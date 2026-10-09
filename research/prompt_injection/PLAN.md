@@ -42,6 +42,7 @@ Every result is reported as a **distribution over seeds**, not a single number.
 | **RQ4** | Is RA-GMM more reliable under label noise or outliers (heavy-tailed gradient noise)? | Exploratory stress test | No (assumptions violated) |
 | **RQ5** | Does an RA-GMM heuristic help when fine-tuning neural detectors or LLMs (LoRA) for injection resistance? | Exploratory | No (non-convex, L/μ estimated) |
 | **RQ6** | Is the theoretical EV@R bound predictive, i.e. does it rank configurations the way the empirical tail does? | Positive rank correlation between bound and empirical CVaR | Yes (validation) |
+| **RQ7** | For *any* frozen backbone, does a strongly convex head trained with RA-GMM give a usable EV@R certificate and a high-probability guarantee on prediction stability? Which layer's features work best? | Certificates hold empirically; RA-GMM tightens them vs standard momentum; quality is competitive with fine-tuning on detection | **Yes** (head training is strongly convex) |
 
 **Pre-registration:** commit the hypotheses, metrics, and analysis script
 (`analyze.py`) to the repo *before* running the main sweep, and cite the commit
@@ -56,6 +57,7 @@ criticism.
 |---|---|---|---|---|
 | **0** | Engineering prerequisites (§4) | Tested, installable library | 1 week | CPU |
 | **1** | **Main experiment:** convex detector, RQ1, RQ2, RQ6 (§5) | Core figures and tables | 2–3 weeks | CPU |
+| **1b** | **Frozen backbone + convex head**, any model, RQ7 (§5B) | Model-agnostic method and certificates | 2 weeks | 1 GPU for feature extraction only |
 | **2** | Held-out attack families and label-noise stress tests, RQ3, RQ4 (§6) | Robustness section | 1–2 weeks | CPU |
 | **3** | Neural and LLM extension, RQ5 (§7) | Exploratory section | 3–4 weeks | 1 GPU (24–80 GB) |
 | **4** | Writing, release, content (§8–§9) | arXiv preprint, code, demo | 2 weeks | — |
@@ -202,6 +204,131 @@ Across runs (the main object of study):
 
 ---
 
+## 5B. Stage 1b — Any frozen backbone + strongly convex head (RQ7)
+
+### 5B.1 Idea
+
+Take **any** pretrained model (embedding model, encoder, LLM), freeze its
+weights, and train only a new head on its features with a **strongly convex**
+objective. With the backbone frozen, the features are fixed, so head training
+is exactly the setting the RA-GMM theorems cover, whatever the backbone is.
+This turns RA-GMM from "a method for logistic regression" into a
+**model-agnostic recipe**: *frozen backbone + risk-averse convex head*.
+
+```
+input ──► [ frozen backbone, layer ℓ ] ──► features φ(x) ──► [ convex head W ] ──► prediction
+                 no gradients                 cached once        trained with RA-GMM
+```
+
+### 5B.2 Head objectives and constants
+
+With features `φ(x) ∈ R^d`, design matrix `Φ` (n × d), and L2 weight λ > 0:
+
+| Head | Objective | L (upper bound) | μ |
+|---|---|---|---|
+| Binary logistic | `(1/n) Σ log(1+exp(−yᵢ wᵀφᵢ)) + (λ/2)‖w‖²` | `λ_max(ΦᵀΦ)/(4n) + λ` | `λ` |
+| Multiclass softmax | cross-entropy + `(λ/2)‖W‖²_F` | `λ_max(ΦᵀΦ)/(2n) + λ` | `λ` |
+| Ridge / least squares | `(1/2n)‖Φw − y‖² + (λ/2)‖w‖²` | `λ_max(ΦᵀΦ)/n + λ` | `λ_min(ΦᵀΦ)/n + λ` |
+
+Strong convexity comes from the L2 term (or from a full-rank feature
+covariance for ridge). Without it the theory does not apply, so λ > 0 is part
+of the recipe. Standardize features (fixed mean/scale from the training set)
+to keep κ = L/μ manageable.
+
+To keep convexity but add expressiveness, the head may use **fixed** nonlinear
+feature maps (random Fourier features, concatenation of several layers).
+Anything with trainable parameters inside the map breaks convexity.
+
+### 5B.3 New theoretical contribution: certified prediction stability
+
+Strong convexity gives `f(w) − f* ≥ (μ/2)‖w − w*‖²`. Combining this with the
+RA-GMM EV@R / Chernoff tail bound on `S_K = f(w_K) − f*`:
+
+1. With probability ≥ 1 − ζ over training randomness, `S_K ≤ t_ζ`, where `t_ζ`
+   is given by the EV@R bound.
+2. Then `‖w_K − w*‖ ≤ r_ζ := √(2 t_ζ / μ)`.
+3. For any input x, `|w_Kᵀφ(x) − w*ᵀφ(x)| ≤ r_ζ ‖φ(x)‖`.
+4. So the trained head's decision on x **provably matches the ideal head's
+   decision** whenever the ideal margin satisfies `|w*ᵀφ(x)| > r_ζ ‖φ(x)‖`.
+
+Reportable quantity: **certified-stable fraction**, the share of test inputs
+whose prediction cannot be flipped by training randomness (with prob. ≥ 1−ζ).
+RA-GMM should yield a smaller `r_ζ`, and therefore a larger certified-stable
+fraction, than standard momentum settings. Verify the derivation carefully
+against the paper's exact bound statements before claiming it, and check it
+empirically: the observed `‖w_K − w*‖` over 200 seeds must sit below `r_ζ`.
+
+Scope: this certifies stability against **training randomness**, relative to
+the ideal head `w*`. It is not a guarantee against adversarial inputs and does
+not say `w*` itself is correct.
+
+### 5B.4 When does RA-GMM matter for a convex head?
+
+A small convex head can often be solved exactly (L-BFGS, closed-form ridge),
+in which case there is no training noise and no risk to control. Reviewers
+will raise this first. RA-GMM is relevant when an exact deterministic solve is
+not available:
+
+- **Differential privacy:** noise is mandatory (DP-SGD on the head; a strong
+  use case, since private linear probing on frozen features is a standard
+  approach)
+- **Streaming / online updates** of the head as new attacks appear
+- **Federated or on-device** training of the head
+- **Very large n** where only stochastic passes are affordable
+
+Always include the exact solver as a **reference** (the ideal `w*`), and frame
+results within these settings.
+
+### 5B.5 Experiment design
+
+**Backbones** (frozen; features extracted once and cached):
+
+| Backbone | Feature |
+|---|---|
+| Small sentence-embedding model | Pooled embedding |
+| Encoder (DeBERTa-v3 / ModernBERT class) | CLS or mean-pooled last layer |
+| Small open LLM (0.5B–3B) | Hidden state at layer ℓ (last token and mean-pooled), ℓ swept over depth |
+
+The LLM case is the most interesting for the story: **the model's own
+internal states are used to detect attacks aimed at it.** Related work on
+probing LLM activations for injection / task drift exists (e.g. activation-delta
+methods such as TaskTracker, Abdelnabi et al. 2024); verify and cite in the
+paper.
+
+**Methods compared** on the head (same features, data, budget):
+
+| Method | Notes |
+|---|---|
+| Exact solve (L-BFGS) | Reference `w*`; no noise |
+| SGD / Nesterov / heavy-ball / Polyak–Ruppert / AdamW | Under noise settings N2 (minibatch) and N3 (DP) |
+| **RA-GMM** | ζ ∈ {0.01, 0.05, 0.1} |
+| *Full fine-tuning / LoRA of the backbone (AdamW)* | Quality reference only: what accuracy is given up by freezing? |
+
+**Metrics:** everything in §5.7, plus
+- certified-stable fraction and `r_ζ` (§5B.3), with an empirical check of the bound
+- accuracy gap vs full fine-tuning / LoRA
+- cost: GPU-hours (feature extraction once vs fine-tuning many seeds)
+- layer-wise curves for the LLM backbone: detection quality and tail metrics vs ℓ
+
+**Seeds:** 200 per configuration (cheap: only the head is trained).
+
+### 5B.6 Product angle
+
+This stage is the natural basis for a library feature:
+
+```python
+head = RiskAverseHead(backbone, layer=-8, objective="logistic",
+                      l2=1e-3, zeta=0.05, dp_epsilon=None)
+head.fit(train_texts, train_labels)
+head.certificate()   # EV@R bound, r_zeta, certified-stable fraction
+```
+
+Positioning: *"Bring any model. Freeze it. Get a risk-certified classifier on
+top."* The certificate is the differentiator. Fine-tuning gives no such
+guarantee.
+
+---
+
 ## 6. Stage 2 — Robustness extensions
 
 ### 6.1 Held-out attack families (RQ3)
@@ -261,8 +388,8 @@ Defenses: Controlling the Tail of Training Outcomes without Additional Data*
 1. Introduction: training randomness as a security risk; "the unlucky detector"
 2. Background: prompt injection; GMM; entropic risk and EV@R; RA-GMM
 3. Problem setup: guard classifiers; reliability as a tail metric over training randomness
-4. Method: RA-GMM for convex detectors; constants for logistic regression; DP variant
-5. Experiments (Stage 1): RQ1, RQ2, RQ6
+4. Method: frozen backbone + strongly convex head; constants; DP variant; certified prediction stability (§5B.3)
+5. Experiments (Stages 1, 1b): RQ1, RQ2, RQ6, RQ7
 6. Robustness (Stage 2): held-out families, label noise
 7. Beyond convexity (Stage 3): exploratory neural/LLM results
 8. Limitations: assumptions, input-space robustness out of scope, bound looseness
@@ -284,6 +411,8 @@ research/prompt_injection/
   data.py                 # download, dedupe, split, hash
   embed.py                # compute and cache embeddings
   problem.py              # logistic objective, L, mu, f* via L-BFGS
+  features.py             # frozen-backbone feature extraction and caching (any layer)
+  heads.py                # convex heads (logistic, softmax, ridge), constants, certificates
   noise.py                # Gaussian oracle, minibatch, DP-SGD gradient oracles
   baselines.py            # SGD, HB, Nesterov, Polyak-Ruppert, AdamW
   run.py                  # seed sweep with common random numbers
@@ -299,6 +428,7 @@ research/prompt_injection/
 |---|---|
 | 0–1 | "I'm testing my own research on a hot problem — here's the plan" (build in public) |
 | 1 | The "100 AI security guards" dot plot: how many fall asleep on the job? |
+| 1b | "Bring any AI model, freeze it, and get a reliability certificate on top" |
 | 2 | "What happens when the training data is messy?" |
 | 3 | "Does it work on real LLMs?" (honest, labelled exploratory) |
 | 4 | Paper launch, interactive demo, code release |
@@ -317,4 +447,6 @@ credible content and still science.
 | Minibatch noise violates the theory's noise model | Setting N1 (Gaussian oracle) isolates the theory; N2/N3 test practice |
 | Loss improvements don't translate into security metrics | That is RQ2 itself; report the link (or its absence) |
 | Dataset leakage or near-duplicates inflate results | Cross-split dedupe, hashed frozen test set |
+| "Just solve the convex head exactly" objection | Frame around DP / streaming / federated / large-n settings; always report the exact solver as reference (§5B.4) |
+| Frozen-feature heads underperform fine-tuning | Report the accuracy gap honestly; sweep layers; allow fixed nonlinear feature maps |
 | LLM results are noisy and costly | Keep Stage 3 exploratory; prioritise the distribution of ASR over many seeds of small models |
