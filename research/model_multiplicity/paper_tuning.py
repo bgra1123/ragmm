@@ -93,3 +93,80 @@ def ra_gmm_params(L, mu, d, zeta, eps, phi=0.99, nbins=100, include_s0=True):
             best = dict(alpha=alpha, beta=beta, gamma=gamma, vartheta=vart, psi=psi,
                         bound=b, rate=rho2, rate_ratio=rho2 / rho2_star)
     return best
+
+
+# ---------------------------------------------------------------------- #
+# Worst-case-aware, horizon-aware selection (exploratory extension)        #
+# ---------------------------------------------------------------------- #
+#
+# Instead of problem (51) (asymptotic bound + relative-rate constraint eps),
+# minimize the finite-horizon EV@R bound of Theorem 3 at the actual budget K:
+#
+#     B_K(vartheta, psi) = sigma^2 * A(vartheta, psi) + rho_bb(vartheta, psi)^K * 2 V_P(z_0)
+#
+# where A is the asymptotic bound (44) per unit noise variance, rho_bb is
+# rho-double-bar in (40), and V_P(z_0) is the Lyapunov function (33).
+# With x_{-1} = x_0 (zero initial momentum), P from (34) gives
+#     V_P(z_0) = (mu/2)||x_0 - x*||^2 + f(x_0) - f*  <=  ||grad f(x_0)||^2 / mu,
+# which needs no knowledge of x*. sigma^2 is the per-coordinate variance of the
+# stochastic gradient (Assumption 1), estimated from data.
+
+
+def candidate_grid(L, mu, n_psi=120, n_vart=120, n_alpha_s0=200):
+    """Candidates over S_c (Theorem 2) and S_0, with log spacing so small step sizes are reachable."""
+    kappa = L / mu
+    rows = []
+    psi_low = np.linspace(0, 1, n_psi + 1)[:-1]
+    psi_high = np.linspace(1, 2 * kappa * (1 + math.sqrt(1 - 1 / kappa)), n_psi + 1)[1:]
+    for psi in np.concatenate([psi_low, psi_high]):
+        if psi < 1:
+            lo = 1 / (1 + kappa * (1 - psi)) if psi == 0 else max(2 - 1 / psi, 1 / (1 + kappa * (1 - psi)))
+            gaps = np.logspace(math.log10(1 - lo), math.log10((1 - lo) * 1e-6), n_vart)   # 1 - vartheta
+            varts = 1 - gaps
+        else:
+            hi = min(2 - 1 / psi, 0.5 * (1 + math.sqrt(1 + 4 * kappa * (psi - 1))))
+            gaps = np.logspace(math.log10(hi - 1), math.log10((hi - 1) * 1e-6), n_vart)  # vartheta - 1
+            varts = 1 + gaps
+        for vart in varts:
+            alpha = (1 - vart) / (L * (1 - psi))
+            if alpha <= 0:
+                continue
+            m_psi = mu * psi ** 2 - L * (1 - psi) ** 2
+            rho2 = 1 - math.sqrt(vart * alpha * mu)
+            if rho2 * (1 - alpha * m_psi / vart) - (1 - alpha * psi * mu) ** 2 <= 0:
+                rows.append((vart, psi, alpha))
+    for alpha in np.logspace(-6, 0, n_alpha_s0) / L:
+        rows.append((1.0, 1.0, float(alpha)))
+    G = np.array(rows)
+    vart, psi, alpha = G[:, 0], G[:, 1], G[:, 2]
+    beta = (1 - np.sqrt(vart * alpha * mu)) / (1 - alpha * psi * mu) * (1 - np.sqrt(alpha * mu / vart))
+    return dict(vartheta=vart, psi=psi, alpha=alpha, beta=beta, gamma=psi * beta)
+
+
+def bound_parts(cand, L, mu, d, zeta, phi=0.99):
+    """Vectorized: A (asymptotic EV@R bound per unit sigma^2, eq. 44) and rho_bb (eq. 40)."""
+    vart, alpha, beta, gamma = cand["vartheta"], cand["alpha"], cand["beta"], cand["gamma"]
+    with np.errstate(all="ignore"):
+        v = (2 * L ** 2 / mu * (2 * (beta - gamma) ** 2 + (1 - alpha * L) ** 2 * (1 + 2 * gamma + 2 * gamma ** 2))
+             + vart / (2 * alpha) * (1 - np.sqrt(vart * alpha * mu)))
+        theta_u = 2 * np.sqrt(vart * mu) / (alpha * (8 * v * np.sqrt(alpha) + np.sqrt(vart * mu) * (vart + alpha * L)))
+        theta = phi * theta_u
+        c = alpha * (vart + alpha * L)
+        denom = 2 - theta * c
+        a = 1 - np.sqrt(vart * alpha * mu) + theta * 4 * alpha ** 2 * v / denom
+        rho_bb = 0.5 * a + 0.5 * np.sqrt(a ** 2 + 16 * theta * alpha ** 2 * v / denom)
+        log_z = math.log(1 / zeta)
+        high = log_z <= d / (2 * (1 - rho_bb)) * (theta * c / denom) ** 2
+        A = np.where(high, c / 2 * (np.sqrt(d / (1 - rho_bb)) + math.sqrt(2 * log_z)) ** 2,
+                     d * c / ((1 - rho_bb) * denom) + 2 / theta * log_z)
+        ok = (denom > 0) & (rho_bb > 0) & (rho_bb < 1) & np.isfinite(A)
+    return np.where(ok, A, np.inf), np.where(ok, rho_bb, 1.0)
+
+
+def horizon_aware_params(cand, A, rho_bb, sigma2, V0, K):
+    """Per seed: argmin over candidates of sigma2*A + rho_bb^K * 2 V0. sigma2, V0: arrays (S,)."""
+    with np.errstate(all="ignore"):
+        B = np.asarray(sigma2)[:, None] * A[None] + (rho_bb[None] ** K) * 2 * np.asarray(V0)[:, None]
+    j = np.argmin(B, 1)
+    return dict(alpha=cand["alpha"][j], beta=cand["beta"][j], gamma=cand["gamma"][j],
+                bound=B[np.arange(len(j)), j], index=j)

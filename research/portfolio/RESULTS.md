@@ -132,3 +132,30 @@ Sharpe 1.08, max drawdown 43%, terminal wealth 279×, 18.6% monthly turnover.
 - **RA-GMM's diagnosis is unchanged:** it selects α ≈ 1/L because of the rate
   constraint at κ ≈ 2, while the tuned methods use α ≈ 0.006–0.011/L. Against
   the textbook defaults it helps only slightly here.
+
+---
+
+# Diagnostic: can the EV@R bound itself choose worst-case-safe settings? (exploratory)
+
+Idea tested: replace problem (51) by minimizing the paper's **finite-horizon**
+EV@R bound (Theorem 3, eqs. 42–43) at the real budget K = 200, using the
+measured gradient noise σ² and `V_P(z₀) ≤ ‖∇f(x₀)‖²/μ` (with zero initial
+momentum; this reading of eq. 34 still needs the authors' confirmation). Code:
+`paper_tuning.py` (`candidate_grid`, `bound_parts`, `horizon_aware_params`),
+`bound_diagnostic.py`. Output: `results/bound_diagnostic.json`.
+
+| Quantity (328 dates, exact-solution path) | Value |
+|---|---|
+| Dates where the bound's smallest possible noise term exceeds the starting error `f(x₀) − f*` | **96%** |
+| Median ratio: bound's noise floor / starting error | 3.8× |
+| Median ratio: bound's noise floor / tuned SGD's actual 95th percentile | **4.6×** |
+| Step size selected by the bound (α·L) | ~1e-7 at every date, i.e. "do not trade" |
+| Dates where tuned SGD's 95th percentile is below the starting error | 63% |
+
+**Reading.** In this noise regime the EV@R bound is about 4–5× looser than
+what a well-tuned solver actually achieves in its worst 5% of runs, so the
+bound cannot certify that *any* trade beats standing still, and its minimizer
+freezes the portfolio. The bound is not wrong (it is an upper bound), but it
+is too loose to choose parameters here. The last row is a separate,
+interesting fact: on 37% of dates even the tuned solver's worst 5% of runs
+ends up farther from the optimum than not rebalancing at all.
