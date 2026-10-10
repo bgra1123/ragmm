@@ -170,3 +170,121 @@ Always include a "research, not investment advice" disclaimer.
 | Estimation error in m and Σ dominates solver error | Measure both; report solver decision risk relative to estimation risk honestly |
 | Real returns violate assumptions (fat tails, non-stationarity) | Setup A isolates the theory; Setup B is labelled as empirical |
 | Constraints break the theory | Budget handled exactly; long-only labelled exploratory |
+
+---
+
+## 9. Rebalancing: optimization problems we can use
+
+**Setting.** A portfolio of n stocks. At each rebalancing date the current
+weights have drifted to `w₀` (yesterday's target, moved by market returns).
+We choose new weights `w`; the trade is `Δ = w − w₀`. Returns `r` are random,
+with mean `m` and covariance `Σ`, estimated from a trailing window.
+
+Formulations are listed from "theory applies exactly" to "exploratory".
+For each: strongly convex constant μ and smoothness L, so RA-GMM can be tuned.
+
+### R1. Mean-variance rebalancing with quadratic trading costs (main candidate)
+
+```
+minimize   −mᵀw + (θ/2) wᵀΣw + (c/2) (w − w₀)ᵀ Λ (w − w₀) + (λ/2)‖w‖²
+subject to 1ᵀw = 1
+```
+
+- `θ`: risk aversion. `Λ`: per-stock trading-cost weights (diagonal, e.g.
+  inversely proportional to liquidity), `c`: cost scale. Quadratic costs are
+  the standard market-impact approximation.
+- Budget constraint removed exactly by `w = w₀ + N z` (N: basis of the null
+  space of `1ᵀ`), so the problem is unconstrained in z.
+- `μ = θ λ_min(Σ) + c λ_min(Λ) + λ`, `L = θ λ_max(Σ) + c λ_max(Λ) + λ`
+  (on the reduced space, use `NᵀΣN`, `NᵀΛN`).
+- **Useful property:** the trading-cost term adds strong convexity, so
+  rebalancing is better conditioned than building a portfolio from scratch.
+- Exact solution: one linear solve. This is the reference `w*`.
+
+### R2. Tracking a target allocation (robo-advisor rebalancing)
+
+```
+minimize   E[(rᵀw − rᵀb)²] + (c/2)(w − w₀)ᵀΛ(w − w₀) + (λ/2)‖w‖²,   1ᵀw = 1
+```
+
+- `b`: target allocation (e.g. 60/40, a glide path, an index). Keeps the
+  portfolio close to the target in *return* terms while limiting trading.
+- `E[(rᵀ(w − b))²] = (w − b)ᵀ(Σ + mmᵀ)(w − b)`: strongly convex when Σ is
+  positive definite. Very easy to explain to a general audience.
+
+### R3. Entropic-risk (exponential-utility) rebalancing
+
+```
+minimize   E[exp(−θ rᵀw)] + trading cost + (λ/2)‖w‖²,   1ᵀw = 1
+```
+
+- Same family as the paper's risk measure; equals mean-variance when returns
+  are Gaussian, but uses the real (fat-tailed) return distribution otherwise.
+- Convex and smooth on bounded sets; per-scenario gradients are unbiased.
+  (The log form `(1/θ) log E[exp(·)]` has biased minibatch gradients, so use
+  the expectation form.) L needs a bound on `exp(−θ rᵀw)` over the region
+  considered; label as partially covered by the theory.
+
+### R4. Proportional transaction costs (realistic, exploratory)
+
+- Real costs for commissions and spreads are `Σᵢ cᵢ |Δᵢ|` (non-smooth). This
+  creates a "no-trade region", which is realistic and important.
+- Non-smooth, so outside the theorems. Use a smooth approximation (Huber or
+  `cᵢ·softplus`-type) to keep L finite; report it as exploratory.
+
+### R5. Long-only, position limits, turnover caps (exploratory)
+
+- Need projection (or barrier terms). Projected GMM is outside the theorems.
+
+### R6. CV@R / EV@R of portfolio losses (exploratory)
+
+- Tail-risk objectives over scenarios. CV@R is non-smooth; EV@R is jointly
+  convex in (w, z) but needs smoothing and L2 for strong convexity.
+
+### Where the randomness comes from (and why RA-GMM is relevant)
+
+At each date the solver runs K stochastic steps:
+- **Minibatches of scenarios:** each step samples days from the trailing
+  window (or Monte Carlo scenarios) instead of using the full `m`, `Σ`. This
+  is how large universes, scenario-based objectives (R3, R6), and many
+  personalized portfolios are solved under a compute budget.
+- Optional: privacy noise when solving on client data.
+
+### The finance analogue of a "flip": phantom trades
+
+A noisy solver returns `w_K ≠ w*`. The difference is trading that comes from
+the solver's random seed, not from new market information:
+
+- **Phantom turnover** per rebalance: `‖w_K − w*‖₁` (and its cost).
+- Across 200 seeds: mean, 95th percentile and worst 5% of phantom turnover and
+  phantom trading cost, plus out-of-sample return, volatility, drawdown, and
+  **how different the whole equity curve looks under a different seed**.
+
+Hook: *"Your robo-advisor traded because of a random number."*
+
+### Rolling rebalancing protocol
+
+```
+for each rebalancing date t (monthly):
+    w₀  ← previous weights drifted by realized returns
+    estimate m, Σ from the trailing 252 trading days (shrinkage for Σ)
+    w*  ← exact solution (reference)
+    for each method and seed: w_K ← K stochastic steps on minibatches of days
+    trade to w_K, pay trading costs, hold until t+1 (out-of-sample)
+```
+
+Methods (lessons from the loan experiment): textbook SGD / Nesterov, SGD
+tuned for the mean, **SGD + tail averaging (the strongest baseline)**,
+paper-faithful RA-GMM, and later horizon-aware RA-GMM. Also the analogue of
+Experiment 1b: **raise the cost penalty c (change the objective) vs tune the
+solver**, measured against the intended portfolio.
+
+### Data (reachable from the current environment)
+
+- **20 large US stocks, daily adjusted prices 1990–2018** (GOOG, AAPL, AMZN,
+  JPM, XOM, WMT, PFE, …) from the PyPortfolioOpt test resources on GitHub
+  (MIT license). Several stocks start late (e.g. FB 2012, BABA 2014), so either
+  restrict to the stocks available over the whole window or use an expanding
+  universe. Survivorship bias: the list was chosen in 2018; state this.
+- Kenneth French industry portfolios, Yahoo, Stooq and FRED are blocked by the
+  environment's network policy; they need the domains allowed.
