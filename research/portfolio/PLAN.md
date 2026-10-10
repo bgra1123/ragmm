@@ -288,3 +288,71 @@ solver**, measured against the intended portfolio.
   universe. Survivorship bias: the list was chosen in 2018; state this.
 - Kenneth French industry portfolios, Yahoo, Stooq and FRED are blocked by the
   environment's network policy; they need the domains allowed.
+
+---
+
+## 10. Experiment P1: monthly rebalancing backtest with R1 (written before running)
+
+**Question.** When the rebalancing problem is solved with a stochastic solver
+under a fixed compute budget, how much trading is caused by the solver's
+random seed ("phantom trades"), and does RA-GMM reduce it?
+
+**Data.** `data/stock_prices.csv`, the 10 stocks with full history
+(AAPL, GE, AMD, WMT, BAC, T, XOM, BBY, PFE, JPM), daily simple returns.
+Monthly rebalancing on the first trading day of each month, starting once 252
+days of history exist: about 327 rebalances, 1991–2018.
+
+**Problem R1 at each rebalance** (annualized units, trailing 252 days):
+
+`f(w) = −mᵀw + (θ/2) wᵀΣw + (c/2)‖w − w₀‖² + (λ/2)‖w‖²`, with `1ᵀw = 1`,
+
+with `m = 252·mean`, `Σ = 252·cov` (sample, 1/T), θ = 10, c = 1, λ = 1
+(chosen from the exact solutions only: median gross leverage 1.33, median
+monthly turnover 27%, κ between about 2 and 12). Budget constraint removed by
+`w = w₀ + N z` (N: orthonormal basis of the null space of 1ᵀ). L and μ are the
+extreme eigenvalues of `Nᵀ(θΣ + (c + λ)I)N`; d = 9. Short positions allowed.
+
+**Stochastic solver.** Starts at the current holdings (z = 0) and runs K = 200
+steps. Each step samples a minibatch of b = 16 days from the window; the
+per-day gradient `−252 r_t + 252 θ (r_t − m̄)(r_t − m̄)ᵀ w + c (w − w₀) + λ w`
+is unbiased for ∇f. Common random numbers: seed s uses the same minibatch
+sequence for every method. 200 seeds; each seed runs the whole backtest along
+its own path.
+
+**Methods** (same oracle, same K):
+- SGD textbook (α = 1/L); Nesterov textbook (α = 1/L, β = γ = (√κ−1)/(√κ+1));
+  heavy-ball textbook (same α, β, γ = 0)
+- SGD tuned for mean; Nesterov tuned for mean; SGD + tail averaging (tuned):
+  step multipliers on 1/L (and β for Nesterov) chosen by mean suboptimality on
+  the **first 24 rebalance dates only** (tuning seeds 10 000–10 019), then
+  fixed. No look-ahead.
+- RA-GMM, paper-faithful (`paper_tuning.py`), ζ = 0.05, ε ∈ {0.25 (main), 0.05},
+  re-solved at every date from that date's (L, μ, d). Zero tuning runs.
+- Reference: the exact solution `w*` at every date (deterministic path).
+
+**Accounting.** Trade from the drifted weights `w₀` to the solver output `w_K`,
+pay 10 bps × `‖w_K − w₀‖₁` of wealth, hold with drifting weights until the next
+rebalance.
+
+**Pre-registered metrics.**
+- Per rebalance: suboptimality `f(w_K) − f*` and **phantom turnover**
+  `‖w_K − w*‖₁` (w* computed from that seed's own w₀). Report mean and 95th
+  percentile over all (seed, date) pairs, and the per-seed average.
+- Per seed over the backtest: annualized return, volatility, Sharpe ratio, max
+  drawdown, total turnover and costs, **tracking error to the exact-solution
+  path** (annualized std of the daily return difference), terminal wealth.
+- Across seeds: mean, 5th/95th percentiles, worst 5% (e.g. lowest Sharpe,
+  highest tracking error), and the width of the terminal-wealth fan.
+
+**Hypotheses.**
+- **H1:** RA-GMM (ε = 0.25) has a lower 95th percentile of suboptimality and of
+  phantom turnover than textbook Nesterov and heavy-ball.
+- **H2:** RA-GMM has lower tracking error to the exact path, and a narrower
+  terminal-wealth fan, than textbook Nesterov and heavy-ball.
+- **H3 (open):** RA-GMM vs the tuned baselines and tail averaging. Note from
+  the loan experiment: there ε = 0.25 was non-binding (κ ≈ 99). Here κ is
+  about 2–12, where it binds, so this is a fairer test of problem (51).
+
+**Caveat stated in advance.** With 10 stocks the exact solve is trivial. The
+stochastic solver stands in for settings where exact solves are not used
+(large universes, scenario-based objectives, many personalized portfolios).
