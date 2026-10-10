@@ -24,7 +24,7 @@ plt.rcParams.update({
 PANELS = ["Nesterov (textbook)", "RA-GMM (eps=0.25)", "SGD + tail averaging (tuned)"]
 
 
-def wealth_fans(arr, summary, out):
+def wealth_fans(arr, summary, out, long_only=False):
     dates = pd.to_datetime(arr["rebalance_dates"])
     ideal = np.exp(arr["ideal|log_wealth_monthly"])
     fig, axes = plt.subplots(1, 3, figsize=(15, 4.6), sharey=True)
@@ -36,10 +36,16 @@ def wealth_fans(arr, summary, out):
         ax.plot(dates, lo, color=color, lw=1.5, ls=(0, (3, 2)))
         ax.plot(dates, hi, color=color, lw=1.5, ls=(0, (3, 2)))
         ax.plot(dates, ideal, color=INK, lw=2)
-        ruin = summary["methods"][name]["ruined"]["mean"]
-        ax.set_title(f"{name}\nruined in {ruin:.0%} of seeds", fontsize=11, color=INK)
+        m = summary["methods"][name]
+        if long_only:
+            lo_tw, hi_tw = m["terminal_wealth"]["p05"], m["terminal_wealth"]["p95"]
+            sub = f"final wealth {lo_tw:.0f}x to {hi_tw:.0f}x (5th to 95th pct)"
+        else:
+            sub = f"ruined in {m['ruined']['mean']:.0%} of seeds"
+        ax.set_title(f"{name}\n{sub}", fontsize=11, color=INK)
         ax.set_yscale("log")
-        ax.set_ylim(1e-3, 1e3)
+        if not long_only:
+            ax.set_ylim(1e-3, 1e3)
     axes[0].set_ylabel("wealth (start = 1, log scale)")
     fig.suptitle("Same strategy, same data, 200 random seeds of the solver. Black: exact solver. "
                  "Thin lines: 50 seeds. Dashed: 5th and 95th percentiles.", color=INK2, fontsize=10, y=0.01)
@@ -69,13 +75,19 @@ def phantom_strip(arr, summary, out):
 
 
 def main():
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--long_only", action="store_true")
+    args = ap.parse_args()
+    tag = "main_longonly" if args.long_only else "main"
+    suffix = "_longonly" if args.long_only else ""
     res = HERE / "results"
-    summary = json.loads((res / "backtest_main.json").read_text())
-    arr = dict(np.load(res / "backtest_main_arrays.npz"))
+    summary = json.loads((res / f"backtest_{tag}.json").read_text())
+    arr = dict(np.load(res / f"backtest_{tag}_arrays.npz"))
     figdir = res / "figures"
     figdir.mkdir(exist_ok=True)
-    wealth_fans(arr, summary, figdir / "wealth_fans.png")
-    phantom_strip(arr, summary, figdir / "phantom_trades.png")
+    wealth_fans(arr, summary, figdir / f"wealth_fans{suffix}.png", long_only=args.long_only)
+    phantom_strip(arr, summary, figdir / f"phantom_trades{suffix}.png")
     print("figures written to", figdir)
 
 

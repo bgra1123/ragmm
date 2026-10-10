@@ -1,0 +1,9 @@
+tuned: {'SGD (tuned for mean)': {'a': np.float64(0.005902178654855692), 'beta': 0.0, 'nest': False, 'avg': False}, 'Nesterov (tuned for mean)': {'a': np.float64(0.00032062953774615447), 'beta': 0.95, 'nest': True, 'avg': False}, 'SGD + tail averaging (tuned)': {'a': np.float64(0.010568518588617426), 'beta': 0.0, 'nest': False, 'avg': True}}  [54s]
+date 0/328 1991-01-02 kappa=2.2 [55s]
+date 50/328 1995-03-01 kappa=2.0 [100s]
+date 100/328 1999-05-03 kappa=2.8 [147s]
+date 150/328 2003-07-01 kappa=3.4 [192s]
+date 200/328 2007-09-04 kappa=1.6 [234s]
+date 250/328 2011-11-01 kappa=1.9 [277s]
+date 300/328 2016-01-04 kappa=2.2 [320s]
+wrote /home/user/ragmm/research/portfolio/results/backtest_main_longonly.json in 346s

@@ -86,3 +86,49 @@ wealth. "Ruined" = the account's wealth reached zero at some point.
   the Gaussian noise of the theory.
 - Short positions are allowed and leverage is unconstrained; with constraints
   (long-only, leverage caps) phantom positions would be bounded and ruin rarer.
+
+---
+
+# Experiment P2: long-only, no leverage (exploratory)
+
+Same backtest with `w ≥ 0`, `1ᵀw = 1`; projected solvers (`PLAN.md` §11).
+Raw summary: `results/backtest_main_longonly.json`. Figures:
+`results/figures/wealth_fans_longonly.png`, `phantom_trades_longonly.png`.
+Reproduce: `python research/portfolio/backtest.py --long_only` (~6 minutes).
+
+**Exact solver (long-only):** 22.9% annualized return, 21.3% volatility,
+Sharpe 1.08, max drawdown 43%, terminal wealth 279×, 18.6% monthly turnover.
+
+| Method | Phantom trades per rebalance (mean / p95) | Monthly turnover | Tracking error vs exact | Sharpe: mean / worst 5% | Max drawdown: mean / worst 5% | Terminal wealth: 5th / median / 95th |
+|---|---|---|---|---|---|---|
+| SGD (textbook) | 97% / 151% | 112% | 0.198 | 0.82 / 0.58 | 64% / 82% | 58× / 207× / 1083× |
+| Nesterov (textbook) | 99% / 152% | 113% | 0.200 | 0.82 / 0.58 | 64% / 82% | 56× / 207× / 1057× |
+| Heavy-ball (textbook) | 100% / 153% | 114% | 0.202 | 0.82 / 0.57 | 64% / 82% | 58× / 210× / 1047× |
+| SGD (tuned for mean) | 15% / 26% | 15% | 0.027 | 1.06 / 1.03 | 46% / 50% | 229× / 257× / 291× |
+| Nesterov (tuned for mean) | 15% / 26% | 15% | 0.027 | 1.06 / 1.03 | 46% / 50% | 225× / 257× / 294× |
+| **SGD + tail averaging (tuned)** | **14% / 24%** | 16% | **0.025** | **1.07 / 1.04** | **45% / 49%** | **236× / 270× / 320×** |
+| **RA-GMM (ε = 0.25)** | 89% / 143% | 103% | 0.170 | 0.85 / 0.64 | 59% / 74% | 59× / 198× / 784× |
+| RA-GMM (ε = 0.05) | 98% / 151% | 113% | 0.198 | 0.82 / 0.58 | 63% / 82% | 54× / 209× / 1022× |
+
+## Hypotheses
+
+| | Result |
+|---|---|
+| **H1** RA-GMM lower tail of suboptimality / phantom trades than textbook momentum | **Supported, small effect.** Suboptimality p95 0.90 vs 1.23 / 1.24; phantom p95 143% vs 152% / 153%. |
+| **H2** lower tracking error, narrower wealth fan | **Supported, small effect.** Tracking error 0.170 vs 0.200 / 0.202; worst-5% drawdown 74% vs 82%; the fan's top shrinks (784× vs ~1,050×) but its bottom does not (59× vs 56×). |
+| **H3** (open) vs tuned baselines | **RA-GMM is far worse**: ~6× the phantom trades and tracking error of tuned SGD / averaging. |
+| Expected: constraints shrink all gaps vs P1 | **Yes.** No ruin is possible; textbook phantom trades fall from ~210% to ~100% per rebalance. |
+
+## What changes with the constraints
+
+- **No account is wiped out**, and the worst seeds still end at ~56× (vs ruin
+  in P1). The constraints cap the damage a noisy step can do.
+- **The seed still matters a lot with default settings:** the same strategy
+  ends anywhere from ~56× to ~1,060×, with ~100% of the portfolio traded each
+  month purely because of the seed (real turnover of the exact strategy:
+  19%). Monthly turnover is about 6× the intended level.
+- **Tuning still removes most of it:** tail averaging keeps the fan at
+  236×–320× around the exact solver's 279×.
+- **RA-GMM's diagnosis is unchanged:** it selects α ≈ 1/L because of the rate
+  constraint at κ ≈ 2, while the tuned methods use α ≈ 0.006–0.011/L. Against
+  the textbook defaults it helps only slightly here.
