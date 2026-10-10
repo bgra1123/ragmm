@@ -356,3 +356,10 @@ rebalance.
 **Caveat stated in advance.** With 10 stocks the exact solve is trivial. The
 stochastic solver stands in for settings where exact solves are not used
 (large universes, scenario-based objectives, many personalized portfolios).
+
+> **Recorded before the main run (after a 10-seed, 30-date smoke test):**
+> (1) the tuning grid for step multipliers was widened from [0.01, 2] to
+> [1e-4, 2] (18 points) because the smoke test selected the grid's lower edge;
+> (2) an account whose wealth reaches zero is marked **ruined** and stays at
+> zero (textbook settings produce very large phantom positions under this
+> noise level); the ruin rate is reported as an additional metric.
