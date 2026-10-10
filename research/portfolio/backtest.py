@@ -77,13 +77,16 @@ class Problem:
 
     def stoch_grad(self, W, W0, idx):
         """Unbiased minibatch gradient in z-space. W, W0: (S, n); idx: (S, b) day indices."""
+        return self.stoch_grad_w(W, W0, idx) @ self.N
+
+    def stoch_grad_w(self, W, W0, idx):
+        """Unbiased minibatch gradient in weight space."""
         rb = self.Rw[idx]                                   # (S, b, n)
         db = self.D[idx]
         b = idx.shape[1]
         proj = np.einsum("sbn,sn->sb", db, W)
-        g = (-252 * rb.mean(1) + 252 * self.theta * np.einsum("sbn,sb->sn", db, proj) / b
-             + self.c * (W - W0) + self.lam * W)
-        return g @ self.N
+        return (-252 * rb.mean(1) + 252 * self.theta * np.einsum("sbn,sb->sn", db, proj) / b
+                + self.c * (W - W0) + self.lam * W)
 
 
 def solve_gmm(prob, W0, idx, alpha, beta, gamma, tail_average=False):
@@ -101,6 +104,84 @@ def solve_gmm(prob, W0, idx, alpha, beta, gamma, tail_average=False):
             n_avg += 1
             avg += (Z - avg) / n_avg
     return avg if tail_average else Z
+
+
+# ---------------------------------------------------------------------- #
+# Long-only mode: weights on the simplex {w >= 0, sum w = 1}               #
+# (no shorts, no leverage). Exploratory: projection is outside the theory. #
+# ---------------------------------------------------------------------- #
+
+LONG_ONLY = False
+
+
+def proj_simplex(V):
+    """Euclidean projection of each row of V onto the probability simplex."""
+    n = V.shape[1]
+    U = -np.sort(-V, 1)
+    css = np.cumsum(U, 1) - 1
+    k = np.arange(1, n + 1)
+    rho = (U - css / k > 0).sum(1) - 1
+    tau = css[np.arange(len(V)), rho] / (rho + 1)
+    return np.maximum(V - tau[:, None], 0.0)
+
+
+def objective(prob, W, W0):
+    return (-W @ prob.m + 0.5 * prob.theta * np.einsum("si,ij,sj->s", W, prob.C, W)
+            + 0.5 * prob.c * ((W - W0) ** 2).sum(1) + 0.5 * prob.lam * (W ** 2).sum(1))
+
+
+def full_grad(prob, W, W0):
+    return -prob.m + prob.theta * W @ prob.C + prob.c * (W - W0) + prob.lam * W
+
+
+def exact_long_only(prob, W0, iters=600):
+    """Projected accelerated gradient with exact gradients (strongly convex, so linear convergence)."""
+    ev = np.linalg.eigvalsh(prob.theta * prob.C + (prob.c + prob.lam) * np.eye(len(prob.m)))
+    Lf, muf = ev[-1], ev[0]
+    mom = (math.sqrt(Lf / muf) - 1) / (math.sqrt(Lf / muf) + 1)
+    X = W0.copy()
+    Xprev = X
+    for _ in range(iters):
+        Y = X + mom * (X - Xprev)
+        Xprev, X = X, proj_simplex(Y - full_grad(prob, Y, W0) / Lf)
+    resid = np.abs(X - proj_simplex(X - full_grad(prob, X, W0) / Lf)).max()
+    assert resid < 1e-9, f"long-only exact solve did not converge: {resid}"
+    return X
+
+
+def solve_projected(prob, W0, idx, alpha, beta, gamma, tail_average=False):
+    """Projected stochastic GMM in weight space:
+       y = x + gamma d ;  x+ = Proj(x + beta d - alpha g(y)) ;  d = x+ - x."""
+    S, K, _ = idx.shape
+    X = W0.copy()
+    Dm = np.zeros_like(X)
+    avg, n_avg = np.zeros_like(X), 0
+    for k in range(K):
+        Y = X + gamma * Dm
+        G = prob.stoch_grad_w(Y, W0, idx[:, k])
+        Xn = proj_simplex(X + beta * Dm - alpha * G)
+        Dm, X = Xn - X, Xn
+        if tail_average and k >= K // 2:
+            n_avg += 1
+            avg += (X - avg) / n_avg
+    return avg if tail_average else X
+
+
+def exact_W(prob, W0):
+    if LONG_ONLY:
+        return exact_long_only(prob, W0)
+    Zs, _ = prob.exact(W0)
+    return W0 + Zs @ prob.N.T
+
+
+def run_W(prob, W0, idx, cfg):
+    if LONG_ONLY:
+        return solve_projected(prob, W0, idx, **cfg)
+    return W0 + solve_gmm(prob, W0, idx, **cfg) @ prob.N.T
+
+
+def subopt_W(prob, W, Wstar, W0):
+    return objective(prob, W, W0) - objective(prob, Wstar, W0)
 
 
 def draw_indices(seeds, date_no, K, b):
@@ -134,13 +215,13 @@ def tune(R, reb, N, args, ideal_W0):
     for j in range(args.tune_dates):
         prob = Problem(R, reb[j], args.theta, args.c, args.lam, N)
         W0 = np.repeat(ideal_W0[j][None], len(tseeds), 0)
-        Zs, gz0 = prob.exact(W0)
+        Ws = exact_W(prob, W0)
         idx = draw_indices(tseeds, 100_000 + j, args.K, args.batch)
         for name, grid in grids.items():
             for gi, cfg in enumerate(grid):
-                Z = solve_gmm(prob, W0, idx, cfg["a"] / prob.L, cfg["beta"],
-                              cfg["beta"] if cfg["nest"] else 0.0, cfg["avg"])
-                sub = prob.subopt(Z, Zs, gz0)
+                W = run_W(prob, W0, idx, dict(alpha=cfg["a"] / prob.L, beta=cfg["beta"],
+                                              gamma=cfg["beta"] if cfg["nest"] else 0.0, tail_average=cfg["avg"]))
+                sub = subopt_W(prob, W, Ws, W0)
                 scores[name][gi] += np.mean(sub) if np.all(np.isfinite(sub)) else np.inf
     return {name: grids[name][int(np.argmin(scores[name]))] for name in grids}
 
@@ -180,8 +261,7 @@ def ideal_path(R, reb, N, args):
     W0s, daily, turnover = [], [], []
     for j, i in enumerate(reb):
         prob = Problem(R, i, args.theta, args.c, args.lam, N)
-        Zs, _ = prob.exact(w0)
-        w = w0 + Zs @ N.T
+        w = exact_W(prob, w0)
         W0s.append(w0[0].copy())
         tv = np.abs(w - w0).sum(1)
         turnover.append(float(tv[0]))
@@ -234,8 +314,12 @@ def main():
     ap.add_argument("--eps", type=float, nargs="+", default=[0.25, 0.05])
     ap.add_argument("--tune_dates", type=int, default=24)
     ap.add_argument("--max_dates", type=int, default=None, help="for smoke tests only")
+    ap.add_argument("--long_only", action="store_true",
+                    help="no short positions, no leverage (weights on the simplex); exploratory")
     ap.add_argument("--out", default=str(HERE / "results"))
     args = ap.parse_args()
+    global LONG_ONLY
+    LONG_ONLY = args.long_only
     t0 = time.time()
     out = pathlib.Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
@@ -271,11 +355,10 @@ def main():
         end = reb[j + 1] if j + 1 < len(reb) else len(R)
         for nm in names:
             W0 = state[nm]
-            Zs, gz0 = prob.exact(W0)
-            Z = solve_gmm(prob, W0, idx, **cfgs[nm])
-            W = W0 + Z @ N.T
-            sub_all[nm].append(prob.subopt(Z, Zs, gz0))
-            phantom_all[nm].append(np.abs((Z - Zs) @ N.T).sum(1))
+            Ws = exact_W(prob, W0)
+            W = run_W(prob, W0, idx, cfgs[nm])
+            sub_all[nm].append(subopt_W(prob, W, Ws, W0))
+            phantom_all[nm].append(np.abs(W - Ws).sum(1))
             tv = np.abs(W - W0).sum(1)
             turn_all[nm].append(tv)
             d, state[nm] = hold(W, R[i:end])
@@ -314,7 +397,7 @@ def main():
         arrays[f"{nm}|phantom"] = ph
     arrays["ideal|log_wealth_monthly"] = np.cumsum(np.log1p(ideal_daily))[month_ends]
     arrays["rebalance_dates"] = np.array([str(dates[i].date()) for i in reb])
-    tag = "smoke" if args.max_dates else "main"
+    tag = ("smoke" if args.max_dates else "main") + ("_longonly" if args.long_only else "")
     (out / f"backtest_{tag}.json").write_text(json.dumps(summary, indent=2))
     np.savez_compressed(out / f"backtest_{tag}_arrays.npz", **arrays)
     print(f"wrote {out}/backtest_{tag}.json in {time.time()-t0:.0f}s")

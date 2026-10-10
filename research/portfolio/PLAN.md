@@ -363,3 +363,25 @@ stochastic solver stands in for settings where exact solves are not used
 > (2) an account whose wealth reaches zero is marked **ruined** and stays at
 > zero (textbook settings produce very large phantom positions under this
 > noise level); the ruin rate is reported as an additional metric.
+
+---
+
+## 11. Experiment P2: long-only, no leverage (written before running)
+
+Same as P1 (§10) except the portfolio must satisfy `w ≥ 0`, `1ᵀw = 1`
+(no short positions, no leverage).
+
+- **Exact reference:** projected accelerated gradient with exact gradients,
+  600 iterations, fixed-point residual < 1e-9 (checked against SciPy SLSQP on
+  three dates: identical to 1e-8).
+- **Stochastic solvers:** projected GMM in weight space,
+  `y = x + γd`, `x⁺ = Proj_simplex(x + βd − α g(y))`, `d = x⁺ − x`
+  (β = γ = 0 gives projected SGD; tail averaging stays feasible). Same
+  minibatch gradients, step multipliers, tuning protocol and seeds as P1.
+- **RA-GMM:** same parameter selection as P1 from (L, μ, d) of the reduced
+  problem. **Exploratory:** the theory does not cover projected steps.
+- **Metrics:** as P1. Phantom trades are now bounded (`‖w_K − w*‖₁ ≤ 2`) and
+  ruin is impossible, so ruin is dropped as a metric.
+- **Hypotheses:** H1–H2 as in P1 (RA-GMM vs textbook Nesterov / heavy-ball),
+  H3 open (vs tuned baselines). Additional expectation: the constraints cap
+  the damage from noisy steps, so all gaps shrink relative to P1.
