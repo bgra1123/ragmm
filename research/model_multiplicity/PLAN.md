@@ -75,6 +75,20 @@ on (L, μ, d, ζ). They are applied through the same vectorized GMM update as th
 baselines; a unit check confirms this update matches the library's `GMM`
 optimizer step for step.
 
+> **Deviation from the pre-registration (recorded before the main sweep).**
+> A 20-seed smoke test showed that the library's `RAGMM` (v0.1.0) selects
+> α ≈ 1e-6, β ≈ 0.9998, so the model barely trains (it rejects every
+> applicant). Two differences from the paper cause this: the rate constraint
+> uses an α-dependent benchmark `1 − √(αμ/L)` instead of the paper's fixed
+> `ρ²_* = 1 − √(μ/L)`, which makes the constraint vacuous for small α; and
+> β uses `1 − αψL` in the denominator where eq. (35b) has `1 − αψμ`.
+> The experiment therefore uses `paper_tuning.py`, a direct implementation of
+> Theorem 2, Theorem 3 (eq. 44) and problem (51). Settings: ζ = 0.05, φ = 0.99,
+> rate trade-off ε = 0.25 (the paper's value; main) and ε = 0.05. The library's
+> choice is still recorded in the results for transparency. Library
+> parameters `zeta ∈ {0.01, 0.10}` are replaced by `ε ∈ {0.25, 0.05}` because ζ
+> barely changes the selected parameters at this κ.
+
 ### Pre-registered metrics
 Optimization (what the theory bounds), across the 200 seeds:
 - `S = f(w_K) − f*`: mean, median, 95th and 99th percentile, CVaR₅% (mean of the worst 5%)
