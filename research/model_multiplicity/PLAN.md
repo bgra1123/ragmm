@@ -143,3 +143,34 @@ Quality (so reliability is not bought with bad decisions):
   updates, or private (DP) training. Experiments 2–3 address this.
 - Flips are measured relative to the ideal model `w*`, not relative to ground
   truth. Stability is not the same as correctness.
+
+---
+
+## 7. Experiment 1b: change the objective (λ) or tune the optimizer? (exploratory)
+
+Added after Experiment 1; written down before running it.
+
+**Question.** To make loan decisions less dependent on the training seed, is
+it better to (A) keep the objective and tune the optimizer, or (B) change the
+objective by increasing the L2 penalty λ and keep a default optimizer?
+
+**Reference.** The model the lender set out to build: the ideal model
+`w*(λ₀)` at the base penalty λ₀ = 0.01, and its decisions on the 300
+held-out applicants (threshold 5/6).
+
+**Arms** (200 seeds, batch 16, K = 2000, same minibatch sequences):
+- **A (tune the optimizer, λ = λ₀):** SGD tuned for mean, SGD + tail averaging
+  (tuned), RA-GMM (ε = 0.25), and the textbook SGD / Nesterov for reference.
+- **B (change the objective):** λ ∈ {0.03, 0.1, 0.3, 1.0} with textbook SGD and
+  textbook Nesterov (α = 1/L(λ)).
+- **A + B:** SGD + tail averaging (tuned) at each λ.
+
+**Metrics.**
+- Flips per retrain against the **reference decisions** (mean, p95).
+- **Bias flips:** applicants on which `w*(λ)` itself disagrees with `w*(λ₀)`,
+  i.e. decisions changed by the objective, not by noise.
+- Quality on held-out applicants: expected cost (cost matrix), AUC, approval rate.
+
+**Prediction.** B reduces seed-dependence but adds bias flips and loses some
+quality as λ grows; A reduces seed-dependence with no bias flips and no loss
+in quality. Whatever is observed gets reported.
