@@ -92,3 +92,64 @@ constraint never binds, and its β formula uses `1 − αψL` where the paper's
   about any current lender.
 - Flips are measured against the ideal model `w*`, not against ground truth.
 - Minibatch noise is not the additive Gaussian noise assumed by the theory.
+
+---
+
+# Experiment 1b (exploratory): change the objective or tune the optimizer?
+
+Design written down before running: `PLAN.md` §7. Raw results:
+`results/lambda_vs_tuning.json`. Figure: `results/figures/lambda_vs_tuning.png`.
+Reproduce: `python research/model_multiplicity/lambda_vs_tuning.py` (~30 s).
+
+Reference = the intended model `w*(λ = 0.01)`: approves 41% of held-out
+applicants, expected cost 0.553 per applicant, AUC 0.762.
+"Bias flips" = applicants on which the new objective's own ideal model `w*(λ)`
+already disagrees with the intended model (no training noise involved).
+
+| Arm | λ | Optimizer | Flips vs intended model (mean) | Seed-only flips (vs own ideal) | Bias flips | Expected cost | Approval rate |
+|---|---|---|---|---|---|---|---|
+| reference | 0.01 | SGD textbook | 71.3 | 71.3 | 0 | 0.751 | 52% |
+| reference | 0.01 | Nesterov textbook | 99.8 | 99.8 | 0 | 0.916 | 62% |
+| **A** | 0.01 | **SGD + tail averaging (tuned)** | **6.6** | 6.6 | **0** | **0.550** | 40% |
+| A | 0.01 | SGD tuned for mean | 10.3 | 10.3 | 0 | 0.552 | 40% |
+| A | 0.01 | RA-GMM (ε = 0.25) | 50.8 | 50.8 | 0 | 0.659 | 46% |
+| B | 0.03 | SGD textbook | 70.8 | 75.3 | 26 | 0.718 | 46% |
+| B | 0.1 | SGD textbook | 76.2 | 72.3 | 65 | 0.681 | 34% |
+| B | 0.3 | SGD textbook | 94.6 | 46.9 | 113 | 0.672 | 17% |
+| B | 1.0 | SGD textbook | 119.5 | 4.4 | 122 | 0.697 | 1% |
+| A+B | 0.03 | SGD + tail averaging (tuned) | 26.6 | 7.2 | 26 | 0.532 | 32% |
+| A+B | 0.1 | SGD + tail averaging (tuned) | 66.4 | 3.8 | 65 | 0.562 | 19% |
+| A+B | 1.0 | SGD + tail averaging (tuned) | 122.0 | 0.0 | 122 | 0.700 | 0% |
+
+(Nesterov-textbook rows for arm B follow the same pattern; see the JSON.)
+
+## Findings
+
+1. **Raising λ with a default optimizer does not remove seed-dependence at
+   moderate λ.** At λ = 0.03–0.1, textbook SGD still flips 72–75 applicants
+   per retrain relative to its own ideal model, about the same as at λ = 0.01.
+   On top of that, the objective change itself moves 26–65 decisions.
+2. **Raising λ only becomes "stable" by becoming degenerate.** At λ = 1 the
+   retrains agree with each other (4 seed-only flips), because the model shrinks
+   toward the base rate and approves almost nobody (1% approval vs the
+   intended 41%). 122 of 300 decisions differ from the intended model, and
+   expected cost rises from 0.553 to about 0.70.
+3. **Tuning the optimizer removes seed-dependence without changing the
+   model.** Tail averaging at λ = 0.01: 6.6 flips, zero bias flips, cost 0.550
+   (the intended model's own cost is 0.553).
+4. **The prediction in PLAN.md §7 holds**, more strongly than expected: B
+   brought no stability gain at moderate λ, not just a gain paid for with bias.
+
+## Caveats
+
+- The approval threshold is fixed at 5/6 (cost matrix). Larger λ pulls
+  predicted probabilities toward the 70% base rate, below that threshold,
+  which drives approvals toward zero. A recalibrated threshold would make the
+  large-λ arm less degenerate; that variant is not run here.
+- λ = 0.01 is treated as the intended model. A mild increase (λ = 0.03) gives a
+  slightly lower ideal cost on held-out applicants (0.540). Choosing λ is a
+  legitimate modeling decision; the point here is that it is the wrong lever
+  for training noise, because it changes decisions for reasons unrelated to
+  the seed.
+- The arm-B optimizers are textbook defaults; arm A+B shows that tuning is
+  what removes the seed-only flips at every λ.

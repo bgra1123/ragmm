@@ -108,3 +108,38 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+def lambda_vs_tuning_figure():
+    """Experiment 1b: seed-dependence vs decision quality, objective change (B) vs optimizer tuning (A)."""
+    s = json.loads((HERE / "results" / "lambda_vs_tuning.json").read_text())
+    colors = {"A": SERIES[0], "B": SERIES[1], "A+B": SERIES[2], "ref": "#8a8984"}
+    labels = {"A": "A: tune the optimizer (λ = 0.01)", "B": "B: raise λ, textbook optimizer",
+              "A+B": "A + B: raise λ and tune", "ref": "textbook optimizer, λ = 0.01"}
+    fig, ax = plt.subplots(figsize=(8.5, 5.2))
+    for arm in ("ref", "B", "A+B", "A"):
+        rows = [r for r in s["rows"] if r["arm"] == arm]
+        xs = [r["flips_vs_reference"]["mean"] for r in rows]
+        ys = [r["cost_per_applicant"]["mean"] for r in rows]
+        ax.scatter(xs, ys, s=70, color=colors[arm], edgecolors=SURFACE, linewidths=2, label=labels[arm], zorder=3)
+        for r, x, y in zip(rows, xs, ys):
+            tag = r["method"].replace(" (tuned for mean)", " tuned").replace(" (tuned)", "").replace(" (textbook)", "")
+            txt = tag if arm in ("A", "ref") else f"λ={r['lam']:g}, {tag}"
+            if r["lam"] == 1.0:              # three overlapping points: one shared label
+                if arm != "A+B":
+                    continue
+                txt = "λ=1, all optimizers"
+            dx, dy = {("A", "SGD tuned"): (6, 8), ("A", "SGD + tail averaging"): (-20, -18),
+                      ("B", "λ=0.3, SGD"): (6, -12)}.get((arm, txt), (6, 4))
+            ax.annotate(txt, (x, y), xytext=(dx, dy), textcoords="offset points", fontsize=8, color=INK2)
+    ref = s["reference"]
+    ax.axhline(ref["cost"], color=INK2, lw=1, ls=(0, (3, 3)))
+    ax.text(0.99, ref["cost"], " intended model's cost", transform=ax.get_yaxis_transform(),
+            ha="right", va="bottom", fontsize=8, color=INK2)
+    ax.set_xlabel("applicants (of 300) whose decision differs from the intended model, per retrain (mean)")
+    ax.set_ylabel("expected cost per applicant (lower is better)")
+    ax.legend(frameon=False, fontsize=9, loc="upper left")
+    out = HERE / "results" / "figures" / "lambda_vs_tuning.png"
+    fig.savefig(out, dpi=200, bbox_inches="tight")
+    plt.close(fig)
+    print("wrote", out)

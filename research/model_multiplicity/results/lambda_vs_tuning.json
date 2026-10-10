@@ -1,0 +1,710 @@
+{
+  "config": {
+    "lam0": 0.01,
+    "lams": [
+      0.03,
+      0.1,
+      0.3,
+      1.0
+    ],
+    "K": 2000,
+    "batch": 16,
+    "seeds": 200,
+    "zeta": 0.05,
+    "eps": 0.25,
+    "out": "/home/user/ragmm/research/model_multiplicity/results"
+  },
+  "reference": {
+    "lam": 0.01,
+    "approval_rate": 0.4066666666666667,
+    "cost": 0.5533333333333333,
+    "auc": 0.761957671957672
+  },
+  "rows": [
+    {
+      "flips_vs_reference": {
+        "mean": 71.27,
+        "median": 70.5,
+        "p95": 91.04999999999998,
+        "p99": 96.00999999999999,
+        "cvar5": 95.5,
+        "max": 109.0
+      },
+      "flips_vs_own_ideal": {
+        "mean": 71.27,
+        "median": 70.5,
+        "p95": 91.04999999999998,
+        "p99": 96.00999999999999,
+        "cvar5": 95.5,
+        "max": 109.0
+      },
+      "ambiguity": 0.98,
+      "cost_per_applicant": {
+        "mean": 0.7509333333333333,
+        "median": 0.7466666666666667,
+        "p95": 0.9236666666666665,
+        "p99": 0.9767999999999999,
+        "cvar5": 0.9626666666666667,
+        "max": 1.0366666666666666
+      },
+      "auc_mean": 0.6944910052910052,
+      "approval_rate": 0.5205666666666666,
+      "arm": "ref",
+      "lam": 0.01,
+      "method": "SGD (textbook)",
+      "params": {
+        "alpha": 1.011313791760392,
+        "beta": 0.0,
+        "gamma": 0.0
+      },
+      "bias_flips": 0,
+      "ideal_cost": 0.5533333333333333,
+      "ideal_auc": 0.761957671957672
+    },
+    {
+      "flips_vs_reference": {
+        "mean": 99.81,
+        "median": 98.5,
+        "p95": 125.04999999999998,
+        "p99": 130.01999999999998,
+        "cvar5": 129.6,
+        "max": 132.0
+      },
+      "flips_vs_own_ideal": {
+        "mean": 99.81,
+        "median": 98.5,
+        "p95": 125.04999999999998,
+        "p99": 130.01999999999998,
+        "cvar5": 129.6,
+        "max": 132.0
+      },
+      "ambiguity": 1.0,
+      "cost_per_applicant": {
+        "mean": 0.9161666666666668,
+        "median": 0.9083333333333333,
+        "p95": 1.1068333333333333,
+        "p99": 1.1637999999999995,
+        "cvar5": 1.1546666666666667,
+        "max": 1.2266666666666666
+      },
+      "auc_mean": 0.6541587301587302,
+      "approval_rate": 0.6182333333333333,
+      "arm": "ref",
+      "lam": 0.01,
+      "method": "Nesterov (textbook)",
+      "params": {
+        "alpha": 1.011313791760392,
+        "beta": 0.8172499017832118,
+        "gamma": 0.8172499017832118
+      },
+      "bias_flips": 0,
+      "ideal_cost": 0.5533333333333333,
+      "ideal_auc": 0.761957671957672
+    },
+    {
+      "flips_vs_reference": {
+        "mean": 6.63,
+        "median": 6.0,
+        "p95": 10.049999999999983,
+        "p99": 12.009999999999991,
+        "cvar5": 11.7,
+        "max": 14.0
+      },
+      "flips_vs_own_ideal": {
+        "mean": 6.63,
+        "median": 6.0,
+        "p95": 10.049999999999983,
+        "p99": 12.009999999999991,
+        "cvar5": 11.7,
+        "max": 14.0
+      },
+      "ambiguity": 0.16000000000000003,
+      "cost_per_applicant": {
+        "mean": 0.5496333333333334,
+        "median": 0.55,
+        "p95": 0.58,
+        "p99": 0.5900333333333333,
+        "cvar5": 0.587,
+        "max": 0.6
+      },
+      "auc_mean": 0.7609415343915344,
+      "approval_rate": 0.40126666666666666,
+      "arm": "A",
+      "lam": 0.01,
+      "method": "SGD + tail averaging (tuned)",
+      "params": {
+        "alpha": 0.026500558089813882,
+        "beta": 0.0,
+        "gamma": 0.0,
+        "tail_average": true
+      },
+      "bias_flips": 0,
+      "ideal_cost": 0.5533333333333333,
+      "ideal_auc": 0.761957671957672
+    },
+    {
+      "flips_vs_reference": {
+        "mean": 10.305,
+        "median": 10.0,
+        "p95": 16.0,
+        "p99": 17.0,
+        "cvar5": 16.7,
+        "max": 20.0
+      },
+      "flips_vs_own_ideal": {
+        "mean": 10.305,
+        "median": 10.0,
+        "p95": 16.0,
+        "p99": 17.0,
+        "cvar5": 16.7,
+        "max": 20.0
+      },
+      "ambiguity": 0.20999999999999996,
+      "cost_per_applicant": {
+        "mean": 0.55225,
+        "median": 0.5533333333333333,
+        "p95": 0.5933333333333334,
+        "p99": 0.6033666666666667,
+        "cvar5": 0.601,
+        "max": 0.6233333333333333
+      },
+      "auc_mean": 0.7598103174603175,
+      "approval_rate": 0.39585,
+      "arm": "A",
+      "lam": 0.01,
+      "method": "SGD (tuned for mean)",
+      "params": {
+        "alpha": 0.01637082156935815,
+        "beta": 0.0,
+        "gamma": 0.0
+      },
+      "bias_flips": 0,
+      "ideal_cost": 0.5533333333333333,
+      "ideal_auc": 0.761957671957672
+    },
+    {
+      "flips_vs_reference": {
+        "mean": 50.83,
+        "median": 51.0,
+        "p95": 65.0,
+        "p99": 72.01999999999998,
+        "cvar5": 69.9,
+        "max": 81.0
+      },
+      "flips_vs_own_ideal": {
+        "mean": 50.83,
+        "median": 51.0,
+        "p95": 65.0,
+        "p99": 72.01999999999998,
+        "cvar5": 69.9,
+        "max": 81.0
+      },
+      "ambiguity": 0.91,
+      "cost_per_applicant": {
+        "mean": 0.6594999999999999,
+        "median": 0.65,
+        "p95": 0.78,
+        "p99": 0.8633666666666666,
+        "cvar5": 0.8203333333333334,
+        "max": 0.87
+      },
+      "auc_mean": 0.723258201058201,
+      "approval_rate": 0.4632,
+      "arm": "A",
+      "lam": 0.01,
+      "method": "RA-GMM (eps=0.25)",
+      "params": {
+        "alpha": 0.010011886330329817,
+        "beta": 0.9800879884484675,
+        "gamma": 0.0
+      },
+      "bias_flips": 0,
+      "ideal_cost": 0.5533333333333333,
+      "ideal_auc": 0.761957671957672
+    },
+    {
+      "flips_vs_reference": {
+        "mean": 70.835,
+        "median": 69.0,
+        "p95": 94.04999999999998,
+        "p99": 97.01999999999998,
+        "cvar5": 98.1,
+        "max": 113.0
+      },
+      "flips_vs_own_ideal": {
+        "mean": 75.295,
+        "median": 75.0,
+        "p95": 98.04999999999998,
+        "p99": 105.04999999999995,
+        "cvar5": 104.9,
+        "max": 121.0
+      },
+      "ambiguity": 0.9966666666666667,
+      "cost_per_applicant": {
+        "mean": 0.7177833333333333,
+        "median": 0.7066666666666667,
+        "p95": 0.8901666666666667,
+        "p99": 0.9500666666666666,
+        "cvar5": 0.9416666666666668,
+        "max": 1.0366666666666666
+      },
+      "auc_mean": 0.6858386243386243,
+      "approval_rate": 0.4595166666666667,
+      "arm": "B",
+      "lam": 0.03,
+      "method": "SGD (textbook)",
+      "params": {
+        "alpha": 0.9912642084546199,
+        "beta": 0.0,
+        "gamma": 0.0
+      },
+      "bias_flips": 26,
+      "ideal_cost": 0.54,
+      "ideal_auc": 0.7616402116402117
+    },
+    {
+      "flips_vs_reference": {
+        "mean": 91.635,
+        "median": 90.0,
+        "p95": 115.04999999999998,
+        "p99": 123.00999999999999,
+        "cvar5": 120.1,
+        "max": 130.0
+      },
+      "flips_vs_own_ideal": {
+        "mean": 99.395,
+        "median": 98.0,
+        "p95": 124.04999999999998,
+        "p99": 132.0,
+        "cvar5": 128.9,
+        "max": 139.0
+      },
+      "ambiguity": 1.0,
+      "cost_per_applicant": {
+        "mean": 0.84375,
+        "median": 0.8433333333333334,
+        "p95": 1.0271666666666663,
+        "p99": 1.0602333333333331,
+        "cvar5": 1.0583333333333333,
+        "max": 1.1233333333333333
+      },
+      "auc_mean": 0.6533058201058202,
+      "approval_rate": 0.53945,
+      "arm": "B",
+      "lam": 0.03,
+      "method": "Nesterov (textbook)",
+      "params": {
+        "alpha": 0.9912642084546199,
+        "beta": 0.7058342130019544,
+        "gamma": 0.7058342130019544
+      },
+      "bias_flips": 26,
+      "ideal_cost": 0.54,
+      "ideal_auc": 0.7616402116402117
+    },
+    {
+      "flips_vs_reference": {
+        "mean": 26.575,
+        "median": 26.5,
+        "p95": 31.0,
+        "p99": 32.0,
+        "cvar5": 31.6,
+        "max": 33.0
+      },
+      "flips_vs_own_ideal": {
+        "mean": 7.165,
+        "median": 7.0,
+        "p95": 10.0,
+        "p99": 12.009999999999991,
+        "cvar5": 11.7,
+        "max": 14.0
+      },
+      "ambiguity": 0.13666666666666671,
+      "cost_per_applicant": {
+        "mean": 0.5323166666666667,
+        "median": 0.5333333333333333,
+        "p95": 0.56,
+        "p99": 0.5733333333333334,
+        "cvar5": 0.568,
+        "max": 0.5766666666666667
+      },
+      "auc_mean": 0.7607439153439153,
+      "approval_rate": 0.3182833333333333,
+      "arm": "A+B",
+      "lam": 0.03,
+      "method": "SGD + tail averaging (tuned)",
+      "params": {
+        "alpha": 0.01604626537966412,
+        "beta": 0.0,
+        "gamma": 0.0,
+        "tail_average": true
+      },
+      "bias_flips": 26,
+      "ideal_cost": 0.54,
+      "ideal_auc": 0.7616402116402117
+    },
+    {
+      "flips_vs_reference": {
+        "mean": 76.22,
+        "median": 74.0,
+        "p95": 101.0,
+        "p99": 112.01999999999998,
+        "cvar5": 110.1,
+        "max": 129.0
+      },
+      "flips_vs_own_ideal": {
+        "mean": 72.29,
+        "median": 72.0,
+        "p95": 96.09999999999997,
+        "p99": 108.01999999999998,
+        "cvar5": 104.4,
+        "max": 115.0
+      },
+      "ambiguity": 0.9966666666666667,
+      "cost_per_applicant": {
+        "mean": 0.6805333333333333,
+        "median": 0.6783333333333333,
+        "p95": 0.8368333333333333,
+        "p99": 0.8867666666666666,
+        "cvar5": 0.8686666666666667,
+        "max": 0.9033333333333333
+      },
+      "auc_mean": 0.6705928571428572,
+      "approval_rate": 0.3369666666666667,
+      "arm": "B",
+      "lam": 0.1,
+      "method": "SGD (textbook)",
+      "params": {
+        "alpha": 0.9269448974509279,
+        "beta": 0.0,
+        "gamma": 0.0
+      },
+      "bias_flips": 65,
+      "ideal_cost": 0.55,
+      "ideal_auc": 0.7612698412698413
+    },
+    {
+      "flips_vs_reference": {
+        "mean": 87.125,
+        "median": 86.0,
+        "p95": 115.04999999999998,
+        "p99": 130.02999999999997,
+        "cvar5": 124.8,
+        "max": 154.0
+      },
+      "flips_vs_own_ideal": {
+        "mean": 90.725,
+        "median": 89.0,
+        "p95": 116.0,
+        "p99": 133.07999999999993,
+        "cvar5": 128.3,
+        "max": 147.0
+      },
+      "ambiguity": 1.0,
+      "cost_per_applicant": {
+        "mean": 0.7508166666666667,
+        "median": 0.7416666666666667,
+        "p95": 0.93,
+        "p99": 1.024266666666666,
+        "cvar5": 0.9956666666666667,
+        "max": 1.1466666666666667
+      },
+      "auc_mean": 0.650555291005291,
+      "approval_rate": 0.4007833333333333,
+      "arm": "B",
+      "lam": 0.1,
+      "method": "Nesterov (textbook)",
+      "params": {
+        "alpha": 0.9269448974509279,
+        "beta": 0.5332041839184126,
+        "gamma": 0.5332041839184126
+      },
+      "bias_flips": 65,
+      "ideal_cost": 0.55,
+      "ideal_auc": 0.7612698412698413
+    },
+    {
+      "flips_vs_reference": {
+        "mean": 66.44,
+        "median": 66.0,
+        "p95": 70.0,
+        "p99": 70.00999999999999,
+        "cvar5": 70.2,
+        "max": 71.0
+      },
+      "flips_vs_own_ideal": {
+        "mean": 3.78,
+        "median": 4.0,
+        "p95": 7.0,
+        "p99": 8.009999999999991,
+        "cvar5": 8.1,
+        "max": 9.0
+      },
+      "ambiguity": 0.10999999999999999,
+      "cost_per_applicant": {
+        "mean": 0.5618000000000001,
+        "median": 0.56,
+        "p95": 0.58,
+        "p99": 0.5900333333333333,
+        "cvar5": 0.5860000000000001,
+        "max": 0.6033333333333334
+      },
+      "auc_mean": 0.7603420634920636,
+      "approval_rate": 0.1852,
+      "arm": "A+B",
+      "lam": 0.1,
+      "method": "SGD + tail averaging (tuned)",
+      "params": {
+        "alpha": 0.015005085112486499,
+        "beta": 0.0,
+        "gamma": 0.0,
+        "tail_average": true
+      },
+      "bias_flips": 65,
+      "ideal_cost": 0.55,
+      "ideal_auc": 0.7612698412698413
+    },
+    {
+      "flips_vs_reference": {
+        "mean": 94.625,
+        "median": 95.0,
+        "p95": 118.0,
+        "p99": 124.03999999999996,
+        "cvar5": 122.7,
+        "max": 131.0
+      },
+      "flips_vs_own_ideal": {
+        "mean": 46.915,
+        "median": 47.0,
+        "p95": 66.04999999999998,
+        "p99": 71.00999999999999,
+        "cvar5": 69.2,
+        "max": 78.0
+      },
+      "ambiguity": 0.9833333333333333,
+      "cost_per_applicant": {
+        "mean": 0.6718500000000001,
+        "median": 0.6666666666666666,
+        "p95": 0.7869999999999998,
+        "p99": 0.8601666666666665,
+        "cvar5": 0.8333333333333334,
+        "max": 0.8766666666666667
+      },
+      "auc_mean": 0.6518439153439154,
+      "approval_rate": 0.16655,
+      "arm": "B",
+      "lam": 0.3,
+      "method": "SGD (textbook)",
+      "params": {
+        "alpha": 0.7819752954423368,
+        "beta": 0.0,
+        "gamma": 0.0
+      },
+      "bias_flips": 113,
+      "ideal_cost": 0.67,
+      "ideal_auc": 0.7586243386243386
+    },
+    {
+      "flips_vs_reference": {
+        "mean": 95.065,
+        "median": 94.0,
+        "p95": 119.04999999999998,
+        "p99": 129.02999999999997,
+        "cvar5": 124.7,
+        "max": 139.0
+      },
+      "flips_vs_own_ideal": {
+        "mean": 56.085,
+        "median": 56.0,
+        "p95": 77.0,
+        "p99": 87.02999999999997,
+        "cvar5": 82.2,
+        "max": 90.0
+      },
+      "ambiguity": 1.0,
+      "cost_per_applicant": {
+        "mean": 0.6881499999999999,
+        "median": 0.68,
+        "p95": 0.8366666666666667,
+        "p99": 0.8934333333333332,
+        "cvar5": 0.8693333333333333,
+        "max": 0.9233333333333333
+      },
+      "auc_mean": 0.6425431216931216,
+      "approval_rate": 0.19755,
+      "arm": "B",
+      "lam": 0.3,
+      "method": "Nesterov (textbook)",
+      "params": {
+        "alpha": 0.7819752954423368,
+        "beta": 0.3473933009416205,
+        "gamma": 0.3473933009416205
+      },
+      "bias_flips": 113,
+      "ideal_cost": 0.67,
+      "ideal_auc": 0.7586243386243386
+    },
+    {
+      "flips_vs_reference": {
+        "mean": 113.655,
+        "median": 113.0,
+        "p95": 116.0,
+        "p99": 117.0,
+        "cvar5": 116.6,
+        "max": 118.0
+      },
+      "flips_vs_own_ideal": {
+        "mean": 1.125,
+        "median": 1.0,
+        "p95": 3.0,
+        "p99": 4.009999999999991,
+        "cvar5": 4.1,
+        "max": 5.0
+      },
+      "ambiguity": 0.030000000000000027,
+      "cost_per_applicant": {
+        "mean": 0.6721833333333334,
+        "median": 0.67,
+        "p95": 0.68,
+        "p99": 0.6833333333333333,
+        "cvar5": 0.682,
+        "max": 0.6866666666666666
+      },
+      "auc_mean": 0.7581513227513227,
+      "approval_rate": 0.027816666666666667,
+      "arm": "A+B",
+      "lam": 0.3,
+      "method": "SGD + tail averaging (tuned)",
+      "params": {
+        "alpha": 0.007819752954423368,
+        "beta": 0.0,
+        "gamma": 0.0,
+        "tail_average": true
+      },
+      "bias_flips": 113,
+      "ideal_cost": 0.67,
+      "ideal_auc": 0.7586243386243386
+    },
+    {
+      "flips_vs_reference": {
+        "mean": 119.535,
+        "median": 120.0,
+        "p95": 124.0,
+        "p99": 126.00999999999999,
+        "cvar5": 125.1,
+        "max": 127.0
+      },
+      "flips_vs_own_ideal": {
+        "mean": 4.415,
+        "median": 3.0,
+        "p95": 12.049999999999983,
+        "p99": 18.0,
+        "cvar5": 15.2,
+        "max": 19.0
+      },
+      "ambiguity": 0.5900000000000001,
+      "cost_per_applicant": {
+        "mean": 0.6974833333333333,
+        "median": 0.6966666666666667,
+        "p95": 0.7266666666666667,
+        "p99": 0.7601333333333332,
+        "cvar5": 0.7513333333333333,
+        "max": 0.7766666666666666
+      },
+      "auc_mean": 0.6306298941798941,
+      "approval_rate": 0.014716666666666666,
+      "arm": "B",
+      "lam": 1.0,
+      "method": "SGD (textbook)",
+      "params": {
+        "alpha": 0.5053535185581843,
+        "beta": 0.0,
+        "gamma": 0.0
+      },
+      "bias_flips": 122,
+      "ideal_cost": 0.7,
+      "ideal_auc": 0.7545502645502645
+    },
+    {
+      "flips_vs_reference": {
+        "mean": 119.305,
+        "median": 120.0,
+        "p95": 124.0,
+        "p99": 126.0,
+        "cvar5": 125.2,
+        "max": 127.0
+      },
+      "flips_vs_own_ideal": {
+        "mean": 5.055,
+        "median": 4.0,
+        "p95": 14.0,
+        "p99": 18.0,
+        "cvar5": 16.6,
+        "max": 21.0
+      },
+      "ambiguity": 0.6333333333333333,
+      "cost_per_applicant": {
+        "mean": 0.69625,
+        "median": 0.6966666666666667,
+        "p95": 0.7269999999999999,
+        "p99": 0.7667,
+        "cvar5": 0.7523333333333333,
+        "max": 0.77
+      },
+      "auc_mean": 0.6278579365079365,
+      "approval_rate": 0.01685,
+      "arm": "B",
+      "lam": 1.0,
+      "method": "Nesterov (textbook)",
+      "params": {
+        "alpha": 0.5053535185581843,
+        "beta": 0.16898754725096304,
+        "gamma": 0.16898754725096304
+      },
+      "bias_flips": 122,
+      "ideal_cost": 0.7,
+      "ideal_auc": 0.7545502645502645
+    },
+    {
+      "flips_vs_reference": {
+        "mean": 122.0,
+        "median": 122.0,
+        "p95": 122.0,
+        "p99": 122.0,
+        "cvar5": 122.0,
+        "max": 122.0
+      },
+      "flips_vs_own_ideal": {
+        "mean": 0.0,
+        "median": 0.0,
+        "p95": 0.0,
+        "p99": 0.0,
+        "cvar5": 0.0,
+        "max": 0.0
+      },
+      "ambiguity": 0.0,
+      "cost_per_applicant": {
+        "mean": 0.7,
+        "median": 0.7,
+        "p95": 0.7,
+        "p99": 0.7,
+        "cvar5": 0.7,
+        "max": 0.7
+      },
+      "auc_mean": 0.7539664021164021,
+      "approval_rate": 0.0,
+      "arm": "A+B",
+      "lam": 1.0,
+      "method": "SGD + tail averaging (tuned)",
+      "params": {
+        "alpha": 0.005053535185581844,
+        "beta": 0.0,
+        "gamma": 0.0,
+        "tail_average": true
+      },
+      "bias_flips": 122,
+      "ideal_cost": 0.7,
+      "ideal_auc": 0.7545502645502645
+    }
+  ]
+}
