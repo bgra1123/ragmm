@@ -1,0 +1,4 @@
+n=700 d=55 n_test=300 lambda=0.03 L=1.0088 mu=0.03 kappa=33.6 f*=0.477696
+K=500 done (42s)
+K=2000 done (96s)
+wrote /home/user/ragmm/research/model_multiplicity/results/summary_lam0.03.json in 96s
