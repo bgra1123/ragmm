@@ -436,3 +436,7 @@ Nesterov (textbook) as the default reference, average-tuned, worst-case-tuned
   average-tuned. Reported whatever its size.
 - If both criteria select the same configuration, the result is a tie and is
   reported as such.
+
+> **Correction recorded before the main run:** the search space defined above
+> has 18 × (1 + 6 × 2) × 2 = **468** configurations, not 432 (arithmetic error
+> in the count; the definition is unchanged).
