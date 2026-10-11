@@ -385,3 +385,54 @@ Same as P1 (§10) except the portfolio must satisfy `w ≥ 0`, `1ᵀw = 1`
 - **Hypotheses:** H1–H2 as in P1 (RA-GMM vs textbook Nesterov / heavy-ball),
   H3 open (vs tuned baselines). Additional expectation: the constraints cap
   the damage from noisy steps, so all gaps shrink relative to P1.
+
+---
+
+## 12. Experiment P3: tune for the worst case, not the average (option B; written before running)
+
+**Question.** If the solver's settings are chosen to minimize the **worst 5%**
+of outcomes (the paper's risk measure, EV@R) instead of the **average**, does
+rebalancing become safer in the worst case, and what does it cost on average?
+
+**Setting.** Long-only, no leverage (as P2) — main. Unconstrained (as P1) —
+secondary. Same data, problem R1, K = 200, batch 16, 10 bps costs.
+
+**Search space (identical for both criteria).** GMM with
+α = a/L, a ∈ 18 log-spaced values in [1e-4, 2];
+β ∈ {0, 0.3, 0.5, 0.7, 0.8, 0.9, 0.95}; γ ∈ {0 (heavy-ball), β (Nesterov)};
+tail averaging on/off. Duplicates for β = 0 removed (432 configurations).
+
+**Tuning data.** First 24 rebalance dates (1991–1992), starting from the
+exact-solution path, **100 tuning seeds** (10 000–10 099), same minibatch
+sequences for every configuration. Outcome per (date, seed): suboptimality
+`f(w_K) − f*`, pooled over all 2,400 (date, seed) pairs.
+
+**Criteria.**
+- **Average-tuned:** minimize the pooled mean.
+- **Worst-case-tuned (main):** minimize the pooled empirical **EV@R** at
+  ζ = 0.05, `EV@R(X) = inf_{t>0} (1/t) log(E[e^{tX}] / ζ)`.
+- **Worst-case-tuned (CVaR, sensitivity):** minimize the mean of the worst 5%.
+
+**Backtest.** 200 evaluation seeds (0–199), all 328 dates. Methods:
+Nesterov (textbook) as the default reference, average-tuned, worst-case-tuned
+(EV@R), worst-case-tuned (CVaR), and RA-GMM (ε = 0.25) for reference.
+
+**Pre-registered metrics.**
+- Out-of-sample dates only (dates 24–327): pooled mean, 95th percentile and
+  CVaR₅% of suboptimality and of phantom trades.
+- Whole backtest, across seeds: terminal wealth 5th / 50th / 95th percentile
+  and the width of the fan (95th / 5th), tracking error vs the exact solver,
+  max drawdown (mean, worst 5%), Sharpe (mean, worst 5%), monthly turnover.
+- Paired bootstrap over seeds (10 000 resamples) for the difference between
+  worst-case-tuned (EV@R) and average-tuned in the 95th percentile and CVaR₅%
+  of phantom trades and suboptimality.
+
+**Hypotheses.**
+- **H1:** worst-case-tuned (EV@R) has a lower 95th percentile and CVaR₅% of
+  suboptimality and of phantom trades than average-tuned (out-of-sample dates).
+- **H2:** worst-case-tuned has a narrower terminal-wealth fan and a lower
+  worst-5% tracking error than average-tuned.
+- **H3 (price):** worst-case-tuned has a higher (worse) mean suboptimality than
+  average-tuned. Reported whatever its size.
+- If both criteria select the same configuration, the result is a tie and is
+  reported as such.
