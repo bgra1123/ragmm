@@ -118,9 +118,12 @@ def worst_case_figures(long_only=True):
         ax.plot(dates, ideal, color=INK, lw=2)
         tw = s["methods"][name]["terminal_wealth"]
         label = name.replace("Nesterov (textbook)", "Default settings (textbook Nesterov)")
-        ax.set_title(f"{label}\nfinal wealth {tw['p05']:.0f}x to {tw['p95']:.0f}x (5th to 95th pct)",
-                     fontsize=11, color=INK)
+        sub = (f"final wealth {tw['p05']:.0f}x to {tw['p95']:.0f}x (5th to 95th pct)"
+               if s["methods"][name]["ruined"] == 0 else f"wiped out in {s['methods'][name]['ruined']:.0%} of seeds")
+        ax.set_title(f"{label}\n{sub}", fontsize=11, color=INK)
         ax.set_yscale("log")
+        if not long_only:
+            ax.set_ylim(1e-3, 1e3)
     axes[0].set_ylabel("wealth (start = 1, log scale)")
     fig.suptitle("Same strategy, same data, 200 random seeds of the solver. Black: exact solver. "
                  "Thin lines: 50 seeds. Dashed: 5th and 95th percentiles.", color=INK2, fontsize=10, y=0.01)

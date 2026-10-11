@@ -159,3 +159,66 @@ freezes the portfolio. The bound is not wrong (it is an upper bound), but it
 is too loose to choose parameters here. The last row is a separate,
 interesting fact: on 37% of dates even the tuned solver's worst 5% of runs
 ends up farther from the optimum than not rebalancing at all.
+
+---
+
+# Experiment P3: tune for the worst case (EV@R) vs the average
+
+Design: `PLAN.md` §12 (pre-registered; search-space count corrected to 468
+before the run). Code: `worst_case_tuning.py`. Raw results:
+`results/worstcase.json`, `results/worstcase_longonly.json`. Figures:
+`results/figures/worstcase_*`. Tuning: 468 configurations × 24 months
+(1991–92) × 100 seeds. Evaluation: 200 different seeds, out-of-sample dates
+1993–2018 for solver metrics, the whole backtest for wealth metrics.
+
+## Selected settings (α = a/L)
+
+| Setting | Average-tuned | Worst-case-tuned (EV@R) | Worst-case-tuned (CVaR) |
+|---|---|---|---|
+| Unconstrained | a = 0.0059, Nesterov β = 0.3 | a = 0.0106, Nesterov β = 0.3, **tail averaging** | a = 0.0010, Nesterov β = 0.9 |
+| Long-only | a = 0.00032, Nesterov β = 0.95 | a = 0.00032, heavy-ball β = 0.95 | same as EV@R |
+
+## Unconstrained (out-of-sample 1993–2018)
+
+| Metric | Average-tuned | Worst-case-tuned (EV@R) | Difference (paired bootstrap 95% CI) |
+|---|---|---|---|
+| Phantom trades, 95th percentile | 32.4% | **29.2%** | −3.2 pts [−3.4, −3.1] (−10%) |
+| Phantom trades, worst 5% (CVaR) | 38.3% | **33.8%** | −4.4 pts [−4.5, −4.3] (−12%) |
+| Solver error, 95th percentile | 0.0282 | **0.0248** | −0.0035 [−0.0037, −0.0031] (−12%) |
+| Solver error, worst 5% (CVaR) | 0.0418 | **0.0346** | −0.0072 [−0.0075, −0.0068] (−17%) |
+| Solver error, mean | 0.0105 | **0.0097** | −0.0008 [−0.0008, −0.0008] (−7%) |
+| Tracking error vs exact: mean / worst 5% | 0.036 / 0.038 | **0.034 / 0.036** | |
+| Terminal wealth 5th / median / 95th | 239× / 295× / 367× | 243× / 303× / 381× | exact solver: 303× |
+| Fan width (95th / 5th) | **1.53** | 1.57 | |
+| Max drawdown, worst 5% | **51.8%** | 52.3% | |
+| Monthly turnover | 25.0% | 28.2% | exact solver: 28.7% |
+
+## Long-only (out-of-sample 1993–2018)
+
+Both criteria select the same step size and momentum; they differ only in
+γ (Nesterov vs heavy-ball). All metrics agree to three decimals (phantom
+trades p95 25.6% vs 25.5%; terminal wealth 225× / 257× / 294× vs 225× / 258× / 294×).
+This is a **tie**, as anticipated in the pre-registration.
+
+## Hypotheses
+
+| | Unconstrained | Long-only |
+|---|---|---|
+| **H1** lower worst-case solver error and phantom trades | **Supported** (−10% to −17% in the tails, CIs exclude 0) | Tie |
+| **H2** narrower wealth fan, lower worst-5% tracking error | **Partly**: tracking error lower (0.036 vs 0.038 worst 5%); fan *not* narrower (1.57 vs 1.53, both ends higher) | Tie |
+| **H3** worse average (price of risk aversion) | **Not supported**: the average also improved (−7%) out of sample | Tie |
+
+## Reading
+
+- Choosing the solver's settings by the **worst 5% of outcomes** (EV@R)
+  instead of the average gave a modest but consistent improvement in the bad
+  tail when positions are unconstrained, with no cost to the average. The
+  selected solver uses iterate averaging, which smooths out unlucky steps.
+- With long-only constraints, the constraints already cut off the bad tail, so
+  both criteria pick the same solver.
+- Scale: the big effect is **deliberate tuning vs default settings** (≈90%
+  fewer phantom trades, no wipe-outs vs 34%). Worst-case vs average tuning is a
+  second-order refinement on top (≈10–17% in the tails).
+- This is empirical tuning with the paper's risk measure (EV@R) on past data,
+  not the paper's theoretical parameter formula, which does not yet work in
+  this noise regime (see the bound diagnostic above).

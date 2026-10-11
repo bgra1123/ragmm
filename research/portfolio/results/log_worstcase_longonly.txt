@@ -1,0 +1,12 @@
+tuning done [553s]
+  average  -> {'a': 0.00032062953774615447, 'beta': 0.95, 'nest': True, 'avg': False}  mean=0.007197 evar=0.02249 cvar=0.01842
+  evar     -> {'a': 0.00032062953774615447, 'beta': 0.95, 'nest': False, 'avg': False}  mean=0.007197 evar=0.02245 cvar=0.01839
+  cvar     -> {'a': 0.00032062953774615447, 'beta': 0.95, 'nest': False, 'avg': False}  mean=0.007197 evar=0.02245 cvar=0.01839
+date 0/328 [553s]
+date 50/328 [590s]
+date 100/328 [628s]
+date 150/328 [665s]
+date 200/328 [700s]
+date 250/328 [736s]
+date 300/328 [772s]
+wrote /home/user/ragmm/research/portfolio/results/worstcase_longonly.json in 919s
