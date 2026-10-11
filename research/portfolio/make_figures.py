@@ -93,3 +93,54 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+def worst_case_figures(long_only=True):
+    """Experiment P3: wealth fans and tail of phantom trades, average-tuned vs worst-case-tuned."""
+    tag = "worstcase_longonly" if long_only else "worstcase"
+    res = HERE / "results"
+    s = json.loads((res / f"{tag}.json").read_text())
+    arr = dict(np.load(res / f"{tag}_arrays.npz"))
+    figdir = res / "figures"
+    figdir.mkdir(exist_ok=True)
+    panels = ["Nesterov (textbook)", "Average-tuned", "Worst-case-tuned (EV@R)"]
+    dates = pd.to_datetime(arr["rebalance_dates"])
+    ideal = np.exp(arr["ideal|log_wealth_monthly"])
+
+    fig, axes = plt.subplots(1, 3, figsize=(15, 4.6), sharey=True)
+    for ax, name, color in zip(axes, panels, SERIES):
+        W = np.exp(arr[f"{name}|log_wealth_monthly"])
+        for k in range(0, W.shape[0], 4):
+            ax.plot(dates, W[k], color=color, lw=0.6, alpha=0.25)
+        lo, hi = np.quantile(W, [0.05, 0.95], axis=0)
+        ax.plot(dates, lo, color=color, lw=1.5, ls=(0, (3, 2)))
+        ax.plot(dates, hi, color=color, lw=1.5, ls=(0, (3, 2)))
+        ax.plot(dates, ideal, color=INK, lw=2)
+        tw = s["methods"][name]["terminal_wealth"]
+        label = name.replace("Nesterov (textbook)", "Default settings (textbook Nesterov)")
+        ax.set_title(f"{label}\nfinal wealth {tw['p05']:.0f}x to {tw['p95']:.0f}x (5th to 95th pct)",
+                     fontsize=11, color=INK)
+        ax.set_yscale("log")
+    axes[0].set_ylabel("wealth (start = 1, log scale)")
+    fig.suptitle("Same strategy, same data, 200 random seeds of the solver. Black: exact solver. "
+                 "Thin lines: 50 seeds. Dashed: 5th and 95th percentiles.", color=INK2, fontsize=10, y=0.01)
+    fig.savefig(figdir / f"{tag}_fans.png", dpi=200, bbox_inches="tight")
+    plt.close(fig)
+
+    # Tail plot: share of rebalances with phantom trades above x (out-of-sample dates)
+    fig, ax = plt.subplots(figsize=(8, 4.8))
+    for name, color in zip(["Average-tuned", "Worst-case-tuned (EV@R)"], SERIES[1:]):
+        v = np.sort(arr[f"{name}|phantom"][:, 24:].ravel() * 100)
+        surv = 1 - np.arange(1, len(v) + 1) / len(v)
+        ax.plot(v, surv, color=color, lw=2)
+        p95 = np.quantile(v, 0.95)
+        ax.annotate(f"{name}: worst 5% start at {p95:.0f}%", (p95, 0.05), xytext=(8, 10 if color == SERIES[1] else -16),
+                    textcoords="offset points", fontsize=9, color=INK)
+    ax.axhline(0.05, color=INK2, lw=1, ls=(0, (3, 3)))
+    ax.set_yscale("log")
+    ax.set_ylim(1e-4, 1)
+    ax.set_xlabel("phantom trades in one rebalance (% of wealth)")
+    ax.set_ylabel("share of rebalances above this level")
+    fig.savefig(figdir / f"{tag}_tail.png", dpi=200, bbox_inches="tight")
+    plt.close(fig)
+    print("wrote", figdir / f"{tag}_fans.png", "and", figdir / f"{tag}_tail.png")
