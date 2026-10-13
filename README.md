@@ -41,9 +41,9 @@ Two special cases are available for comparison with standard methods: `method="a
 ## Installation
 
 ```bash
-pip install -r requirements.txt
-pip install -e .
-pip install pytest numpy && pytest        # optional: run the tests
+pip install -e .                 # tabular API and CLI (numpy, pandas)
+pip install -e ".[torch]"        # plus the PyTorch optimizers GMM / RAGMM
+pip install -e ".[dev]" && pytest   # optional: run the tests
 ```
 
 ## Usage
