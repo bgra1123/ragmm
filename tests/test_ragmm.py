@@ -160,3 +160,12 @@ def test_tuning_arguments_are_keyword_only():
     p = torch.zeros(2, requires_grad=True)
     with pytest.raises(TypeError):
         RAGMM(GMM([p], lr=0.1), 1.0, 0.1, 0.05, 10)
+
+
+def test_ra_agd_wrapper_sets_gamma_equal_to_beta():
+    x = torch.linspace(1.0, 2.0, 4).requires_grad_(True)
+    gmm = GMM([x], lr=0.1)
+    opt = RAGMM(gmm, L=1.0, mu=0.1, grid_size=30, rate_slack=0.25, method="agd")
+    assert opt.method == "agd" and opt.solution.region == "S_0"
+    assert opt.gamma == opt.beta
+    assert opt.beta == pytest.approx((1 - math.sqrt(opt.alpha * 0.1)) / (1 + math.sqrt(opt.alpha * 0.1)))

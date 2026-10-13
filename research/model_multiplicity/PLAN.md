@@ -174,3 +174,37 @@ held-out applicants (threshold 5/6).
 **Prediction.** B reduces seed-dependence but adds bias flips and loses some
 quality as λ grows; A reduces seed-dependence with no bias flips and no loss
 in quality. Whatever is observed gets reported.
+
+---
+
+## 8. Experiment 1c: matched-family comparison (exploratory; written before running)
+
+Suggested by the paper's own special cases: compare RA-GMM restricted to
+**β = γ = 0 with SGD** and restricted to **γ = β with Nesterov's method**, so that
+only the step-size rule differs within a family.
+
+Same setting as Experiment 1: German Credit, λ = 0.01, threshold 5/6, batch 16,
+K = 2000, 200 evaluation seeds, common random numbers, tuning seeds 10 000–10 019.
+
+| Family | Method | Step size rule |
+|---|---|---|
+| β = γ = 0 | SGD (textbook) | α = 1/L |
+| β = γ = 0 | SGD (tuned for mean) | α from a log grid, minimum mean suboptimality |
+| γ = β | AGD (textbook) | α = 1/L, β = (√κ − 1)/(√κ + 1) |
+| γ = β | AGD, β tied to α (tuned for mean) | α from a log grid, β = (1 − √(αμ))/(1 + √(αμ)); minimum mean suboptimality |
+| γ = β | **RA-AGD** (ε = 0.05, ε = 0.25) | paper's problem (51) restricted to S_0, library `method="agd"`, ζ = 0.05 |
+| general | RA-GMM (ε = 0.05) | problem (51), library (reference row) |
+
+The paper gives the EV@R bound for GD (Theorem 4) but **no selection problem** for
+GD in the strongly convex case, so there is no "RA-GD" row. Any problem of type
+(51b) for GD is degenerate here: its rate `(1 − αμ)²` is within `(1 + ε)` of any
+benchmark ≤ 1 for all small α once `ε` exceeds roughly `4/κ` (≈ 0.04 at κ ≈ 99).
+
+Metrics: as Experiment 1 (flips per retrain on the 300 held-out applicants, p95 of
+`f(w_K) − f*`, expected cost, ambiguity).
+
+Hypotheses:
+- **H1:** RA-AGD (ε = 0.05) has fewer flips and a lower 95th percentile of
+  suboptimality than textbook AGD (same family; only α and β differ).
+- **H2 (open):** RA-AGD vs AGD with β tied to a tuned α.
+- **H3:** within each family, tuning for the mean beats the textbook setting.

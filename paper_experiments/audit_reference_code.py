@@ -9,12 +9,16 @@ Run from the repository root (needs ``pip install pandas plotly tabulate`` to im
 Part A  four formula deviations in ``sFoms.str_cnvx_evar_bound``: exact EV@R of a noisy quadratic vs bounds
 Part B  the rate column returned by ``sFoms.str_cnvx_stab_reg_params`` is in reverse order
 Part C  parameters selected for the paper's logistic-regression setting (needs the reference package)
+Part D  library GMM vs the reference ``train()`` and vs torch SGD / momentum / Nesterov in the special cases
+        GD (beta = gamma = 0), heavy ball (gamma = 0), AGD (gamma = beta)
 """
 import importlib.util
 import itertools
 import math
+import os
 import pathlib
 import sys
+import tempfile
 
 import numpy as np
 
@@ -27,8 +31,13 @@ from risk_averse_tuning import RAGMMBounds  # noqa: E402
 
 
 def load_reference():
-    """Import the authors' package (its folder is ``EntropicsFOMs`` but it imports ``EntropicFOMs``)."""
+    """
+    Import the authors' package (its folder is ``EntropicsFOMs`` but it imports ``EntropicFOMs``).
+    The package creates ``./risk-averse GMM experiments/`` in the working directory at import time and
+    ``train()`` writes CSV files there, so the import and all later use happen inside a temporary directory.
+    """
     folder = ROOT / "paper_experiments" / "EntropicsFOMs"
+    os.chdir(TMP.name)
     spec = importlib.util.spec_from_file_location("EntropicFOMs", folder / "__init__.py",
                                                   submodule_search_locations=[str(folder)])
     pkg = importlib.util.module_from_spec(spec)
@@ -40,11 +49,17 @@ def load_reference():
     return obj
 
 
+TMP = tempfile.TemporaryDirectory()
+_CWD = os.getcwd()
+
+
 try:
     REF = load_reference()
 except Exception as exc:                                     # pragma: no cover
     REF = None
-    print(f"[reference package not importable ({type(exc).__name__}: {exc}); parts B and C skipped]\n")
+    print(f"[reference package not importable ({type(exc).__name__}: {exc}); parts B, C and D skipped]\n")
+finally:
+    os.chdir(TMP.name if REF is not None else _CWD)          # keep the temp dir as cwd while the reference is used
 
 
 # ---------------------------------------------------------------------- #
@@ -169,8 +184,74 @@ def part_c():
     print()
 
 
+def part_d(K=300):
+    import torch
+    from risk_averse_tuning import GMM
+    from EntropicFOMs.entropic_ra_sFoms import entropic_ra_sFoms
+    torch.set_default_dtype(torch.float64)
+    det = entropic_ra_sFoms(optim_problem="synthetic_logit", data_std=5, data_size=1000, num_of_feat=100,
+                            reg_param=1, noise_std=0, init_x0="fixed")
+    L, mu = det.L_and_mu_logistic_reg()
+    L = float(np.real(L))
+    X = torch.tensor(np.asarray(det.X, dtype=np.float64))        # exact conversion; the reference computes in float64
+    Y = torch.tensor(np.asarray(det.Y, dtype=np.float64)).reshape(-1)
+    reg = float(det.reg_param)
+    kappa = L / mu
+    mom = (math.sqrt(kappa) - 1) / (math.sqrt(kappa) + 1)
+
+    def loss_fn(w):
+        return torch.nn.functional.softplus(-Y * (X @ w)).mean() + 0.5 * reg * (w ** 2).sum()
+
+    def run_library(a, b, g):
+        w = torch.ones(100, requires_grad=True)
+        opt = GMM([w], lr=a, beta=b, gamma=g)
+        path = [float(loss_fn(w))]
+        def closure():
+            opt.zero_grad()
+            loss = loss_fn(w)
+            loss.backward()
+            return loss
+        for _ in range(K):
+            opt.step(closure)
+            path.append(float(loss_fn(w)))
+        return w.detach().numpy(), np.array(path)
+
+    def run_torch(a, b, nesterov):
+        w = torch.ones(100, requires_grad=True)
+        opt = torch.optim.SGD([w], lr=a, momentum=b, nesterov=nesterov)
+        for _ in range(K):
+            opt.zero_grad()
+            loss_fn(w).backward()
+            opt.step()
+        return w.detach().numpy()
+
+    print(f"PART D  library GMM vs reference train() and torch.optim.SGD, logistic regression of the paper "
+          f"(L={L:.2f}, mu={mu}), {K} steps")
+    print(f"  {'case':28s} {'max|x_K - x_K(reference)|':>26s} {'max|f_k - f_k(reference)|':>26s} {'vs torch':>22s}")
+    cases = [("GD (beta=gamma=0)", 1 / L, 0.0, 0.0), ("heavy ball (gamma=0)", 1 / L, mom, 0.0),
+             ("AGD / Nesterov (gamma=beta)", 1 / L, mom, mom), ("general (beta=0.6, gamma=0.35)", 0.5 / L, 0.6, 0.35)]
+    for name, a, b, g in cases:
+        det.train(learning_rate=a, iter_momentum=b, grad_momentum=g, Samples=1, stop_criteria=K, seed=1)
+        x_ref = det.train_result[:, 0]
+        f_ref = det.suboptimality_data.values[:, 0]
+        x_lib, f_lib = run_library(a, b, g)
+        dx, df = np.abs(x_lib - x_ref).max(), np.abs(f_lib - f_ref).max()
+        if (b, g) == (0.0, 0.0):
+            vs = f"SGD: {np.abs(x_lib - run_torch(a, 0.0, False)).max():.1e}"
+        elif g == 0.0:
+            vs = f"SGD momentum: {np.abs(x_lib - run_torch(a, b, False)).max():.1e}"
+        elif g == b:
+            vs = "(see tests)"      # torch's Nesterov tracks the lookahead point y_k, compared in tests/test_gmm.py
+        else:
+            vs = "-"
+        print(f"  {name:28s} {dx:26.1e} {df:26.1e} {vs:>22s}")
+    print("  (the reference rounds its stored f-path to 5 decimals, so f differences below 1e-5 are rounding)")
+    print()
+
+
 if __name__ == "__main__":
     part_a()
     if REF is not None:
         part_b()
         part_c()
+        part_d()

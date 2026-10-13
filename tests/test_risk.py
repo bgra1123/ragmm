@@ -221,3 +221,65 @@ def test_matches_the_independent_implementation_used_in_the_experiments():
             sol = RAGMMBounds(zeta=zeta).solve(L_, mu, d, rate_slack=eps, grid_size=40)
             assert (sol.alpha, sol.beta, sol.gamma, sol.evar_bound) == pytest.approx(
                 (ref["alpha"], ref["beta"], ref["gamma"], ref["bound"]), rel=1e-9)
+
+
+# ---------------------------------------------------------------------- #
+# AGD (gamma = beta) and GD (beta = gamma = 0) special cases               #
+# ---------------------------------------------------------------------- #
+
+def test_agd_bound_is_a_valid_upper_bound_on_the_exact_evar():
+    """Same formula-independent check as above, on the set S_0 (vartheta = psi = 1)."""
+    d, eigs = 10, np.linspace(MU, L, 10)
+    for alpha in np.linspace(0.05, 1.0, 12) / L:
+        _, beta, gamma = RAGMMBounds.parameters(1.0, 1.0, L, MU, alpha=alpha)
+        assert beta == gamma
+        s = stationary_variances(eigs, alpha, beta, gamma)
+        assert s is not None
+        for zeta in (0.05, 0.5, 0.95):
+            bound = RAGMMBounds(zeta=zeta).evar_bound_vp(1.0, 1.0, L, MU, alpha=alpha, d=d)
+            assert bound >= exact_evar(eigs, s, zeta), (alpha, zeta)
+
+
+def test_gd_bound_is_a_valid_upper_bound_on_the_exact_evar():
+    """Theorem 4 (eq. 50) for beta = gamma = 0, against the exact EV@R of noisy GD on a quadratic."""
+    d, eigs = 10, np.linspace(MU, L, 10)
+    for alpha in np.linspace(0.05, 2 / (MU + L), 12):
+        s = stationary_variances(eigs, alpha, 0.0, 0.0)
+        for zeta in (0.05, 0.5, 0.95):
+            bound = RAGMMBounds(zeta=zeta).gd_evar_bound(alpha, L, MU, d=d)
+            assert bound >= exact_evar(eigs, s, zeta), (alpha, zeta)
+
+
+def test_gd_bound_closed_form_and_domain():
+    b = bounds()
+    alpha = 0.5
+    rho2 = max(abs(1 - alpha * MU), abs(1 - alpha * L)) ** 2
+    expected = alpha ** 2 * L / (2 * (1 - rho2)) * (math.sqrt(2 * math.log(1 / 0.05)) + math.sqrt(7)) ** 2
+    assert b.gd_evar_bound(alpha, L, MU, d=7) == pytest.approx(expected)
+    assert b.gd_evar_bound(alpha, L, MU, d=7, sigma=2.0) == pytest.approx(4 * expected)
+    assert b.gd_evar_bound(2.5 / (MU + L), L, MU, d=7) == float("inf")      # alpha > 2/(mu + L)
+    assert b.gd_evar_bound(0.0, L, MU, d=7) == float("inf")
+
+
+def test_ra_agd_is_the_s0_restriction_of_problem_51():
+    b = bounds()
+    for L_, mu, d, eps in [(1.0, 0.1, 10, 0.05), (0.9888, 0.01, 55, 0.05), (44.13, 1.0, 100, 0.05)]:
+        sol = b.solve(L_, mu, d, rate_slack=eps, method="agd")
+        assert sol.region == "S_0" and sol.vartheta == 1.0 and sol.psi == 1.0
+        assert sol.gamma == sol.beta == pytest.approx((1 - math.sqrt(sol.alpha * mu)) / (1 + math.sqrt(sol.alpha * mu)))
+        assert 0 < sol.alpha <= 1 / L_
+        assert sol.rate_ratio <= 1 + eps + 1e-12
+        # minimal over the S_0 grid among rate-feasible alphas
+        rho2_star = 1 - math.sqrt(mu / L_)
+        for _, _, alpha, _ in b.candidates(L_, mu, 100, agd_only=True):
+            if b.rate(1.0, alpha, mu) / rho2_star <= 1 + eps:
+                assert b.evar_bound_vp(1.0, 1.0, L_, mu, alpha=alpha, d=d) >= sol.evar_bound - 1e-12
+        # the RA-AGD grid (10 x finer) contains the general solver's S_0 candidates, so it is at least as good as each
+        for vartheta, psi, alpha, region in b.candidates(L_, mu, 100):
+            if region == "S_0" and b.rate(1.0, alpha, mu) / rho2_star <= 1 + eps:
+                assert sol.evar_bound <= b.evar_bound_vp(1.0, 1.0, L_, mu, alpha=alpha, d=d) + 1e-12
+
+
+def test_unknown_method_is_rejected():
+    with pytest.raises(ValueError, match="method"):
+        bounds().solve(1.0, 0.1, 5, method="gd")

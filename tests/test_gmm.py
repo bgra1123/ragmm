@@ -144,3 +144,59 @@ def test_double_apply_lookahead_is_rejected():
 def test_invalid_hyperparameters_are_rejected(kwargs):
     with pytest.raises(ValueError):
         GMM([torch.zeros(1, requires_grad=True)], **kwargs)
+
+
+# ---------------------------------------------------------------------- #
+# Special cases against torch.optim.SGD                                    #
+# ---------------------------------------------------------------------- #
+
+def _noisy_quadratic_grad(x, step):
+    """A deterministic 'noisy' gradient so the comparison is not only on a smooth path."""
+    return Q * x - B + 0.3 * torch.sin(torch.arange(3.0) * (step + 1.0))
+
+
+def _run_gmm_with_grad_fn(alpha, beta, gamma, x0, steps):
+    x = x0.clone().requires_grad_(True)
+    opt = GMM([x], lr=alpha, beta=beta, gamma=gamma)
+    xs, ys = [x.detach().clone()], [x.detach().clone()]
+    for k in range(steps):
+        opt.apply_lookahead()                                # gradient at y_k
+        x.grad = _noisy_quadratic_grad(x.detach(), k)
+        opt.step()
+        xs.append(x.detach().clone())
+        buf = opt.state[x]['momentum_buffer']
+        ys.append(x.detach() + gamma * buf)                  # y_{k+1} = x_{k+1} + gamma d_{k+1}
+    return xs, ys
+
+
+def _run_torch_sgd(alpha, momentum, nesterov, x0, steps):
+    x = x0.clone().requires_grad_(True)
+    opt = torch.optim.SGD([x], lr=alpha, momentum=momentum, nesterov=nesterov)
+    path = [x.detach().clone()]
+    for k in range(steps):
+        x.grad = _noisy_quadratic_grad(x.detach(), k)
+        opt.step()
+        path.append(x.detach().clone())
+    return path
+
+
+def test_beta_gamma_zero_is_sgd():
+    x0 = torch.tensor([2.0, -1.0, 3.0])
+    xs, _ = _run_gmm_with_grad_fn(0.2, 0.0, 0.0, x0, 30)
+    for g, w in zip(xs, _run_torch_sgd(0.2, 0.0, False, x0, 30)):
+        assert torch.allclose(g, w, atol=1e-13)
+
+
+def test_gamma_zero_is_sgd_with_heavy_ball_momentum():
+    x0 = torch.tensor([2.0, -1.0, 3.0])
+    xs, _ = _run_gmm_with_grad_fn(0.2, 0.7, 0.0, x0, 30)
+    for g, w in zip(xs, _run_torch_sgd(0.2, 0.7, False, x0, 30)):
+        assert torch.allclose(g, w, atol=1e-13)
+
+
+def test_gamma_equals_beta_is_nesterov():
+    """torch's Nesterov SGD tracks the lookahead point y_k, so compare it with y_k = x_k + gamma d_k."""
+    x0 = torch.tensor([2.0, -1.0, 3.0])
+    _, ys = _run_gmm_with_grad_fn(0.2, 0.7, 0.7, x0, 30)
+    for g, w in zip(ys, _run_torch_sgd(0.2, 0.7, True, x0, 30)):
+        assert torch.allclose(g, w, atol=1e-12)

@@ -153,6 +153,9 @@ class RAGMM:
         phi:         the constant ``phi`` in (0, 1) of Theorem 3 (default 0.99)
         dimension:   dimension ``d`` of the optimization variable; defaults to the
                      number of parameters of ``optimizer`` that require gradients
+        method:      ``"gmm"`` (default) solves problem (51); ``"agd"`` is the paper's
+                     RA-AGD, the same problem restricted to ``gamma = beta`` (Nesterov's
+                     method), which is the natural comparison with Nesterov's method
 
     Usage::
 
@@ -174,7 +177,7 @@ class RAGMM:
     _DEPRECATED = ('alpha_range', 'psi_range', 'eps')
 
     def __init__(self, optimizer, L, mu, zeta=0.05, *, grid_size=100, rate_slack=0.05,
-                 phi=0.99, dimension=None, **deprecated):
+                 phi=0.99, dimension=None, method="gmm", **deprecated):
         unknown = set(deprecated) - set(self._DEPRECATED)
         if unknown:
             raise TypeError(f"unexpected keyword arguments: {sorted(unknown)}")
@@ -202,8 +205,9 @@ class RAGMM:
 
         self.bounds = RAGMMBounds(zeta=zeta, phi=phi)
         self.bounds.d = self.dimension
-        self.solution = self.bounds.solve(self.L, self.mu, self.dimension,
-                                          rate_slack=rate_slack, grid_size=grid_size)
+        self.method = method
+        self.solution = self.bounds.solve(self.L, self.mu, self.dimension, rate_slack=rate_slack,
+                                          grid_size=grid_size, method=method)
         self._apply_hyperparams(self.solution.alpha, self.solution.beta, self.solution.gamma)
         self._announce_tuned = True
 

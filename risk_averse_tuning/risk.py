@@ -194,18 +194,51 @@ class RAGMMBounds:
                                   alpha=alpha, sigma=sigma, zeta=zeta)
 
     # ------------------------------------------------------------------ #
+    # Gradient descent (beta = gamma = 0): Proposition 4, Theorem 4        #
+    # ------------------------------------------------------------------ #
+
+    @staticmethod
+    def gd_rate(alpha, L, mu):
+        """Rate ``rho_GD(alpha)^2`` of noisy GD for f(x_k) - f*, ``rho_GD = max(|1 - alpha mu|, |1 - alpha L|)``."""
+        return max(abs(1.0 - alpha * mu), abs(1.0 - alpha * L)) ** 2
+
+    def gd_evar_bound(self, alpha, L, mu, d=None, sigma=1.0, zeta=None):
+        """
+        Asymptotic EV@R bound of noisy gradient descent, Theorem 4, eq. (50):
+
+            sigma^2 alpha^2 L / (2 (1 - rho_GD^2)) * (sqrt(2 log(1/zeta)) + sqrt(d))^2,
+
+        valid for ``alpha in (0, 2/(mu + L)]``; ``inf`` outside. Unlike GMM, the paper gives no
+        problem of type (51) for GD, so this class only evaluates the bound.
+        """
+        zeta = self.zeta if zeta is None else zeta
+        d = self.d if d is None else d
+        if d is None:
+            raise ValueError("problem dimension d is required (set .d or pass d=)")
+        if not 0.0 < alpha <= 2.0 / (mu + L) * (1.0 + self.eps):
+            return float("inf")
+        rho2 = self.gd_rate(alpha, L, mu)
+        return (sigma ** 2 * alpha ** 2 * L / (2.0 * (1.0 - rho2))
+                * (math.sqrt(2.0 * math.log(1.0 / zeta)) + math.sqrt(d)) ** 2)
+
+    # ------------------------------------------------------------------ #
     # Problem (51)                                                         #
     # ------------------------------------------------------------------ #
 
-    def candidates(self, L, mu, grid_size=100, include_agd=True):
+    def candidates(self, L, mu, grid_size=100, include_agd=True, agd_only=False):
         """
         Grid over ``S_c U S_0`` as in the authors' reference code
         (``sFoms.str_cnvx_stab_reg_params``): ``grid_size`` bins in psi on
         ``[0, 1)`` and on ``(1, 2 kappa (1 + sqrt(1 - 1/kappa))]``, and
         ``grid_size`` bins in vartheta over the admissible interval for each psi.
-        Yields ``(vartheta, psi, alpha, region)``.
+        Yields ``(vartheta, psi, alpha, region)``. With ``agd_only`` only the set
+        ``S_0`` (AGD, ``gamma = beta``) is searched, on ``10 * grid_size`` values of alpha.
         """
         n = int(grid_size)
+        if agd_only:
+            for i in range(1, 10 * n + 1):
+                yield 1.0, 1.0, i / (10 * n * L), "S_0"
+            return
         kappa = L / mu
         psi_hi = 2.0 * kappa * (1.0 + math.sqrt(max(1.0 - 1.0 / kappa, 0.0)))
         psis = [i / n for i in range(n)] + [1.0 + (psi_hi - 1.0) * i / n for i in range(1, n + 1)]
@@ -228,7 +261,8 @@ class RAGMMBounds:
             for i in range(1, n + 1):
                 yield 1.0, 1.0, i / (n * L), "S_0"
 
-    def solve(self, L, mu, d, rate_slack=0.05, grid_size=100, include_agd=True) -> RAGMMSolution:
+    def solve(self, L, mu, d, rate_slack=0.05, grid_size=100, include_agd=True,
+              method="gmm") -> RAGMMSolution:
         """
         Solve problem (51) by grid search:
 
@@ -241,13 +275,20 @@ class RAGMMBounds:
         ``1 + rate_slack >= 1 / rho_*^2``; then the minimizer depends on the grid.
         Coarse grids can miss the narrow feasible band of S_+ entirely (e.g. 20 bins
         at kappa = 10); keep ``grid_size`` at 100 or more.
+
+        ``method="agd"`` is the paper's RA-AGD: the same problem restricted to
+        ``vartheta = psi = 1`` (``gamma = beta``, Nesterov's method), a one-dimensional
+        search over ``alpha in (0, 1/L]`` with ``beta = (1 - sqrt(alpha mu)) / (1 + sqrt(alpha mu))``.
         """
+        if method not in ("gmm", "agd"):
+            raise ValueError(f"method must be 'gmm' or 'agd', got {method!r}")
         if not (L > mu > 0.0):
             raise ValueError(f"need L > mu > 0 (kappa > 1: for L == mu the reference rate "
                              f"rho_*^2 = 1 - sqrt(mu / L) is 0), got L={L}, mu={mu}")
         rho2_star = 1.0 - math.sqrt(mu / L)
         best = None
-        for vartheta, psi, alpha, region in self.candidates(L, mu, grid_size, include_agd):
+        for vartheta, psi, alpha, region in self.candidates(L, mu, grid_size, include_agd,
+                                                            agd_only=(method == "agd")):
             rho2 = self.rate(vartheta, alpha, mu)
             if rho2 / rho2_star > 1.0 + rate_slack:
                 continue
