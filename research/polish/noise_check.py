@@ -13,7 +13,7 @@ from polish_experiments import le, g0  # noqa: E402
 from risk_averse_tuning.quadratic import evar_quadratic, gmm_matrices  # noqa: E402
 from risk_averse_tuning.tail_report import empirical_evar  # noqa: E402
 
-N_PATHS, B = 20_000, pe.BATCH
+N_PATHS, B = 10_000, pe.BATCH
 
 
 def simulate(H, alpha, beta, gamma, Gc, K, rng):

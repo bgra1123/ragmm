@@ -113,3 +113,7 @@ and above 1 (Gaussian too optimistic about the tail) when α is large, because f
 If the ratio stays within ±15% for the small steps that the polisher selects, the Gaussian model is adequate in
 the regime where it is used and only needs a diagnostic; otherwise a cumulant correction or the bootstrap-simulation
 variant is needed.
+
+> **Deviation recorded before the (re)run:** the first launch of `noise_check.py` was killed by a time limit on its wrapper
+> before any result was saved (no numbers were seen). The rerun uses **10,000** simulated paths per configuration instead
+> of 20,000, to fit the CPU shared with the other running experiments. Everything else is as above.
