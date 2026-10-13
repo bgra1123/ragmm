@@ -1,3 +1,4 @@
 german alpha=1.0/L SGD: cvar 0.3834 ch 55.3 | Nesterov: cvar 2.3728 ch 74.8 | RA-GMM: cvar 2.3728 ch 74.8 | Exact-EV@R: cvar 0.3834 ch 55.3 | SGD-eff: cvar 0.3834 ch 55.3 [40s]
 german alpha=0.3/L SGD: cvar 0.0757 ch 32.3 | Nesterov: cvar 1.0037 ch 68.1 | RA-GMM: cvar 1.0842 ch 69.6 | Exact-EV@R: cvar 0.0757 ch 32.3 | SGD-eff: cvar 0.3834 ch 55.3 [324s]
 german alpha=0.1/L SGD: cvar 0.0215 ch 18.5 | Nesterov: cvar 0.4951 ch 59.0 | RA-GMM: cvar 0.5710 ch 61.3 | Exact-EV@R: cvar 0.0215 ch 18.5 | SGD-eff: cvar 0.3834 ch 55.3 [453s]
+german alpha=0.03/L SGD: cvar 0.0065 ch 10.3 | Nesterov: cvar 0.2258 ch 47.9 | RA-GMM: cvar 0.2644 ch 50.2 | Exact-EV@R: cvar 0.0065 ch 10.3 | SGD-eff: cvar 0.3124 ch 52.5 [953s]
