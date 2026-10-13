@@ -3,3 +3,4 @@ __pycache__/
 .DS_Store
 *.egg-info/
 .pytest_cache/
+research/polish/results_e*.log
