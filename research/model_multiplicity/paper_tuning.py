@@ -13,11 +13,14 @@ for strongly convex smooth (non-quadratic) objectives:
 
 The grid over S_c follows paper_experiments/EntropicsFOMs/sFoms.py::str_cnvx_stab_reg_params.
 
-Note: this is written separately from risk_averse_tuning.RAGMM because that
-implementation (v0.1.0) differs from the paper in two places: its rate
-constraint uses an alpha-dependent benchmark (1 - sqrt(alpha mu / L)), which
-makes the constraint vacuous for small alpha, and its beta uses
+Note: this was written separately from risk_averse_tuning.RAGMM because that
+implementation (v0.1.0) differed from the paper in two places: its rate
+constraint used an alpha-dependent benchmark (1 - sqrt(alpha mu / L)), which
+made the constraint vacuous for small alpha, and its beta used
 (1 - alpha psi L) in the denominator instead of (1 - alpha psi mu).
+Both are fixed in risk_averse_tuning 0.2.0, which reproduces this module's
+solutions (see tests/test_risk.py). This copy is kept so the committed results
+can be reproduced, and for the vectorized horizon-aware extension below.
 """
 import math
 

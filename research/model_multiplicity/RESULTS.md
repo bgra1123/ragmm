@@ -86,6 +86,14 @@ constraint never binds, and its β formula uses `1 − αψL` where the paper's
 (35b) has `1 − αψμ`. The library choice is recorded in each summary under
 `ragmm_tuning`; it was not used as a method.
 
+**Update:** both are fixed in `risk_averse_tuning` 0.2.0 (see the README). In
+this setting (L = 0.9888, μ = 0.01, d = 55, ζ = 0.05, ε = 0.05) v0.1.0 chose
+α = 1e-6, β = 0.9998, γ = 0.555; v0.2.0 chooses α = 0.3328, β = 0.8902,
+γ = 0.7033, identical to the `paper_tuning.py` values used for the
+"RA-GMM (eps=0.05)" rows above (the library is tested against `paper_tuning.py`
+in `tests/test_risk.py`). The experiment results were not re-run: they used
+`paper_tuning.py`, not the library.
+
 ## Limitations
 
 - One small (1,000 applicants), old dataset; an illustration, not a statement
