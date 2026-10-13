@@ -68,10 +68,12 @@ the average worse.*
   tuning is a smaller, second improvement on top.
 - **Long-only portfolios: no difference** between worst-case and average
   tuning. The no-shorting, no-leverage rule already cuts off the bad tail.
-- **This uses the paper's risk measure, tuned on past data.** The paper's
-  closed-form recipe for the settings does not yet work in this setting: its
-  worst-case bound is about 4–5× too loose here. Tightening it is the next
-  research step.
+- **This uses the paper's risk measure, tuned on past data.** The recipe that
+  was tested here is the paper's *strongly-convex* one (problem (51)), whose
+  bound is about 4–5× too loose in this setting. That was the wrong tool: this
+  objective is an exact quadratic, for which the paper has a separate, tighter
+  formulation (Section 3, problem (32)) that has **not** been tested here yet.
+  See PLAN.md section 13 for that test.
 - **Survivorship bias:** the 10 stocks were chosen in 2018, so absolute
   returns are flattering. Compare solvers with each other, not with the market.
 - With 10 stocks the exact answer is cheap to compute; the noisy solver stands

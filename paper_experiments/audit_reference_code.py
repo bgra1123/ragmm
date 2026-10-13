@@ -11,6 +11,8 @@ Part B  the rate column returned by ``sFoms.str_cnvx_stab_reg_params`` is in rev
 Part C  parameters selected for the paper's logistic-regression setting (needs the reference package)
 Part D  library GMM vs the reference ``train()`` and vs torch SGD / momentum / Nesterov in the special cases
         GD (beta = gamma = 0), heavy ball (gamma = 0), AGD (gamma = beta)
+Part E  the quadratic path (paper Section 3): reference ``quad_*`` / ``raTMM_quad_params`` vs
+        ``risk_averse_tuning.quadratic``, and how the reference treats the noise scale ``std``
 """
 import importlib.util
 import itertools
@@ -28,6 +30,7 @@ sys.path.insert(0, str(ROOT / "tests"))
 
 from helpers import exact_evar, stationary_variances  # noqa: E402
 from risk_averse_tuning import RAGMMBounds  # noqa: E402
+from risk_averse_tuning import quadratic as quad  # noqa: E402
 
 
 def load_reference():
@@ -249,9 +252,70 @@ def part_d(K=300):
     print()
 
 
+# ---------------------------------------------------------------------- #
+# Part E                                                                   #
+# ---------------------------------------------------------------------- #
+
+def part_e():
+    eigs = np.array([0.1, 0.4, 1.0, 2.0])
+    rng = np.random.default_rng(0)
+    pts = []
+    while len(pts) < 100:
+        a, b, g = rng.uniform(0, 1 / eigs.max()), rng.uniform(0, 1), rng.uniform(0, 1)
+        if quad.quad_in_stable_set(a, b, g, eigs):
+            pts.append((a, b, g))
+    print(f"PART E  paper Section 3 (quadratic): eigenvalues {eigs.tolist()}, {len(pts)} stable random parameter points")
+    d_risk = d_bound = d_evar = 0.0
+    for a, b, g in pts:
+        theta = 0.5 * 2 * quad.quad_u(a, b, g, eigs).min()
+        ref_r = REF.quad_risk_measure(a, b, g, eigs, theta=theta, std=1)
+        d_risk = max(d_risk, abs(ref_r - quad.quad_entropic_risk(theta, a, b, g, eigs)) / abs(ref_r))
+        d_bound = max(d_bound, abs(REF.quad_evar_bound(a, b, g, eigs, std=1, conf_level=0.05)
+                                   - quad.quad_evar_bound(a, b, g, eigs, 0.05)) / quad.quad_evar_bound(a, b, g, eigs, 0.05))
+        ref_e = REF.quad_evar(a, b, g, eigs, nbins_theta=2000, std=1, conf_level=0.05)
+        ours = float(quad.quad_evar_exact(a, b, g, eigs, 0.05))
+        d_evar = max(d_evar, (ref_e - ours) / ours)
+    print(f"  entropic risk r(theta), Prop. 2        max rel. diff {d_risk:.1e}")
+    print(f"  Theorem 1 bound (std = 1)              max rel. diff {d_bound:.1e}")
+    print(f"  EV@R by grid over theta in (0, 5]      worst overestimate {d_evar:.1e} x exact (grid of 0.1 steps can miss the interval (0, 2 min u))")
+
+    # the reference's stable region S_q only tests rho < 1; the paper's S_q also requires u_i > 0
+    region = REF.quad_stab_reg(eigs, nbins=30)
+    n_u = int((~quad.quad_in_stable_set(region[:, 0], region[:, 1], region[:, 2], eigs)).sum())
+    print(f"  reference stable region: {len(region)} points with rho < 1, of which {n_u} fail the u_i > 0 test of eq. (23)")
+
+    # problem (32): same grid, same constraint, same bound -> same parameters
+    print("  problem (32): reference raTMM_quad_params vs quad.solve_quadratic (same 50-point grids, confidence = 1 - zeta)")
+    for eps in (0.05, 0.25, 1.0, 3.0):
+        REF.eig_vals = eigs
+        try:
+            ref = tuple(round(float(v), 4) for v in REF.raTMM_quad_params(eps, confidence=0.05))
+        except Exception:
+            ref = "no feasible point"
+        try:
+            sol = quad.solve_quadratic(eigs, zeta=0.05, rate_slack=eps, grid_size=50)
+            ours = (round(sol.alpha, 4), round(sol.beta, 4), round(sol.gamma, 4))
+        except ValueError:
+            ours = "no feasible point"
+        print(f"    eps={eps:<5}  reference {ref}   ours {ours}")
+
+    # noise scale: std is documented as a standard deviation but is used as a variance
+    a, b, g = pts[0]
+    print("  noise scale (std = 3, so sigma^2 = 9): value / value at std = 1  [a variance would scale by 9]")
+    theta = quad.quad_u(a, b, g, eigs).min()
+    print(f"    quad_risk_measure  {REF.quad_risk_measure(a, b, g, eigs, theta, 3) / REF.quad_risk_measure(a, b, g, eigs, theta, 1):.1f}  (uses std**2)")
+    print(f"    quad_evar_bound    {REF.quad_evar_bound(a, b, g, eigs, 3, 0.05) / REF.quad_evar_bound(a, b, g, eigs, 1, 0.05):.1f}  (uses std)")
+    e1 = REF.quad_evar(a, b, g, eigs, 2000, 1, 0.05)
+    e3 = REF.quad_evar(a, b, g, eigs, 2000, 3, 0.05)
+    print(f"    quad_evar          {e3 / e1:.1f}  (std**2 in the risk term, 2*std in the log term: mixed)")
+    print("  (the paper's experiments use std = 1, where all three coincide)")
+    print()
+
+
 if __name__ == "__main__":
     part_a()
     if REF is not None:
         part_b()
         part_c()
         part_d()
+        part_e()

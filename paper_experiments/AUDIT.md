@@ -84,12 +84,33 @@ logistic-regression problem (L = 44.13, mu = 1, 300 steps, noiseless so both are
 So the optimizer step is correct in the special cases; the differences above are in the *parameter-selection*
 code, not in `train()`.
 
+## The quadratic path (paper Section 3) is faithful
+
+`audit_reference_code.py` Part E compares the authors' quadratic code (`quad_stab_reg`, `quad_risk_measure`,
+`quad_evar_bound`, `raTMM_quad_params`) with `risk_averse_tuning.quadratic`, which implements Lemma 3.1,
+Proposition 2, Theorem 1 and problem (32) from the paper:
+
+* entropic risk (Prop. 2) and the Theorem 1 bound agree to 1e-13;
+* problem (32) selects identical parameters at epsilon = 0.25, 1 and 3 (both find nothing at 0.05 on a 50-point grid);
+* the reference's stable region tests only `rho < 1`; on the example every such point also satisfies `u_i > 0`.
+
+Two minor reference-code points, neither affecting the paper's experiments (they use `std = 1`):
+
+* `quad_evar` searches `theta` on a fixed grid in `(0, 5]`; the finite interval is `(0, 2 min u_i)`, so the grid can
+  miss it and return a value far above the exact EV@R (up to 39x on the example). Use `quad_evar_exact`.
+* `std` is documented as a standard deviation but enters `quad_risk_measure` as `std**2`, `quad_evar_bound` as `std`
+  and `quad_evar` as a mixture of both, so they disagree for `std != 1`. `risk_averse_tuning.quadratic` takes `sigma2`.
+
+For a quadratic objective the strongly-convex machinery (problem (51), Theorem 3) is not the right tool: its bound is
+the 165-817x-loose one reported above, whereas the quadratic bound (Theorem 1) is a closed form with the exact EV@R
+computable in one dimension.
+
 ## What I did not check
 
 * whether the published Figure 6 / Table values came from this version of the code;
 * whether the qualitative conclusions of the logistic-regression experiment survive with parameters that
   satisfy the constraint (this needs the experiment to be re-run; I did not do that);
-* the quadratic-case code and the AGD bound `str_cnvx_agd_evar_bound`.
+* the AGD bound `str_cnvx_agd_evar_bound`.
 
 ## A convention question for the authors
 

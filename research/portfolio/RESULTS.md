@@ -152,6 +152,9 @@ momentum; this reading of eq. 34 still needs the authors' confirmation). Code:
 | Step size selected by the bound (α·L) | ~1e-7 at every date, i.e. "do not trade" |
 | Dates where tuned SGD's 95th percentile is below the starting error | 63% |
 
+**Correction (later).** The bound examined here is the strongly-convex Theorem 3 bound used by problem (51). The portfolio
+objective is an exact quadratic, for which the paper's Section 3 (Theorem 1, problem (32)) applies; it is tested in PLAN.md section 13.
+
 **Reading.** In this noise regime the EV@R bound is about 4–5× looser than
 what a well-tuned solver actually achieves in its worst 5% of runs, so the
 bound cannot certify that *any* trade beats standing still, and its minimizer

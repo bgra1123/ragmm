@@ -3,6 +3,7 @@
 __version__ = "0.2.0"
 
 from .optimizer import RAGMM, GMM
+from . import quadratic
 from .risk import RAGMMBounds, RAGMMSolution
 
 __all__ = [
@@ -10,4 +11,5 @@ __all__ = [
     "GMM",
     "RAGMMBounds",
     "RAGMMSolution",
+    "quadratic",
 ]

@@ -84,7 +84,7 @@ for x, y in dataloader:
 * **`rate_slack` can be vacuous.** Since $\rho^2 < 1$, the constraint (51b) does nothing when $1+\varepsilon \ge 1/\rho_*^2$ (for $\kappa = 100$, when $\varepsilon \ge 0.11$). The minimizer then drifts toward ever smaller step sizes and depends on `grid_size`. Check `opt.solution.rate_ratio`.
 * **Keep `grid_size >= 100`.** The feasible band of the set $S_+$ ($\psi > 1$) is narrow; a coarse grid can miss it.
 * **$\gamma$ may exceed 1** (the set $S_+$). This is allowed by Theorem 2.
-* **The EV@R bounds are conservative.** On the noisy-quadratic example of `paper_experiments/audit_reference_code.py` (Part A) the bound is 165–817x the exact EV@R: valid, but conservative.
+* **The strongly-convex EV@R bounds (Theorem 3, problem (51)) are conservative; for quadratic objectives use `risk_averse_tuning.quadratic` (paper Section 3: exact EV@R, Theorem 1, problem (32)).** On the noisy-quadratic example of `paper_experiments/audit_reference_code.py` (Part A) the bound is 165–817x the exact EV@R: valid, but conservative.
 
 ## Changes in 0.2.0
 
