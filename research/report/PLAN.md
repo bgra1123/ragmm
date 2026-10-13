@@ -25,3 +25,27 @@ Measurements (held-out applicants unless stated):
    training objective; paired bootstrap CIs (seeds) for RA-GMM vs textbook SGD and vs matched SGD.
 6. Three example applicants (most-flipped under textbook SGD), described from their data, with their approval share
    under each method.
+
+## Addendum: the two kinds of wrong loan decision (written before running `error_types.py`)
+
+Same retrains (1,000 per method, same minibatches), same 300 held-out applicants (210 good = would repay, 90 bad =
+defaulted per the dataset label), methods as above.
+
+For each method, averaged over the 1,000 models, at threshold 0.5 (primary) and 5/6 (sensitivity: the cost-based
+threshold for 5:1 default-to-lost-business cost):
+* **Wrongly denied rate** = share of good applicants who are denied. **Wrongly approved rate** = share of bad
+  applicants who are approved. Also: number of applicants of each kind per model, default rate among approvals,
+  and expected cost per applicant (5 per wrongly approved, 1 per wrongly denied).
+* Split each into errors the **exactly-trained model also makes** (unavoidable with this model family and data) and
+  **training-induced** errors (the retrain errs, the exact model does not) and the reverse (retrain fixes the exact
+  model's error).
+* **Shared characteristics:** per error type, over all (model, applicant) error events: for each binary feature,
+  the share of events with the feature (coverage) vs the share of all applicants of that class (good for denied, bad
+  for approved) with it; report the 4 features with the highest lift (coverage ≥ 25%). Plus the share of events
+  falling in the **top-5% most error-prone applicants** of that type.
+* Same numbers for the training-induced events only.
+* Paired bootstrap over models for RA-GMM minus textbook SGD and RA-GMM minus matched SGD in each rate.
+
+Hypotheses: **H1** RA-GMM's two error rates are both lower than textbook SGD's. **H2** the training-induced errors
+concentrate on a few characteristics (top-5% error-prone applicants carry ≥ 20% of events). **H3** (open) RA-GMM equals
+matched SGD within the bootstrap interval.

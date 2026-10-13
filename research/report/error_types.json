@@ -1,0 +1,538 @@
+{
+  "n_good": 210,
+  "n_bad": 90,
+  "methods": {
+    "SGD (textbook)": {
+      "0.500": {
+        "wrongly_denied_rate": 0.19354285714285713,
+        "wrongly_denied_n": 40.644,
+        "wrongly_approved_rate": 0.5806666666666667,
+        "wrongly_approved_n": 52.26,
+        "default_rate_among_approved": 0.23512340974488535,
+        "exact_wrongly_denied_n": 27,
+        "exact_wrongly_approved_n": 53,
+        "induced_wrongly_denied_n": 23.279,
+        "induced_wrongly_approved_n": 10.754,
+        "cost_per_applicant": 1.00648
+      },
+      "0.833": {
+        "wrongly_denied_rate": 0.3913190476190477,
+        "wrongly_denied_n": 82.177,
+        "wrongly_approved_rate": 0.3191,
+        "wrongly_approved_n": 28.719,
+        "default_rate_among_approved": 0.18240511394103157,
+        "exact_wrongly_denied_n": 101,
+        "exact_wrongly_approved_n": 13,
+        "induced_wrongly_denied_n": 15.86,
+        "induced_wrongly_approved_n": 18.843,
+        "cost_per_applicant": 0.7525733333333333
+      },
+      "characteristics": {
+        "wd": {
+          "events_per_model": 40.644,
+          "ever_affected": 194,
+          "share_in_top5pct_of_class": 0.18344651117016042,
+          "characteristics": [
+            {
+              "feature": "status_of_existing_checking_account_... < 0 DM",
+              "coverage": 0.37543056785749435,
+              "base": 0.20476190476190476,
+              "lift": 1.83349812209474
+            },
+            {
+              "feature": "status_of_existing_checking_account_0 <= ... < 200 DM",
+              "coverage": 0.3769068005117607,
+              "base": 0.23333333333333334,
+              "lift": 1.615314859336117
+            },
+            {
+              "feature": "duration > 24 months",
+              "coverage": 0.2995276055506348,
+              "base": 0.18571428571428572,
+              "lift": 1.6128409529649566
+            },
+            {
+              "feature": "credit amount > 4,000 DM",
+              "coverage": 0.2901289243184726,
+              "base": 0.2,
+              "lift": 1.450644621592363
+            }
+          ]
+        },
+        "wa": {
+          "events_per_model": 52.26,
+          "ever_affected": 90,
+          "share_in_top5pct_of_class": 0.07531572904707233,
+          "characteristics": [
+            {
+              "feature": "status_of_existing_checking_account_no checking account",
+              "coverage": 0.3187715269804822,
+              "base": 0.2222222222222222,
+              "lift": 1.43447187141217
+            },
+            {
+              "feature": "property_real estate",
+              "coverage": 0.3100459242250287,
+              "base": 0.24444444444444444,
+              "lift": 1.2683696900114811
+            },
+            {
+              "feature": "purpose_radio/television",
+              "coverage": 0.292460773057788,
+              "base": 0.25555555555555554,
+              "lift": 1.1444117206609097
+            },
+            {
+              "feature": "present_employment_since_1 <= ... < 4 years",
+              "coverage": 0.46421737466513585,
+              "base": 0.4111111111111111,
+              "lift": 1.1291773978341142
+            }
+          ]
+        },
+        "wd_ind": {
+          "events_per_model": 23.279,
+          "ever_affected": 167,
+          "share_in_top5pct_of_class": 0.20877185446110227,
+          "characteristics": [
+            {
+              "feature": "status_of_existing_checking_account_0 <= ... < 200 DM",
+              "coverage": 0.368142961467417,
+              "base": 0.23333333333333334,
+              "lift": 1.5777555491460729
+            },
+            {
+              "feature": "purpose_car (new)",
+              "coverage": 0.26092186090467806,
+              "base": 0.18095238095238095,
+              "lift": 1.4419365997363789
+            },
+            {
+              "feature": "status_of_existing_checking_account_... < 0 DM",
+              "coverage": 0.2533184415138107,
+              "base": 0.20476190476190476,
+              "lift": 1.2371365748348897
+            },
+            {
+              "feature": "savings_account_and_bonds_... < 100 DM",
+              "coverage": 0.5942265561235448,
+              "base": 0.5190476190476191,
+              "lift": 1.14484015399949
+            }
+          ]
+        },
+        "wa_ind": {
+          "events_per_model": 10.754,
+          "ever_affected": 37,
+          "share_in_top5pct_of_class": 0.17602752464199367,
+          "characteristics": [
+            {
+              "feature": "property_unknown / no property",
+              "coverage": 0.275897340524456,
+              "base": 0.13333333333333333,
+              "lift": 2.06923005393342
+            },
+            {
+              "feature": "present_employment_since_... >= 7 years",
+              "coverage": 0.27115491909986983,
+              "base": 0.13333333333333333,
+              "lift": 2.0336618932490236
+            },
+            {
+              "feature": "purpose_car (new)",
+              "coverage": 0.36628231355774593,
+              "base": 0.24444444444444444,
+              "lift": 1.498427646372597
+            },
+            {
+              "feature": "property_building society savings agreement/ life insurance",
+              "coverage": 0.36563139297005764,
+              "base": 0.25555555555555554,
+              "lift": 1.4307315377089214
+            }
+          ]
+        }
+      }
+    },
+    "RA-GMM": {
+      "0.500": {
+        "wrongly_denied_rate": 0.15989523809523812,
+        "wrongly_denied_n": 33.578,
+        "wrongly_approved_rate": 0.5971111111111111,
+        "wrongly_approved_n": 53.74,
+        "default_rate_among_approved": 0.23308401512269425,
+        "exact_wrongly_denied_n": 27,
+        "exact_wrongly_approved_n": 53,
+        "induced_wrongly_denied_n": 14.945,
+        "induced_wrongly_approved_n": 8.699,
+        "cost_per_applicant": 1.0075933333333333
+      },
+      "0.833": {
+        "wrongly_denied_rate": 0.4406666666666667,
+        "wrongly_denied_n": 92.54,
+        "wrongly_approved_rate": 0.23225555555555555,
+        "wrongly_approved_n": 20.903,
+        "default_rate_among_approved": 0.1500458001234525,
+        "exact_wrongly_denied_n": 101,
+        "exact_wrongly_approved_n": 13,
+        "induced_wrongly_denied_n": 14.07,
+        "induced_wrongly_approved_n": 10.989,
+        "cost_per_applicant": 0.65685
+      },
+      "characteristics": {
+        "wd": {
+          "events_per_model": 33.578,
+          "ever_affected": 158,
+          "share_in_top5pct_of_class": 0.24578593126451845,
+          "characteristics": [
+            {
+              "feature": "status_of_existing_checking_account_... < 0 DM",
+              "coverage": 0.4270951218059444,
+              "base": 0.20476190476190476,
+              "lift": 2.0858133855639145
+            },
+            {
+              "feature": "duration > 24 months",
+              "coverage": 0.342754184287331,
+              "base": 0.18571428571428572,
+              "lift": 1.8455994538548592
+            },
+            {
+              "feature": "status_of_existing_checking_account_0 <= ... < 200 DM",
+              "coverage": 0.3895109893382572,
+              "base": 0.23333333333333334,
+              "lift": 1.6693328114496735
+            },
+            {
+              "feature": "credit amount > 4,000 DM",
+              "coverage": 0.31711239502054916,
+              "base": 0.2,
+              "lift": 1.5855619751027457
+            }
+          ]
+        },
+        "wa": {
+          "events_per_model": 53.74,
+          "ever_affected": 90,
+          "share_in_top5pct_of_class": 0.07424637141793822,
+          "characteristics": [
+            {
+              "feature": "status_of_existing_checking_account_no checking account",
+              "coverage": 0.33541123930033495,
+              "base": 0.2222222222222222,
+              "lift": 1.5093505768515074
+            },
+            {
+              "feature": "property_real estate",
+              "coverage": 0.3203572757722367,
+              "base": 0.24444444444444444,
+              "lift": 1.3105524917955138
+            },
+            {
+              "feature": "purpose_radio/television",
+              "coverage": 0.3004465947152959,
+              "base": 0.25555555555555554,
+              "lift": 1.1756605880163753
+            },
+            {
+              "feature": "present_employment_since_1 <= ... < 4 years",
+              "coverage": 0.47171566803126164,
+              "base": 0.4111111111111111,
+              "lift": 1.1474164898057715
+            }
+          ]
+        },
+        "wd_ind": {
+          "events_per_model": 14.945,
+          "ever_affected": 131,
+          "share_in_top5pct_of_class": 0.3041820006691201,
+          "characteristics": [
+            {
+              "feature": "status_of_existing_checking_account_0 <= ... < 200 DM",
+              "coverage": 0.4054198728671797,
+              "base": 0.23333333333333334,
+              "lift": 1.7375137408593415
+            },
+            {
+              "feature": "purpose_car (new)",
+              "coverage": 0.28397457343593174,
+              "base": 0.18095238095238095,
+              "lift": 1.5693331689880439
+            },
+            {
+              "feature": "purpose_furniture/equipment",
+              "coverage": 0.2668450986952158,
+              "base": 0.19047619047619047,
+              "lift": 1.400936768149883
+            },
+            {
+              "feature": "status_of_existing_checking_account_... < 0 DM",
+              "coverage": 0.27440615590498496,
+              "base": 0.20476190476190476,
+              "lift": 1.3401230869778336
+            }
+          ]
+        },
+        "wa_ind": {
+          "events_per_model": 8.699,
+          "ever_affected": 37,
+          "share_in_top5pct_of_class": 0.21864582135877686,
+          "characteristics": [
+            {
+              "feature": "property_unknown / no property",
+              "coverage": 0.3131394413150937,
+              "base": 0.13333333333333333,
+              "lift": 2.348545809863203
+            },
+            {
+              "feature": "present_employment_since_... >= 7 years",
+              "coverage": 0.2939418323945281,
+              "base": 0.13333333333333333,
+              "lift": 2.204563742958961
+            },
+            {
+              "feature": "purpose_car (new)",
+              "coverage": 0.375330497758363,
+              "base": 0.24444444444444444,
+              "lift": 1.5354429453751215
+            },
+            {
+              "feature": "property_building society savings agreement/ life insurance",
+              "coverage": 0.3813081963444074,
+              "base": 0.25555555555555554,
+              "lift": 1.4920755509128985
+            }
+          ]
+        }
+      }
+    },
+    "SGD (same average as RA-GMM)": {
+      "0.500": {
+        "wrongly_denied_rate": 0.16262857142857143,
+        "wrongly_denied_n": 34.152,
+        "wrongly_approved_rate": 0.5962666666666667,
+        "wrongly_approved_n": 53.664,
+        "default_rate_among_approved": 0.23337724552694075,
+        "exact_wrongly_denied_n": 27,
+        "exact_wrongly_approved_n": 53,
+        "induced_wrongly_denied_n": 15.351,
+        "induced_wrongly_approved_n": 8.557,
+        "cost_per_applicant": 1.00824
+      },
+      "0.833": {
+        "wrongly_denied_rate": 0.43815714285714286,
+        "wrongly_denied_n": 92.013,
+        "wrongly_approved_rate": 0.23245555555555555,
+        "wrongly_approved_n": 20.921,
+        "default_rate_among_approved": 0.14971629021108607,
+        "exact_wrongly_denied_n": 101,
+        "exact_wrongly_approved_n": 13,
+        "induced_wrongly_denied_n": 13.895,
+        "induced_wrongly_approved_n": 11.015,
+        "cost_per_applicant": 0.6553933333333333
+      }
+    },
+    "SGD (careful: tuned + averaging)": {
+      "0.500": {
+        "wrongly_denied_rate": 0.12837142857142855,
+        "wrongly_denied_n": 26.958,
+        "wrongly_approved_rate": 0.5887333333333333,
+        "wrongly_approved_n": 52.986,
+        "default_rate_among_approved": 0.22448109380787698,
+        "exact_wrongly_denied_n": 27,
+        "exact_wrongly_approved_n": 53,
+        "induced_wrongly_denied_n": 1.855,
+        "induced_wrongly_approved_n": 0.97,
+        "cost_per_applicant": 0.9729599999999999
+      },
+      "0.833": {
+        "wrongly_denied_rate": 0.4866857142857143,
+        "wrongly_denied_n": 102.204,
+        "wrongly_approved_rate": 0.14017777777777776,
+        "wrongly_approved_n": 12.616,
+        "default_rate_among_approved": 0.10470350993390591,
+        "exact_wrongly_denied_n": 101,
+        "exact_wrongly_approved_n": 13,
+        "induced_wrongly_denied_n": 3.223,
+        "induced_wrongly_approved_n": 0.551,
+        "cost_per_applicant": 0.5509466666666666
+      },
+      "characteristics": {
+        "wd": {
+          "events_per_model": 26.958,
+          "ever_affected": 40,
+          "share_in_top5pct_of_class": 0.3709473996587284,
+          "characteristics": [
+            {
+              "feature": "present_employment_since_unemployed",
+              "coverage": 0.3352993545515246,
+              "base": 0.08095238095238096,
+              "lift": 4.141933203283539
+            },
+            {
+              "feature": "job_management/ self-employed/ highly qualified employee/ officer",
+              "coverage": 0.3264708064396469,
+              "base": 0.12857142857142856,
+              "lift": 2.539217383419476
+            },
+            {
+              "feature": "duration > 24 months",
+              "coverage": 0.47002745010757474,
+              "base": 0.18571428571428572,
+              "lift": 2.530917039040787
+            },
+            {
+              "feature": "status_of_existing_checking_account_... < 0 DM",
+              "coverage": 0.495029304844573,
+              "base": 0.20476190476190476,
+              "lift": 2.4175849771479148
+            }
+          ]
+        },
+        "wa": {
+          "events_per_model": 52.986,
+          "ever_affected": 61,
+          "share_in_top5pct_of_class": 0.07549163930094742,
+          "characteristics": [
+            {
+              "feature": "status_of_existing_checking_account_no checking account",
+              "coverage": 0.3606990525799268,
+              "base": 0.2222222222222222,
+              "lift": 1.6231457366096707
+            },
+            {
+              "feature": "property_real estate",
+              "coverage": 0.35111161438870647,
+              "base": 0.24444444444444444,
+              "lift": 1.4363656952265265
+            },
+            {
+              "feature": "purpose_radio/television",
+              "coverage": 0.32002793190654133,
+              "base": 0.25555555555555554,
+              "lift": 1.2522832118082052
+            },
+            {
+              "feature": "purpose_furniture/equipment",
+              "coverage": 0.27779035971766125,
+              "base": 0.2222222222222222,
+              "lift": 1.2500566187294757
+            }
+          ]
+        },
+        "wd_ind": {
+          "events_per_model": 1.855,
+          "ever_affected": 13,
+          "share_in_top5pct_of_class": 0.997843665768194,
+          "characteristics": [
+            {
+              "feature": "job_unemployed/ unskilled - non-resident",
+              "coverage": 0.6630727762803235,
+              "base": 0.047619047619047616,
+              "lift": 13.924528301886793
+            },
+            {
+              "feature": "present_employment_since_unemployed",
+              "coverage": 0.5622641509433962,
+              "base": 0.08095238095238096,
+              "lift": 6.945615982241953
+            },
+            {
+              "feature": "housing_for free",
+              "coverage": 0.35471698113207545,
+              "base": 0.08095238095238096,
+              "lift": 4.381798002219755
+            },
+            {
+              "feature": "status_of_existing_checking_account_0 <= ... < 200 DM",
+              "coverage": 0.8172506738544474,
+              "base": 0.23333333333333334,
+              "lift": 3.5025028879476316
+            }
+          ]
+        },
+        "wa_ind": {
+          "events_per_model": 0.97,
+          "ever_affected": 8,
+          "share_in_top5pct_of_class": 0.8917525773195877,
+          "characteristics": [
+            {
+              "feature": "housing_for free",
+              "coverage": 0.6360824742268041,
+              "base": 0.05555555555555555,
+              "lift": 11.449484536082474
+            },
+            {
+              "feature": "purpose_car (used)",
+              "coverage": 0.3628865979381443,
+              "base": 0.03333333333333333,
+              "lift": 10.88659793814433
+            },
+            {
+              "feature": "property_unknown / no property",
+              "coverage": 0.7216494845360825,
+              "base": 0.13333333333333333,
+              "lift": 5.412371134020619
+            },
+            {
+              "feature": "other_debtors_or_guarantors_co-applicant",
+              "coverage": 0.4154639175257732,
+              "base": 0.1,
+              "lift": 4.154639175257732
+            }
+          ]
+        }
+      }
+    }
+  },
+  "paired": {
+    "RA-GMM minus SGD (textbook)": {
+      "wrongly_denied_n": {
+        "diff": -7.065999999999995,
+        "ci95": [
+          -7.680025,
+          -6.477975000000002
+        ]
+      },
+      "wrongly_approved_n": {
+        "diff": 1.480000000000004,
+        "ci95": [
+          0.9389250000000001,
+          1.9830250000000036
+        ]
+      }
+    },
+    "RA-GMM minus SGD (same average as RA-GMM)": {
+      "wrongly_denied_n": {
+        "diff": -0.5739999999999981,
+        "ci95": [
+          -1.078050000000003,
+          -0.09497499999999928
+        ]
+      },
+      "wrongly_approved_n": {
+        "diff": 0.07600000000000051,
+        "ci95": [
+          -0.3539999999999992,
+          0.5120499999999996
+        ]
+      }
+    },
+    "RA-GMM minus SGD (careful: tuned + averaging)": {
+      "wrongly_denied_n": {
+        "diff": 6.6200000000000045,
+        "ci95": [
+          6.218,
+          7.0169999999999995
+        ]
+      },
+      "wrongly_approved_n": {
+        "diff": 0.7540000000000049,
+        "ci95": [
+          0.4139749999999946,
+          1.0910500000000003
+        ]
+      }
+    }
+  }
+}

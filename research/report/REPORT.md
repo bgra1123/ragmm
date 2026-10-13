@@ -140,14 +140,102 @@ worst-case training loss by **63%**, and improved accuracy slightly. The same ho
 identifies them (ROC AUC 0.92). With carefully tuned SGD only 27% are (others 5%). Better training shrinks the problem
 but the people at risk are the same kind of people, and they can be identified in advance.
 
-## 7. The takeaway
+## 7. Two ways to get it wrong: denying a good customer, approving a bad one
+
+Decisions can be wrong in two costly ways. Among the 300 new applicants, **210 went on to repay** and **90 did not**
+(German Credit's "bad credit" label). Across the 1,000 retrained models:
+
+**Wrongly denied** = a good applicant (would have repaid) who is refused. **Wrongly approved** = a bad applicant
+(defaulted) who is given the loan. Decision rule as before: approve at a 50% repayment probability. Because a default
+costs a bank far more than a lost customer (the dataset's own cost matrix says 5 to 1), we also show the stricter
+cost-based rule (approve only at 83% or more), which a lender would normally use.
+
+| Averages over 1,000 models | Textbook SGD | **RA-GMM** | Carefully tuned SGD | Exactly-trained model (no training noise) |
+|---|---|---|---|---|
+| **Rule: approve at 50%** | | | | |
+| Good applicants wrongly denied | 19.4% (40.6 people) | **16.0% (33.6)** | 12.8% (27.0) | 12.9% (27) |
+| Bad applicants wrongly approved | 58.1% (52.3 people) | 59.7% (53.7) | 58.9% (53.0) | 58.9% (53) |
+| Errors caused by the training run (not made by the exact model) | 34.0 per model | **23.6** (-31%) | 2.8 (-92%) | 0 |
+| **Rule: approve at 83% (cost-based)** | | | | |
+| Good applicants wrongly denied | 39.1% | 44.1% | 48.7% | 48.1% |
+| Bad applicants wrongly approved | 31.9% (28.7 people) | **23.2% (20.9)** | 14.0% (12.6) | 14.4% |
+| Share of approved loans that default | 18.2% | **15.0%** | 10.5% | 10.7% |
+| Cost per applicant (default = 5, lost customer = 1) | 0.753 | **0.657** (-13%) | 0.551 (-27%) | 0.553 |
+
+### Wrongly denied: who they are
+
+Averaged over models, 16-19% of the good applicants are turned away, and the same kind of person is turned away
+repeatedly:
+
+* **82% of RA-GMM's wrongful denials involve applicants with a checking account under 200 DM** (negative balance 43%,
+  0-200 DM 39%), although only 44% of good applicants look like that. For textbook SGD it is 75%.
+* **34% involve a long or large loan** (over 24 months or over 4,000 DM), vs 19% / 20% of good applicants.
+* The 5% of good applicants most often refused (about 10 people) account for 25% of all wrongful denials under
+  RA-GMM (18% under textbook SGD).
+
+Of these denials, 27 per model are made even by the exactly-trained model: with this simple model, thin-balance
+applicants look riskier than they are. The remaining ones are **caused by the training run**: 23.3 per model with
+textbook SGD, **14.9 with RA-GMM** (-36%), 1.9 with careful tuning. Those
+people are mostly applicants with a 0-200 DM balance (41% of RA-GMM's training-induced denials vs 23% of good
+applicants), buying a new car (28% vs 18%) or furniture (27% vs 19%): applicants near the line that the model
+itself finds ambiguous.
+
+### Wrongly approved: who they are
+
+Defaulters who get the loan are harder to characterize, because the model approves them precisely when they look like
+good customers. Their common traits are being **without a checking account (34% of RA-GMM's wrongful approvals vs 22%
+of defaulters)**, owning real estate (32% vs 24%), and borrowing for a TV or radio (30% vs 26%); the over-representation
+is mild (1.2-1.5x), unlike the denial case. The training-induced share (people the exact model would have refused) is
+10.8 per model for textbook SGD and **8.7 for RA-GMM** (-19%), concentrated on applicants with no or unknown property
+(31% vs 13% of defaulters) or seven-plus years of employment (29% vs 13%): profiles that look reliable on paper.
+
+### What RA-GMM changes, and why
+
+* **It reduces the errors the training run adds.** Per model, 34.0 decisions that the exact model gets right are
+  wrong because of training noise with textbook SGD; with RA-GMM that is 23.6. Its smaller step size and
+  momentum average out the random order of the training examples, so each retrain lands closer to the exactly-trained
+  model.
+* **With the 50% rule, that shows up as fewer wrongly denied good customers** (-7.1 people per model, interval -7.7 to
+  -6.5), but not as fewer wrongly approved defaulters: the exact model itself approves 53 of the 90 defaulters at
+  50%, so RA-GMM's retrains drift toward that (53.7 vs 52.3, +1.5, interval +0.9 to +2.0). Training noise had been
+  accidentally refusing a few extra defaulters at random.
+* **With the cost-based rule, the bank benefits clearly:** 8 fewer defaulters wrongly approved per model (28.7 to
+  20.9), the default rate among approved loans from 18.2% to 15.0%, and 13% lower expected cost. The price is more good
+  customers refused (39% to 44%), because the cost-based rule refuses many by design.
+* **The limit is the model, not the training.** What remains with RA-GMM at 50% (33.6 denials, 53.7 approvals) is
+  mostly what the exactly-trained model does as well: 27 and 53. Training can remove the noise; only better features
+  or a better model can remove those. Plain SGD with a step size matched to RA-GMM's average gives the same numbers
+  (denied -0.6, approved +0.1, within the interval for approved), and careful tuning removes nearly all training-
+  induced errors (2.8 per model), at 240 trial runs.
+
+### Why it matters
+
+**For the customer.** A refusal that depends on the luck of a training run is not a decision about them. With textbook
+training about 40 of 210 good applicants in a batch like this one are refused; about 23 of those are refused only
+because of the run. Moving to RA-GMM spares about 7 of them per model, and careful tuning about 21. The people
+affected are not random: the same unusual, borderline profiles bear the cost of every bad run.
+
+**For the bank.** Each wrongful denial is lost interest income and a lost customer; each wrongful approval is a loss
+that, at the dataset's 5:1 ratio, costs five times as much. Under the cost-based rule the exactly-trained model would see
+10.7% of approved loans default; textbook training delivers 18.2%, RA-GMM 15.0% and careful tuning 10.5%. Reducing
+training noise therefore brings the portfolio's actual risk closer to what the bank's own validation of the model
+promised, makes audits and retraining reproducible, and lowers the number of customers whose answer would change on
+a rerun.
+
+> The same disclaimer applies: these are statistical properties of models trained on one public dataset. They are not
+> findings about any lender, and the dataset's labels reflect a 1990s German bank. Decisions about real credit need
+> real validation, fairness review and legal compliance.
+
+## 8. The takeaway
 
 1. A model's answer for a given person can depend on the luck of its training run, by a lot with default settings.
 2. The cost of a bad training run falls on **unusual applicants**, identifiable in advance from the data alone.
 3. Training for the worst case helps: the paper's RA-GMM, with zero tuning, makes decisions measurably more stable
-   than textbook training. Careful tuning helps more. Either way, **measure the tail** before deploying.
+   than textbook training and removes about a third of the errors the training run itself adds (fewer good customers
+   wrongly refused; with a cost-based rule, fewer defaults approved). Careful tuning removes almost all of them.
+   Either way, **measure the tail** before deploying.
 
-## 8. Try it on your own data
+## 9. Try it on your own data
 
 The repository is now a package (`risk-averse-tuning` 0.3.0, NumPy and pandas only):
 
@@ -192,6 +280,7 @@ with 200 retrains; tested in `tests/test_package.py`).
 ```bash
 python research/report/credit_story.py     # all numbers in this report (about 1 minute)
 python research/report/make_figures.py
+python research/report/error_types.py     # section 7: wrongly denied / wrongly approved
 python research/tail_analysis/tail_rows.py # cross-dataset tail analysis
 python -m pytest tests                     # 102 tests, including the package
 ```
