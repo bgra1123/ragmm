@@ -1,0 +1,135 @@
+{
+  "dataset": "adult",
+  "n_train": 46842,
+  "n_test": 2000,
+  "d": 101,
+  "L": 0.9647712073524273,
+  "mu": 0.01,
+  "kappa": 96.47712073524272,
+  "positive_rate_test": 0.2395,
+  "exact_model_auc": 0.8881991712407643,
+  "exact_model_flag_rate": 0.207,
+  "epochs": 0.6831476025788822,
+  "methods": {
+    "SGD (textbook)": {
+      "flips_vs_exact_mean": 0.1356625,
+      "flips_vs_exact_p95": 0.18607499999999996,
+      "retrain_disagreement": 0.1878387185929648,
+      "not_unanimous": 0.7595,
+      "rows_flip_prob_ge_10pct": 0.45,
+      "auc_mean": 0.8155636605957787,
+      "auc_worst5": 0.7640903482079008,
+      "flag_rate": 0.2444875,
+      "subopt_mean": 0.4296199748648729,
+      "subopt_p95": 0.5412736729927722
+    },
+    "Nesterov (textbook)": {
+      "flips_vs_exact_mean": 0.197045,
+      "flips_vs_exact_p95": 0.25614999999999993,
+      "retrain_disagreement": 0.26914537688442214,
+      "not_unanimous": 0.9645,
+      "rows_flip_prob_ge_10pct": 0.647,
+      "auc_mean": 0.7614436167832668,
+      "auc_worst5": 0.6581066873101561,
+      "flag_rate": 0.283655,
+      "subopt_mean": 2.3182546260776338,
+      "subopt_p95": 3.390647439635755
+    },
+    "SGD (lr=0.01)": {
+      "flips_vs_exact_mean": 0.02246,
+      "flips_vs_exact_p95": 0.0275,
+      "retrain_disagreement": 0.019919798994974872,
+      "not_unanimous": 0.0985,
+      "rows_flip_prob_ge_10pct": 0.045,
+      "auc_mean": 0.8824867032045449,
+      "auc_worst5": 0.8800865818691417,
+      "flag_rate": 0.21153,
+      "subopt_mean": 0.0075777041012604655,
+      "subopt_p95": 0.008162671863696432
+    },
+    "SGD + tail averaging (tuned)": {
+      "flips_vs_exact_mean": 0.0165525,
+      "flips_vs_exact_p95": 0.02102499999999999,
+      "retrain_disagreement": 0.02126143216080402,
+      "not_unanimous": 0.101,
+      "rows_flip_prob_ge_10pct": 0.0505,
+      "auc_mean": 0.8854691178065195,
+      "auc_worst5": 0.8827065481313113,
+      "flag_rate": 0.2085675,
+      "subopt_mean": 0.002567677428567453,
+      "subopt_p95": 0.0032447650366455826
+    },
+    "RA-GMM (eps=0.25)": {
+      "flips_vs_exact_mean": 0.0964725,
+      "flips_vs_exact_p95": 0.131025,
+      "retrain_disagreement": 0.13494479899497486,
+      "not_unanimous": 0.5955,
+      "rows_flip_prob_ge_10pct": 0.305,
+      "auc_mean": 0.8463875300421794,
+      "auc_worst5": 0.8182015457910753,
+      "flag_rate": 0.2255575,
+      "subopt_mean": 0.17163402321491078,
+      "subopt_p95": 0.22403699413889672
+    }
+  },
+  "params": {
+    "SGD (textbook)": {
+      "alpha": 1.0365151782921147,
+      "beta": 0.0,
+      "gamma": 0.0
+    },
+    "Nesterov (textbook)": {
+      "alpha": 1.0365151782921147,
+      "beta": 0.815196003161615,
+      "gamma": 0.815196003161615
+    },
+    "SGD (lr=0.01)": {
+      "alpha": 0.01,
+      "beta": 0.0,
+      "gamma": 0.0
+    },
+    "SGD + tail averaging (tuned)": {
+      "alpha": 0.04396724984181581,
+      "beta": 0.0,
+      "gamma": 0.0,
+      "tail_average": 1.0
+    },
+    "RA-GMM (eps=0.25)": {
+      "alpha": 0.01025881758157493,
+      "beta": 0.9798451734066258,
+      "gamma": 0.0
+    }
+  },
+  "paired_vs_tuned_avg": {
+    "SGD (textbook)": {
+      "diff": 0.11911,
+      "ci95": [
+        0.11561743750000003,
+        0.1226675625
+      ]
+    },
+    "Nesterov (textbook)": {
+      "diff": 0.1804925,
+      "ci95": [
+        0.1755521875,
+        0.1855875625
+      ]
+    },
+    "SGD (lr=0.01)": {
+      "diff": 0.0059074999999999996,
+      "ci95": [
+        0.005482499999999994,
+        0.006339999999999995
+      ]
+    },
+    "RA-GMM (eps=0.25)": {
+      "diff": 0.07992,
+      "ci95": [
+        0.07740000000000001,
+        0.0824750625
+      ]
+    }
+  },
+  "unstable_by_gate": true,
+  "seconds": 27.135682344436646
+}
