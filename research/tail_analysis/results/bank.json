@@ -1,0 +1,278 @@
+{
+  "dataset": "bank",
+  "n_train": 39188,
+  "d": 63,
+  "kappa": 150.64417213537774,
+  "matched_mean_found": true,
+  "params": {
+    "SGD (textbook)": {
+      "alpha": 0.6638159218674194,
+      "beta": 0.0,
+      "gamma": 0.0
+    },
+    "RA-GMM (eps=0.25)": {
+      "alpha": 0.0066381592186741945,
+      "beta": 0.9838367103761236,
+      "gamma": 0.9838367103761236
+    },
+    "SGD (matched mean)": {
+      "alpha": 0.34993526052266277,
+      "beta": 0.0,
+      "gamma": 0.0
+    },
+    "SGD + tail averaging (tuned)": {
+      "alpha": 0.0281579672897899,
+      "beta": 0.0,
+      "gamma": 0.0,
+      "tail_average": 1.0
+    }
+  },
+  "methods": {
+    "SGD (textbook)": {
+      "S_mean": 0.11460036278977423,
+      "S_p95": 0.17335011160720068,
+      "S_cvar5": 0.2055645498115985,
+      "S_cvar5_over_mean": 1.7937513006716326,
+      "tail_excess_loss_mean": 0.1816682680201986,
+      "body_excess_loss_mean": 0.0898381763307818,
+      "concentration_top5pct_rows": 0.4472353502747135,
+      "spearman_tail_vs_body": 0.6857434644431619,
+      "top_rows_overlap_tail_vs_body": 0.5053598774885145,
+      "spearman_with_leverage": 0.7160860667700027,
+      "spearman_with_abs_margin": -0.6212748415164236,
+      "spearman_with_margin": -0.6884857220101644,
+      "spearman_with_rarity": -0.5280251800514548,
+      "profile": {
+        "n_rows": 1959,
+        "median_margin_top": 0.377696002221245,
+        "median_margin_rest": 2.3931399980252417,
+        "misclassified_by_exact_top": 0.38131699846860645,
+        "misclassified_by_exact_rest": 0.08498750973703295,
+        "median_leverage_ratio": 5.931460365733105,
+        "median_rarity_top": 0.017224660610390935,
+        "median_rarity_rest": 0.09985199550882923,
+        "positive_share_top": 0.6452271567126084,
+        "positive_share_rest": 0.08463831958956727,
+        "top_features": [
+          {
+            "feature": "nr.employed",
+            "smd": -2.364918600345566,
+            "mean_top": 5029.029300663603,
+            "mean_rest": 5174.409718230411
+          },
+          {
+            "feature": "poutcome_nonexistent",
+            "smd": -2.1160920379634502,
+            "mean_top": 0.17508933129147525,
+            "mean_rest": 0.8998092884579226
+          },
+          {
+            "feature": "euribor3m",
+            "smd": -2.0532399430936836,
+            "mean_top": 1.0517519142419602,
+            "mean_rest": 3.758665260952483
+          },
+          {
+            "feature": "pdays",
+            "smd": -1.971066208776242,
+            "mean_top": 337.4977029096478,
+            "mean_rest": 995.4282145639153
+          },
+          {
+            "feature": "emp.var.rate",
+            "smd": -1.7803686666374445,
+            "mean_top": -2.139816232771822,
+            "mean_rest": 0.200018802546402
+          }
+        ]
+      }
+    },
+    "RA-GMM (eps=0.25)": {
+      "S_mean": 0.05159645529839021,
+      "S_p95": 0.07641543108272743,
+      "S_cvar5": 0.08746204960651584,
+      "S_cvar5_over_mean": 1.6951174087582064,
+      "tail_excess_loss_mean": 0.07479373254082948,
+      "body_excess_loss_mean": 0.040521325763192666,
+      "concentration_top5pct_rows": 0.5333157297343444,
+      "spearman_tail_vs_body": 0.7094174287607954,
+      "top_rows_overlap_tail_vs_body": 0.633486472690148,
+      "spearman_with_leverage": 0.6709355178306156,
+      "spearman_with_abs_margin": -0.609814082863175,
+      "spearman_with_margin": -0.6852349718015553,
+      "spearman_with_rarity": -0.39340274799579256,
+      "profile": {
+        "n_rows": 1959,
+        "median_margin_top": 0.028326409907705852,
+        "median_margin_rest": 2.3931399980252417,
+        "misclassified_by_exact_top": 0.4900459418070444,
+        "misclassified_by_exact_rest": 0.07926616347471058,
+        "median_leverage_ratio": 6.081089587012279,
+        "median_rarity_top": 0.017224660610390935,
+        "median_rarity_rest": 0.09985199550882923,
+        "positive_share_top": 0.3481368044920878,
+        "positive_share_rest": 0.10027129388380027,
+        "top_features": [
+          {
+            "feature": "nr.employed",
+            "smd": -1.5090024457581406,
+            "mean_top": 5061.8797856049005,
+            "mean_rest": 5172.681116871255
+          },
+          {
+            "feature": "euribor3m",
+            "smd": -1.3836580890423757,
+            "mean_top": 1.5737529351710056,
+            "mean_rest": 3.7311974267372205
+          },
+          {
+            "feature": "emp.var.rate",
+            "smd": -1.3668421646356306,
+            "mean_top": -1.8416539050535987,
+            "mean_rest": 0.18432942061296306
+          },
+          {
+            "feature": "poutcome_nonexistent",
+            "smd": -0.9557491197643572,
+            "mean_top": 0.48238897396630936,
+            "mean_rest": 0.8836390985522039
+          },
+          {
+            "feature": "pdays",
+            "smd": -0.9202264834245116,
+            "mean_top": 658.3593670239918,
+            "mean_rest": 978.544387439899
+          }
+        ]
+      }
+    },
+    "SGD (matched mean)": {
+      "S_mean": 0.04912388282974018,
+      "S_p95": 0.07186898908875308,
+      "S_cvar5": 0.08550354815514559,
+      "S_cvar5_over_mean": 1.7405698253025863,
+      "tail_excess_loss_mean": 0.07639747367756086,
+      "body_excess_loss_mean": 0.03910451671319987,
+      "concentration_top5pct_rows": 0.5133301791868459,
+      "spearman_tail_vs_body": 0.6602320107693561,
+      "top_rows_overlap_tail_vs_body": 0.4155181214905564,
+      "spearman_with_leverage": 0.5323900498755522,
+      "spearman_with_abs_margin": -0.4158948912968638,
+      "spearman_with_margin": -0.47570622082036845,
+      "spearman_with_rarity": -0.47950104084679296,
+      "profile": {
+        "n_rows": 1959,
+        "median_margin_top": 0.45374741313975586,
+        "median_margin_rest": 2.3931399980252417,
+        "misclassified_by_exact_top": 0.31955079122001023,
+        "misclassified_by_exact_rest": 0.08823766418652126,
+        "median_leverage_ratio": 5.928852211521314,
+        "median_rarity_top": 0.017224660610390935,
+        "median_rarity_rest": 0.09985199550882923,
+        "positive_share_top": 0.6651352730985196,
+        "positive_share_rest": 0.08359074914717021,
+        "top_features": [
+          {
+            "feature": "nr.employed",
+            "smd": -2.2983684411124656,
+            "mean_top": 5031.15303726391,
+            "mean_rest": 5174.29796663891
+          },
+          {
+            "feature": "euribor3m",
+            "smd": -1.9923462114583623,
+            "mean_top": 1.0840724859622257,
+            "mean_rest": 3.7569645437696417
+          },
+          {
+            "feature": "emp.var.rate",
+            "smd": -1.7908263615734876,
+            "mean_top": -2.189943848902501,
+            "mean_rest": 0.20265653119879665
+          },
+          {
+            "feature": "poutcome_nonexistent",
+            "smd": -1.6351264311448077,
+            "mean_top": 0.27054619703930577,
+            "mean_rest": 0.8947863224905316
+          },
+          {
+            "feature": "pdays",
+            "smd": -1.521694120711131,
+            "mean_top": 448.50638080653397,
+            "mean_rest": 989.5869080555481
+          }
+        ]
+      }
+    },
+    "SGD + tail averaging (tuned)": {
+      "S_mean": 0.0010047387742086874,
+      "S_p95": 0.0013360772671736159,
+      "S_cvar5": 0.0014290809982822528,
+      "S_cvar5_over_mean": 1.4223408461644858,
+      "tail_excess_loss_mean": 0.002459156102016338,
+      "body_excess_loss_mean": 0.0018011613533167876,
+      "concentration_top5pct_rows": 0.3841773219049194,
+      "spearman_tail_vs_body": 0.7290193621507598,
+      "top_rows_overlap_tail_vs_body": 0.7953037263910159,
+      "spearman_with_leverage": 0.1694907366349943,
+      "spearman_with_abs_margin": -0.16863456140164315,
+      "spearman_with_margin": -0.03794231122926885,
+      "spearman_with_rarity": -0.07440013574458276,
+      "profile": {
+        "n_rows": 1959,
+        "median_margin_top": 0.061456234218495,
+        "median_margin_rest": 2.3938685986261254,
+        "misclassified_by_exact_top": 0.47881572230729963,
+        "misclassified_by_exact_rest": 0.07985710064734482,
+        "median_leverage_ratio": 5.3423620420626055,
+        "median_rarity_top": 0.021307543125446565,
+        "median_rarity_rest": 0.09985199550882923,
+        "positive_share_top": 0.39765186319550794,
+        "positive_share_rest": 0.09766579816809476,
+        "top_features": [
+          {
+            "feature": "nr.employed",
+            "smd": -2.2458542745969545,
+            "mean_top": 5037.6879530372635,
+            "mean_rest": 5173.954097612075
+          },
+          {
+            "feature": "euribor3m",
+            "smd": -2.0780766471946115,
+            "mean_top": 1.0854568657478305,
+            "mean_rest": 3.7568916973327244
+          },
+          {
+            "feature": "emp.var.rate",
+            "smd": -1.9512666371393195,
+            "mean_top": -2.239714139867279,
+            "mean_rest": 0.20527545730478916
+          },
+          {
+            "feature": "poutcome_nonexistent",
+            "smd": -0.8011788159566823,
+            "mean_top": 0.5436447166921899,
+            "mean_rest": 0.8804158048832899
+          },
+          {
+            "feature": "previous",
+            "smd": 0.7410026823047654,
+            "mean_top": 0.6942317508933129,
+            "mean_rest": 0.1451019366622794
+          }
+        ]
+      }
+    }
+  },
+  "overlap": {
+    "jaccard_sgd_textbook_vs_ragmm": 0.3723292469352014,
+    "jaccard_sgd_matched_vs_ragmm": 0.31786074672048437,
+    "ragmm_over_sgd_textbook_excess_on_sgd_top_rows": 0.41790179166896285,
+    "ragmm_over_sgd_matched_excess_on_ragmm_top_rows": 1.4127309630800264,
+    "ragmm_over_sgd_matched_excess_all_rows": 0.9790079297189846,
+    "ragmm_over_sgd_matched_excess_on_union_top_rows": 1.0136731071619807,
+    "ragmm_over_sgd_textbook_excess_all_rows": 0.4117049903977376
+  },
+  "seconds": 122.7677788734436
+}

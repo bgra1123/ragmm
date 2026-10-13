@@ -1,0 +1,278 @@
+{
+  "dataset": "adult",
+  "n_train": 46842,
+  "d": 101,
+  "kappa": 96.47712073524272,
+  "matched_mean_found": true,
+  "params": {
+    "SGD (textbook)": {
+      "alpha": 1.0365151782921147,
+      "beta": 0.0,
+      "gamma": 0.0
+    },
+    "RA-GMM (eps=0.25)": {
+      "alpha": 0.01025881758157493,
+      "beta": 0.9798451734066258,
+      "gamma": 0.0
+    },
+    "SGD (matched mean)": {
+      "alpha": 0.4838643599318791,
+      "beta": 0.0,
+      "gamma": 0.0
+    },
+    "SGD + tail averaging (tuned)": {
+      "alpha": 0.04396724984181581,
+      "beta": 0.0,
+      "gamma": 0.0,
+      "tail_average": 1.0
+    }
+  },
+  "methods": {
+    "SGD (textbook)": {
+      "S_mean": 0.43146196509158413,
+      "S_p95": 0.5624558951254173,
+      "S_cvar5": 0.6174350621146479,
+      "S_cvar5_over_mean": 1.4310301071001432,
+      "tail_excess_loss_mean": 0.4420791490606557,
+      "body_excess_loss_mean": 0.31236500621771257,
+      "concentration_top5pct_rows": 0.5794948910447045,
+      "spearman_tail_vs_body": 0.9077317128430884,
+      "top_rows_overlap_tail_vs_body": 0.8915456874466268,
+      "spearman_with_leverage": 0.7652555333084399,
+      "spearman_with_abs_margin": -0.49033912392508416,
+      "spearman_with_margin": -0.5574021296202822,
+      "spearman_with_rarity": -0.4814336671036302,
+      "profile": {
+        "n_rows": 2342,
+        "median_margin_top": 1.3235661856355936,
+        "median_margin_rest": 1.92455865517883,
+        "misclassified_by_exact_top": 0.2664389410760034,
+        "misclassified_by_exact_rest": 0.1429438202247191,
+        "median_leverage_ratio": 15.566843699304846,
+        "median_rarity_top": 0.002134836258059007,
+        "median_rarity_rest": 0.04779898381794116,
+        "positive_share_top": 0.29120409906063194,
+        "positive_share_rest": 0.23653932584269663,
+        "top_features": [
+          {
+            "feature": "native_country_United-States",
+            "smd": -3.0068445820125342,
+            "mean_top": 0.1071733561058924,
+            "mean_rest": 0.9389213483146067
+          },
+          {
+            "feature": "native_country_Canada",
+            "smd": 0.38006069927154407,
+            "mean_top": 0.06831767719897523,
+            "mean_rest": 0.00033707865168539324
+          },
+          {
+            "feature": "native_country_India",
+            "smd": 0.3460947025801161,
+            "mean_top": 0.05721605465414176,
+            "mean_rest": 0.00024719101123595505
+          },
+          {
+            "feature": "native_country_England",
+            "smd": 0.3329575769978362,
+            "mean_top": 0.05251921434671221,
+            "mean_rest": 0.0
+          },
+          {
+            "feature": "native_country_Cuba",
+            "smd": 0.3326526175351694,
+            "mean_top": 0.05294619982920581,
+            "mean_rest": 0.00017977528089887642
+          }
+        ]
+      }
+    },
+    "RA-GMM (eps=0.25)": {
+      "S_mean": 0.17293236248214963,
+      "S_p95": 0.22533092702146015,
+      "S_cvar5": 0.2408435957744192,
+      "S_cvar5_over_mean": 1.3927040162842825,
+      "tail_excess_loss_mean": 0.1847620621148678,
+      "body_excess_loss_mean": 0.12949873178914473,
+      "concentration_top5pct_rows": 0.6735540301102375,
+      "spearman_tail_vs_body": 0.8289308129384227,
+      "top_rows_overlap_tail_vs_body": 0.8834329632792485,
+      "spearman_with_leverage": 0.6528902330363674,
+      "spearman_with_abs_margin": -0.4664811887886603,
+      "spearman_with_margin": -0.5460518003263779,
+      "spearman_with_rarity": -0.3720194187621247,
+      "profile": {
+        "n_rows": 2342,
+        "median_margin_top": 0.919372555311656,
+        "median_margin_rest": 1.9434024003490804,
+        "misclassified_by_exact_top": 0.3257899231426131,
+        "misclassified_by_exact_rest": 0.13982022471910113,
+        "median_leverage_ratio": 15.915692531442044,
+        "median_rarity_top": 0.002134836258059007,
+        "median_rarity_rest": 0.04779898381794116,
+        "positive_share_top": 0.3654995730145175,
+        "positive_share_rest": 0.23262921348314608,
+        "top_features": [
+          {
+            "feature": "native_country_United-States",
+            "smd": -2.4166974814524536,
+            "mean_top": 0.1695132365499573,
+            "mean_rest": 0.9356404494382022
+          },
+          {
+            "feature": "native_country_Canada",
+            "smd": 0.3680457464074218,
+            "mean_top": 0.06490179333902647,
+            "mean_rest": 0.0005168539325842696
+          },
+          {
+            "feature": "native_country_India",
+            "smd": 0.34289394635862397,
+            "mean_top": 0.05636208368915457,
+            "mean_rest": 0.0002921348314606742
+          },
+          {
+            "feature": "native_country_Cuba",
+            "smd": 0.31586246467396134,
+            "mean_top": 0.04867634500426986,
+            "mean_rest": 0.0004044943820224719
+          },
+          {
+            "feature": "education_Doctorate",
+            "smd": 0.31112185079459703,
+            "mean_top": 0.06874466268146882,
+            "mean_rest": 0.009235955056179775
+          }
+        ]
+      }
+    },
+    "SGD (matched mean)": {
+      "S_mean": 0.17363520293542495,
+      "S_p95": 0.2236933492664021,
+      "S_cvar5": 0.24148340732422935,
+      "S_cvar5_over_mean": 1.3907514331298199,
+      "tail_excess_loss_mean": 0.19058698858920872,
+      "body_excess_loss_mean": 0.13504471246071495,
+      "concentration_top5pct_rows": 0.6784931616427029,
+      "spearman_tail_vs_body": 0.8446441222105985,
+      "top_rows_overlap_tail_vs_body": 0.8842869342442357,
+      "spearman_with_leverage": 0.6589116107048368,
+      "spearman_with_abs_margin": -0.3925853896085553,
+      "spearman_with_margin": -0.47921453976893835,
+      "spearman_with_rarity": -0.44626994903893685,
+      "profile": {
+        "n_rows": 2342,
+        "median_margin_top": 1.0401662980567044,
+        "median_margin_rest": 1.9362136088449826,
+        "misclassified_by_exact_top": 0.3151152860802733,
+        "misclassified_by_exact_rest": 0.14038202247191012,
+        "median_leverage_ratio": 15.46210609474644,
+        "median_rarity_top": 0.002134836258059007,
+        "median_rarity_rest": 0.04779898381794116,
+        "positive_share_top": 0.2694278394534586,
+        "positive_share_rest": 0.23768539325842697,
+        "top_features": [
+          {
+            "feature": "native_country_United-States",
+            "smd": -2.436243507390159,
+            "mean_top": 0.16695132365499574,
+            "mean_rest": 0.9357752808988764
+          },
+          {
+            "feature": "native_country_Canada",
+            "smd": 0.30986641352484345,
+            "mean_top": 0.04953031596925705,
+            "mean_rest": 0.0013258426966292136
+          },
+          {
+            "feature": "native_country_India",
+            "smd": 0.3095130570155123,
+            "mean_top": 0.04782237403928266,
+            "mean_rest": 0.0007415730337078652
+          },
+          {
+            "feature": "native_country_Cuba",
+            "smd": 0.3054438110011893,
+            "mean_top": 0.04611443210930828,
+            "mean_rest": 0.0005393258426966292
+          },
+          {
+            "feature": "native_country_China",
+            "smd": 0.30228486173729585,
+            "mean_top": 0.0444064901793339,
+            "mean_rest": 0.00024719101123595505
+          }
+        ]
+      }
+    },
+    "SGD + tail averaging (tuned)": {
+      "S_mean": 0.0025638144200323706,
+      "S_p95": 0.0031957067504332966,
+      "S_cvar5": 0.003415992487704972,
+      "S_cvar5_over_mean": 1.3323867987534923,
+      "tail_excess_loss_mean": 0.004605928439577638,
+      "body_excess_loss_mean": 0.0036725763612495965,
+      "concentration_top5pct_rows": 0.5902298007840678,
+      "spearman_tail_vs_body": 0.8444482629733125,
+      "top_rows_overlap_tail_vs_body": 0.822801024765158,
+      "spearman_with_leverage": 0.13716979705241156,
+      "spearman_with_abs_margin": -0.10746962914895704,
+      "spearman_with_margin": -0.10488264152969586,
+      "spearman_with_rarity": -0.022293920776495828,
+      "profile": {
+        "n_rows": 2342,
+        "median_margin_top": -0.09161651050409736,
+        "median_margin_rest": 2.023844677596731,
+        "misclassified_by_exact_top": 0.5290350128095644,
+        "misclassified_by_exact_rest": 0.12912359550561797,
+        "median_leverage_ratio": 2.8789107711031483,
+        "median_rarity_top": 0.032769736561205756,
+        "median_rarity_rest": 0.04779898381794116,
+        "positive_share_top": 0.6289496157130657,
+        "positive_share_rest": 0.21876404494382024,
+        "top_features": [
+          {
+            "feature": "marital_status_Married-civ-spouse",
+            "smd": 0.647324452474685,
+            "mean_top": 0.7450896669513236,
+            "mean_rest": 0.44262921348314604
+          },
+          {
+            "feature": "education_num",
+            "smd": 0.5520188459317187,
+            "mean_top": 11.479504696840307,
+            "mean_rest": 10.004247191011236
+          },
+          {
+            "feature": "capital_gain",
+            "smd": 0.5458605210537782,
+            "mean_top": 4610.826643894107,
+            "mean_rest": 901.8155056179776
+          },
+          {
+            "feature": "marital_status_Never-married",
+            "smd": -0.5445708036531551,
+            "mean_top": 0.11998292058070026,
+            "mean_rest": 0.3413258426966292
+          },
+          {
+            "feature": "relationship_Husband",
+            "smd": 0.522277141835077,
+            "mean_top": 0.6430401366353544,
+            "mean_rest": 0.3905168539325843
+          }
+        ]
+      }
+    }
+  },
+  "overlap": {
+    "jaccard_sgd_textbook_vs_ragmm": 0.7516828721017202,
+    "jaccard_sgd_matched_vs_ragmm": 0.7471092875792614,
+    "ragmm_over_sgd_textbook_excess_on_sgd_top_rows": 0.473221768626559,
+    "ragmm_over_sgd_matched_excess_on_ragmm_top_rows": 0.9787746277950594,
+    "ragmm_over_sgd_matched_excess_all_rows": 0.9694369142539107,
+    "ragmm_over_sgd_matched_excess_on_union_top_rows": 0.9558689844253834,
+    "ragmm_over_sgd_textbook_excess_all_rows": 0.4179388747636171
+  },
+  "seconds": 170.11037850379944
+}

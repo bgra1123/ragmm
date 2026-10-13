@@ -1,0 +1,278 @@
+{
+  "dataset": "german",
+  "n_train": 700,
+  "d": 55,
+  "kappa": 98.88127781381304,
+  "matched_mean_found": true,
+  "params": {
+    "SGD (textbook)": {
+      "alpha": 1.011313791760392,
+      "beta": 0.0,
+      "gamma": 0.0
+    },
+    "RA-GMM (eps=0.25)": {
+      "alpha": 0.010011886330329817,
+      "beta": 0.9800879884484675,
+      "gamma": 0.0
+    },
+    "SGD (matched mean)": {
+      "alpha": 0.4798335508361663,
+      "beta": 0.0,
+      "gamma": 0.0
+    },
+    "SGD + tail averaging (tuned)": {
+      "alpha": 0.026500558089813882,
+      "beta": 0.0,
+      "gamma": 0.0,
+      "tail_average": 1.0
+    }
+  },
+  "methods": {
+    "SGD (textbook)": {
+      "S_mean": 0.24718803049201585,
+      "S_p95": 0.34094164478043826,
+      "S_cvar5": 0.37385087904868974,
+      "S_cvar5_over_mean": 1.5124149753714111,
+      "tail_excess_loss_mean": 0.343254589131322,
+      "body_excess_loss_mean": 0.21394304528878036,
+      "concentration_top5pct_rows": 0.20475431160787766,
+      "spearman_tail_vs_body": 0.8975850388032861,
+      "top_rows_overlap_tail_vs_body": 0.5142857142857142,
+      "spearman_with_leverage": 0.7640740607925439,
+      "spearman_with_abs_margin": -0.6535800043906795,
+      "spearman_with_margin": -0.7940135271413089,
+      "spearman_with_rarity": -0.361950377245852,
+      "profile": {
+        "n_rows": 35,
+        "median_margin_top": -0.14608801336444666,
+        "median_margin_rest": 1.283287793366904,
+        "misclassified_by_exact_top": 0.5714285714285714,
+        "misclassified_by_exact_rest": 0.16390977443609023,
+        "median_leverage_ratio": 2.415184954485002,
+        "median_rarity_top": 0.032857142857142856,
+        "median_rarity_rest": 0.09571428571428571,
+        "positive_share_top": 0.3142857142857143,
+        "positive_share_rest": 0.7203007518796992,
+        "top_features": [
+          {
+            "feature": "present_employment_since_unemployed",
+            "smd": 0.7031481766241567,
+            "mean_top": 0.2857142857142857,
+            "mean_rest": 0.0406015037593985
+          },
+          {
+            "feature": "job_management/ self-employed/ highly qualified employee/ officer",
+            "smd": 0.6756710968485594,
+            "mean_top": 0.42857142857142855,
+            "mean_rest": 0.13984962406015036
+          },
+          {
+            "feature": "job_skilled employee / official",
+            "smd": -0.6411574276439265,
+            "mean_top": 0.34285714285714286,
+            "mean_rest": 0.6481203007518797
+          },
+          {
+            "feature": "other_debtors_or_guarantors_co-applicant",
+            "smd": 0.5808758993514829,
+            "mean_top": 0.2,
+            "mean_rest": 0.02406015037593985
+          },
+          {
+            "feature": "purpose_others",
+            "smd": 0.5583999576013143,
+            "mean_top": 0.14285714285714285,
+            "mean_rest": 0.0030075187969924814
+          }
+        ]
+      }
+    },
+    "RA-GMM (eps=0.25)": {
+      "S_mean": 0.08477174631126871,
+      "S_p95": 0.12556106450470467,
+      "S_cvar5": 0.1398596219515581,
+      "S_cvar5_over_mean": 1.6498376881138586,
+      "tail_excess_loss_mean": 0.1284927969486661,
+      "body_excess_loss_mean": 0.07326961010396967,
+      "concentration_top5pct_rows": 0.24649595178768827,
+      "spearman_tail_vs_body": 0.8142777201003034,
+      "top_rows_overlap_tail_vs_body": 0.6,
+      "spearman_with_leverage": 0.6573687584785158,
+      "spearman_with_abs_margin": -0.5814805336337421,
+      "spearman_with_margin": -0.7150441997986584,
+      "spearman_with_rarity": -0.31348303254012233,
+      "profile": {
+        "n_rows": 35,
+        "median_margin_top": -0.48567377320168215,
+        "median_margin_rest": 1.3090040569936683,
+        "misclassified_by_exact_top": 0.7428571428571429,
+        "misclassified_by_exact_rest": 0.1548872180451128,
+        "median_leverage_ratio": 2.4136114049629382,
+        "median_rarity_top": 0.032857142857142856,
+        "median_rarity_rest": 0.09571428571428571,
+        "positive_share_top": 0.42857142857142855,
+        "positive_share_rest": 0.7142857142857143,
+        "top_features": [
+          {
+            "feature": "status_of_existing_checking_account_no checking account",
+            "smd": -0.5974790909625319,
+            "mean_top": 0.14285714285714285,
+            "mean_rest": 0.3969924812030075
+          },
+          {
+            "feature": "other_debtors_or_guarantors_co-applicant",
+            "smd": 0.5808758993514829,
+            "mean_top": 0.2,
+            "mean_rest": 0.02406015037593985
+          },
+          {
+            "feature": "property_unknown / no property",
+            "smd": 0.5606421918292963,
+            "mean_top": 0.4,
+            "mean_rest": 0.15789473684210525
+          },
+          {
+            "feature": "purpose_domestic appliances",
+            "smd": 0.5583999576013143,
+            "mean_top": 0.14285714285714285,
+            "mean_rest": 0.0030075187969924814
+          },
+          {
+            "feature": "other_debtors_or_guarantors_none",
+            "smd": -0.5531438159425135,
+            "mean_top": 0.7142857142857143,
+            "mean_rest": 0.9203007518796993
+          }
+        ]
+      }
+    },
+    "SGD (matched mean)": {
+      "S_mean": 0.08625369402466171,
+      "S_p95": 0.1185147230133175,
+      "S_cvar5": 0.13198941217086546,
+      "S_cvar5_over_mean": 1.5302464858273428,
+      "tail_excess_loss_mean": 0.12273349778663442,
+      "body_excess_loss_mean": 0.07520320216358622,
+      "concentration_top5pct_rows": 0.23356247478096304,
+      "spearman_tail_vs_body": 0.738898219325812,
+      "top_rows_overlap_tail_vs_body": 0.34285714285714286,
+      "spearman_with_leverage": 0.6945136622727801,
+      "spearman_with_abs_margin": -0.613343642392273,
+      "spearman_with_margin": -0.6760564351005963,
+      "spearman_with_rarity": -0.29575023606607204,
+      "profile": {
+        "n_rows": 35,
+        "median_margin_top": -0.09614461729835222,
+        "median_margin_rest": 1.283287793366904,
+        "misclassified_by_exact_top": 0.5714285714285714,
+        "misclassified_by_exact_rest": 0.16390977443609023,
+        "median_leverage_ratio": 2.398981134004264,
+        "median_rarity_top": 0.032857142857142856,
+        "median_rarity_rest": 0.09571428571428571,
+        "positive_share_top": 0.2,
+        "positive_share_rest": 0.7263157894736842,
+        "top_features": [
+          {
+            "feature": "present_employment_since_unemployed",
+            "smd": 0.6322545930164877,
+            "mean_top": 0.2571428571428571,
+            "mean_rest": 0.042105263157894736
+          },
+          {
+            "feature": "job_unemployed/ unskilled - non-resident",
+            "smd": 0.5995077187075576,
+            "mean_top": 0.17142857142857143,
+            "mean_rest": 0.007518796992481203
+          },
+          {
+            "feature": "purpose_repairs",
+            "smd": 0.566459730437516,
+            "mean_top": 0.17142857142857143,
+            "mean_rest": 0.013533834586466165
+          },
+          {
+            "feature": "purpose_radio/television",
+            "smd": -0.5288043944828764,
+            "mean_top": 0.08571428571428572,
+            "mean_rest": 0.28421052631578947
+          },
+          {
+            "feature": "job_skilled employee / official",
+            "smd": -0.5061989749402702,
+            "mean_top": 0.4,
+            "mean_rest": 0.6451127819548872
+          }
+        ]
+      }
+    },
+    "SGD + tail averaging (tuned)": {
+      "S_mean": 0.0010070589986902487,
+      "S_p95": 0.0013968405150221045,
+      "S_cvar5": 0.0015266200258974817,
+      "S_cvar5_over_mean": 1.5159191545708433,
+      "tail_excess_loss_mean": 0.0018824345963975577,
+      "body_excess_loss_mean": 0.0012682083677948125,
+      "concentration_top5pct_rows": 0.30121574310621674,
+      "spearman_tail_vs_body": 0.6513774226361394,
+      "top_rows_overlap_tail_vs_body": 0.5428571428571428,
+      "spearman_with_leverage": 0.10047693974885662,
+      "spearman_with_abs_margin": -0.030794371883557776,
+      "spearman_with_margin": 0.11115391780682933,
+      "spearman_with_rarity": -0.020134371175563714,
+      "profile": {
+        "n_rows": 35,
+        "median_margin_top": 0.2082515329093192,
+        "median_margin_rest": 1.283287793366904,
+        "misclassified_by_exact_top": 0.3142857142857143,
+        "misclassified_by_exact_rest": 0.1774436090225564,
+        "median_leverage_ratio": 1.9342450757269047,
+        "median_rarity_top": 0.09571428571428571,
+        "median_rarity_rest": 0.09285714285714286,
+        "positive_share_top": 0.7428571428571429,
+        "positive_share_rest": 0.6977443609022557,
+        "top_features": [
+          {
+            "feature": "status_of_existing_checking_account_no checking account",
+            "smd": -0.7877263614409026,
+            "mean_top": 0.08571428571428572,
+            "mean_rest": 0.4
+          },
+          {
+            "feature": "job_skilled employee / official",
+            "smd": -0.71242006960815,
+            "mean_top": 0.3142857142857143,
+            "mean_rest": 0.649624060150376
+          },
+          {
+            "feature": "job_management/ self-employed/ highly qualified employee/ officer",
+            "smd": 0.6756710968485594,
+            "mean_top": 0.42857142857142855,
+            "mean_rest": 0.13984962406015036
+          },
+          {
+            "feature": "credit_amount",
+            "smd": 0.4957842247189731,
+            "mean_top": 4971.6,
+            "mean_rest": 3219.9834586466163
+          },
+          {
+            "feature": "duration_in_month",
+            "smd": 0.4693345560737397,
+            "mean_top": 26.885714285714286,
+            "mean_rest": 20.446616541353382
+          }
+        ]
+      }
+    }
+  },
+  "overlap": {
+    "jaccard_sgd_textbook_vs_ragmm": 0.2962962962962963,
+    "jaccard_sgd_matched_vs_ragmm": 0.1864406779661017,
+    "ragmm_over_sgd_textbook_excess_on_sgd_top_rows": 0.34689880604218165,
+    "ragmm_over_sgd_matched_excess_on_ragmm_top_rows": 1.9555231132422768,
+    "ragmm_over_sgd_matched_excess_all_rows": 1.0469252426264581,
+    "ragmm_over_sgd_matched_excess_on_union_top_rows": 1.1838791771624138,
+    "ragmm_over_sgd_textbook_excess_all_rows": 0.3743367197911153
+  },
+  "seconds": 53.48362684249878
+}
