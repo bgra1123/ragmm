@@ -97,3 +97,19 @@ deployed model whose last layer is linear. **Not tested yet**; the plan is to te
 The report's paper section becomes: "RA-GMM is not a replacement trainer. It is the finishing phase: after normal
 training, a short, risk-aware phase reduces the part of the error that depends on the luck of the run." The headline
 comparisons move from "RA-GMM vs textbook SGD" to "your trainer vs your trainer + 1 epoch of polish", at equal-ish compute.
+
+## 8. Addendum: how much does the Gaussian-noise assumption matter? (written before running `noise_check.py`)
+
+Question: in the linearized polish model `z_{k+1} = A z_k + B w_k`, replace the Gaussian noise `w_k` by the **real**
+minibatch noise (mean of 16 rows drawn with replacement from the centered per-row gradients at the exact solution) and
+compare the empirical EV@R (20,000 simulated paths, zeta = 0.05) of the final loss `½ zᵀ H z` with the exact Gaussian
+EV@R computed from the same covariance (`evar_quadratic`). Both are linear systems, so the ratio isolates the effect of
+the noise *distribution*. Start at the optimum (`e₀ = 0`) so the final loss is pure noise (the case where the
+distribution matters most). Datasets: COMPAS (d = 8), Heart (d = 27), German (d = 55); α ∈ {1, 0.3, 0.1, 0.03}/L,
+(β, γ) ∈ {(0, 0), (0.9, 0.9)}, K ∈ {200, 1000}.
+
+Expectation: ratio (real / Gaussian) near 1 when the averaging window `1/(αμ)` is long compared with 1 step (small α),
+and above 1 (Gaussian too optimistic about the tail) when α is large, because few independent minibatches contribute.
+If the ratio stays within ±15% for the small steps that the polisher selects, the Gaussian model is adequate in
+the regime where it is used and only needs a diagnostic; otherwise a cumulant correction or the bootstrap-simulation
+variant is needed.
