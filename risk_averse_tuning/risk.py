@@ -261,6 +261,44 @@ class RAGMMBounds:
             for i in range(1, n + 1):
                 yield 1.0, 1.0, i / (n * L), "S_0"
 
+    def solve_fixed_alpha(self, alpha, L, mu, d, grid_size=400):
+        """
+        RA-GMM at a **given step size**: minimize the EV@R bound (44) over ``psi`` on the curve
+        ``vartheta = 1 - alpha L (1 - psi)``, subject to membership in the stable set ``S_c`` (Theorem 2).
+        The rate constraint of (51) is not applied (``alpha`` is fixed by the caller, so the rate is whatever it is).
+        Candidates ``psi`` lie on ``[0, 1)`` and ``(1, 2 kappa (1 + sqrt(1 - 1/kappa))]``; ``psi = 1`` (Nesterov,
+        ``S_0``, needs ``alpha <= 1/L``) is included. Returns :class:`RAGMMSolution` or raises ``ValueError`` if no
+        feasible ``psi`` has a finite bound.
+        """
+        if not (L > mu > 0.0):
+            raise ValueError(f"need L > mu > 0, got L={L}, mu={mu}")
+        if not alpha > 0.0:
+            raise ValueError("alpha must be positive")
+        self.d = d
+        kappa = L / mu
+        psi_hi = 2.0 * kappa * (1.0 + math.sqrt(max(1.0 - 1.0 / kappa, 0.0)))
+        psis = [i / grid_size for i in range(grid_size)] + [1.0 + (psi_hi - 1.0) * i / grid_size
+                                                           for i in range(1, grid_size + 1)]
+        best = None
+        for psi in psis:
+            vt = self.vartheta_of(alpha, psi, L)
+            if not self.in_stable_set(vt, psi, L, mu):
+                continue
+            bound = self.evar_bound_vp(vt, psi, L, mu, alpha=alpha)
+            if math.isfinite(bound) and (best is None or bound < best[0]):
+                best = (bound, vt, psi)
+        if alpha <= 1.0 / L * (1 + self.eps):                       # S_0: Nesterov at this alpha
+            bound = self.evar_bound_vp(1.0, 1.0, L, mu, alpha=alpha)
+            if math.isfinite(bound) and (best is None or bound < best[0]):
+                best = (bound, 1.0, 1.0)
+        if best is None:
+            raise ValueError(f"no feasible psi with a finite EV@R bound at alpha={alpha}; try a smaller alpha")
+        bound, vt, psi = best
+        a, beta, gamma = self.parameters(vt, psi, L, mu, alpha=alpha)
+        rho2 = self.rate(vt, a, mu)
+        region = "S_0" if psi == 1.0 else ("S_minus" if psi < 1.0 else "S_plus")
+        return RAGMMSolution(a, beta, gamma, vt, psi, bound, rho2, rho2 / (1.0 - math.sqrt(mu / L)), region)
+
     def solve(self, L, mu, d, rate_slack=0.05, grid_size=100, include_agd=True,
               method="gmm") -> RAGMMSolution:
         """
