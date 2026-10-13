@@ -196,9 +196,13 @@ K = 2000, 200 evaluation seeds, common random numbers, tuning seeds 10 000–10 
 | general | RA-GMM (ε = 0.05) | problem (51), library (reference row) |
 
 The paper gives the EV@R bound for GD (Theorem 4) but **no selection problem** for
-GD in the strongly convex case, so there is no "RA-GD" row. Any problem of type
-(51b) for GD is degenerate here: its rate `(1 − αμ)²` is within `(1 + ε)` of any
-benchmark ≤ 1 for all small α once `ε` exceeds roughly `4/κ` (≈ 0.04 at κ ≈ 99).
+GD in the strongly convex case, so there is no "RA-GD" row. A problem of type (51)
+is degenerate for GD at this condition number (κ ≈ 99): with the benchmark of
+(51b), ρ_*² = 1 − √(μ/L) = 0.899, GD's best rate is 0.960, so the constraint is
+infeasible for ε < 0.068 and vacuous (minimizer at the smallest step size on the
+grid) for ε ≥ 0.112; with GD's own best rate as the benchmark it is vacuous for
+ε ≳ 4/κ ≈ 0.040. (Wording corrected after the first commit of this section; no
+result had been produced.)
 
 Metrics: as Experiment 1 (flips per retrain on the 300 held-out applicants, p95 of
 `f(w_K) − f*`, expected cost, ambiguity).
