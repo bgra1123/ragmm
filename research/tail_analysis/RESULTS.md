@@ -34,7 +34,7 @@ noisy training wanders the most, so these people's predictions swing the most fr
 
 ## 2. With a careful optimizer the pattern changes
 
-With tuned SGD + tail averaging the absolute tail is about 100–400× smaller (e.g. German CVaR₅% of the objective
+With tuned SGD + tail averaging the absolute tail is about 90–550× smaller (e.g. German CVaR₅% of the objective
 0.0015 vs 0.37), the leverage effect almost disappears (Spearman 0.07–0.17), and the top rows become the
 **borderline / misclassified** people instead (misclassified by the exact model: 31–89% of the top rows). The
 residual instability is the usual noise around the decision boundary, not a group-level effect.
@@ -82,6 +82,8 @@ residual instability is the usual noise around the decision boundary, not a grou
 ## Caveats
 
 * Losses are measured on training rows (the objective the theory controls); held-out behaviour was measured in Gate 0.
-* "Matched mean" is matched on 100 tuning seeds; on the evaluation seeds the means differ by ≤ 5%.
+* "Matched mean" is matched on 100 tuning seeds; on the evaluation seeds the means differ by up to 5.2% (RA-GMM's is
+  higher on COMPAS, Bank and Pima). That is the same size as the worst-case differences, so read the matched comparison
+  as a tie, not as RA-GMM being worse.
 * Feature profiles are descriptive (standardized mean differences), not causal.
 * COMPAS has one categorical feature and Pima none, so "rarity" is only informative for German, Adult, Bank and Heart.
