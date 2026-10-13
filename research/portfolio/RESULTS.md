@@ -225,3 +225,90 @@ This is a **tie**, as anticipated in the pre-registration.
 - This is empirical tuning with the paper's risk measure (EV@R) on past data,
   not the paper's theoretical parameter formula, which does not yet work in
   this noise regime (see the bound diagnostic above).
+
+---
+
+# P5: the paper's quadratic formulation on the quadratic portfolio problem
+
+Design: PLAN.md §13 (pre-registered; one addendum after a 40-date smoke test). Unconstrained R1, 328 dates (out-of-sample
+from date 24), 200 seeds, K = 200, batch 16, 10 bps. Data: `results/quadratic_formulation.json`,
+`results/calibration_additive.json`. Code: `quadratic_formulation.py`, `calibration_additive.py`.
+This tests the formulation the earlier P1–P3 should have used (§13): Section 3 of the paper, problem (32).
+
+## Headline (out-of-sample dates, pooled over seeds × dates)
+
+| Method | Mean subopt. | 95th pct | CVaR₅% | Phantom trades 95th pct | Ruin | Median terminal wealth |
+|---|---|---|---|---|---|---|
+| Exact solver (reference) | – | – | – | – | – | 303 |
+| SGD (tuned for mean) | **0.0101** | **0.026** | **0.036** | 0.30 | 0% | 306 |
+| Nesterov (tuned for mean) | 0.0105 | 0.028 | 0.042 | 0.32 | 0% | 295 |
+| SGD + tail averaging (tuned) | 0.0109 | 0.030 | 0.044 | 0.34 | 0% | 290 |
+| EXT: exact EV@R at K (extension; oracle start) | 0.0315 | 0.084 | 0.121 | 0.57 | 0% | 208 |
+| RA-GMM, problem (51), ε = 0.25 | 1.20 | 2.75 | 8.7 | 2.90 | 9% | 36 |
+| Q32-grid (paper's grid, ε = 1) | 1.45 | 2.94 | 12.6 | 2.83 | 14% | 32 |
+| SGD (textbook) | 1.81 | 3.96 | 15.1 | 3.11 | 17% | 16 |
+| Nesterov (textbook) | 15.5 | 4.98 | 287 | 3.40 | 34% | 5.7 |
+| **Q32, ε = 0.25** (paper's problem (32)) | 26.0 | 5.28 | 494 | 3.52 | 37% | 3.7 |
+| Q32, ε = 0.05 | 38.3 | 6.68 | 736 | 3.85 | 45% | 0.19 |
+| Q32-exact (exact EV@R as objective), ε = 0.25 | 62.5 | 5.74 | 1224 | 3.63 | 42% | 1.3 |
+
+(Means of the untuned methods are dominated by a few runs where the account is wiped out; compare the 95th percentile
+and the ruin rate.)
+
+## Hypotheses (as pre-registered)
+
+- **H1 – false.** Q32 (ε = 0.25) is *worse* than textbook Nesterov and SGD at the 95th percentile (+0.30, CI [0.24, 0.35];
+  +1.32, CI [1.25, 1.40]) and in phantom trades; the mean differences are not distinguishable from zero against
+  Nesterov (heavy tails) and worse against SGD. Only the paper's-grid variant (ε = 1) beats the textbook settings,
+  and that comparison was not pre-registered.
+- **H2 – false.** Q32 is worse than problem (51) (95th pct +2.52, CI [2.42, 2.63]).
+- **H3 – direction as expected, magnitude not.** Q32 is about 200× worse than the tuned baselines at the 95th
+  percentile, with 37% of accounts ruined against 0%.
+- **H4 – half true.** EXT is far better than Q32 (95th pct 0.084 vs 5.28; CVaR 0.12 vs 494), but its mean is 3.1× the
+  best tuned-for-mean baseline, not within 10%, and it is worse than the tuned baselines on every metric.
+- **H5 – calibration: EXT true; the bound claim false.** EXT's exact-K prediction matched the empirical EV@R at 40/40
+  dates (median ratio 1.003, within 1.5× everywhere) *with the real minibatch noise*. For textbook Nesterov and Q32 the
+  prediction was 4.2–4.5× too low (empirical / predicted, median), and the Theorem 1 bound (isotropic σ² =
+  tr Σ / d) was **below** the empirical EV@R (median ratio 0.14–0.16), i.e. the guarantee does not hold for these
+  settings in this problem.
+
+## Diagnosis: the noise is not the paper's noise
+
+With the real noise replaced by additive Gaussian `N(0, Σ)` (same Σ; the paper's model), the exact-K prediction is right
+for all three settings: empirical / predicted median 0.89 (Nesterov, range 0.77–1.10), 0.91 (Q32, 0.78–1.22), 0.99 (EXT,
+0.91–1.07). (The first two are slightly below 1 because a 2 000-sample estimate of EV@R of a heavy-tailed variable
+is biased low; my pre-registered "within 10%" was met at 47–50% of dates for them, 100% for EXT.) With the real
+minibatch noise the same settings come out 4.2–4.5× higher. The minibatch gradient of this objective has a part that
+grows with `w` (the `θ D_t D_tᵀ w` term), so large steps that make the weights large also make the noise larger and
+can destabilize the iteration in mean square; the additive-noise theory cannot represent that. EXT avoids it
+by choosing tiny steps (α·L between 2e-4 and 2e-3 on the dates checked), where the noise is effectively additive.
+
+## What this means
+
+1. **The paper's quadratic formulation is correct as mathematics and does what it says on its own model.** The exact
+   EV@R is computable, and with additive noise it predicts the simulated tail to within the sampling error.
+2. **It does not transfer to this portfolio problem.** Problem (32) asks for the fastest-converging settings (within ε of
+   the optimal rate); on this objective the minibatch noise is state-dependent, and those settings are unstable in
+   mean square. Zero-tuning use of (32) is worse than textbook SGD, and ruins more accounts than P1's (51).
+   Problem (32) also never sees the budget K or the noise level, and its argmin does not depend on σ, so it cannot
+   back off the step size.
+3. **An exact finite-horizon EV@R (my extension) is a good predictor and a good selector relative to (32), but still
+   does not beat a tuned-for-mean SGD here.** Its selections are well calibrated from the reference start. In the
+   backtest it starts each month from its own holdings, which are farther from the optimum than the reference
+   path's (mean starting gap `f(w₀) − f*` over the first 150 dates, 40 seeds: reference path 0.027, EXT 0.062, tuned SGD
+   0.037; post-hoc check): a lazy solver inherits a larger error next month, which the one-month criterion with the
+   reference start does not see. I did not test a self-consistent version; this explanation is supported by that
+   measurement but untested as a fix.
+4. **Corrected statement for the argument (ARGUMENT.md):** the earlier "bound 4–5× too loose" referred to problem (51)'s
+   bound. The quadratic bound (Theorem 1) is not loose here; it is *invalid* for this noise, because its model
+   (additive, stationary) does not describe minibatch gradients of this objective.
+
+## Caveats
+
+* One objective, one universe, one noise level; the conclusion is about this problem's noise structure, not about the paper's
+  theory on additive-noise problems.
+* EXT uses the reference path's holdings for e₀ (an oracle a deployed solver would not have); its backtest numbers are
+  not a deployable result.
+* Tuned baselines were tuned on 24 dates and tested out of sample; Q32 variants use no data.
+* Textbook, Q32 and (51) means are driven by wiped-out accounts; use the 95th percentile and ruin rate.
+* The diagnostic's sample EV@R from 2 000 draws is biased low for heavy tails.

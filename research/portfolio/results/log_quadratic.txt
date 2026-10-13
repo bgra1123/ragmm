@@ -1,0 +1,11 @@
+tuned: {'SGD (tuned for mean)': {'a': np.float64(0.010568518588617426), 'beta': 0.0, 'nest': False, 'avg': False}, 'Nesterov (tuned for mean)': {'a': np.float64(0.005902178654855692), 'beta': 0.3, 'nest': True, 'avg': False}, 'SGD + tail averaging (tuned)': {'a': np.float64(0.010568518588617426), 'beta': 0.0, 'nest': False, 'avg': True}} [61s]
+parameters selected for 328 dates [593s]
+date 0/328 [594s]
+date 50/328 [645s]
+date 100/328 [695s]
+date 150/328 [744s]
+date 200/328 [794s]
+date 250/328 [845s]
+date 300/328 [895s]
+backtest done [1012s]
+wrote /home/user/ragmm/research/portfolio/results/quadratic_formulation.json in 1117s

@@ -73,7 +73,9 @@ the average worse.*
   bound is about 4–5× too loose in this setting. That was the wrong tool: this
   objective is an exact quadratic, for which the paper has a separate, tighter
   formulation (Section 3, problem (32)) that has **not** been tested here yet.
-  See PLAN.md section 13 for that test.
+  That test is now done (RESULTS.md, P5): the quadratic formulation is exact on its own
+  model but did not help here, because the minibatch noise of this objective grows
+  with the weights, which the additive-noise theory does not cover.
 - **Survivorship bias:** the 10 stocks were chosen in 2018, so absolute
   returns are flattering. Compare solvers with each other, not with the market.
 - With 10 stocks the exact answer is cheap to compute; the noisy solver stands

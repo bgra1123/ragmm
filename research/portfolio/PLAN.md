@@ -504,3 +504,12 @@ formula on the 2 000 samples.
 - **H5 (calibration):** EXT's predicted EV@R is within a factor 1.5 of the empirical EV@R at ≥ 80% of the checked
   dates; the Theorem 1 bound is ≥ the empirical value at all of them but loose (reported as ratio).
 - Whatever happens is reported, including a null or negative result for the paper's formulation.
+
+> **Addendum recorded after a 40-date, 20-seed smoke test and before the main run.** In the smoke test the empirical
+> EV@R of the fast settings (textbook Nesterov and Q32) was 10–20× the exact-K prediction that assumes *additive*
+> gradient noise, while EXT's was within ~25% of its prediction. The minibatch noise here has a part proportional to
+> `w` (multiplicative), which the additive theory cannot see, and fast settings with large steps make the iterates
+> large. A **diagnostic** is therefore added to P5: repeat the calibration with the noise replaced by additive Gaussian
+> noise `N(0, Σ)` (the paper's model, same Σ), same configurations. Prediction: with additive noise the exact-K
+> EV@R matches the empirical value for all three configurations (within 10%), which would attribute the failure to
+> the noise model and not to the formulas. Script: `calibration_additive.py`. The hypotheses above are unchanged.

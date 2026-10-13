@@ -128,3 +128,14 @@ def test_select_parameters_trades_speed_for_noise():
     noisy = q.select_parameters(H, 40, 1.0 * np.eye(4), e0, 0.05)
     assert noisy.alpha < quiet.alpha                              # noise calls for smaller steps
     assert noisy.evar > 0 and quiet.candidates > 10
+
+
+def test_zoom_finds_feasible_point_missed_by_coarse_grid():
+    eigs = np.array([2.3, 6.5])                                   # kappa ~ 2.8: optimum needs alpha > 1/L
+    with pytest.raises(ValueError):
+        q.solve_quadratic(eigs, 0.05, 0.25, 50)
+    sol = q.solve_quadratic(eigs, 0.05, 0.25, 50, alpha_max=2 / 6.5, zoom=3)
+    assert sol.rate_ratio <= 1.25 + 1e-9 and q.quad_in_stable_set(sol.alpha, sol.beta, sol.gamma, eigs)
+    plain = q.solve_quadratic(eigs, 0.05, 1.0, 50)
+    zoomed = q.solve_quadratic(eigs, 0.05, 1.0, 50, zoom=3)
+    assert zoomed.objective <= plain.objective + 1e-12            # zooming never makes the incumbent worse

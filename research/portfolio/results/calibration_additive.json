@@ -1,0 +1,762 @@
+[
+  {
+    "date": 0,
+    "kappa": 2.232838246905373,
+    "Nesterov (textbook)": {
+      "additive_empirical_evar": 4.896224697983499,
+      "predicted_exact_K_evar": 5.263252513260744,
+      "real_minibatch_empirical_evar": 8446.984515395969
+    },
+    "Q32 (eps=0.25)": {
+      "additive_empirical_evar": 5.256244042673509,
+      "predicted_exact_K_evar": 5.805369083501942,
+      "real_minibatch_empirical_evar": 17421.70581410402
+    },
+    "EXT (exact-K)": {
+      "additive_empirical_evar": 0.038054819119165556,
+      "predicted_exact_K_evar": 0.04184808124657181,
+      "real_minibatch_empirical_evar": 0.044385934178981394
+    }
+  },
+  {
+    "date": 8,
+    "kappa": 2.3196248756328646,
+    "Nesterov (textbook)": {
+      "additive_empirical_evar": 5.753044741341553,
+      "predicted_exact_K_evar": 6.25794685792622,
+      "real_minibatch_empirical_evar": 12.48932869633249
+    },
+    "Q32 (eps=0.25)": {
+      "additive_empirical_evar": 6.395971837957536,
+      "predicted_exact_K_evar": 6.947417221480987,
+      "real_minibatch_empirical_evar": 13.159475884202978
+    },
+    "EXT (exact-K)": {
+      "additive_empirical_evar": 0.0247289964311942,
+      "predicted_exact_K_evar": 0.024370562824117235,
+      "real_minibatch_empirical_evar": 0.02450144692209873
+    }
+  },
+  {
+    "date": 16,
+    "kappa": 3.2743027843881722,
+    "Nesterov (textbook)": {
+      "additive_empirical_evar": 5.677265916055182,
+      "predicted_exact_K_evar": 6.27492179408039,
+      "real_minibatch_empirical_evar": 299.28191337309664
+    },
+    "Q32 (eps=0.25)": {
+      "additive_empirical_evar": 5.5284958368475,
+      "predicted_exact_K_evar": 6.68039261924594,
+      "real_minibatch_empirical_evar": 410.07741342168424
+    },
+    "EXT (exact-K)": {
+      "additive_empirical_evar": 0.019648059670825384,
+      "predicted_exact_K_evar": 0.01976187797148873,
+      "real_minibatch_empirical_evar": 0.01936088933154068
+    }
+  },
+  {
+    "date": 25,
+    "kappa": 2.5014128918162966,
+    "Nesterov (textbook)": {
+      "additive_empirical_evar": 5.122289339128934,
+      "predicted_exact_K_evar": 5.77428452710267,
+      "real_minibatch_empirical_evar": 1777.6331986905484
+    },
+    "Q32 (eps=0.25)": {
+      "additive_empirical_evar": 5.628180398616766,
+      "predicted_exact_K_evar": 6.3819374638757935,
+      "real_minibatch_empirical_evar": 1877.1430829684039
+    },
+    "EXT (exact-K)": {
+      "additive_empirical_evar": 0.0030281201006441675,
+      "predicted_exact_K_evar": 0.0030250900740407274,
+      "real_minibatch_empirical_evar": 0.003016682948692562
+    }
+  },
+  {
+    "date": 33,
+    "kappa": 2.1692078458984914,
+    "Nesterov (textbook)": {
+      "additive_empirical_evar": 4.5302262244187865,
+      "predicted_exact_K_evar": 5.39469319705775,
+      "real_minibatch_empirical_evar": 23.03264801836244
+    },
+    "Q32 (eps=0.25)": {
+      "additive_empirical_evar": 5.512124484846422,
+      "predicted_exact_K_evar": 6.000834401434455,
+      "real_minibatch_empirical_evar": 23.58611157058178
+    },
+    "EXT (exact-K)": {
+      "additive_empirical_evar": 0.019881297634809354,
+      "predicted_exact_K_evar": 0.019187627975265513,
+      "real_minibatch_empirical_evar": 0.019191077608396327
+    }
+  },
+  {
+    "date": 41,
+    "kappa": 2.472329530920375,
+    "Nesterov (textbook)": {
+      "additive_empirical_evar": 5.314706363989284,
+      "predicted_exact_K_evar": 5.984571360730559,
+      "real_minibatch_empirical_evar": 76.23591489227665
+    },
+    "Q32 (eps=0.25)": {
+      "additive_empirical_evar": 5.33999984694369,
+      "predicted_exact_K_evar": 6.61449872754487,
+      "real_minibatch_empirical_evar": 70.43006851407301
+    },
+    "EXT (exact-K)": {
+      "additive_empirical_evar": 0.010627811788109525,
+      "predicted_exact_K_evar": 0.010624321953906892,
+      "real_minibatch_empirical_evar": 0.010626129234231618
+    }
+  },
+  {
+    "date": 50,
+    "kappa": 2.047447333971443,
+    "Nesterov (textbook)": {
+      "additive_empirical_evar": 5.0074097120180445,
+      "predicted_exact_K_evar": 5.374423952629285,
+      "real_minibatch_empirical_evar": 23.341779498891466
+    },
+    "Q32 (eps=0.25)": {
+      "additive_empirical_evar": 5.027371211384081,
+      "predicted_exact_K_evar": 5.9905793039165465,
+      "real_minibatch_empirical_evar": 26.941879931299166
+    },
+    "EXT (exact-K)": {
+      "additive_empirical_evar": 0.023089318133017307,
+      "predicted_exact_K_evar": 0.023153017176868417,
+      "real_minibatch_empirical_evar": 0.021586210611274817
+    }
+  },
+  {
+    "date": 58,
+    "kappa": 1.9611566025028129,
+    "Nesterov (textbook)": {
+      "additive_empirical_evar": 4.723609281312289,
+      "predicted_exact_K_evar": 4.814754208759522,
+      "real_minibatch_empirical_evar": 55.93307564116402
+    },
+    "Q32 (eps=0.25)": {
+      "additive_empirical_evar": 4.41575218777872,
+      "predicted_exact_K_evar": 5.363248488330387,
+      "real_minibatch_empirical_evar": 40.81586146573804
+    },
+    "EXT (exact-K)": {
+      "additive_empirical_evar": 0.019331851732578436,
+      "predicted_exact_K_evar": 0.020008627533589576,
+      "real_minibatch_empirical_evar": 0.019683132789822803
+    }
+  },
+  {
+    "date": 67,
+    "kappa": 2.065845471876212,
+    "Nesterov (textbook)": {
+      "additive_empirical_evar": 5.578902527382557,
+      "predicted_exact_K_evar": 5.736714262680196,
+      "real_minibatch_empirical_evar": 28.166968776060198
+    },
+    "Q32 (eps=0.25)": {
+      "additive_empirical_evar": 5.264904072066329,
+      "predicted_exact_K_evar": 6.387357029761419,
+      "real_minibatch_empirical_evar": 26.22335086798234
+    },
+    "EXT (exact-K)": {
+      "additive_empirical_evar": 0.008164318736039487,
+      "predicted_exact_K_evar": 0.008174025684884074,
+      "real_minibatch_empirical_evar": 0.0081649777521803
+    }
+  },
+  {
+    "date": 75,
+    "kappa": 2.411886552561052,
+    "Nesterov (textbook)": {
+      "additive_empirical_evar": 5.4218952236139595,
+      "predicted_exact_K_evar": 5.86644932641818,
+      "real_minibatch_empirical_evar": 15.50369402605892
+    },
+    "Q32 (eps=0.25)": {
+      "additive_empirical_evar": 6.1453193071691254,
+      "predicted_exact_K_evar": 6.4901854530218115,
+      "real_minibatch_empirical_evar": 17.501903647791067
+    },
+    "EXT (exact-K)": {
+      "additive_empirical_evar": 0.024225734928930712,
+      "predicted_exact_K_evar": 0.02314539342683716,
+      "real_minibatch_empirical_evar": 0.024129123280158104
+    }
+  },
+  {
+    "date": 83,
+    "kappa": 2.5463728636398293,
+    "Nesterov (textbook)": {
+      "additive_empirical_evar": 7.073376463033656,
+      "predicted_exact_K_evar": 7.3063084904455495,
+      "real_minibatch_empirical_evar": 1479.072039073222
+    },
+    "Q32 (eps=0.25)": {
+      "additive_empirical_evar": 7.748283432347879,
+      "predicted_exact_K_evar": 8.071574716531106,
+      "real_minibatch_empirical_evar": 1625.3795814882903
+    },
+    "EXT (exact-K)": {
+      "additive_empirical_evar": 0.03220228626205076,
+      "predicted_exact_K_evar": 0.03310134694459163,
+      "real_minibatch_empirical_evar": 0.032635169287368364
+    }
+  },
+  {
+    "date": 92,
+    "kappa": 2.9330405174578154,
+    "Nesterov (textbook)": {
+      "additive_empirical_evar": 5.0473756569952695,
+      "predicted_exact_K_evar": 5.961800828956913,
+      "real_minibatch_empirical_evar": 12.849599066415996
+    },
+    "Q32 (eps=0.25)": {
+      "additive_empirical_evar": 5.055160496841946,
+      "predicted_exact_K_evar": 6.4780977709827825,
+      "real_minibatch_empirical_evar": 12.5833187458047
+    },
+    "EXT (exact-K)": {
+      "additive_empirical_evar": 0.03371706551557173,
+      "predicted_exact_K_evar": 0.036720128834725946,
+      "real_minibatch_empirical_evar": 0.037222017830505
+    }
+  },
+  {
+    "date": 100,
+    "kappa": 2.8256052617088923,
+    "Nesterov (textbook)": {
+      "additive_empirical_evar": 5.492592749620863,
+      "predicted_exact_K_evar": 6.719790326704169,
+      "real_minibatch_empirical_evar": 35.416187087019956
+    },
+    "Q32 (eps=0.25)": {
+      "additive_empirical_evar": 6.541756786343294,
+      "predicted_exact_K_evar": 7.320650064661827,
+      "real_minibatch_empirical_evar": 31.172145715573404
+    },
+    "EXT (exact-K)": {
+      "additive_empirical_evar": 0.026517645750394652,
+      "predicted_exact_K_evar": 0.02724345953709341,
+      "real_minibatch_empirical_evar": 0.02633818612763022
+    }
+  },
+  {
+    "date": 109,
+    "kappa": 2.6539748310828144,
+    "Nesterov (textbook)": {
+      "additive_empirical_evar": 6.085448517799921,
+      "predicted_exact_K_evar": 6.504410206875435,
+      "real_minibatch_empirical_evar": 14.65368711736268
+    },
+    "Q32 (eps=0.25)": {
+      "additive_empirical_evar": 6.733356673726855,
+      "predicted_exact_K_evar": 7.165223019181872,
+      "real_minibatch_empirical_evar": 12.655961446639086
+    },
+    "EXT (exact-K)": {
+      "additive_empirical_evar": 0.029786767053979833,
+      "predicted_exact_K_evar": 0.03122819901923497,
+      "real_minibatch_empirical_evar": 0.030519313506962072
+    }
+  },
+  {
+    "date": 117,
+    "kappa": 3.468832301997533,
+    "Nesterov (textbook)": {
+      "additive_empirical_evar": 6.779645250747126,
+      "predicted_exact_K_evar": 7.265406262075814,
+      "real_minibatch_empirical_evar": 1473.5117517276467
+    },
+    "Q32 (eps=0.25)": {
+      "additive_empirical_evar": 7.296314549514547,
+      "predicted_exact_K_evar": 7.647446076011227,
+      "real_minibatch_empirical_evar": 1753.5295750175198
+    },
+    "EXT (exact-K)": {
+      "additive_empirical_evar": 0.01815995886162711,
+      "predicted_exact_K_evar": 0.01812618871209642,
+      "real_minibatch_empirical_evar": 0.018150211799366614
+    }
+  },
+  {
+    "date": 125,
+    "kappa": 3.929372404895092,
+    "Nesterov (textbook)": {
+      "additive_empirical_evar": 6.307829043353996,
+      "predicted_exact_K_evar": 7.12470755100365,
+      "real_minibatch_empirical_evar": 257.47728996714295
+    },
+    "Q32 (eps=0.25)": {
+      "additive_empirical_evar": 6.950477278515555,
+      "predicted_exact_K_evar": 7.272562187341862,
+      "real_minibatch_empirical_evar": 269.65211960953474
+    },
+    "EXT (exact-K)": {
+      "additive_empirical_evar": 0.007180084656045761,
+      "predicted_exact_K_evar": 0.007189157348338215,
+      "real_minibatch_empirical_evar": 0.007166397865810029
+    }
+  },
+  {
+    "date": 134,
+    "kappa": 3.570694100781514,
+    "Nesterov (textbook)": {
+      "additive_empirical_evar": 5.172417237928218,
+      "predicted_exact_K_evar": 6.082018955610978,
+      "real_minibatch_empirical_evar": 44.37817684140978
+    },
+    "Q32 (eps=0.25)": {
+      "additive_empirical_evar": 6.4812907897020615,
+      "predicted_exact_K_evar": 6.357134436736269,
+      "real_minibatch_empirical_evar": 45.35085939490252
+    },
+    "EXT (exact-K)": {
+      "additive_empirical_evar": 0.01744331707085222,
+      "predicted_exact_K_evar": 0.017400926972076868,
+      "real_minibatch_empirical_evar": 0.01743833145754202
+    }
+  },
+  {
+    "date": 142,
+    "kappa": 3.3940938651621018,
+    "Nesterov (textbook)": {
+      "additive_empirical_evar": 5.927619325189571,
+      "predicted_exact_K_evar": 6.754180481535522,
+      "real_minibatch_empirical_evar": 144.60082464308317
+    },
+    "Q32 (eps=0.25)": {
+      "additive_empirical_evar": 5.691573294043992,
+      "predicted_exact_K_evar": 7.138402603546715,
+      "real_minibatch_empirical_evar": 153.95092235092744
+    },
+    "EXT (exact-K)": {
+      "additive_empirical_evar": 0.026149163038155246,
+      "predicted_exact_K_evar": 0.026217740898460674,
+      "real_minibatch_empirical_evar": 0.026086492924120786
+    }
+  },
+  {
+    "date": 150,
+    "kappa": 3.3527065991624116,
+    "Nesterov (textbook)": {
+      "additive_empirical_evar": 5.477230144081949,
+      "predicted_exact_K_evar": 6.603664105310183,
+      "real_minibatch_empirical_evar": 3148.6776875836385
+    },
+    "Q32 (eps=0.25)": {
+      "additive_empirical_evar": 6.810717695178326,
+      "predicted_exact_K_evar": 6.994454041025221,
+      "real_minibatch_empirical_evar": 2892.140303128696
+    },
+    "EXT (exact-K)": {
+      "additive_empirical_evar": 0.02443251602842779,
+      "predicted_exact_K_evar": 0.024918034930826324,
+      "real_minibatch_empirical_evar": 0.02501611897771045
+    }
+  },
+  {
+    "date": 159,
+    "kappa": 1.8028721410335005,
+    "Nesterov (textbook)": {
+      "additive_empirical_evar": 3.8878090455924648,
+      "predicted_exact_K_evar": 4.204190568610377,
+      "real_minibatch_empirical_evar": 5.558383920363166
+    },
+    "Q32 (eps=0.25)": {
+      "additive_empirical_evar": 4.527084910582289,
+      "predicted_exact_K_evar": 4.671580739067174,
+      "real_minibatch_empirical_evar": 6.088618951849719
+    },
+    "EXT (exact-K)": {
+      "additive_empirical_evar": 0.010286876820779174,
+      "predicted_exact_K_evar": 0.01050052717855997,
+      "real_minibatch_empirical_evar": 0.010378082548440701
+    }
+  },
+  {
+    "date": 167,
+    "kappa": 1.8121293356608608,
+    "Nesterov (textbook)": {
+      "additive_empirical_evar": 3.8041272181558066,
+      "predicted_exact_K_evar": 3.973048695997621,
+      "real_minibatch_empirical_evar": 5.954845204056608
+    },
+    "Q32 (eps=0.25)": {
+      "additive_empirical_evar": 3.9877322552548806,
+      "predicted_exact_K_evar": 4.431224157532571,
+      "real_minibatch_empirical_evar": 7.892892579510305
+    },
+    "EXT (exact-K)": {
+      "additive_empirical_evar": 0.016314444251495714,
+      "predicted_exact_K_evar": 0.017076475341952613,
+      "real_minibatch_empirical_evar": 0.016615350627995077
+    }
+  },
+  {
+    "date": 176,
+    "kappa": 1.8709731786937691,
+    "Nesterov (textbook)": {
+      "additive_empirical_evar": 5.147552986499532,
+      "predicted_exact_K_evar": 5.994084247094783,
+      "real_minibatch_empirical_evar": 145.65783411054403
+    },
+    "Q32 (eps=0.25)": {
+      "additive_empirical_evar": 6.069325498294183,
+      "predicted_exact_K_evar": 6.691827554766299,
+      "real_minibatch_empirical_evar": 137.6179159384236
+    },
+    "EXT (exact-K)": {
+      "additive_empirical_evar": 0.011311956939967019,
+      "predicted_exact_K_evar": 0.01132362357069241,
+      "real_minibatch_empirical_evar": 0.011367428137999087
+    }
+  },
+  {
+    "date": 184,
+    "kappa": 1.668692476821613,
+    "Nesterov (textbook)": {
+      "additive_empirical_evar": 3.950374905253488,
+      "predicted_exact_K_evar": 4.299322937604472,
+      "real_minibatch_empirical_evar": 9.616495045230524
+    },
+    "Q32 (eps=0.25)": {
+      "additive_empirical_evar": 3.9859749586081104,
+      "predicted_exact_K_evar": 4.758520299635757,
+      "real_minibatch_empirical_evar": 10.297990686389076
+    },
+    "EXT (exact-K)": {
+      "additive_empirical_evar": 0.011349913041033213,
+      "predicted_exact_K_evar": 0.011552482289268211,
+      "real_minibatch_empirical_evar": 0.011753308074275673
+    }
+  },
+  {
+    "date": 192,
+    "kappa": 1.9790154870627286,
+    "Nesterov (textbook)": {
+      "additive_empirical_evar": 3.5227294338333075,
+      "predicted_exact_K_evar": 4.017780254086837,
+      "real_minibatch_empirical_evar": 11.378797699017195
+    },
+    "Q32 (eps=0.25)": {
+      "additive_empirical_evar": 4.248523890445287,
+      "predicted_exact_K_evar": 4.482161511748012,
+      "real_minibatch_empirical_evar": 12.402316176149517
+    },
+    "EXT (exact-K)": {
+      "additive_empirical_evar": 0.013106521071726175,
+      "predicted_exact_K_evar": 0.013176634996515021,
+      "real_minibatch_empirical_evar": 0.01318339467903658
+    }
+  },
+  {
+    "date": 201,
+    "kappa": 1.6056465287882644,
+    "Nesterov (textbook)": {
+      "additive_empirical_evar": 2.78418233158329,
+      "predicted_exact_K_evar": 3.1936539649594096,
+      "real_minibatch_empirical_evar": 5.767070153467171
+    },
+    "Q32 (eps=0.25)": {
+      "additive_empirical_evar": 2.9804335128787622,
+      "predicted_exact_K_evar": 3.5184546900209,
+      "real_minibatch_empirical_evar": 6.456607646310205
+    },
+    "EXT (exact-K)": {
+      "additive_empirical_evar": 0.007931266724542627,
+      "predicted_exact_K_evar": 0.008061129380903528,
+      "real_minibatch_empirical_evar": 0.008035443446526555
+    }
+  },
+  {
+    "date": 209,
+    "kappa": 1.7526658119276017,
+    "Nesterov (textbook)": {
+      "additive_empirical_evar": 5.727088393193155,
+      "predicted_exact_K_evar": 5.215487386340862,
+      "real_minibatch_empirical_evar": 17.697851629550865
+    },
+    "Q32 (eps=0.25)": {
+      "additive_empirical_evar": 4.995974192650265,
+      "predicted_exact_K_evar": 5.7919029194063265,
+      "real_minibatch_empirical_evar": 19.397101643068776
+    },
+    "EXT (exact-K)": {
+      "additive_empirical_evar": 0.016637426118307586,
+      "predicted_exact_K_evar": 0.015619702289732954,
+      "real_minibatch_empirical_evar": 0.01494361192221749
+    }
+  },
+  {
+    "date": 218,
+    "kappa": 5.633005976531768,
+    "Nesterov (textbook)": {
+      "additive_empirical_evar": 7.650382214811833,
+      "predicted_exact_K_evar": 7.620889415946094,
+      "real_minibatch_empirical_evar": 132.21494583351415
+    },
+    "Q32 (eps=0.25)": {
+      "additive_empirical_evar": 6.689855359258474,
+      "predicted_exact_K_evar": 6.909596700998471,
+      "real_minibatch_empirical_evar": 118.3007955644533
+    },
+    "EXT (exact-K)": {
+      "additive_empirical_evar": 0.051019161597800566,
+      "predicted_exact_K_evar": 0.05251901318630939,
+      "real_minibatch_empirical_evar": 0.05473035055622857
+    }
+  },
+  {
+    "date": 226,
+    "kappa": 6.953690679417041,
+    "Nesterov (textbook)": {
+      "additive_empirical_evar": 5.39325595980131,
+      "predicted_exact_K_evar": 6.907587439932632,
+      "real_minibatch_empirical_evar": 172.03058732244102
+    },
+    "Q32 (eps=0.25)": {
+      "additive_empirical_evar": 4.7047491979515845,
+      "predicted_exact_K_evar": 5.715771926295233,
+      "real_minibatch_empirical_evar": 108.67970963729601
+    },
+    "EXT (exact-K)": {
+      "additive_empirical_evar": 0.02836947898474181,
+      "predicted_exact_K_evar": 0.028436424317978402,
+      "real_minibatch_empirical_evar": 0.02840596921497571
+    }
+  },
+  {
+    "date": 234,
+    "kappa": 2.1203339752581085,
+    "Nesterov (textbook)": {
+      "additive_empirical_evar": 4.571966784382634,
+      "predicted_exact_K_evar": 4.407952858400369,
+      "real_minibatch_empirical_evar": 20.582195248621137
+    },
+    "Q32 (eps=0.25)": {
+      "additive_empirical_evar": 3.9370772953346074,
+      "predicted_exact_K_evar": 4.914993605118385,
+      "real_minibatch_empirical_evar": 21.868817503148705
+    },
+    "EXT (exact-K)": {
+      "additive_empirical_evar": 0.012717683334397016,
+      "predicted_exact_K_evar": 0.013016879207780777,
+      "real_minibatch_empirical_evar": 0.0130378644995317
+    }
+  },
+  {
+    "date": 243,
+    "kappa": 1.5610992258926717,
+    "Nesterov (textbook)": {
+      "additive_empirical_evar": 3.1011197868272786,
+      "predicted_exact_K_evar": 3.490688509609768,
+      "real_minibatch_empirical_evar": 4.523191547137804
+    },
+    "Q32 (eps=0.25)": {
+      "additive_empirical_evar": 3.360575162001606,
+      "predicted_exact_K_evar": 3.836250271173598,
+      "real_minibatch_empirical_evar": 5.011416495696592
+    },
+    "EXT (exact-K)": {
+      "additive_empirical_evar": 0.01585981154085663,
+      "predicted_exact_K_evar": 0.015733567172944714,
+      "real_minibatch_empirical_evar": 0.01517870149623331
+    }
+  },
+  {
+    "date": 251,
+    "kappa": 1.9595897371742212,
+    "Nesterov (textbook)": {
+      "additive_empirical_evar": 4.3660340963832,
+      "predicted_exact_K_evar": 4.807985294434527,
+      "real_minibatch_empirical_evar": 8.933799964424288
+    },
+    "Q32 (eps=0.25)": {
+      "additive_empirical_evar": 4.312383772830569,
+      "predicted_exact_K_evar": 5.365752361104755,
+      "real_minibatch_empirical_evar": 9.74153453454632
+    },
+    "EXT (exact-K)": {
+      "additive_empirical_evar": 0.017063934084053767,
+      "predicted_exact_K_evar": 0.017781922485354325,
+      "real_minibatch_empirical_evar": 0.0168266640996852
+    }
+  },
+  {
+    "date": 259,
+    "kappa": 2.2726377905062307,
+    "Nesterov (textbook)": {
+      "additive_empirical_evar": 4.151317757782379,
+      "predicted_exact_K_evar": 5.066490842008747,
+      "real_minibatch_empirical_evar": 7.9829128418367485
+    },
+    "Q32 (eps=0.25)": {
+      "additive_empirical_evar": 4.965005031612819,
+      "predicted_exact_K_evar": 5.664875253842359,
+      "real_minibatch_empirical_evar": 9.68055004280596
+    },
+    "EXT (exact-K)": {
+      "additive_empirical_evar": 0.023667717694084076,
+      "predicted_exact_K_evar": 0.026094783159498904,
+      "real_minibatch_empirical_evar": 0.02533986529341086
+    }
+  },
+  {
+    "date": 268,
+    "kappa": 2.227154600066867,
+    "Nesterov (textbook)": {
+      "additive_empirical_evar": 4.612322544705714,
+      "predicted_exact_K_evar": 5.377563582517882,
+      "real_minibatch_empirical_evar": 14.574694512942067
+    },
+    "Q32 (eps=0.25)": {
+      "additive_empirical_evar": 7.286784510701128,
+      "predicted_exact_K_evar": 5.991907596702478,
+      "real_minibatch_empirical_evar": 16.95944544565141
+    },
+    "EXT (exact-K)": {
+      "additive_empirical_evar": 0.024099203755973447,
+      "predicted_exact_K_evar": 0.02658693895141783,
+      "real_minibatch_empirical_evar": 0.02433978452046758
+    }
+  },
+  {
+    "date": 276,
+    "kappa": 2.005219476334188,
+    "Nesterov (textbook)": {
+      "additive_empirical_evar": 3.567829383279515,
+      "predicted_exact_K_evar": 4.40508928767622,
+      "real_minibatch_empirical_evar": 12.564666266005228
+    },
+    "Q32 (eps=0.25)": {
+      "additive_empirical_evar": 4.679352180081572,
+      "predicted_exact_K_evar": 4.920085244803398,
+      "real_minibatch_empirical_evar": 13.18505176555662
+    },
+    "EXT (exact-K)": {
+      "additive_empirical_evar": 0.019095527543549266,
+      "predicted_exact_K_evar": 0.018839254769027765,
+      "real_minibatch_empirical_evar": 0.017744013459395136
+    }
+  },
+  {
+    "date": 285,
+    "kappa": 1.8088390012071942,
+    "Nesterov (textbook)": {
+      "additive_empirical_evar": 3.4328012865732833,
+      "predicted_exact_K_evar": 3.95141362964933,
+      "real_minibatch_empirical_evar": 75.07631597995106
+    },
+    "Q32 (eps=0.25)": {
+      "additive_empirical_evar": 4.353710675418983,
+      "predicted_exact_K_evar": 4.4083419320571915,
+      "real_minibatch_empirical_evar": 117.46504344976378
+    },
+    "EXT (exact-K)": {
+      "additive_empirical_evar": 0.009306782893266256,
+      "predicted_exact_K_evar": 0.009325359495029287,
+      "real_minibatch_empirical_evar": 0.00932633814447752
+    }
+  },
+  {
+    "date": 293,
+    "kappa": 1.7654346051228125,
+    "Nesterov (textbook)": {
+      "additive_empirical_evar": 3.343114837986096,
+      "predicted_exact_K_evar": 3.626323242209161,
+      "real_minibatch_empirical_evar": 18.143746782564502
+    },
+    "Q32 (eps=0.25)": {
+      "additive_empirical_evar": 3.775549412482236,
+      "predicted_exact_K_evar": 4.027400226255134,
+      "real_minibatch_empirical_evar": 13.379162899309216
+    },
+    "EXT (exact-K)": {
+      "additive_empirical_evar": 0.009491591508058499,
+      "predicted_exact_K_evar": 0.00963322717598028,
+      "real_minibatch_empirical_evar": 0.009481975904684232
+    }
+  },
+  {
+    "date": 301,
+    "kappa": 2.3952242897019382,
+    "Nesterov (textbook)": {
+      "additive_empirical_evar": 4.593712912147481,
+      "predicted_exact_K_evar": 4.622564265993457,
+      "real_minibatch_empirical_evar": 15.767021044251855
+    },
+    "Q32 (eps=0.25)": {
+      "additive_empirical_evar": 5.3522052357384515,
+      "predicted_exact_K_evar": 5.132634595961227,
+      "real_minibatch_empirical_evar": 16.509896362137056
+    },
+    "EXT (exact-K)": {
+      "additive_empirical_evar": 0.015560729391853103,
+      "predicted_exact_K_evar": 0.01594301303515337,
+      "real_minibatch_empirical_evar": 0.01590044915416568
+    }
+  },
+  {
+    "date": 310,
+    "kappa": 3.7631347327806908,
+    "Nesterov (textbook)": {
+      "additive_empirical_evar": 2.5624729869573954,
+      "predicted_exact_K_evar": 3.341138988767113,
+      "real_minibatch_empirical_evar": 325.67626708454475
+    },
+    "Q32 (eps=0.25)": {
+      "additive_empirical_evar": 3.243555917780759,
+      "predicted_exact_K_evar": 3.459999351126228,
+      "real_minibatch_empirical_evar": 253.83984826457157
+    },
+    "EXT (exact-K)": {
+      "additive_empirical_evar": 0.01982140776717138,
+      "predicted_exact_K_evar": 0.019718997609252917,
+      "real_minibatch_empirical_evar": 0.018951402348389497
+    }
+  },
+  {
+    "date": 318,
+    "kappa": 2.764056915895447,
+    "Nesterov (textbook)": {
+      "additive_empirical_evar": 4.363870056807734,
+      "predicted_exact_K_evar": 5.342849261938468,
+      "real_minibatch_empirical_evar": 19.489351243218714
+    },
+    "Q32 (eps=0.25)": {
+      "additive_empirical_evar": 5.328822885307403,
+      "predicted_exact_K_evar": 5.854338847762372,
+      "real_minibatch_empirical_evar": 21.06807735023903
+    },
+    "EXT (exact-K)": {
+      "additive_empirical_evar": 0.018794294615440164,
+      "predicted_exact_K_evar": 0.019721880922830722,
+      "real_minibatch_empirical_evar": 0.020171456161826737
+    }
+  },
+  {
+    "date": 327,
+    "kappa": 2.2726960418774214,
+    "Nesterov (textbook)": {
+      "additive_empirical_evar": 3.6898531511898285,
+      "predicted_exact_K_evar": 4.681524813459215,
+      "real_minibatch_empirical_evar": 20.020832169860114
+    },
+    "Q32 (eps=0.25)": {
+      "additive_empirical_evar": 4.518829811128429,
+      "predicted_exact_K_evar": 5.242865398822247,
+      "real_minibatch_empirical_evar": 36.568429563824445
+    },
+    "EXT (exact-K)": {
+      "additive_empirical_evar": 0.005780043317331344,
+      "predicted_exact_K_evar": 0.005783997120060624,
+      "real_minibatch_empirical_evar": 0.005784663751164176
+    }
+  }
+]
