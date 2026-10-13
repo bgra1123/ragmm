@@ -440,3 +440,67 @@ Nesterov (textbook) as the default reference, average-tuned, worst-case-tuned
 > **Correction recorded before the main run:** the search space defined above
 > has 18 × (1 + 6 × 2) × 2 = **468** configurations, not 432 (arithmetic error
 > in the count; the definition is unchanged).
+
+---
+
+## 13. Experiment P5: the paper's quadratic formulation on the quadratic portfolio problem (written before running)
+
+**Why this experiment exists (a correction).** P1–P3 tuned RA-GMM with problem (51), the paper's
+*strongly-convex* recipe (Theorem 3), whose bound is loose (§ bound diagnostic: 4–5× above what a tuned solver
+achieves). The R1 objective is an exact quadratic in the weights, for which the paper has a separate, tighter
+formulation (Section 3): closed-form entropic risk (Prop. 2), exact EV@R as a one-dimensional convex minimization
+(eq. 12), a closed-form bound (Theorem 1, eq. 29) and the parameter-selection problem (32). P1–P3 did not test it.
+It is implemented in `risk_averse_tuning/quadratic.py` and checked against the authors' code
+(`paper_experiments/audit_reference_code.py`, Part E).
+
+**Setting.** P1 (unconstrained R1, θ = 10, c = λ = 1, K = 200, batch 16, 10 bps, 328 dates, 200 evaluation seeds
+0–199, same minibatch sequences for every method, tuning data = first 24 dates, 20 tuning seeds, as in P1). The
+unconstrained problem is used because the theory is for unconstrained quadratics. Long-only is not repeated here.
+
+**Methods.** All stochastic GMM from the drifted holdings, one parameter set per date from that date's reduced
+Hessian `H_z` (eigenvalues λ_i, d = 9).
+
+| Name | Parameters |
+|---|---|
+| SGD, Nesterov (textbook) | α = 1/L; β = γ = (√κ−1)/(√κ+1) (P1) |
+| SGD / Nesterov / SGD + tail averaging (tuned for mean) | as P1 |
+| RA-GMM (51), ε = 0.25 | as P1 (strongly-convex recipe) |
+| **Q32-grid, ε = 1** | paper's problem (32) on the paper's grid (α ≤ 1/L, 50³ points), Theorem 1 bound, ζ = 0.05 |
+| **Q32, ε = 0.25** and **ε = 0.05** | (32) with α ≤ 2/L and 3 zoom rounds (the paper's α ≤ 1/L cap makes ε < 1 infeasible when κ < 12; heavy-ball optimum has α > 1/L) |
+| **Q32-exact, ε = 0.25** | (32) with the exact stationary EV@R (eq. 12) as the objective instead of the bound |
+| **EXT (exact-K)** | extension beyond the paper: minimize the exact EV@R of `f(x_K) − f*` at K = 200 with noise covariance Σ and start e₀, over a grid of 24 α × 8 β × (γ ∈ {0, β}) (`select_parameters`) |
+
+Q32 methods use no data, no tuning dates and no noise level: the argmin of (32) does not depend on σ.
+EXT uses, per date: K; Σ = `Nᵀ Cov_t[g_t(w*)] N / batch`, the covariance of the per-day gradient at the reference
+solution `w*` (so it is *estimated from the same 252 days*, isotropy not assumed); and e₀ = −z* from the **reference
+(ideal) path's** holdings at that date. e₀ is information a deployed stochastic solver would not have; EXT is
+therefore an upper bound on what exact-K selection can deliver, not a deployable method. It is included to
+separate "formulation is wrong" from "formulation ignores the horizon and the noise".
+
+**Known departures from the paper's model, stated in advance.** (i) The minibatch gradient noise here is not
+`N(0, σ²I)`: it has a non-identity covariance and a part that scales with `w` (multiplicative). (ii) The paper's
+quantities are stationary; K = 200 steps from a displaced start is finite horizon. (iii) Sampling is with
+replacement from 252 days, so noise is not Gaussian. The experiment tests how much of the theory survives these.
+
+**Metrics.** Out-of-sample dates only (24–327) for all comparisons: mean, 95th percentile and CVaR₅% of
+suboptimality `f(w_K) − f*` and of phantom turnover `‖w_K − w*‖₁`, pooled over (seed, date); whole-backtest
+terminal wealth (5/50/95th percentiles, fan width), tracking error to the exact path, ruin rate, max drawdown.
+Paired bootstrap over seeds (10 000 resamples) for differences quoted in hypotheses.
+
+**Calibration check (separate).** At 40 evenly spaced dates, from the reference path's holdings, 2 000 fresh seeds,
+for Nesterov (textbook), Q32 (ε = 0.25) and EXT: compare the predicted EV@R (EXT: the exact finite-horizon value;
+Q32: Theorem 1 bound and the exact stationary value) with the empirical EV@R of `f(x_K) − f*` computed from the same
+formula on the 2 000 samples.
+
+**Hypotheses.**
+- **H1:** Q32 (ε = 0.25) has lower mean *and* 95th-percentile suboptimality and phantom turnover than textbook
+  Nesterov and textbook SGD (zero tuning versus zero tuning).
+- **H2:** Q32 (ε = 0.25) beats RA-GMM (51, ε = 0.25) on the same two metrics.
+- **H3 (open):** Q32 vs the tuned-for-mean baselines and tail averaging. Expectation: Q32 is worse on the mean
+  (the stationary criterion ignores K and the noise level), possibly close at the 95th percentile.
+- **H4:** EXT has lower 95th-percentile and CVaR₅% suboptimality than Q32 (ε = 0.25), and a mean no worse than the
+  best tuned-for-mean baseline within 10%. If H4 fails, the finite-horizon exact objective does not rescue the
+  formulation here and the cause is the departures (i)–(iii), which the calibration check isolates.
+- **H5 (calibration):** EXT's predicted EV@R is within a factor 1.5 of the empirical EV@R at ≥ 80% of the checked
+  dates; the Theorem 1 bound is ≥ the empirical value at all of them but loose (reported as ratio).
+- Whatever happens is reported, including a null or negative result for the paper's formulation.

@@ -151,36 +151,58 @@ class QuadraticSolution(NamedTuple):
     candidates: int
 
 
-def solve_quadratic(eigs, zeta=0.05, rate_slack=0.25, grid_size=50, alpha_max=None, use_exact=False):
+def _search_box(lam, rho2_star, zeta, rate_slack, alphas, betas, gammas, use_exact):
+    A, Bm, G = np.meshgrid(alphas, betas, gammas, indexing="ij")           # alpha-major, as in the reference loop
+    rho = quad_spectral_radius(A, Bm, G, lam)
+    feasible = (rho < 1.0) & (rho ** 2 <= (1.0 + rate_slack) * rho2_star) & quad_in_stable_set(A, Bm, G, lam)
+    if not feasible.any():
+        k = int(np.argmin(np.where(np.isfinite(rho), rho, np.inf)))        # closest to feasibility: centre for zooming
+        return None, (A.ravel()[k], Bm.ravel()[k], G.ravel()[k]), 0
+    idx = np.flatnonzero(feasible.ravel())
+    a, b, g, r = A.ravel()[idx], Bm.ravel()[idx], G.ravel()[idx], rho.ravel()[idx]
+    obj = quad_evar_exact(a, b, g, lam, zeta) if use_exact else quad_evar_bound(a, b, g, lam, zeta)
+    obj = np.where(np.isfinite(obj), obj, np.inf)
+    j = int(np.argmin(obj))
+    if not np.isfinite(obj[j]):
+        return None, (a[j], b[j], g[j]), 0
+    return (float(a[j]), float(b[j]), float(g[j]), float(obj[j]), float(r[j])), (a[j], b[j], g[j]), len(idx)
+
+
+def solve_quadratic(eigs, zeta=0.05, rate_slack=0.25, grid_size=50, alpha_max=None, use_exact=False, zoom=0):
     """
     The paper's problem (32) by grid search, as in the authors' reference code: ``alpha`` in ``(0, 1/L]`` and
     ``beta, gamma`` in ``[0, 1]`` on ``grid_size`` points each, keep ``rho(A_Q) < 1`` and
     ``rho^2 <= (1 + rate_slack) rho_{q,*}^2``, minimize the Theorem 1 bound. ``use_exact=True`` minimizes the exact
     stationary EV@R instead (the paper computes it for illustration only).
+
+    ``zoom > 0`` (not in the paper) repeats the search ``zoom`` times on a box of +-2 grid cells around the incumbent
+    (around the point of smallest rate if the grid has no feasible point), which matters when the rate constraint is
+    tight (``rho_{q,*}`` is the optimum of AGD, so a coarse grid can miss the thin feasible set).
     """
     lam = np.asarray(eigs, float)
     L, mu = float(lam.max()), float(lam.min())
     if not L > mu > 0:
         raise ValueError(f"need L > mu > 0, got L={L}, mu={mu}")
-    alphas = np.linspace(0.0, (alpha_max or 1.0 / L), grid_size)[1:]
-    betas = np.linspace(0.0, 1.0, grid_size)
-    A, Bm, G = np.meshgrid(alphas, betas, betas, indexing="ij")           # alpha-major, as in the reference loop
-    rho = quad_spectral_radius(A, Bm, G, lam)
     rho2_star = rho_star_quadratic(L, mu) ** 2
-    feasible = (rho < 1.0) & (rho ** 2 <= (1.0 + rate_slack) * rho2_star)
-    feasible &= quad_in_stable_set(A, Bm, G, lam)
-    if not feasible.any():
-        raise ValueError("no feasible parameters; increase rate_slack or grid_size")
-    idx = np.flatnonzero(feasible.ravel())
-    a, b, g = A.ravel()[idx], Bm.ravel()[idx], G.ravel()[idx]
-    obj = (quad_evar_exact(a, b, g, lam, zeta) if use_exact else quad_evar_bound(a, b, g, lam, zeta))
-    obj = np.where(np.isfinite(obj), obj, np.inf)
-    j = int(np.argmin(obj))
-    if not np.isfinite(obj[j]):
-        raise ValueError("no feasible parameters with a finite objective")
-    return QuadraticSolution(float(a[j]), float(b[j]), float(g[j]), float(obj[j]), float(rho.ravel()[idx][j]),
-                             float(rho.ravel()[idx][j] ** 2 / rho2_star), int(len(idx)))
-
+    amax = alpha_max or 1.0 / L
+    alphas = np.linspace(0.0, amax, grid_size)[1:]
+    betas = np.linspace(0.0, 1.0, grid_size)
+    best, centre, count = _search_box(lam, rho2_star, zeta, rate_slack, alphas, betas, betas, use_exact)
+    steps = np.array([alphas[1] - alphas[0], betas[1] - betas[0], betas[1] - betas[0]])
+    lo_hi = [(1e-12, amax), (0.0, 1.0), (0.0, 1.0)]
+    for _ in range(zoom):
+        grids = []
+        for c, h, (lo, hi) in zip(centre, steps, lo_hi):
+            grids.append(np.linspace(max(lo, c - 2 * h), min(hi, c + 2 * h), grid_size))
+        steps = np.array([g[1] - g[0] for g in grids])
+        cand, centre, n = _search_box(lam, rho2_star, zeta, rate_slack, *grids, use_exact)
+        if cand is not None and (best is None or cand[3] <= best[3]):
+            best = cand
+        count = max(count, n)
+    if best is None:
+        raise ValueError("no feasible parameters; increase rate_slack, grid_size or zoom")
+    a, b, g, obj, rho = best
+    return QuadraticSolution(a, b, g, obj, rho, rho ** 2 / rho2_star, int(count))
 
 
 # ---------------------------------------------------------------------- #
