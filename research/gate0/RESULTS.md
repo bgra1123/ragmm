@@ -35,7 +35,7 @@ non-zero (1–3% of people; e.g. ~40 of 2,000 Adult rows between two retrains) w
 
 ## Secondary results
 
-* **Accuracy cost of instability.** With α = 1/L the retrains' mean AUC is 0.03–0.18 below the exact model's (worst 5%:
+* **Accuracy cost of instability.** With α = 1/L the retrains' mean AUC is up to 0.18 below the exact model's (0.002 for SGD on Heart; worst 5%:
   up to 0.36 below, Bank). With lr = 0.01 or tuned averaging the AUC matches the exact model within 0.01. So in this
   setting stability and accuracy come together; there is no trade-off to sell.
 * **Gate 1 preview (not a gate here).** Tuned tail averaging cut flips by ≥ 85% relative to SGD (α = 1/L) on every
