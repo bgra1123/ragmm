@@ -283,3 +283,32 @@ def test_ra_agd_is_the_s0_restriction_of_problem_51():
 def test_unknown_method_is_rejected():
     with pytest.raises(ValueError, match="method"):
         bounds().solve(1.0, 0.1, 5, method="gd")
+
+
+def test_solve_fixed_alpha_is_feasible_and_minimizes_the_bound_on_its_curve():
+    import math
+    L, mu, d = 1.0, 0.01, 55
+    b = RAGMMBounds(zeta=0.05)
+    for c in (1.0, 0.3, 0.1, 0.03):
+        sol = b.solve_fixed_alpha(c / L, L, mu, d)
+        assert sol.alpha == pytest.approx(c / L)
+        assert sol.beta == pytest.approx(b.parameters(sol.vartheta, sol.psi, L, mu, alpha=sol.alpha)[1])
+        assert sol.gamma == pytest.approx(sol.psi * sol.beta)
+        assert math.isfinite(sol.evar_bound) and sol.rate < 1.0
+        if sol.psi == 1.0:
+            assert sol.region == "S_0" and sol.beta == pytest.approx((1 - math.sqrt(sol.alpha * mu)) / (1 + math.sqrt(sol.alpha * mu)))
+        else:
+            assert b.in_stable_set(sol.vartheta, sol.psi, L, mu)
+            assert sol.vartheta == pytest.approx(1 - sol.alpha * L * (1 - sol.psi))
+        for psi in (0.0, 0.25, 0.5, 0.75, 0.9):          # no feasible psi on the curve beats it
+            vt = b.vartheta_of(sol.alpha, psi, L)
+            if b.in_stable_set(vt, psi, L, mu):
+                assert b.evar_bound_vp(vt, psi, L, mu, alpha=sol.alpha, d=d) >= sol.evar_bound - 1e-9
+
+
+def test_solve_fixed_alpha_validates_inputs():
+    b = RAGMMBounds()
+    with pytest.raises(ValueError):
+        b.solve_fixed_alpha(-0.1, 1.0, 0.1, 5)
+    with pytest.raises(ValueError):
+        b.solve_fixed_alpha(0.1, 0.1, 1.0, 5)
