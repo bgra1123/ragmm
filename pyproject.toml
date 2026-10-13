@@ -4,18 +4,23 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "risk-averse-tuning"
-version = "0.2.0"
-description = "Risk-averse hyperparameter selection for momentum optimizers (RA-GMM, Can et al. 2025)"
+version = "0.3.0"
+description = "Risk-averse training (RA-GMM, Can & Gurbuzbalaban 2025) and retraining-tail reports for tabular models"
 requires-python = ">=3.9"
 dependencies = [
-    "torch>=2.0.0",
+    "numpy>=1.24",
+    "pandas>=1.5",
 ]
 
 [project.optional-dependencies]
+torch = ["torch>=2.0.0"]
 dev = [
     "pytest>=7.0",
-    "numpy>=1.24",
+    "torch>=2.0.0",
 ]
+
+[project.scripts]
+ragmm = "risk_averse_tuning.cli:main"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

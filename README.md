@@ -7,6 +7,21 @@ PyTorch implementation of the **RA-GMM** (Risk-Averse Generalized Momentum Metho
 > *Optimization Methods and Software*, 40(6), 1535–1583, 2025
 > https://doi.org/10.1080/10556788.2025.2549356
 
+## Quick start: your own table
+
+Version 0.3.0 adds a NumPy/pandas API for tabular yes/no decisions (PyTorch is only needed for the optimizers below):
+
+```bash
+pip install .
+ragmm applications.csv --target repaid --positive yes --drop applicant_id --report tail_report.md
+```
+
+This trains an L2 logistic regression with the paper's RA-GMM settings (`--method sgd` or `careful` for the two
+baselines) and, with `--report`, retrains each method 200 times on a held-out split and reports how many decisions
+change between training runs, which rows are affected, and which rows are at risk (found from one fit). In Python:
+`RiskAverseClassifier`, `TabularEncoder`, `tail_report`. The story and evidence behind it:
+[`research/report/REPORT.md`](research/report/REPORT.md).
+
 ## Overview
 
 The Generalized Momentum Method (GMM) covers gradient descent (GD), Nesterov's accelerated gradient (AGD) and the heavy-ball (HB) method through three parameters: step size $\alpha$, momentum $\beta$ and lookahead $\gamma$.

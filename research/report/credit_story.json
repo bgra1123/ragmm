@@ -1,0 +1,337 @@
+{
+  "n_train": 700,
+  "n_test": 300,
+  "L": 0.9888127781381304,
+  "kappa": 98.88127781381304,
+  "exact_auc": 0.761957671957672,
+  "exact_approval_rate": 0.7866666666666666,
+  "params": {
+    "SGD (textbook)": {
+      "alpha": 1.011313791760392,
+      "beta": 0.0,
+      "gamma": 0.0
+    },
+    "RA-GMM": {
+      "alpha": 0.010011886330329817,
+      "beta": 0.9800879884484675,
+      "gamma": 0.0
+    },
+    "SGD (same average as RA-GMM)": {
+      "alpha": 0.4798335508361663,
+      "beta": 0.0,
+      "gamma": 0.0
+    },
+    "SGD (careful: tuned + averaging)": {
+      "alpha": 0.026500558089813882,
+      "beta": 0.0,
+      "gamma": 0.0,
+      "tail_average": 1.0
+    }
+  },
+  "methods": {
+    "SGD (textbook)": {
+      "objective_mean": 0.24718803049201585,
+      "objective_cvar5": 0.37385087904868974,
+      "accuracy_tail_runs": 0.6788666666666667,
+      "accuracy_other_runs": 0.6909228070175439,
+      "by_threshold": {
+        "0.500": {
+          "changed_mean": 55.162,
+          "changed_worst5": 78.8,
+          "changed_in_tail_runs": 67.18,
+          "changed_in_other_runs": 54.52947368421053,
+          "approval_rate_tail": 0.729,
+          "approval_rate_other": 0.7392315789473685,
+          "coin_flip_applicants": 175,
+          "ever_changed": 284
+        },
+        "0.833": {
+          "changed_mean": 72.51,
+          "changed_worst5": 98.58,
+          "changed_in_tail_runs": 84.36,
+          "changed_in_other_runs": 71.88631578947368,
+          "approval_rate_tail": 0.5245333333333333,
+          "approval_rate_other": 0.5216631578947368,
+          "coin_flip_applicants": 221,
+          "ever_changed": 299
+        }
+      },
+      "tail_applicants": {
+        "flip_prob_top": 0.2828666666666667,
+        "flip_prob_rest": 0.17866315789473683,
+        "coin_flip_share_top": 0.8666666666666667,
+        "coin_flip_share_rest": 0.5684210526315789,
+        "leverage_ratio": 2.683093955468422
+      },
+      "leverage_prediction": {
+        "share_of_changes_in_top10pct_leverage": 0.2137340923099235,
+        "auc_leverage_for_coin_flip": 0.9456914285714285,
+        "spearman_leverage_flipprob": 0.8566817932849874
+      }
+    },
+    "RA-GMM": {
+      "objective_mean": 0.08477174631126871,
+      "objective_cvar5": 0.1398596219515581,
+      "accuracy_tail_runs": 0.6916666666666668,
+      "accuracy_other_runs": 0.7098491228070174,
+      "by_threshold": {
+        "0.500": {
+          "changed_mean": 39.97,
+          "changed_worst5": 59.26,
+          "changed_in_tail_runs": 50.14,
+          "changed_in_other_runs": 39.434736842105266,
+          "approval_rate_tail": 0.7562,
+          "approval_rate_other": 0.7677859649122807,
+          "coin_flip_applicants": 128,
+          "ever_changed": 248
+        },
+        "0.833": {
+          "changed_mean": 50.675,
+          "changed_worst5": 71.56,
+          "changed_in_tail_runs": 61.98,
+          "changed_in_other_runs": 50.08,
+          "approval_rate_tail": 0.4726,
+          "approval_rate_other": 0.46061052631578947,
+          "coin_flip_applicants": 157,
+          "ever_changed": 284
+        }
+      },
+      "tail_applicants": {
+        "flip_prob_top": 0.2660666666666666,
+        "flip_prob_rest": 0.1262421052631579,
+        "coin_flip_share_top": 0.8,
+        "coin_flip_share_rest": 0.4070175438596491,
+        "leverage_ratio": 2.711312461680924
+      },
+      "leverage_prediction": {
+        "share_of_changes_in_top10pct_leverage": 0.2581436077057794,
+        "auc_leverage_for_coin_flip": 0.9191951308139535,
+        "spearman_leverage_flipprob": 0.8570735550160242
+      }
+    },
+    "SGD (same average as RA-GMM)": {
+      "objective_mean": 0.08625369402466171,
+      "objective_cvar5": 0.13198941217086546,
+      "accuracy_tail_runs": 0.7024666666666667,
+      "accuracy_other_runs": 0.7075333333333335,
+      "by_threshold": {
+        "0.500": {
+          "changed_mean": 40.0,
+          "changed_worst5": 59.34,
+          "changed_in_tail_runs": 50.3,
+          "changed_in_other_runs": 39.45789473684211,
+          "approval_rate_tail": 0.7572666666666666,
+          "approval_rate_other": 0.7654491228070175,
+          "coin_flip_applicants": 128,
+          "ever_changed": 250
+        },
+        "0.833": {
+          "changed_mean": 50.886,
+          "changed_worst5": 70.4,
+          "changed_in_tail_runs": 60.9,
+          "changed_in_other_runs": 50.358947368421056,
+          "approval_rate_tail": 0.4644666666666667,
+          "approval_rate_other": 0.46295087719298245,
+          "coin_flip_applicants": 161,
+          "ever_changed": 285
+        }
+      },
+      "tail_applicants": {
+        "flip_prob_top": 0.2378,
+        "flip_prob_rest": 0.12783508771929827,
+        "coin_flip_share_top": 0.6666666666666666,
+        "coin_flip_share_rest": 0.41403508771929826,
+        "leverage_ratio": 1.8806249396894255
+      },
+      "leverage_prediction": {
+        "share_of_changes_in_top10pct_leverage": 0.26244999999999996,
+        "auc_leverage_for_coin_flip": 0.9190134447674418,
+        "spearman_leverage_flipprob": 0.8561280809337868
+      }
+    },
+    "SGD (careful: tuned + averaging)": {
+      "objective_mean": 0.0010070589986902487,
+      "objective_cvar5": 0.0015266200258974817,
+      "accuracy_tail_runs": 0.7322,
+      "accuracy_other_runs": 0.7335894736842106,
+      "by_threshold": {
+        "0.500": {
+          "changed_mean": 5.706,
+          "changed_worst5": 10.32,
+          "changed_in_tail_runs": 7.18,
+          "changed_in_other_runs": 5.6284210526315785,
+          "approval_rate_tail": 0.7852666666666667,
+          "approval_rate_other": 0.7868385964912281,
+          "coin_flip_applicants": 18,
+          "ever_changed": 41
+        },
+        "0.833": {
+          "changed_mean": 6.728,
+          "changed_worst5": 11.96,
+          "changed_in_tail_runs": 8.66,
+          "changed_in_other_runs": 6.626315789473685,
+          "approval_rate_tail": 0.39766666666666667,
+          "approval_rate_other": 0.4015684210526316,
+          "coin_flip_applicants": 24,
+          "ever_changed": 56
+        }
+      },
+      "tail_applicants": {
+        "flip_prob_top": 0.09093333333333334,
+        "flip_prob_rest": 0.015235087719298247,
+        "coin_flip_share_top": 0.26666666666666666,
+        "coin_flip_share_rest": 0.04912280701754386,
+        "leverage_ratio": 2.694838297031322
+      },
+      "leverage_prediction": {
+        "share_of_changes_in_top10pct_leverage": 0.5452155625657203,
+        "auc_leverage_for_coin_flip": 0.8607171000788022,
+        "spearman_leverage_flipprob": 0.4061181545506541
+      }
+    }
+  },
+  "tail_applicant_profile": [
+    {
+      "feature": "present_employment_since_unemployed",
+      "top": 0.6,
+      "rest": 0.056140350877192984
+    },
+    {
+      "feature": "job_skilled employee / official",
+      "top": 0.13333333333333333,
+      "rest": 0.6491228070175439
+    },
+    {
+      "feature": "job_unemployed/ unskilled - non-resident",
+      "top": 0.3333333333333333,
+      "rest": 0.021052631578947368
+    },
+    {
+      "feature": "property_building society savings agreement/ life insurance",
+      "top": 0.0,
+      "rest": 0.2596491228070175
+    },
+    {
+      "feature": "job_management/ self-employed/ highly qualified employee/ officer",
+      "top": 0.4666666666666667,
+      "rest": 0.11578947368421053
+    },
+    {
+      "feature": "purpose_furniture/equipment",
+      "top": 0.0,
+      "rest": 0.21052631578947367
+    },
+    {
+      "feature": "property_unknown / no property",
+      "top": 0.4,
+      "rest": 0.10175438596491228
+    },
+    {
+      "feature": "housing_for free",
+      "top": 0.3333333333333333,
+      "rest": 0.05964912280701754
+    }
+  ],
+  "tail_applicants_good_credit_share": [
+    0.4666666666666667,
+    0.712280701754386
+  ],
+  "tail_applicants_exact_prob_median": [
+    0.5301419144468147,
+    0.7867992994778817
+  ],
+  "paired_changed_decisions": {
+    "RA-GMM minus SGD (textbook)": {
+      "diff": -15.192,
+      "ci95": [
+        -16.038100000000004,
+        -14.361000000000004
+      ]
+    },
+    "RA-GMM minus SGD (same average as RA-GMM)": {
+      "diff": -0.030000000000001137,
+      "ci95": [
+        -0.6929999999999978,
+        0.6451750000000005
+      ]
+    },
+    "RA-GMM minus SGD (careful: tuned + averaging)": {
+      "diff": 34.263999999999996,
+      "ci95": [
+        33.728,
+        34.802
+      ]
+    }
+  },
+  "examples": [
+    {
+      "status_of_existing_checking_account": "0 <= ... < 200 DM",
+      "duration_in_month": 9,
+      "credit_history": "existing credits paid back duly till now",
+      "purpose": "car (new)",
+      "credit_amount": 1549,
+      "savings_account_and_bonds": "unknown/ no savings account",
+      "present_employment_since": "... < 1 year",
+      "other_debtors_or_guarantors": "none",
+      "property": "real estate",
+      "job": "unemployed/ unskilled - non-resident",
+      "housing": "own",
+      "actually_good_credit": true,
+      "exact_model_prob_good": 0.5415342001018502,
+      "exact_model_decision": "approve",
+      "approval_share": {
+        "SGD (textbook)": 0.447,
+        "RA-GMM": 0.495,
+        "SGD (same average as RA-GMM)": 0.465,
+        "SGD (careful: tuned + averaging)": 0.813
+      },
+      "leverage_rank": 9
+    },
+    {
+      "status_of_existing_checking_account": "0 <= ... < 200 DM",
+      "duration_in_month": 16,
+      "credit_history": "critical account/ other credits existing (not at this bank)",
+      "purpose": "car (new)",
+      "credit_amount": 1175,
+      "savings_account_and_bonds": "... < 100 DM",
+      "present_employment_since": "unemployed",
+      "other_debtors_or_guarantors": "none",
+      "property": "car or other, not in attribute Savings account/bonds",
+      "job": "unemployed/ unskilled - non-resident",
+      "housing": "for free",
+      "actually_good_credit": true,
+      "exact_model_prob_good": 0.5021215804620816,
+      "exact_model_decision": "approve",
+      "approval_share": {
+        "SGD (textbook)": 0.458,
+        "RA-GMM": 0.474,
+        "SGD (same average as RA-GMM)": 0.439,
+        "SGD (careful: tuned + averaging)": 0.415
+      },
+      "leverage_rank": 6
+    },
+    {
+      "status_of_existing_checking_account": "0 <= ... < 200 DM",
+      "duration_in_month": 24,
+      "credit_history": "existing credits paid back duly till now",
+      "purpose": "radio/television",
+      "credit_amount": 3758,
+      "savings_account_and_bonds": "500 <= ... < 1000 DM",
+      "present_employment_since": "unemployed",
+      "other_debtors_or_guarantors": "none",
+      "property": "unknown / no property",
+      "job": "unemployed/ unskilled - non-resident",
+      "housing": "rent",
+      "actually_good_credit": true,
+      "exact_model_prob_good": 0.5301419144468147,
+      "exact_model_decision": "approve",
+      "approval_share": {
+        "SGD (textbook)": 0.458,
+        "RA-GMM": 0.513,
+        "SGD (same average as RA-GMM)": 0.455,
+        "SGD (careful: tuned + averaging)": 0.719
+      },
+      "leverage_rank": 3
+    }
+  ]
+}
