@@ -110,7 +110,7 @@ def _proposal(name, tickers, w0, w1, total, cost_bps, r, scen, zeta, risk_before
     }
 
 
-def propose_rebalance(holdings: dict, prices: str = "demo", mode: str = "min_evar",
+def propose_rebalance(holdings: dict, prices: str = "demo", mode: str = "min_vol",
                       target_weights: dict | None = None, max_weight: float = 1.0, cost_bps: float = 10.0,
                       turnover_cap: float | None = None, trigger_band: float = 0.05,
                       band_type: str = "absolute", landing_band: float | None = None, zeta: float = 0.05,
@@ -171,7 +171,7 @@ def propose_rebalance(holdings: dict, prices: str = "demo", mode: str = "min_eva
             st = core.stability_summary(W, w_point, w0, tickers)
             out["proposals"].append(_proposal("bagged", tickers, w0, st["bagged_weights"], total, cost_bps, r, scen,
                                               zeta, before))
-            out["recommended"] = "bagged"
+            out["recommended"] = "point_estimate"
             out["stability"] = {
                 "samples": stability_samples,
                 "turnover_caused_by_data_noise_median": _r(st["turnover_noise_median"]),
@@ -184,8 +184,12 @@ def propose_rebalance(holdings: dict, prices: str = "demo", mode: str = "min_eva
                                 "between resamples: the part of any trade that is estimation noise, not signal. "
                                 "trade_direction_agreement near 1 means resamples agree on buy vs sell."),
             }
-            out["notes"].append("'bagged' averages the resampled solutions (a standard way to reduce "
-                                "estimation noise); 'point_estimate' is the single solution on the observed history.")
+            out["notes"].append(
+                "'point_estimate' is the recommended proposal. 'bagged' averages the resampled solutions; in a "
+                "1993-2018 backtest on 10 US stocks it did NOT reduce turnover or weight instability (it increased "
+                "both) and lowered tail losses only when no position cap was set. Use the stability figures "
+                "as a warning about how noisy the trades are, not as a way to remove the noise; a turnover_cap or a "
+                "higher cost_bps is the direct way to trade less.")
         if mean_weight == 0.0:
             out["notes"].append("Expected returns were ignored (mean_weight = 0): the proposal reduces risk, it is "
                                 "not a return forecast.")

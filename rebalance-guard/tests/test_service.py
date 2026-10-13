@@ -29,10 +29,16 @@ def test_risk_report_invariants():
     assert "not investment" in r["disclaimer"]
 
 
+def test_default_mode_is_min_vol_and_point_estimate_is_recommended():
+    p = service.propose_rebalance(H, stability_samples=4)
+    assert p["mode"] == "min_vol" and p["recommended"] == "point_estimate"
+    assert any("did NOT reduce turnover" in n for n in p["notes"])      # the evidence-based caveat on bagging
+
+
 def test_propose_min_evar_structure_and_invariants():
-    p = service.propose_rebalance(H, stability_samples=8)
+    p = service.propose_rebalance(H, mode="min_evar", stability_samples=8)
     json.dumps(p)
-    assert [x["name"] for x in p["proposals"]] == ["point_estimate", "bagged"] and p["recommended"] == "bagged"
+    assert [x["name"] for x in p["proposals"]] == ["point_estimate", "bagged"] and p["recommended"] == "point_estimate"
     for prop in p["proposals"]:
         assert sum(t["trade_value"] for t in prop["trades"]) == pytest.approx(0.0, abs=1.0)   # self-financing (to the cent rounding)
         assert sum(t["proposed_weight"] for t in prop["trades"]) == pytest.approx(1.0, abs=1e-3)
@@ -51,7 +57,7 @@ def test_no_stability_samples_returns_point_only():
 
 
 def test_max_weight_and_turnover_cap_flow_through():
-    p = service.propose_rebalance(H, max_weight=0.2, turnover_cap=0.05, stability_samples=4, cost_bps=0)
+    p = service.propose_rebalance(H, mode="min_evar", max_weight=0.2, turnover_cap=0.05, stability_samples=4, cost_bps=0)
     for prop in p["proposals"]:
         assert max(t["proposed_weight"] for t in prop["trades"]) <= 0.2 + 1e-3
         assert prop["turnover"] <= 0.05 + 1e-3

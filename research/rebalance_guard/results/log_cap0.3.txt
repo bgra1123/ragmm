@@ -1,0 +1,6 @@
+EW              ret 0.175 vol 0.224 sharpe 0.83 mdd 0.580 cvar5m 0.113 turn 0.032 instab 0.000  [0s]
+MinVol-point    ret 0.136 vol 0.175 sharpe 0.82 mdd 0.419 cvar5m 0.083 turn 0.029 instab 0.025  [2s]
+MinVol-bagged   ret 0.138 vol 0.174 sharpe 0.83 mdd 0.425 cvar5m 0.083 turn 0.047 instab 0.041  [77s]
+MinEVaR-point   ret 0.144 vol 0.182 sharpe 0.83 mdd 0.461 cvar5m 0.086 turn 0.051 instab 0.041  [100s]
+MinEVaR-bagged  ret 0.139 vol 0.175 sharpe 0.83 mdd 0.425 cvar5m 0.084 turn 0.073 instab 0.067  [773s]
+wrote results/backtest_cap0.3.json in 919s

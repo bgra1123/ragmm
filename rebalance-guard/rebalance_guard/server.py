@@ -24,11 +24,15 @@ How to use it:
 - Holdings are {ticker: market value}. Prices are either "demo" (a bundled 10-stock history for demonstrations) or the
   path of a CSV with a date column and one column of adjusted close prices per ticker.
 - Call risk_report first to show the portfolio's worst-case risk (EV@R, CVaR, VaR, drawdown, worst periods).
-- Call propose_rebalance with mode "min_evar" (minimize the worst-case loss), "min_vol", or "target" (return to target
-  weights with the fewest trades once a tolerance band is breached).
+- Call propose_rebalance with mode "min_vol" (default), "min_evar" (minimize the EV@R worst-case loss), or "target"
+  (return to target weights with the fewest trades once a tolerance band is breached). In a backtest min_vol matched
+  or beat min_evar on realized worst-case losses with less trading, so prefer it unless the user asks for EV@R.
+- Present the `recommended` proposal (point_estimate). The stability figures say how much of the proposed trading is
+  estimation noise; they are a warning, not a fix. Bagging did not reduce trading in the backtest.
 - When you present results: state the lookback window and level, show the trades with the estimated cost, explain
-  that min_evar/min_vol optimize risk and ignore expected returns, and mention the stability result (how much of
-  the proposed trading is estimation noise). Always include the disclaimer. Do not say the tool predicts returns.
+  that the optimizing modes reduce risk and ignore expected returns (a backtest showed lower tail losses and drawdowns
+  than equal weight but no reliable gain in return per unit of risk). Always include the disclaimer. Do not say the
+  tool predicts returns.
 """
 
 server = MCPServer(name="rebalance-guard", instructions=INSTRUCTIONS)
@@ -69,7 +73,7 @@ def risk_report(holdings: dict[str, float], prices: str = "demo", lookback_days:
 
 @server.tool(annotations=_READ_ONLY)
 @_guarded
-def propose_rebalance(holdings: dict[str, float], prices: str = "demo", mode: str = "min_evar",
+def propose_rebalance(holdings: dict[str, float], prices: str = "demo", mode: str = "min_vol",
                       target_weights: dict[str, float] | None = None, max_weight: float = 1.0,
                       cost_bps: float = 10.0, turnover_cap: float | None = None, trigger_band: float = 0.05,
                       band_type: str = "absolute", landing_band: float | None = None, zeta: float = 0.05,
@@ -78,12 +82,12 @@ def propose_rebalance(holdings: dict[str, float], prices: str = "demo", mode: st
     """
     Propose rebalancing trades (analysis only; no orders are placed).
 
-    mode "min_evar": minimize the worst-case (EV@R) monthly loss. mode "min_vol": minimize volatility.
+    mode "min_vol" (default): minimize volatility. mode "min_evar": minimize the worst-case (EV@R) monthly loss.
     mode "target": give target_weights; if any holding is outside trigger_band (absolute weight, or relative
     if band_type="relative"), trade the least needed to bring every holding within landing_band of its target.
     All modes are long-only with max_weight per holding, proportional trading cost cost_bps, and an optional
     turnover_cap (share of the portfolio traded). For the optimizing modes, stability_samples bootstrap
-    resamples show how much of the trading is estimation noise and give a 'bagged' proposal.
+    resamples show how much of the trading is estimation noise; the recommended proposal is the point estimate.
     """
     return service.propose_rebalance(holdings, prices, mode, target_weights, max_weight, cost_bps, turnover_cap,
                                      trigger_band, band_type, landing_band, zeta, lookback_days, horizon_days,

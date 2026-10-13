@@ -35,13 +35,13 @@ def test_calls_return_structured_results_and_model_readable_errors():
     async def go():
         async with mcp_client.Client(server) as c:
             ok = await c.call_tool("risk_report", {"holdings": H})
-            plan = await c.call_tool("propose_rebalance", {"holdings": H, "stability_samples": 4})
+            plan = await c.call_tool("propose_rebalance", {"holdings": H, "stability_samples": 4, "mode": "min_evar"})
             bad = await c.call_tool("risk_report", {"holdings": {"AAPL": 1, "NOPE": 1}})
             bad_arg = await c.call_tool("propose_rebalance", {"holdings": H, "zeta": 0.9})
             return ok, plan, bad, bad_arg
     ok, plan, bad, bad_arg = run(go())
     assert not ok.is_error and ok.structured_content["risk"]["annual_volatility"] > 0
-    assert not plan.is_error and plan.structured_content["recommended"] == "bagged"
+    assert not plan.is_error and plan.structured_content["recommended"] == "point_estimate"
     assert bad.is_error and "no price history for: ['NOPE']" in bad.content[0].text        # message reaches the model
     assert bad_arg.is_error and "zeta" in bad_arg.content[0].text
 
