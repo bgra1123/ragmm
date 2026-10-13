@@ -19,6 +19,8 @@ $$\min_{(\vartheta,\psi)\in S_c\cup S_0}\ \bar{E}_{1-\zeta}(\vartheta,\psi) \qua
 
 with $\alpha = \frac{1-\vartheta}{L(1-\psi)}$, $\beta = \frac{1-\sqrt{\vartheta\alpha\mu}}{1-\alpha\psi\mu}\bigl(1-\sqrt{\alpha\mu/\vartheta}\bigr)$, $\gamma = \psi\beta$ and $\rho^2 = 1-\sqrt{\vartheta\alpha\mu}$. The choice depends only on $(L, \mu, d, \zeta, \varepsilon)$ and is made once, when the wrapper is created.
 
+Two special cases are available for comparison with standard methods: `method="agd"` gives the paper's **RA-AGD** (problem (51) restricted to $\gamma = \beta$, i.e. Nesterov's method with a risk-averse step size), and `RAGMMBounds.gd_evar_bound` evaluates the paper's Theorem 4 bound for plain gradient descent ($\beta = \gamma = 0$). The paper gives no selection problem for GD in the strongly convex case, so there is no "RA-GD". `GMM` itself reduces exactly to `torch.optim.SGD` ($\beta=\gamma=0$), SGD with momentum ($\gamma=0$) and Nesterov SGD ($\gamma=\beta$, in terms of the lookahead point $y_k$); this is tested.
+
 **Assumptions of the theory:** a strongly convex, smooth objective with known constants $L > \mu > 0$, and unbiased gradients with additive noise.
 
 ## Installation
@@ -73,6 +75,7 @@ for x, y in dataloader:
 | `grid_size` | `100` | Bins per axis of the $(\vartheta,\psi)$ grid, as in the authors' reference code |
 | `phi` | `0.99` | The constant $\varphi \in (0,1)$ of Theorem 3 |
 | `dimension` | number of trainable parameters | Dimension $d$ of the optimization variable |
+| `method` | `"gmm"` | `"gmm"` solves (51); `"agd"` is RA-AGD ($\gamma = \beta$, search over $\alpha \in (0, 1/L]$) |
 
 ## Conventions worth knowing
 

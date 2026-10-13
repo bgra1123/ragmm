@@ -70,6 +70,20 @@ d = 100, lambda_reg = 1, giving L = 44.131, mu = 1; the same instance the notebo
 At eps = 0.25 the two agree in order of magnitude; at eps = 0.05, the value used in the paper's
 logistic-regression experiment, they do not.
 
+**Part D: the GMM update itself.** `risk_averse_tuning.GMM` against the reference `train()` on the paper's
+logistic-regression problem (L = 44.13, mu = 1, 300 steps, noiseless so both are deterministic):
+
+| Case | max abs difference in the last iterate | vs `torch.optim.SGD` |
+|---|---|---|
+| GD (beta = gamma = 0) | 1.4e-17 | SGD: 1.4e-17 |
+| heavy ball (gamma = 0) | 9.7e-17 | SGD with momentum: 1.4e-17 |
+| AGD (gamma = beta) | 1.1e-16 | Nesterov SGD: matches in terms of the lookahead point (`tests/test_gmm.py`) |
+| general (beta = 0.6, gamma = 0.35) | 4.2e-17 | n/a |
+
+(The reference's stored f-path is rounded to 5 decimals, so its f-differences, about 5e-6, are rounding.)
+So the optimizer step is correct in the special cases; the differences above are in the *parameter-selection*
+code, not in `train()`.
+
 ## What I did not check
 
 * whether the published Figure 6 / Table values came from this version of the code;

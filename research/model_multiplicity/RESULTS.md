@@ -202,7 +202,7 @@ With the wider grid the SGD row becomes α·L = 0.011, 12.0 flips (interior opti
 
 1. **Within the AGD family, the risk-averse step size helps a little at ε = 0.05** (−10 flips), with zero tuning runs, consistent with the paper's claim of improving on standard AGD parameters.
 2. **At ε = 0.25 the constraint is vacuous** (`1 + ε ≥ 1/ρ_*²` for ε ≥ 0.11 at this κ), so RA-AGD simply picks the smallest α on its grid (α·L = 0.001) with β = 0.994. That choice is edge-driven: a finer grid would pick a smaller α. It performs well here, but because the grid ends there, not because the criterion identified it.
-3. **Every "tuned" AGD optimum sits at the grid edge:** with β tied to α, the mean-optimal setting at K = 2000 keeps moving toward α → 0, β → 1 (effective step α/(1 − β) ≈ 0.05/L). The comparison of tuned AGD with anything is therefore limited by the grid; I report both grids.
+3. **Every "tuned" AGD optimum sits at the grid edge:** with β tied to α, the mean-optimal setting at K = 2000 keeps moving toward α → 0, β → 1 (effective step α/(1 − β) ≈ 0.5/L at the pre-registered grid's edge and ≈ 0.05/L at the wider grid's edge, against 0.011–0.016/L for tuned SGD). The comparison of tuned AGD with anything is therefore limited by the grid; I report both grids.
 4. **Momentum does not help in this noisy problem.** Tuned SGD (10–12 flips) beats every AGD-family variant (best 23.1) and every RA variant, in line with the paper's premise that momentum amplifies gradient noise.
 
 ## Post hoc: do the paper's bounds rank the methods correctly?
@@ -220,7 +220,7 @@ Not pre-registered; 7 methods, so treat as indicative. The asymptotic EV@R bound
 | AGD (textbook) | 56,182 | 2.08 | 99.8 |
 
 Spearman rank correlation between the bound and the empirical 95th percentile: **0.93**;
-with mean flips: **0.93**. The bounds are 10³–10⁴ times larger than the empirical values in
+with mean flips: **0.93**. The bounds are roughly 7,000–41,000 times larger than the empirical values in
 absolute terms (valid but conservative, as in the quadratic check in
 `paper_experiments/AUDIT.md`), yet their *ordering* of configurations is informative. This
 suggests the weakness of RA-GMM in Experiments 1 and P1–P3 is in how problem (51) constrains
