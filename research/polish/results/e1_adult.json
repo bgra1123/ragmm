@@ -1,0 +1,653 @@
+{
+  "dataset": "adult",
+  "L": 0.9647712073524273,
+  "kappa": 96.47712073524272,
+  "cells": {
+    "1.0": {
+      "alpha_over_invL": 1.0,
+      "params": {
+        "SGD": {
+          "alpha": 1.0365151782921147,
+          "beta": 0.0,
+          "gamma": 0.0
+        },
+        "Nesterov (textbook momentum)": {
+          "alpha": 1.0365151782921147,
+          "beta": 0.815196003161615,
+          "gamma": 0.815196003161615
+        },
+        "RA-GMM at alpha": {
+          "alpha": 1.0365151782921147,
+          "beta": 0.8151960031616151,
+          "gamma": 0.8151960031616151
+        },
+        "Exact-EV@R at alpha (oracle)": {
+          "alpha": 1.0365151782921147,
+          "beta": 0.0,
+          "gamma": 0.0
+        },
+        "SGD at effective step alpha/(1-beta_RA)": {
+          "alpha": 1.0365151782921147,
+          "beta": 0.0,
+          "gamma": 0.0
+        }
+      },
+      "ra_region": "S_0",
+      "ra_psi": 1.0,
+      "methods": {
+        "SGD": {
+          "S_mean": 0.4296199748648728,
+          "S_p95": 0.5412736729927721,
+          "S_cvar5": 0.6148332612082505,
+          "S_evar": 0.6818432721946239,
+          "changed_mean": 271.325,
+          "changed_worst5": 391.6,
+          "coin_flip": 900,
+          "accuracy": 0.7902775
+        },
+        "Nesterov (textbook momentum)": {
+          "S_mean": 2.3182546260776338,
+          "S_p95": 3.390647439635755,
+          "S_cvar5": 3.7972367378383334,
+          "S_evar": 4.239532680175146,
+          "changed_mean": 394.09,
+          "changed_worst5": 548.1,
+          "coin_flip": 1294,
+          "accuracy": 0.7491800000000001
+        },
+        "RA-GMM at alpha": {
+          "S_mean": 2.326101182249651,
+          "S_p95": 3.3947648819053304,
+          "S_cvar5": 3.8104829309014265,
+          "S_evar": 4.241763231807436,
+          "changed_mean": 394.95,
+          "changed_worst5": 554.2,
+          "coin_flip": 1288,
+          "accuracy": 0.74925
+        },
+        "Exact-EV@R at alpha (oracle)": {
+          "S_mean": 0.4296199748648728,
+          "S_p95": 0.5412736729927721,
+          "S_cvar5": 0.6148332612082505,
+          "S_evar": 0.6818432721946239,
+          "changed_mean": 271.325,
+          "changed_worst5": 391.6,
+          "coin_flip": 900,
+          "accuracy": 0.7902775
+        },
+        "SGD at effective step alpha/(1-beta_RA)": {
+          "S_mean": 0.4296199748648728,
+          "S_p95": 0.5412736729927721,
+          "S_cvar5": 0.6148332612082505,
+          "S_evar": 0.6818432721946239,
+          "changed_mean": 271.325,
+          "changed_worst5": 391.6,
+          "coin_flip": 900,
+          "accuracy": 0.7902775
+        }
+      },
+      "paired": {
+        "RA-GMM at alpha minus SGD": {
+          "cvar5": {
+            "diff": 3.195649669693176,
+            "ci95": [
+              2.8391838237098,
+              3.5703740317463186
+            ]
+          },
+          "mean": {
+            "diff": 1.896481207384778,
+            "ci95": [
+              1.8178445362865165,
+              1.973836194765024
+            ]
+          }
+        },
+        "RA-GMM at alpha minus Nesterov (textbook momentum)": {
+          "cvar5": {
+            "diff": 0.013246193063093159,
+            "ci95": [
+              -0.23494167741357136,
+              0.27665483718908096
+            ]
+          },
+          "mean": {
+            "diff": 0.007846556172017127,
+            "ci95": [
+              -0.032241492482376184,
+              0.049917099629384384
+            ]
+          }
+        },
+        "RA-GMM at alpha minus Exact-EV@R at alpha (oracle)": {
+          "cvar5": {
+            "diff": 3.195649669693176,
+            "ci95": [
+              2.8391838237098,
+              3.5703740317463186
+            ]
+          },
+          "mean": {
+            "diff": 1.896481207384778,
+            "ci95": [
+              1.8178445362865165,
+              1.973836194765024
+            ]
+          }
+        },
+        "RA-GMM at alpha minus SGD at effective step alpha/(1-beta_RA)": {
+          "cvar5": {
+            "diff": 3.195649669693176,
+            "ci95": [
+              2.8391838237098,
+              3.5703740317463186
+            ]
+          },
+          "mean": {
+            "diff": 1.896481207384778,
+            "ci95": [
+              1.8178445362865165,
+              1.973836194765024
+            ]
+          }
+        },
+        "Exact minus SGD": {
+          "cvar5": {
+            "diff": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ]
+          }
+        }
+      }
+    },
+    "0.3": {
+      "alpha_over_invL": 0.3,
+      "params": {
+        "SGD": {
+          "alpha": 0.3109545534876344,
+          "beta": 0.0,
+          "gamma": 0.0
+        },
+        "Nesterov (textbook momentum)": {
+          "alpha": 0.3109545534876344,
+          "beta": 0.8943640128075316,
+          "gamma": 0.8943640128075316
+        },
+        "RA-GMM at alpha": {
+          "alpha": 0.3109545534876344,
+          "beta": 0.8930510911274198,
+          "gamma": 0.5425285378599075
+        },
+        "Exact-EV@R at alpha (oracle)": {
+          "alpha": 0.3109545534876344,
+          "beta": 0.0,
+          "gamma": 0.0
+        },
+        "SGD at effective step alpha/(1-beta_RA)": {
+          "alpha": 1.0365151782921147,
+          "beta": 0.0,
+          "gamma": 0.0
+        }
+      },
+      "ra_region": "S_minus",
+      "ra_psi": 0.6075,
+      "methods": {
+        "SGD": {
+          "S_mean": 0.09990410335476507,
+          "S_p95": 0.12439561253336825,
+          "S_cvar5": 0.13492231971025884,
+          "S_evar": 0.1379768641005939,
+          "changed_mean": 161.755,
+          "changed_worst5": 236.4,
+          "coin_flip": 513,
+          "accuracy": 0.8180225
+        },
+        "Nesterov (textbook momentum)": {
+          "S_mean": 1.1390281286540875,
+          "S_p95": 1.5183652969496704,
+          "S_cvar5": 1.5970953122262164,
+          "S_evar": 1.6158322306808677,
+          "changed_mean": 347.305,
+          "changed_worst5": 478.2,
+          "coin_flip": 1142,
+          "accuracy": 0.7662224999999999
+        },
+        "RA-GMM at alpha": {
+          "S_mean": 1.1829456093424815,
+          "S_p95": 1.5696120365050754,
+          "S_cvar5": 1.648066695271055,
+          "S_evar": 1.669022832333172,
+          "changed_mean": 353.83,
+          "changed_worst5": 493.1,
+          "coin_flip": 1165,
+          "accuracy": 0.7641749999999999
+        },
+        "Exact-EV@R at alpha (oracle)": {
+          "S_mean": 0.09990410335476507,
+          "S_p95": 0.12439561253336825,
+          "S_cvar5": 0.13492231971025884,
+          "S_evar": 0.1379768641005939,
+          "changed_mean": 161.755,
+          "changed_worst5": 236.4,
+          "coin_flip": 513,
+          "accuracy": 0.8180225
+        },
+        "SGD at effective step alpha/(1-beta_RA)": {
+          "S_mean": 0.4296199748648728,
+          "S_p95": 0.5412736729927721,
+          "S_cvar5": 0.6148332612082505,
+          "S_evar": 0.6818432721946239,
+          "changed_mean": 271.325,
+          "changed_worst5": 391.6,
+          "coin_flip": 900,
+          "accuracy": 0.7902775
+        }
+      },
+      "paired": {
+        "RA-GMM at alpha minus SGD": {
+          "cvar5": {
+            "diff": 1.513144375560796,
+            "ci95": [
+              1.4512582795474294,
+              1.5490893523233977
+            ]
+          },
+          "mean": {
+            "diff": 1.0830415059877163,
+            "ci95": [
+              1.0526129341068076,
+              1.1142143501564745
+            ]
+          }
+        },
+        "RA-GMM at alpha minus Nesterov (textbook momentum)": {
+          "cvar5": {
+            "diff": 0.050971383044838614,
+            "ci95": [
+              0.014582661879372528,
+              0.08702272176120378
+            ]
+          },
+          "mean": {
+            "diff": 0.04391748068839396,
+            "ci95": [
+              0.03362020856418142,
+              0.054731788632712455
+            ]
+          }
+        },
+        "RA-GMM at alpha minus Exact-EV@R at alpha (oracle)": {
+          "cvar5": {
+            "diff": 1.513144375560796,
+            "ci95": [
+              1.4512582795474294,
+              1.5490893523233977
+            ]
+          },
+          "mean": {
+            "diff": 1.0830415059877163,
+            "ci95": [
+              1.0526129341068076,
+              1.1142143501564745
+            ]
+          }
+        },
+        "RA-GMM at alpha minus SGD at effective step alpha/(1-beta_RA)": {
+          "cvar5": {
+            "diff": 1.0332334340628044,
+            "ci95": [
+              0.9475706401771758,
+              1.096249598451063
+            ]
+          },
+          "mean": {
+            "diff": 0.7533256344776087,
+            "ci95": [
+              0.723941312400817,
+              0.7832718330181982
+            ]
+          }
+        },
+        "Exact minus SGD": {
+          "cvar5": {
+            "diff": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ]
+          }
+        }
+      }
+    },
+    "0.1": {
+      "alpha_over_invL": 0.1,
+      "params": {
+        "SGD": {
+          "alpha": 0.10365151782921149,
+          "beta": 0.0,
+          "gamma": 0.0
+        },
+        "Nesterov (textbook momentum)": {
+          "alpha": 0.10365151782921149,
+          "beta": 0.9376184593637374,
+          "gamma": 0.9376184593637374
+        },
+        "RA-GMM at alpha": {
+          "alpha": 0.10365151782921149,
+          "beta": 0.9370632563049862,
+          "gamma": 0.42636378161876876
+        },
+        "Exact-EV@R at alpha (oracle)": {
+          "alpha": 0.10365151782921149,
+          "beta": 0.0,
+          "gamma": 0.0
+        },
+        "SGD at effective step alpha/(1-beta_RA)": {
+          "alpha": 1.0365151782921147,
+          "beta": 0.0,
+          "gamma": 0.0
+        }
+      },
+      "ra_region": "S_minus",
+      "ra_psi": 0.455,
+      "methods": {
+        "SGD": {
+          "S_mean": 0.023979485059126313,
+          "S_p95": 0.030034240658193462,
+          "S_cvar5": 0.031470736603767535,
+          "S_evar": 0.03194311321044745,
+          "changed_mean": 93.54,
+          "changed_worst5": 123.2,
+          "coin_flip": 288,
+          "accuracy": 0.830885
+        },
+        "Nesterov (textbook momentum)": {
+          "S_mean": 0.6261967038213122,
+          "S_p95": 0.8084244768999836,
+          "S_cvar5": 0.8727984647537532,
+          "S_evar": 0.8922033144576682,
+          "changed_mean": 291.5,
+          "changed_worst5": 409.5,
+          "coin_flip": 971,
+          "accuracy": 0.78447
+        },
+        "RA-GMM at alpha": {
+          "S_mean": 0.6530558046302585,
+          "S_p95": 0.8444849349336643,
+          "S_cvar5": 0.8990721641265342,
+          "S_evar": 0.926805731757099,
+          "changed_mean": 300.13,
+          "changed_worst5": 420.1,
+          "coin_flip": 992,
+          "accuracy": 0.782065
+        },
+        "Exact-EV@R at alpha (oracle)": {
+          "S_mean": 0.023979485059126313,
+          "S_p95": 0.030034240658193462,
+          "S_cvar5": 0.031470736603767535,
+          "S_evar": 0.03194311321044745,
+          "changed_mean": 93.54,
+          "changed_worst5": 123.2,
+          "coin_flip": 288,
+          "accuracy": 0.830885
+        },
+        "SGD at effective step alpha/(1-beta_RA)": {
+          "S_mean": 0.4296199748648728,
+          "S_p95": 0.5412736729927721,
+          "S_cvar5": 0.6148332612082505,
+          "S_evar": 0.6818432721946239,
+          "changed_mean": 271.325,
+          "changed_worst5": 391.6,
+          "coin_flip": 900,
+          "accuracy": 0.7902775
+        }
+      },
+      "paired": {
+        "RA-GMM at alpha minus SGD": {
+          "cvar5": {
+            "diff": 0.8676014275227667,
+            "ci95": [
+              0.8269448630881012,
+              0.9032912976352894
+            ]
+          },
+          "mean": {
+            "diff": 0.6290763195711322,
+            "ci95": [
+              0.614549627502336,
+              0.6454968538644499
+            ]
+          }
+        },
+        "RA-GMM at alpha minus Nesterov (textbook momentum)": {
+          "cvar5": {
+            "diff": 0.026273699372781012,
+            "ci95": [
+              0.00019317571036425138,
+              0.05318698940175182
+            ]
+          },
+          "mean": {
+            "diff": 0.026859100808946268,
+            "ci95": [
+              0.0224538839507585,
+              0.03150678515419387
+            ]
+          }
+        },
+        "RA-GMM at alpha minus Exact-EV@R at alpha (oracle)": {
+          "cvar5": {
+            "diff": 0.8676014275227667,
+            "ci95": [
+              0.8269448630881012,
+              0.9032912976352894
+            ]
+          },
+          "mean": {
+            "diff": 0.6290763195711322,
+            "ci95": [
+              0.614549627502336,
+              0.6454968538644499
+            ]
+          }
+        },
+        "RA-GMM at alpha minus SGD at effective step alpha/(1-beta_RA)": {
+          "cvar5": {
+            "diff": 0.2842389029182836,
+            "ci95": [
+              0.21364343448146603,
+              0.3503972475946445
+            ]
+          },
+          "mean": {
+            "diff": 0.22343582976538567,
+            "ci95": [
+              0.20691261177622336,
+              0.24048462229949094
+            ]
+          }
+        },
+        "Exact minus SGD": {
+          "cvar5": {
+            "diff": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ]
+          }
+        }
+      }
+    },
+    "0.03": {
+      "alpha_over_invL": 0.03,
+      "params": {
+        "SGD": {
+          "alpha": 0.031095455348763443,
+          "beta": 0.0,
+          "gamma": 0.0
+        },
+        "Nesterov (textbook momentum)": {
+          "alpha": 0.031095455348763443,
+          "beta": 0.9653433254085486,
+          "gamma": 0.9653433254085486
+        },
+        "RA-GMM at alpha": {
+          "alpha": 0.031095455348763443,
+          "beta": 0.9651143596636212,
+          "gamma": 0.2364530181175872
+        },
+        "Exact-EV@R at alpha (oracle)": {
+          "alpha": 0.031095455348763443,
+          "beta": 0.0,
+          "gamma": 0.0
+        },
+        "SGD at effective step alpha/(1-beta_RA)": {
+          "alpha": 0.8913540083808379,
+          "beta": 0.0,
+          "gamma": 0.0
+        }
+      },
+      "ra_region": "S_minus",
+      "ra_psi": 0.245,
+      "methods": {
+        "SGD": {
+          "S_mean": 0.005535307431915444,
+          "S_p95": 0.006985137283935496,
+          "S_cvar5": 0.007540988353069799,
+          "S_evar": 0.007770160834545466,
+          "changed_mean": 53.89,
+          "changed_worst5": 72.0,
+          "coin_flip": 166,
+          "accuracy": 0.835855
+        },
+        "Nesterov (textbook momentum)": {
+          "S_mean": 0.31853461965063784,
+          "S_p95": 0.41776812584274037,
+          "S_cvar5": 0.4417410229873043,
+          "S_evar": 0.45426305457998045,
+          "changed_mean": 236.615,
+          "changed_worst5": 341.7,
+          "coin_flip": 797,
+          "accuracy": 0.8004075
+        },
+        "RA-GMM at alpha": {
+          "S_mean": 0.3355234080533448,
+          "S_p95": 0.4365136386925579,
+          "S_cvar5": 0.47156846618556053,
+          "S_evar": 0.48202505741244,
+          "changed_mean": 245.64,
+          "changed_worst5": 357.6,
+          "coin_flip": 834,
+          "accuracy": 0.7983199999999999
+        },
+        "Exact-EV@R at alpha (oracle)": {
+          "S_mean": 0.005535307431915444,
+          "S_p95": 0.006985137283935496,
+          "S_cvar5": 0.007540988353069799,
+          "S_evar": 0.007770160834545466,
+          "changed_mean": 53.89,
+          "changed_worst5": 72.0,
+          "coin_flip": 166,
+          "accuracy": 0.835855
+        },
+        "SGD at effective step alpha/(1-beta_RA)": {
+          "S_mean": 0.3602828248199803,
+          "S_p95": 0.4528548384488238,
+          "S_cvar5": 0.500929988676998,
+          "S_evar": 0.5462059828111969,
+          "changed_mean": 256.385,
+          "changed_worst5": 369.2,
+          "coin_flip": 846,
+          "accuracy": 0.7945875000000001
+        }
+      },
+      "paired": {
+        "RA-GMM at alpha minus SGD": {
+          "cvar5": {
+            "diff": 0.46402747783249065,
+            "ci95": [
+              0.43789566478176833,
+              0.4812833549392507
+            ]
+          },
+          "mean": {
+            "diff": 0.32998810062142936,
+            "ci95": [
+              0.3218276421179243,
+              0.3384079054972191
+            ]
+          }
+        },
+        "RA-GMM at alpha minus Nesterov (textbook momentum)": {
+          "cvar5": {
+            "diff": 0.02982744319825631,
+            "ci95": [
+              0.019971259613965696,
+              0.035600607817400445
+            ]
+          },
+          "mean": {
+            "diff": 0.016988788402706956,
+            "ci95": [
+              0.014977036506657373,
+              0.01905857348070145
+            ]
+          }
+        },
+        "RA-GMM at alpha minus Exact-EV@R at alpha (oracle)": {
+          "cvar5": {
+            "diff": 0.46402747783249065,
+            "ci95": [
+              0.43789566478176833,
+              0.4812833549392507
+            ]
+          },
+          "mean": {
+            "diff": 0.32998810062142936,
+            "ci95": [
+              0.3218276421179243,
+              0.3384079054972191
+            ]
+          }
+        },
+        "RA-GMM at alpha minus SGD at effective step alpha/(1-beta_RA)": {
+          "cvar5": {
+            "diff": -0.02936152249143753,
+            "ci95": [
+              -0.07837166737164436,
+              0.014313170506584287
+            ]
+          },
+          "mean": {
+            "diff": -0.02475941676663551,
+            "ci95": [
+              -0.034383094988727214,
+              -0.014685378077112511
+            ]
+          }
+        },
+        "Exact minus SGD": {
+          "cvar5": {
+            "diff": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ]
+          }
+        }
+      }
+    }
+  },
+  "reference_careful_sgd": {
+    "S_mean": 0.0025676774285673977,
+    "S_p95": 0.003244765036645527,
+    "S_cvar5": 0.0035322762948282516,
+    "S_evar": 0.0036377539626789935,
+    "changed_mean": 33.105,
+    "changed_worst5": 44.9,
+    "coin_flip": 101,
+    "accuracy": 0.8384225
+  }
+}

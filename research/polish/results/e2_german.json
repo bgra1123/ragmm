@@ -1,0 +1,605 @@
+{
+  "dataset": "german",
+  "stages": {
+    "SGD (textbook, 2000 steps)": {
+      "stage1": {
+        "S_mean": 0.24360524581909296,
+        "S_p95": 0.3427729810344846,
+        "S_cvar5": 0.38046240986792984,
+        "S_evar": 0.40986826681319116,
+        "changed_mean": 55.21,
+        "changed_worst5": 80.2,
+        "coin_flip": 175,
+        "accuracy": 0.6893
+      },
+      "K2": {
+        "200": {
+          "selected": {
+            "continue (SGD, 1/L)": {
+              "alpha": 1.011313791760392,
+              "beta": 0.0,
+              "gamma": 0.0
+            },
+            "decay (SGD, 0.05/L)": {
+              "alpha": 0.05056568958801961,
+              "beta": 0.0,
+              "gamma": 0.0
+            },
+            "average (SGD, 1/L, averaged)": {
+              "alpha": 1.011313791760392,
+              "beta": 0.0,
+              "gamma": 0.0
+            },
+            "RA-GMM (51)": {
+              "alpha": 0.01001188633032993,
+              "beta": 0.9800879884484673,
+              "gamma": 0.0
+            },
+            "Exact-EV@R polish": {
+              "alpha": 0.010113137917603921,
+              "beta": 0.9,
+              "gamma": 0.9
+            }
+          },
+          "methods": {
+            "none": {
+              "S_mean": 0.24360524581909296,
+              "S_p95": 0.3427729810344846,
+              "S_cvar5": 0.38046240986792984,
+              "S_evar": 0.40986826681319116,
+              "changed_mean": 55.21,
+              "changed_worst5": 80.2,
+              "coin_flip": 175,
+              "accuracy": 0.6893
+            },
+            "continue (SGD, 1/L)": {
+              "S_mean": 0.2537850885691745,
+              "S_p95": 0.3451435226280557,
+              "S_cvar5": 0.36451256908717566,
+              "S_evar": 0.3842645359332331,
+              "changed_mean": 57.205,
+              "changed_worst5": 82.3,
+              "coin_flip": 182,
+              "accuracy": 0.69035,
+              "share_seeds_improved": 0.425
+            },
+            "decay (SGD, 0.05/L)": {
+              "S_mean": 0.027053481412764088,
+              "S_p95": 0.03992847595395957,
+              "S_cvar5": 0.0453000624587389,
+              "S_evar": 0.04743491102897577,
+              "changed_mean": 19.61,
+              "changed_worst5": 30.7,
+              "coin_flip": 60,
+              "accuracy": 0.7232,
+              "share_seeds_improved": 1.0
+            },
+            "average (SGD, 1/L, averaged)": {
+              "S_mean": 0.035757235851373845,
+              "S_p95": 0.044513436885166686,
+              "S_cvar5": 0.046073778231355944,
+              "S_evar": 0.04906490757321967,
+              "changed_mean": 16.9,
+              "changed_worst5": 25.2,
+              "coin_flip": 49,
+              "accuracy": 0.7245333333333334,
+              "share_seeds_improved": 1.0
+            },
+            "RA-GMM (51)": {
+              "S_mean": 0.08434043177498511,
+              "S_p95": 0.12342559669809088,
+              "S_cvar5": 0.14007036849181534,
+              "S_evar": 0.15974015086986249,
+              "changed_mean": 39.515,
+              "changed_worst5": 57.4,
+              "coin_flip": 130,
+              "accuracy": 0.7120833333333334,
+              "share_seeds_improved": 1.0
+            },
+            "Exact-EV@R polish": {
+              "S_mean": 0.017371538382647256,
+              "S_p95": 0.025144383892851,
+              "S_cvar5": 0.02819717421584334,
+              "S_evar": 0.03157636691650745,
+              "changed_mean": 17.855,
+              "changed_worst5": 28.4,
+              "coin_flip": 59,
+              "accuracy": 0.7252166666666667,
+              "share_seeds_improved": 1.0
+            }
+          },
+          "paired": {
+            "continue (SGD, 1/L) minus none": {
+              "cvar5": {
+                "diff": -0.015949840780754232,
+                "ci95": [
+                  -0.048068237721154844,
+                  0.017258009030214815
+                ]
+              }
+            },
+            "decay (SGD, 0.05/L) minus none": {
+              "cvar5": {
+                "diff": -0.33516234740919093,
+                "ci95": [
+                  -0.36695879943347703,
+                  -0.30593073581506053
+                ]
+              }
+            },
+            "average (SGD, 1/L, averaged) minus none": {
+              "cvar5": {
+                "diff": -0.3343886316365739,
+                "ci95": [
+                  -0.366076121137741,
+                  -0.3046635997475624
+                ]
+              }
+            },
+            "RA-GMM (51) minus none": {
+              "cvar5": {
+                "diff": -0.2403920413761145,
+                "ci95": [
+                  -0.2758593550424042,
+                  -0.2065913413144628
+                ]
+              }
+            },
+            "Exact-EV@R polish minus none": {
+              "cvar5": {
+                "diff": -0.3522652356520865,
+                "ci95": [
+                  -0.38420558843494607,
+                  -0.32247122200028894
+                ]
+              }
+            }
+          }
+        },
+        "1000": {
+          "selected": {
+            "continue (SGD, 1/L)": {
+              "alpha": 1.011313791760392,
+              "beta": 0.0,
+              "gamma": 0.0
+            },
+            "decay (SGD, 0.05/L)": {
+              "alpha": 0.05056568958801961,
+              "beta": 0.0,
+              "gamma": 0.0
+            },
+            "average (SGD, 1/L, averaged)": {
+              "alpha": 1.011313791760392,
+              "beta": 0.0,
+              "gamma": 0.0
+            },
+            "RA-GMM (51)": {
+              "alpha": 0.01001188633032993,
+              "beta": 0.9800879884484673,
+              "gamma": 0.0
+            },
+            "Exact-EV@R polish": {
+              "alpha": 0.030339413752811763,
+              "beta": 0.5,
+              "gamma": 0.5
+            }
+          },
+          "methods": {
+            "none": {
+              "S_mean": 0.24360524581909296,
+              "S_p95": 0.3427729810344846,
+              "S_cvar5": 0.38046240986792984,
+              "S_evar": 0.40986826681319116,
+              "changed_mean": 55.21,
+              "changed_worst5": 80.2,
+              "coin_flip": 175,
+              "accuracy": 0.6893
+            },
+            "continue (SGD, 1/L)": {
+              "S_mean": 0.24602345501655626,
+              "S_p95": 0.333675530865598,
+              "S_cvar5": 0.36440309440302754,
+              "S_evar": 0.397051601501048,
+              "changed_mean": 56.785,
+              "changed_worst5": 78.5,
+              "coin_flip": 177,
+              "accuracy": 0.6919166666666666,
+              "share_seeds_improved": 0.495
+            },
+            "decay (SGD, 0.05/L)": {
+              "S_mean": 0.0068820106176678605,
+              "S_p95": 0.010034645962013871,
+              "S_cvar5": 0.011218577982516386,
+              "S_evar": 0.012007208840527726,
+              "changed_mean": 13.32,
+              "changed_worst5": 21.7,
+              "coin_flip": 41,
+              "accuracy": 0.7282333333333334,
+              "share_seeds_improved": 1.0
+            },
+            "average (SGD, 1/L, averaged)": {
+              "S_mean": 0.023423960155482888,
+              "S_p95": 0.026830533883679626,
+              "S_cvar5": 0.028239315259477666,
+              "S_evar": 0.029286498889188814,
+              "changed_mean": 9.345,
+              "changed_worst5": 15.3,
+              "coin_flip": 22,
+              "accuracy": 0.7276833333333333,
+              "share_seeds_improved": 1.0
+            },
+            "RA-GMM (51)": {
+              "S_mean": 0.087221408674639,
+              "S_p95": 0.12859140884325632,
+              "S_cvar5": 0.13712068707199238,
+              "S_evar": 0.14209654082351703,
+              "changed_mean": 40.01,
+              "changed_worst5": 56.0,
+              "coin_flip": 129,
+              "accuracy": 0.7104333333333333,
+              "share_seeds_improved": 1.0
+            },
+            "Exact-EV@R polish": {
+              "S_mean": 0.008162396682439505,
+              "S_p95": 0.011685631668241592,
+              "S_cvar5": 0.013320318029361039,
+              "S_evar": 0.014523819210990045,
+              "changed_mean": 14.335,
+              "changed_worst5": 22.8,
+              "coin_flip": 45,
+              "accuracy": 0.7276833333333335,
+              "share_seeds_improved": 1.0
+            }
+          },
+          "paired": {
+            "continue (SGD, 1/L) minus none": {
+              "cvar5": {
+                "diff": -0.016059315464902302,
+                "ci95": [
+                  -0.05855618231811926,
+                  0.028646276893782567
+                ]
+              }
+            },
+            "decay (SGD, 0.05/L) minus none": {
+              "cvar5": {
+                "diff": -0.36924383188541343,
+                "ci95": [
+                  -0.40102578722643506,
+                  -0.3398619657324896
+                ]
+              }
+            },
+            "average (SGD, 1/L, averaged) minus none": {
+              "cvar5": {
+                "diff": -0.3522230946084522,
+                "ci95": [
+                  -0.3838367099498685,
+                  -0.3226521938378984
+                ]
+              }
+            },
+            "RA-GMM (51) minus none": {
+              "cvar5": {
+                "diff": -0.24334172279593747,
+                "ci95": [
+                  -0.2762038312832926,
+                  -0.21322981015408832
+                ]
+              }
+            },
+            "Exact-EV@R polish minus none": {
+              "cvar5": {
+                "diff": -0.36714209183856883,
+                "ci95": [
+                  -0.39881311734079344,
+                  -0.33769174342179936
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "ADMM (5 iterations)": {
+      "stage1": {
+        "S_mean": 0.03483762075393221,
+        "S_p95": 0.03497656322345245,
+        "S_cvar5": 0.035009551989370793,
+        "S_evar": 0.03537723190553207,
+        "changed_mean": 12.155,
+        "changed_worst5": 13.0,
+        "coin_flip": 1,
+        "accuracy": 0.72615
+      },
+      "K2": {
+        "200": {
+          "selected": {
+            "continue (SGD, 1/L)": {
+              "alpha": 1.011313791760392,
+              "beta": 0.0,
+              "gamma": 0.0
+            },
+            "decay (SGD, 0.05/L)": {
+              "alpha": 0.05056568958801961,
+              "beta": 0.0,
+              "gamma": 0.0
+            },
+            "average (SGD, 1/L, averaged)": {
+              "alpha": 1.011313791760392,
+              "beta": 0.0,
+              "gamma": 0.0
+            },
+            "RA-GMM (51)": {
+              "alpha": 0.01001188633032993,
+              "beta": 0.9800879884484673,
+              "gamma": 0.0
+            },
+            "Exact-EV@R polish": {
+              "alpha": 0.0030339413752811764,
+              "beta": 0.9,
+              "gamma": 0.9
+            }
+          },
+          "methods": {
+            "none": {
+              "S_mean": 0.03483762075393221,
+              "S_p95": 0.03497656322345245,
+              "S_cvar5": 0.035009551989370793,
+              "S_evar": 0.03537723190553207,
+              "changed_mean": 12.155,
+              "changed_worst5": 13.0,
+              "coin_flip": 1,
+              "accuracy": 0.72615
+            },
+            "continue (SGD, 1/L)": {
+              "S_mean": 0.2537843942147642,
+              "S_p95": 0.3451415381339201,
+              "S_cvar5": 0.3645088718057802,
+              "S_evar": 0.3842593277038639,
+              "changed_mean": 57.21,
+              "changed_worst5": 82.3,
+              "coin_flip": 182,
+              "accuracy": 0.6903333333333334,
+              "share_seeds_improved": 0.0
+            },
+            "decay (SGD, 0.05/L)": {
+              "S_mean": 0.00939648268523491,
+              "S_p95": 0.01243491179988513,
+              "S_cvar5": 0.013784126963198712,
+              "S_evar": 0.01426856177801698,
+              "changed_mean": 15.15,
+              "changed_worst5": 25.9,
+              "coin_flip": 47,
+              "accuracy": 0.7267,
+              "share_seeds_improved": 1.0
+            },
+            "average (SGD, 1/L, averaged)": {
+              "S_mean": 0.03172632872995121,
+              "S_p95": 0.03996111108511558,
+              "S_cvar5": 0.04160844707705632,
+              "S_evar": 0.04452360461943863,
+              "changed_mean": 17.305,
+              "changed_worst5": 26.0,
+              "coin_flip": 53,
+              "accuracy": 0.7246833333333333,
+              "share_seeds_improved": 0.755
+            },
+            "RA-GMM (51)": {
+              "S_mean": 0.07948153573912953,
+              "S_p95": 0.11546238004343053,
+              "S_cvar5": 0.12805677692306386,
+              "S_evar": 0.13869482298221475,
+              "changed_mean": 39.845,
+              "changed_worst5": 56.6,
+              "coin_flip": 134,
+              "accuracy": 0.7103166666666667,
+              "share_seeds_improved": 0.0
+            },
+            "Exact-EV@R polish": {
+              "S_mean": 0.01091999005303001,
+              "S_p95": 0.01275049123702827,
+              "S_cvar5": 0.01346549551912321,
+              "S_evar": 0.013735907182302937,
+              "changed_mean": 12.84,
+              "changed_worst5": 21.7,
+              "coin_flip": 39,
+              "accuracy": 0.7278,
+              "share_seeds_improved": 1.0
+            }
+          },
+          "paired": {
+            "continue (SGD, 1/L) minus none": {
+              "cvar5": {
+                "diff": 0.3294993198164094,
+                "ci95": [
+                  0.31285401527735424,
+                  0.3483046774094218
+                ]
+              }
+            },
+            "decay (SGD, 0.05/L) minus none": {
+              "cvar5": {
+                "diff": -0.02122542502617208,
+                "ci95": [
+                  -0.022188187677497452,
+                  -0.02051906190533072
+                ]
+              }
+            },
+            "average (SGD, 1/L, averaged) minus none": {
+              "cvar5": {
+                "diff": 0.006598895087685526,
+                "ci95": [
+                  0.005096689380087871,
+                  0.008476184420984686
+                ]
+              }
+            },
+            "RA-GMM (51) minus none": {
+              "cvar5": {
+                "diff": 0.09304722493369307,
+                "ci95": [
+                  0.08282096499507526,
+                  0.10380122886604695
+                ]
+              }
+            },
+            "Exact-EV@R polish minus none": {
+              "cvar5": {
+                "diff": -0.021544056470247583,
+                "ci95": [
+                  -0.02208458105920637,
+                  -0.021146795159437844
+                ]
+              }
+            }
+          }
+        },
+        "1000": {
+          "selected": {
+            "continue (SGD, 1/L)": {
+              "alpha": 1.011313791760392,
+              "beta": 0.0,
+              "gamma": 0.0
+            },
+            "decay (SGD, 0.05/L)": {
+              "alpha": 0.05056568958801961,
+              "beta": 0.0,
+              "gamma": 0.0
+            },
+            "average (SGD, 1/L, averaged)": {
+              "alpha": 1.011313791760392,
+              "beta": 0.0,
+              "gamma": 0.0
+            },
+            "RA-GMM (51)": {
+              "alpha": 0.01001188633032993,
+              "beta": 0.9800879884484673,
+              "gamma": 0.0
+            },
+            "Exact-EV@R polish": {
+              "alpha": 0.010113137917603921,
+              "beta": 0.0,
+              "gamma": 0.0
+            }
+          },
+          "methods": {
+            "none": {
+              "S_mean": 0.03483762075393221,
+              "S_p95": 0.03497656322345245,
+              "S_cvar5": 0.035009551989370793,
+              "S_evar": 0.03537723190553207,
+              "changed_mean": 12.155,
+              "changed_worst5": 13.0,
+              "coin_flip": 1,
+              "accuracy": 0.72615
+            },
+            "continue (SGD, 1/L)": {
+              "S_mean": 0.24602345501655626,
+              "S_p95": 0.333675530865598,
+              "S_cvar5": 0.36440309440302754,
+              "S_evar": 0.39705160150104807,
+              "changed_mean": 56.785,
+              "changed_worst5": 78.5,
+              "coin_flip": 177,
+              "accuracy": 0.6919166666666666,
+              "share_seeds_improved": 0.0
+            },
+            "decay (SGD, 0.05/L)": {
+              "S_mean": 0.006799951925450751,
+              "S_p95": 0.009963117687331303,
+              "S_cvar5": 0.011152169020880703,
+              "S_evar": 0.011996507774203982,
+              "changed_mean": 13.28,
+              "changed_worst5": 22.1,
+              "coin_flip": 41,
+              "accuracy": 0.7282,
+              "share_seeds_improved": 1.0
+            },
+            "average (SGD, 1/L, averaged)": {
+              "S_mean": 0.022632533287473607,
+              "S_p95": 0.026114170475120938,
+              "S_cvar5": 0.027340234704512217,
+              "S_evar": 0.02828305962051653,
+              "changed_mean": 9.225,
+              "changed_worst5": 15.5,
+              "coin_flip": 22,
+              "accuracy": 0.7279166666666665,
+              "share_seeds_improved": 1.0
+            },
+            "RA-GMM (51)": {
+              "S_mean": 0.08722128616654733,
+              "S_p95": 0.1286233143443016,
+              "S_cvar5": 0.13711218279266696,
+              "S_evar": 0.14208341568820074,
+              "changed_mean": 40.005,
+              "changed_worst5": 56.1,
+              "coin_flip": 129,
+              "accuracy": 0.7103833333333333,
+              "share_seeds_improved": 0.0
+            },
+            "Exact-EV@R polish": {
+              "S_mean": 0.004341065318076465,
+              "S_p95": 0.005123515059034014,
+              "S_cvar5": 0.005353871452089853,
+              "S_evar": 0.005536925676446271,
+              "changed_mean": 6.97,
+              "changed_worst5": 11.9,
+              "coin_flip": 23,
+              "accuracy": 0.7325666666666666,
+              "share_seeds_improved": 1.0
+            }
+          },
+          "paired": {
+            "continue (SGD, 1/L) minus none": {
+              "cvar5": {
+                "diff": 0.32939354241365676,
+                "ci95": [
+                  0.3023584039112353,
+                  0.3594949774199004
+                ]
+              }
+            },
+            "decay (SGD, 0.05/L) minus none": {
+              "cvar5": {
+                "diff": -0.02385738296849009,
+                "ci95": [
+                  -0.024740103468239617,
+                  -0.02310453665867103
+                ]
+              }
+            },
+            "average (SGD, 1/L, averaged) minus none": {
+              "cvar5": {
+                "diff": -0.007669317284858576,
+                "ci95": [
+                  -0.008750139941126295,
+                  -0.0066162748093519545
+                ]
+              }
+            },
+            "RA-GMM (51) minus none": {
+              "cvar5": {
+                "diff": 0.10210263080329614,
+                "ci95": [
+                  0.09398502809715942,
+                  0.10834663389444385
+                ]
+              }
+            },
+            "Exact-EV@R polish minus none": {
+              "cvar5": {
+                "diff": -0.02965568053728094,
+                "ci95": [
+                  -0.02982590013165136,
+                  -0.029485665483473512
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
