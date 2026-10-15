@@ -83,3 +83,16 @@ With 200 more steps the same pattern holds (e.g. German SGD: 0.381 → 0.028 wit
   dataset and stage from 6 pilot seeds), not per-run values.
 * "Oracle" rows in E1 use the exact solution; the E2 adapter does not.
 * Adult and Bank E1 used 200 seeds.
+
+## Noise-distribution check (Gaussian vs real minibatch noise), `noise_check.py`
+
+48 settings (COMPAS, Heart, German; α ∈ {1, .3, .1, .03}/L; (β, γ) ∈ {(0,0), (.9,.9)}; K ∈ {200, 1000}; 10,000 simulated paths,
+start at the optimum). Ratio of the EV@R of the final loss under **real** minibatch noise to the exact **Gaussian** value
+(same covariance): range **0.93–1.35, median 1.06**.
+
+* Plain SGD with α ≤ 0.3/L: 0.93–1.11 (within ±11%); at α = 1/L: 1.05–1.22.
+* Momentum 0.9: 1.0–1.35, growing with the effective step α/(1−β): 0.96–1.08 at α = 0.03/L, 1.19–1.35 at α = 1/L.
+* The real final loss is heavy-tailed (kurtosis 5–11, Gaussian = 3), yet its EV@R stays close because the final state is a
+  long weighted sum of many independent minibatch noises. The Gaussian formula underestimates the tail by up to 35%
+  only for large effective steps, the regime the polisher avoids. Expectation recorded in `ADAPTER_PLAN.md` §8
+  (within ±15% for the small steps the polisher selects) held. One deviation: 10,000 paths instead of 20,000.
