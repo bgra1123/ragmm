@@ -25,8 +25,8 @@ and the exact finite-horizon EV@R picks (β, γ) as an oracle at the exact solut
 * So the answer to "for a given learning rate, how do we improve the tail using RA-GMM?" is: **by not adding momentum.**
   Decisions changed per retrain at α = 0.1/L: SGD 55 / 402 / 23 / 4.8 / 271 / 113 (German, COMPAS, Pima, Heart, Adult,
   Bank), RA-GMM at α 61 / 346 / 22 / 6.2 / 300 / 160.
-* **Step size is the dominant lever**: no choice of momentum at α = 1/L reaches SGD at 0.03/L (CVaR₅% 3–10× larger at
-  1/L), and carefully tuned SGD with averaging (240 tuning runs) remains better than anything fixed-α here.
+* **Step size is the dominant lever**: no choice of momentum at α = 1/L reaches SGD at 0.03/L (German CVaR₅% 0.38 at 1/L vs 0.0065 at 0.03/L; the same order on the others),
+  and carefully tuned SGD with averaging (240 tuning runs) remains better than anything fixed-α here.
 
 Pre-registered hypotheses: **H1 false** (RA-GMM at α does not beat SGD at α, 0 of 6 at every α ≤ 0.1/L), **H2 false**
 (it is not better than textbook Nesterov at the same α), **H3 true but degenerate** (exact selection equals SGD), **H4**
@@ -50,20 +50,21 @@ CVaR₅% of f(w) − f* (decisions changed per retrain in parentheses), after K�
 With 200 more steps the same pattern holds (e.g. German SGD: 0.381 → 0.028 with the adapter).
 
 * **H6 supported:** the adapter lowers the tail for both stage-1 solvers on all four datasets (8 of 8 at both budgets), by
-  3–70× for textbook SGD (German 29×, COMPAS 52×, Pima 64×, Heart 33×) and 1.8–10× for early-stopped ADMM.
-  Decisions changed fall by 74–98% for SGD stage 1 (German 55 → 14, COMPAS 399 → 53) and by 31–78% for ADMM.
+  29–64× for textbook SGD (German 29×, COMPAS 52×, Pima 64×, Heart 33×) and 6.5–20× for early-stopped ADMM.
+  Decisions changed fall by 74–91% for SGD stage 1 (German 55 → 14, COMPAS 399 → 53) and by 25–77% for ADMM.
 * **H7 partly supported:** the adapter is below or within 10% of the best simple finisher (average or decay) in 6 of 8
   cells (COMPAS, Pima both stages; German ADMM; Heart SGD). It is 19% worse than decay for German SGD and
   about 90% worse than averaging for Heart ADMM (0.0049 vs 0.0026): **averaging or a small step is as good in
   most cells and sometimes better.** The adapter's advantage is that it chooses the step and length from the data
   and never needs a guess; it is not uniformly ahead.
 * **H8 supported:** early-stopped ADMM is not at its floor; polishing lowers its tail in 8 of 8 cells.
-* **H9 supported:** "continue" with the same large step does nothing (SGD) or makes ADMM's tail 10–30× worse
+* **H9 supported:** "continue" with the same large step does nothing (SGD) or makes ADMM's tail 1.6–16× worse
   (the large SGD step undoes ADMM's fit).
 * **The paper's problem (51) is a poor polisher** (0.03–0.14): its tiny step (≈ 0.01/L) cannot converge in 1,000 steps, so it
-  leaves most of the stage-1 error in place. Compared with the adapter it is 7–35× worse.
-* Selected parameters are mostly small steps with moderate momentum (α ≈ 0.003–0.03 of 1/L... see `selected` in the
-  JSON), chosen per stage and budget; for the longer budget on ADMM and Pima SGD it chooses plain SGD.
+  leaves most of the stage-1 error in place. Compared with the adapter it is 6–30× worse.
+* Selected parameters (1,000-step budget): steps of 0.003–0.03 of 1/L, with momentum 0.5–0.9 for German SGD, COMPAS and Heart
+  SGD/ADMM and plain SGD (β = 0) for German ADMM and Pima (`selected` in the JSON). The adapter improved the
+  objective in every one of the seeds in all 8 cells (share of seeds improved = 1.0).
 
 ## What this means
 
@@ -72,7 +73,7 @@ With 200 more steps the same pattern holds (e.g. German SGD: 0.381 → 0.028 wit
    and averaging out noise.
 2. **The adapter is a good, no-tuning finisher but does not beat plain averaging or decay by itself.** The honest product
    claim: "after your usual training, a short, data-chosen low-noise phase cuts the tail by 3-70× and changed decisions by
-   30-98%; the exact tail-risk model picks the step and length for you".
+   25-91%; the exact tail-risk model picks the step and length for you".
 3. Next: E3 (epoch-based budgets, Adam and other optimizers as stage 1; running as `research/optimizers`) and the
    noise-distribution check (`noise_check.py`).
 
