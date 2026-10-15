@@ -45,3 +45,7 @@ disagreement estimates use fewer units; stated in the results).
 
 Reported whichever way it falls. If H1 fails, the answer to the user is that instability is not the problem for trees at
 this scale; if it holds and H2 holds, the integration is "seed-averaging plus the tail report", not a gradient-based step.
+
+> **Deviation recorded before any result was seen:** the first launch was stopped because the last-layer refit used
+> Newton's method on ~4,000 leaf indicators per model (hours at 200 seeds). The refit now uses L-BFGS (gradient norm
+> < 1e-7) on the same strongly convex objective; nothing else changed.

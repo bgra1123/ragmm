@@ -34,7 +34,18 @@ def fit_xgb(X, y01, seed, **kw):
 
 
 def newton_logistic(F, y, lam):
-    return le.solve_exact(F, y, lam)[0]
+    """Minimizer of the L2 logistic objective on leaf indicators (thousands of columns: L-BFGS, gradient norm < 1e-7)."""
+    from scipy.optimize import minimize
+    n = len(y)
+
+    def fg(w):
+        m = y * (F @ w)
+        f = np.logaddexp(0.0, -m).mean() + 0.5 * lam * w @ w
+        g = -(F.T @ (y * le.sigmoid(-m))) / n + lam * w
+        return f, g
+
+    r = minimize(fg, np.zeros(F.shape[1]), jac=True, method="L-BFGS-B", options=dict(maxiter=2000, gtol=1e-7, ftol=1e-15))
+    return r.x
 
 
 def leaf_features(models_leaves, enc=None):
