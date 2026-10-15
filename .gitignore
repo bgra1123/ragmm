@@ -5,3 +5,4 @@ __pycache__/
 .pytest_cache/
 research/polish/results_e*.log
 research/polish/noise_check.log
+research/polish/results_e1b.log

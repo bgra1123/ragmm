@@ -65,3 +65,8 @@ Hypotheses:
 
 If H6 and H7 hold, a `polish` option is added to the package; otherwise the result is reported and the package is unchanged.
 Everything is reported whichever way it falls.
+
+> **Deviation recorded 2026-10-15.** The background runs were found dead at the start of this session day (no process
+> alive; E1 had finished german, compas, pima, heart; E2 only the heart smoke test; the noise check 33 of 48 settings).
+> They are restarted detached, with one thread each: E1 for adult and bank at **200 seeds** (planned 400, to fit the
+> remaining compute), E2 for german, compas, pima at the planned 200 seeds. The earlier E1 results (400 seeds) are kept.
