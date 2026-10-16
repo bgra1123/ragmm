@@ -132,7 +132,7 @@ def run(name):
 
 def main():
     (HERE / "results").mkdir(exist_ok=True)
-    for name in ("german", "compas", "pima", "heart"):
+    for name in (sys.argv[1:] or ["german", "compas", "pima", "heart"]):
         r = run(name)
         (HERE / "results" / f"{name}.json").write_text(json.dumps(r, indent=2))
         print(name, f"[{r['seconds']:.0f}s]", {k: (round(v['retrain_disagreement'], 4), round(v['auc_mean'], 3)) for k, v in r["configs"].items()}, flush=True)
