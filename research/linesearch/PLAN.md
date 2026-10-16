@@ -56,3 +56,8 @@ Held-out rows as in the credit report.
 
 If H1 holds, the full-batch baseline must be included in every adapter comparison and the adapter's role narrows to problems where a
 full pass over the data is too expensive; reported whichever way it falls.
+
+> **Deviation recorded before any performance result was seen.** In a first diagnostic run on Heart, the exact line search on the mean loss and
+> R1/R3 at θ = 1 sat on the cap of 2/L in every seed, i.e. the cap, not the rule, decided the step. The cap of 2/L is the stability bound for a
+> *fixed* step; a line search can legitimately take steps up to about 1/μ (the optimal step along g is ‖g‖²/gᵀHg ≤ 1/μ, μ = λ = 0.01, so up to ≈ 100/L).
+> All line-search variants therefore search α ∈ [1e-3/L, 1/μ] (80-point geometric grid, then golden section). Nothing else changed.
