@@ -1,0 +1,119 @@
+{
+  "dataset": "heart",
+  "xgboost": "3.4.1",
+  "n_train": 212,
+  "n_test": 91,
+  "configs": {
+    "default": {
+      "units": 200,
+      "retrain_disagreement": 0.015613230990115414,
+      "coin_flip_rows": 3,
+      "ever_changed_rows": 10,
+      "logloss_mean": 0.5975717340267437,
+      "logloss_p95": 0.6201840194725553,
+      "logloss_cvar5": 0.6246915100458824,
+      "auc_mean": 0.8877243902439025,
+      "auc_worst5": 0.8790731707317073,
+      "changed_vs_consensus": 0.98
+    },
+    "no subsampling": {
+      "units": 10,
+      "retrain_disagreement": 0.0,
+      "coin_flip_rows": 0,
+      "ever_changed_rows": 0,
+      "logloss_mean": 0.6006040319215582,
+      "logloss_p95": 0.6006040319215582,
+      "logloss_cvar5": 0.6006040319215582,
+      "auc_mean": 0.893658536585366,
+      "auc_worst5": 0.8936585365853659,
+      "changed_vs_consensus": 1.0,
+      "identical_predictions": true
+    },
+    "slow (lr 0.03, 1000 trees)": {
+      "units": 200,
+      "retrain_disagreement": 0.006703296703296703,
+      "coin_flip_rows": 1,
+      "ever_changed_rows": 5,
+      "logloss_mean": 0.5902746452047051,
+      "logloss_p95": 0.603606848241667,
+      "logloss_cvar5": 0.6072662721519888,
+      "auc_mean": 0.8894292682926829,
+      "auc_worst5": 0.8848292682926828,
+      "changed_vs_consensus": 0.425
+    },
+    "seed-average m=5": {
+      "units": 40,
+      "retrain_disagreement": 0.006058044519582981,
+      "coin_flip_rows": 1,
+      "ever_changed_rows": 2,
+      "logloss_mean": 0.5866413051469124,
+      "logloss_p95": 0.5955218381011865,
+      "logloss_cvar5": 0.5979015755125787,
+      "auc_mean": 0.8889756097560977,
+      "auc_worst5": 0.8853658536585366,
+      "changed_vs_consensus": 0.45
+    },
+    "seed-average m=20": {
+      "units": 10,
+      "retrain_disagreement": 0.005860805860805861,
+      "coin_flip_rows": 1,
+      "ever_changed_rows": 1,
+      "logloss_mean": 0.5847552515802218,
+      "logloss_p95": 0.5880243314174979,
+      "logloss_cvar5": 0.5884834752320715,
+      "auc_mean": 0.8889756097560977,
+      "auc_worst5": 0.8858536585365854,
+      "changed_vs_consensus": 0.4
+    },
+    "last-layer refit (leaf one-hot, L2 logistic)": {
+      "units": 200,
+      "retrain_disagreement": 0.014120603015075377,
+      "coin_flip_rows": 2,
+      "ever_changed_rows": 9,
+      "logloss_mean": 0.7431597472438781,
+      "logloss_p95": 0.7726894978473783,
+      "logloss_cvar5": 0.7820257866357173,
+      "auc_mean": 0.8833463414634147,
+      "auc_worst5": 0.8757560975609756,
+      "changed_vs_consensus": 0.885
+    },
+    "leaf refit + seed-average m=20": {
+      "units": 10,
+      "retrain_disagreement": 0.0,
+      "coin_flip_rows": 0,
+      "ever_changed_rows": 0,
+      "logloss_mean": 0.7205021157694245,
+      "logloss_p95": 0.7260685927493665,
+      "logloss_cvar5": 0.7271579471550184,
+      "auc_mean": 0.8845853658536585,
+      "auc_worst5": 0.8814634146341463,
+      "changed_vs_consensus": 0.0
+    },
+    "logistic SGD lr=0.01": {
+      "units": 200,
+      "retrain_disagreement": 0.009479264454138827,
+      "coin_flip_rows": 2,
+      "ever_changed_rows": 3,
+      "logloss_mean": 0.411719696782681,
+      "logloss_p95": 0.4164102244293861,
+      "logloss_cvar5": 0.4179660219232799,
+      "auc_mean": 0.895339024390244,
+      "auc_worst5": 0.8913170731707318,
+      "changed_vs_consensus": 6.54
+    },
+    "logistic careful SGD (tuned + averaging)": {
+      "units": 200,
+      "retrain_disagreement": 0.010366116295764536,
+      "coin_flip_rows": 2,
+      "ever_changed_rows": 4,
+      "logloss_mean": 0.45727127730433553,
+      "logloss_p95": 0.46404715666654167,
+      "logloss_cvar5": 0.46634361771520655,
+      "auc_mean": 0.8798414634146341,
+      "auc_worst5": 0.8750731707317074,
+      "changed_vs_consensus": 6.83
+    }
+  },
+  "logistic_exact_auc": 0.8780487804878049,
+  "seconds": 53.1194589138031
+}
