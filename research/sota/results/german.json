@@ -1,0 +1,307 @@
+{
+  "dataset": "german",
+  "n_train": 700,
+  "n_test": 300,
+  "configs": {
+    "XGBoost default": {
+      "units": 200,
+      "retrain_disagreement": 0.05529246231155779,
+      "coin_flip_rows": 36,
+      "auc_mean": 0.7593907407407408,
+      "changed_vs_consensus": 11.32,
+      "0.500": {
+        "wrongly_denied_rate": 0.12154761904761904,
+        "wrongly_approved_rate": 0.5822777777777778,
+        "default_among_approved": 0.22118841297931088,
+        "cost_mean": 0.9584999999999999,
+        "cost_p05": 0.9,
+        "cost_p95": 1.01
+      },
+      "0.833": {
+        "wrongly_denied_rate": 0.3185714285714286,
+        "wrongly_approved_rate": 0.32733333333333337,
+        "default_among_approved": 0.17068458438608516,
+        "cost_mean": 0.7140000000000001,
+        "cost_p05": 0.6633333333333333,
+        "cost_p95": 0.7635
+      }
+    },
+    "XGBoost seed-average m=5": {
+      "units": 40,
+      "retrain_disagreement": 0.02246153846153846,
+      "coin_flip_rows": 15,
+      "auc_mean": 0.7625066137566139,
+      "changed_vs_consensus": 4.45,
+      "0.500": {
+        "wrongly_denied_rate": 0.11880952380952381,
+        "wrongly_approved_rate": 0.5883333333333334,
+        "default_among_approved": 0.22246900430794359,
+        "cost_mean": 0.9656666666666668,
+        "cost_p05": 0.9421666666666667,
+        "cost_p95": 0.9906666666666666
+      },
+      "0.833": {
+        "wrongly_denied_rate": 0.319047619047619,
+        "wrongly_approved_rate": 0.3275,
+        "default_among_approved": 0.17088008016067796,
+        "cost_mean": 0.7145833333333333,
+        "cost_p05": 0.6898333333333333,
+        "cost_p95": 0.74
+      }
+    },
+    "XGBoost seed-average m=20": {
+      "units": 10,
+      "retrain_disagreement": 0.008,
+      "coin_flip_rows": 5,
+      "auc_mean": 0.7628518518518519,
+      "changed_vs_consensus": 1.4,
+      "0.500": {
+        "wrongly_denied_rate": 0.11523809523809524,
+        "wrongly_approved_rate": 0.5933333333333333,
+        "default_among_approved": 0.2232407439963433,
+        "cost_mean": 0.9706666666666667,
+        "cost_p05": 0.9523333333333334,
+        "cost_p95": 0.9818333333333333
+      },
+      "0.833": {
+        "wrongly_denied_rate": 0.3157142857142857,
+        "wrongly_approved_rate": 0.33666666666666667,
+        "default_among_approved": 0.17409766071121305,
+        "cost_mean": 0.726,
+        "cost_p05": 0.6953333333333334,
+        "cost_p95": 0.7488333333333332
+      }
+    },
+    "XGBoost no subsampling": {
+      "units": 5,
+      "retrain_disagreement": 0.0,
+      "coin_flip_rows": 0,
+      "auc_mean": 0.7548148148148148,
+      "changed_vs_consensus": 18.0,
+      "0.500": {
+        "wrongly_denied_rate": 0.1380952380952381,
+        "wrongly_approved_rate": 0.5777777777777777,
+        "default_among_approved": 0.22317596566523606,
+        "cost_mean": 0.9633333333333333,
+        "cost_p05": 0.9633333333333334,
+        "cost_p95": 0.9633333333333334
+      },
+      "0.833": {
+        "wrongly_denied_rate": 0.32857142857142857,
+        "wrongly_approved_rate": 0.3333333333333333,
+        "default_among_approved": 0.17543859649122806,
+        "cost_mean": 0.73,
+        "cost_p05": 0.73,
+        "cost_p95": 0.73
+      }
+    },
+    "XGBoost + exact head refit": {
+      "units": 200,
+      "retrain_disagreement": 0.06150368509212731,
+      "coin_flip_rows": 48,
+      "auc_mean": 0.7424518518518518,
+      "changed_vs_consensus": 15.905,
+      "0.500": {
+        "wrongly_denied_rate": 0.12702380952380954,
+        "wrongly_approved_rate": 0.5776666666666667,
+        "default_among_approved": 0.22089967797257962,
+        "cost_mean": 0.9554166666666667,
+        "cost_p05": 0.8998333333333334,
+        "cost_p95": 1.0136666666666667
+      },
+      "0.833": {
+        "wrongly_denied_rate": 0.28435714285714286,
+        "wrongly_approved_rate": 0.37516666666666665,
+        "default_among_approved": 0.18343338512648671,
+        "cost_mean": 0.7618,
+        "cost_p05": 0.7166666666666667,
+        "cost_p95": 0.8033333333333333
+      }
+    },
+    "MLP default": {
+      "units": 200,
+      "retrain_disagreement": 0.15060318257956448,
+      "coin_flip_rows": 102,
+      "auc_mean": 0.7147291005291007,
+      "changed_vs_consensus": 32.205,
+      "0.500": {
+        "wrongly_denied_rate": 0.17711904761904762,
+        "wrongly_approved_rate": 0.5777777777777777,
+        "default_among_approved": 0.2311998833302977,
+        "cost_mean": 0.99065,
+        "cost_p05": 0.903,
+        "cost_p95": 1.08
+      },
+      "0.833": {
+        "wrongly_denied_rate": 0.2469047619047619,
+        "wrongly_approved_rate": 0.47855555555555557,
+        "default_among_approved": 0.21394647680490833,
+        "cost_mean": 0.8906666666666666,
+        "cost_p05": 0.8031666666666667,
+        "cost_p95": 0.9771666666666665
+      }
+    },
+    "MLP seed-average m=5": {
+      "units": 40,
+      "retrain_disagreement": 0.0738974358974359,
+      "coin_flip_rows": 49,
+      "auc_mean": 0.7271044973544974,
+      "changed_vs_consensus": 15.8,
+      "0.500": {
+        "wrongly_denied_rate": 0.16023809523809524,
+        "wrongly_approved_rate": 0.5766666666666667,
+        "default_among_approved": 0.22736716594075074,
+        "cost_mean": 0.9771666666666666,
+        "cost_p05": 0.9291666666666667,
+        "cost_p95": 1.0173333333333332
+      },
+      "0.833": {
+        "wrongly_denied_rate": 0.3183333333333333,
+        "wrongly_approved_rate": 0.38277777777777783,
+        "default_among_approved": 0.19386453791124864,
+        "cost_mean": 0.797,
+        "cost_p05": 0.7428333333333333,
+        "cost_p95": 0.8703333333333333
+      }
+    },
+    "MLP seed-average m=20": {
+      "units": 10,
+      "retrain_disagreement": 0.0402962962962963,
+      "coin_flip_rows": 29,
+      "auc_mean": 0.7325238095238096,
+      "changed_vs_consensus": 8.6,
+      "0.500": {
+        "wrongly_denied_rate": 0.16095238095238093,
+        "wrongly_approved_rate": 0.5688888888888889,
+        "default_among_approved": 0.22516652654465327,
+        "cost_mean": 0.966,
+        "cost_p05": 0.9375,
+        "cost_p95": 1.0036666666666667
+      },
+      "0.833": {
+        "wrongly_denied_rate": 0.31523809523809526,
+        "wrongly_approved_rate": 0.37666666666666665,
+        "default_among_approved": 0.19074134325609876,
+        "cost_mean": 0.7856666666666666,
+        "cost_p05": 0.7581666666666667,
+        "cost_p95": 0.8194999999999999
+      }
+    },
+    "MLP + exact head refit": {
+      "units": 200,
+      "retrain_disagreement": 0.15040502512562812,
+      "coin_flip_rows": 103,
+      "auc_mean": 0.7150867724867724,
+      "changed_vs_consensus": 32.28,
+      "0.500": {
+        "wrongly_denied_rate": 0.1742142857142857,
+        "wrongly_approved_rate": 0.5798333333333333,
+        "default_among_approved": 0.23122595051928596,
+        "cost_mean": 0.9916999999999999,
+        "cost_p05": 0.9033333333333333,
+        "cost_p95": 1.0803333333333334
+      },
+      "0.833": {
+        "wrongly_denied_rate": 0.2677380952380952,
+        "wrongly_approved_rate": 0.4485,
+        "default_among_approved": 0.20777756200315756,
+        "cost_mean": 0.8601666666666666,
+        "cost_p05": 0.7731666666666667,
+        "cost_p95": 0.9501666666666666
+      }
+    },
+    "MLP + head refit + seed-average m=5": {
+      "units": 40,
+      "retrain_disagreement": 0.07437179487179486,
+      "coin_flip_rows": 49,
+      "auc_mean": 0.7282685185185185,
+      "changed_vs_consensus": 16.525,
+      "0.500": {
+        "wrongly_denied_rate": 0.15821428571428572,
+        "wrongly_approved_rate": 0.5794444444444444,
+        "default_among_approved": 0.22778553530644285,
+        "cost_mean": 0.9799166666666667,
+        "cost_p05": 0.9296666666666668,
+        "cost_p95": 1.0273333333333332
+      },
+      "0.833": {
+        "wrongly_denied_rate": 0.3282142857142857,
+        "wrongly_approved_rate": 0.3644444444444444,
+        "default_among_approved": 0.18858052534550326,
+        "cost_mean": 0.7764166666666668,
+        "cost_p05": 0.7216666666666667,
+        "cost_p95": 0.837
+      }
+    },
+    "MLP + head refit + seed-average m=20": {
+      "units": 10,
+      "retrain_disagreement": 0.03955555555555555,
+      "coin_flip_rows": 28,
+      "auc_mean": 0.7336772486772487,
+      "changed_vs_consensus": 9.0,
+      "0.500": {
+        "wrongly_denied_rate": 0.15571428571428572,
+        "wrongly_approved_rate": 0.5655555555555556,
+        "default_among_approved": 0.22305192892810183,
+        "cost_mean": 0.9573333333333333,
+        "cost_p05": 0.9345,
+        "cost_p95": 0.9966666666666667
+      },
+      "0.833": {
+        "wrongly_denied_rate": 0.32857142857142857,
+        "wrongly_approved_rate": 0.35111111111111115,
+        "default_among_approved": 0.1830239573008921,
+        "cost_mean": 0.7566666666666666,
+        "cost_p05": 0.7333333333333333,
+        "cost_p95": 0.798
+      }
+    },
+    "Logistic regression (exact)": {
+      "units": 2,
+      "retrain_disagreement": 0.0,
+      "coin_flip_rows": 0,
+      "auc_mean": 0.761957671957672,
+      "changed_vs_consensus": 0.0,
+      "0.500": {
+        "wrongly_denied_rate": 0.12857142857142856,
+        "wrongly_approved_rate": 0.5888888888888889,
+        "default_among_approved": 0.2245762711864407,
+        "cost_mean": 0.9733333333333334,
+        "cost_p05": 0.9733333333333334,
+        "cost_p95": 0.9733333333333334
+      },
+      "0.833": {
+        "wrongly_denied_rate": 0.48095238095238096,
+        "wrongly_approved_rate": 0.14444444444444443,
+        "default_among_approved": 0.10655737704918032,
+        "cost_mean": 0.5533333333333333,
+        "cost_p05": 0.5533333333333333,
+        "cost_p95": 0.5533333333333333
+      }
+    },
+    "Logistic careful SGD": {
+      "units": 200,
+      "retrain_disagreement": 0.025396147403685093,
+      "coin_flip_rows": 18,
+      "auc_mean": 0.7609415343915344,
+      "changed_vs_consensus": 5.665,
+      "0.500": {
+        "wrongly_denied_rate": 0.1285238095238095,
+        "wrongly_approved_rate": 0.5885,
+        "default_among_approved": 0.22444673223247552,
+        "cost_mean": 0.9727166666666668,
+        "cost_p05": 0.9433333333333334,
+        "cost_p95": 1.0133333333333334
+      },
+      "0.833": {
+        "wrongly_denied_rate": 0.48650000000000004,
+        "wrongly_approved_rate": 0.1393888888888889,
+        "default_among_approved": 0.10414266647817007,
+        "cost_mean": 0.5496333333333334,
+        "cost_p05": 0.5165000000000001,
+        "cost_p95": 0.58
+      }
+    }
+  },
+  "seconds": 209.5695481300354
+}
