@@ -235,7 +235,7 @@ a rerun.
    wrongly refused; with a cost-based rule, fewer defaults approved). Careful tuning removes almost all of them.
    Either way, **measure the tail** before deploying.
 
-## 9b. What a post-training polish step changes (added later)
+## 8b. What a post-training polish step changes (added later)
 
 Starting from each way of training (SGD, momentum, Adam, ADMM, RA-GMM, careful SGD), a short polish step (5 epochs of compute) moves credit outcomes toward those of the exactly trained
 model. For textbook SGD at the cost-based 83% rule: defaulters wrongly approved 28.5 → 16.4 per model, default rate among approved loans 18.2% → 12.6%, expected cost 0.751 → 0.595; at the 50% rule,
