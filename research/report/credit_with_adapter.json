@@ -1,0 +1,1935 @@
+{
+  "exact_model": {
+    "0.500": {
+      "wrongly_denied_n": 27.0,
+      "wrongly_denied_rate": 0.12857142857142856,
+      "wrongly_approved_n": 53.0,
+      "wrongly_approved_rate": 0.5888888888888889,
+      "default_among_approved": 0.2245762711864407,
+      "cost": 0.9733333333333334,
+      "changed": 0.0,
+      "coin_flip": 0,
+      "induced_errors": 0.0
+    },
+    "0.833": {
+      "wrongly_denied_n": 101.0,
+      "wrongly_denied_rate": 0.48095238095238096,
+      "wrongly_approved_n": 13.0,
+      "wrongly_approved_rate": 0.14444444444444443,
+      "default_among_approved": 0.10655737704918032,
+      "cost": 0.5533333333333333,
+      "changed": 0.0,
+      "coin_flip": 0,
+      "induced_errors": 0.0
+    }
+  },
+  "n_good": 210,
+  "n_bad": 90,
+  "seeds": 300,
+  "trainers": {
+    "SGD (textbook)": {
+      "none": {
+        "0.500": {
+          "wrongly_denied_n": 41.15,
+          "wrongly_denied_rate": 0.19595238095238093,
+          "wrongly_approved_n": 52.01,
+          "wrongly_approved_rate": 0.5778888888888889,
+          "default_among_approved": 0.23481655326770343,
+          "cost": 1.004,
+          "changed": 55.78666666666667,
+          "coin_flip": 177,
+          "induced_errors": 34.473333333333336
+        },
+        "0.833": {
+          "wrongly_denied_n": 82.79666666666667,
+          "wrongly_denied_rate": 0.39426984126984127,
+          "wrongly_approved_n": 28.526666666666667,
+          "wrongly_approved_rate": 0.31696296296296295,
+          "default_among_approved": 0.18207852069080768,
+          "cost": 0.7514333333333334,
+          "changed": 72.32333333333334,
+          "coin_flip": 220,
+          "induced_errors": 34.82333333333333
+        }
+      },
+      "polished": {
+        "5": {
+          "adapter": {
+            "0.500": {
+              "wrongly_denied_n": 29.233333333333334,
+              "wrongly_denied_rate": 0.13920634920634922,
+              "wrongly_approved_n": 53.99666666666667,
+              "wrongly_approved_rate": 0.599962962962963,
+              "default_among_approved": 0.2298517314228717,
+              "cost": 0.9973888888888888,
+              "changed": 23.23,
+              "coin_flip": 71,
+              "induced_errors": 13.23
+            },
+            "0.833": {
+              "wrongly_denied_n": 96.71333333333334,
+              "wrongly_denied_rate": 0.4605396825396826,
+              "wrongly_approved_n": 16.37,
+              "wrongly_approved_rate": 0.1818888888888889,
+              "default_among_approved": 0.12568742634505478,
+              "cost": 0.5952111111111111,
+              "changed": 30.243333333333332,
+              "coin_flip": 91,
+              "induced_errors": 14.663333333333334
+            },
+            "paired_vs_none": {
+              "cost_half": {
+                "diff": -1.9833333333333485,
+                "ci95": [
+                  -5.740583333333286,
+                  1.7403333333332818
+                ]
+              },
+              "wrongly_denied_half": {
+                "diff": -11.916666666666664,
+                "ci95": [
+                  -12.959999999999997,
+                  -10.850000000000001
+                ]
+              }
+            }
+          },
+          "GD exact line search": {
+            "0.500": {
+              "wrongly_denied_n": 27.35,
+              "wrongly_denied_rate": 0.13023809523809524,
+              "wrongly_approved_n": 53.96,
+              "wrongly_approved_rate": 0.5995555555555556,
+              "default_among_approved": 0.22804416527513613,
+              "cost": 0.9904999999999999,
+              "changed": 8.163333333333334,
+              "coin_flip": 21,
+              "induced_errors": 4.736666666666666
+            },
+            "0.833": {
+              "wrongly_denied_n": 91.66,
+              "wrongly_denied_rate": 0.43647619047619046,
+              "wrongly_approved_n": 17.21,
+              "wrongly_approved_rate": 0.19122222222222224,
+              "default_among_approved": 0.12665871868894754,
+              "cost": 0.5923666666666667,
+              "changed": 16.05,
+              "coin_flip": 28,
+              "induced_errors": 5.46
+            },
+            "paired_vs_none": {
+              "cost_half": {
+                "diff": -4.050000000000011,
+                "ci95": [
+                  -7.360083333333347,
+                  -0.7794999999999804
+                ]
+              },
+              "wrongly_denied_half": {
+                "diff": -13.799999999999997,
+                "ci95": [
+                  -14.64,
+                  -12.96
+                ]
+              }
+            }
+          },
+          "risk-averse step R1 (\u03b8=5)": {
+            "0.500": {
+              "wrongly_denied_n": 31.463333333333335,
+              "wrongly_denied_rate": 0.14982539682539683,
+              "wrongly_approved_n": 53.733333333333334,
+              "wrongly_approved_rate": 0.597037037037037,
+              "default_among_approved": 0.23115421687852414,
+              "cost": 1.0004333333333333,
+              "changed": 31.043333333333333,
+              "coin_flip": 100,
+              "induced_errors": 18.12
+            },
+            "0.833": {
+              "wrongly_denied_n": 82.72,
+              "wrongly_denied_rate": 0.3939047619047619,
+              "wrongly_approved_n": 22.916666666666668,
+              "wrongly_approved_rate": 0.25462962962962965,
+              "default_among_approved": 0.15196855215405744,
+              "cost": 0.6576777777777778,
+              "changed": 45.763333333333335,
+              "coin_flip": 127,
+              "induced_errors": 18.7
+            },
+            "paired_vs_none": {
+              "cost_half": {
+                "diff": -1.0699999999999932,
+                "ci95": [
+                  -3.4733333333333007,
+                  1.3000833333333435
+                ]
+              },
+              "wrongly_denied_half": {
+                "diff": -9.686666666666664,
+                "ci95": [
+                  -10.259999999999998,
+                  -9.126666666666665
+                ]
+              }
+            }
+          }
+        },
+        "20": {
+          "adapter": {
+            "0.500": {
+              "wrongly_denied_n": 28.243333333333332,
+              "wrongly_denied_rate": 0.1344920634920635,
+              "wrongly_approved_n": 53.74333333333333,
+              "wrongly_approved_rate": 0.5971481481481481,
+              "default_among_approved": 0.22813613280327316,
+              "cost": 0.9898666666666666,
+              "changed": 14.24,
+              "coin_flip": 46,
+              "induced_errors": 8.113333333333333
+            },
+            "0.833": {
+              "wrongly_denied_n": 100.76,
+              "wrongly_denied_rate": 0.47980952380952385,
+              "wrongly_approved_n": 13.943333333333333,
+              "wrongly_approved_rate": 0.15492592592592594,
+              "default_among_approved": 0.11282894910142233,
+              "cost": 0.5682555555555555,
+              "changed": 18.043333333333333,
+              "coin_flip": 59,
+              "induced_errors": 9.373333333333333
+            },
+            "paired_vs_none": {
+              "cost_half": {
+                "diff": -4.240000000000009,
+                "ci95": [
+                  -7.800000000000011,
+                  -0.529833333333364
+                ]
+              },
+              "wrongly_denied_half": {
+                "diff": -12.906666666666666,
+                "ci95": [
+                  -13.859999999999996,
+                  -11.966666666666669
+                ]
+              }
+            }
+          },
+          "GD exact line search": {
+            "0.500": {
+              "wrongly_denied_n": 27.053333333333335,
+              "wrongly_denied_rate": 0.12882539682539684,
+              "wrongly_approved_n": 53.263333333333335,
+              "wrongly_approved_rate": 0.5918148148148148,
+              "default_among_approved": 0.2254896979359584,
+              "cost": 0.9779,
+              "changed": 0.9233333333333333,
+              "coin_flip": 3,
+              "induced_errors": 0.62
+            },
+            "0.833": {
+              "wrongly_denied_n": 100.62333333333333,
+              "wrongly_denied_rate": 0.4791587301587302,
+              "wrongly_approved_n": 12.993333333333334,
+              "wrongly_approved_rate": 0.14437037037037037,
+              "default_among_approved": 0.10618224152028811,
+              "cost": 0.5519666666666667,
+              "changed": 0.39666666666666667,
+              "coin_flip": 1,
+              "induced_errors": 0.006666666666666667
+            },
+            "paired_vs_none": {
+              "cost_half": {
+                "diff": -7.829999999999984,
+                "ci95": [
+                  -11.196833333333325,
+                  -4.463250000000035
+                ]
+              },
+              "wrongly_denied_half": {
+                "diff": -14.096666666666664,
+                "ci95": [
+                  -14.973333333333333,
+                  -13.22658333333333
+                ]
+              }
+            }
+          },
+          "risk-averse step R1 (\u03b8=5)": {
+            "0.500": {
+              "wrongly_denied_n": 26.856666666666666,
+              "wrongly_denied_rate": 0.12788888888888889,
+              "wrongly_approved_n": 53.306666666666665,
+              "wrongly_approved_rate": 0.5922962962962963,
+              "default_among_approved": 0.22544464553281282,
+              "cost": 0.9779666666666667,
+              "changed": 3.31,
+              "coin_flip": 10,
+              "induced_errors": 1.7366666666666666
+            },
+            "0.833": {
+              "wrongly_denied_n": 98.90666666666667,
+              "wrongly_denied_rate": 0.470984126984127,
+              "wrongly_approved_n": 13.046666666666667,
+              "wrongly_approved_rate": 0.14496296296296296,
+              "default_among_approved": 0.10509277675360396,
+              "cost": 0.5471333333333332,
+              "changed": 2.526666666666667,
+              "coin_flip": 4,
+              "induced_errors": 0.24
+            },
+            "paired_vs_none": {
+              "cost_half": {
+                "diff": -7.810000000000002,
+                "ci95": [
+                  -11.283416666666636,
+                  -4.373083333333339
+                ]
+              },
+              "wrongly_denied_half": {
+                "diff": -14.293333333333333,
+                "ci95": [
+                  -15.163333333333334,
+                  -13.416583333333332
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "SGD + momentum 0.9 (lr 0.01)": {
+      "none": {
+        "0.500": {
+          "wrongly_denied_n": 28.78,
+          "wrongly_denied_rate": 0.13704761904761906,
+          "wrongly_approved_n": 53.626666666666665,
+          "wrongly_approved_rate": 0.5958518518518519,
+          "default_among_approved": 0.22826108526931535,
+          "cost": 0.9897111111111112,
+          "changed": 18.08,
+          "coin_flip": 59,
+          "induced_errors": 10.243333333333334
+        },
+        "0.833": {
+          "wrongly_denied_n": 100.74666666666667,
+          "wrongly_denied_rate": 0.47974603174603175,
+          "wrongly_approved_n": 14.596666666666666,
+          "wrongly_approved_rate": 0.16218518518518518,
+          "default_among_approved": 0.11741322828386795,
+          "cost": 0.5791,
+          "changed": 22.85,
+          "coin_flip": 73,
+          "induced_errors": 12.096666666666666
+        }
+      },
+      "polished": {
+        "5": {
+          "adapter": {
+            "0.500": {
+              "wrongly_denied_n": 27.79,
+              "wrongly_denied_rate": 0.13233333333333333,
+              "wrongly_approved_n": 53.38333333333333,
+              "wrongly_approved_rate": 0.5931481481481481,
+              "default_among_approved": 0.2265583064541273,
+              "cost": 0.9823555555555555,
+              "changed": 10.433333333333334,
+              "coin_flip": 31,
+              "induced_errors": 5.803333333333334
+            },
+            "0.833": {
+              "wrongly_denied_n": 100.22666666666667,
+              "wrongly_denied_rate": 0.4772698412698413,
+              "wrongly_approved_n": 13.806666666666667,
+              "wrongly_approved_rate": 0.1534074074074074,
+              "default_among_approved": 0.11151487510126551,
+              "cost": 0.5641999999999999,
+              "changed": 14.013333333333334,
+              "coin_flip": 50,
+              "induced_errors": 7.023333333333333
+            },
+            "paired_vs_none": {
+              "cost_half": {
+                "diff": -2.206666666666706,
+                "ci95": [
+                  -3.803416666666675,
+                  -0.6598333333333609
+                ]
+              },
+              "wrongly_denied_half": {
+                "diff": -0.990000000000002,
+                "ci95": [
+                  -1.3633333333333333,
+                  -0.616666666666667
+                ]
+              }
+            }
+          },
+          "GD exact line search": {
+            "0.500": {
+              "wrongly_denied_n": 26.493333333333332,
+              "wrongly_denied_rate": 0.12615873015873016,
+              "wrongly_approved_n": 53.10333333333333,
+              "wrongly_approved_rate": 0.590037037037037,
+              "default_among_approved": 0.2244339239541195,
+              "cost": 0.9733666666666666,
+              "changed": 3.1233333333333335,
+              "coin_flip": 9,
+              "induced_errors": 1.36
+            },
+            "0.833": {
+              "wrongly_denied_n": 100.01,
+              "wrongly_denied_rate": 0.47623809523809524,
+              "wrongly_approved_n": 13.02,
+              "wrongly_approved_rate": 0.14466666666666667,
+              "default_among_approved": 0.10584571620903742,
+              "cost": 0.5503666666666667,
+              "changed": 1.7033333333333334,
+              "coin_flip": 5,
+              "induced_errors": 0.36666666666666664
+            },
+            "paired_vs_none": {
+              "cost_half": {
+                "diff": -4.903333333333364,
+                "ci95": [
+                  -6.44999999999999,
+                  -3.3497499999999696
+                ]
+              },
+              "wrongly_denied_half": {
+                "diff": -2.286666666666669,
+                "ci95": [
+                  -2.706666666666667,
+                  -1.8533333333333353
+                ]
+              }
+            }
+          },
+          "risk-averse step R1 (\u03b8=5)": {
+            "0.500": {
+              "wrongly_denied_n": 27.496666666666666,
+              "wrongly_denied_rate": 0.13093650793650793,
+              "wrongly_approved_n": 53.29,
+              "wrongly_approved_rate": 0.5921111111111111,
+              "default_among_approved": 0.22598075804580703,
+              "cost": 0.9798222222222222,
+              "changed": 8.34,
+              "coin_flip": 24,
+              "induced_errors": 4.5633333333333335
+            },
+            "0.833": {
+              "wrongly_denied_n": 100.25666666666666,
+              "wrongly_denied_rate": 0.4774126984126984,
+              "wrongly_approved_n": 13.686666666666667,
+              "wrongly_approved_rate": 0.15207407407407408,
+              "default_among_approved": 0.11073069592305713,
+              "cost": 0.5623,
+              "changed": 10.923333333333334,
+              "coin_flip": 41,
+              "induced_errors": 5.433333333333334
+            },
+            "paired_vs_none": {
+              "cost_half": {
+                "diff": -2.966666666666697,
+                "ci95": [
+                  -4.133416666666714,
+                  -1.7833333333333599
+                ]
+              },
+              "wrongly_denied_half": {
+                "diff": -1.283333333333335,
+                "ci95": [
+                  -1.6066666666666656,
+                  -0.9699166666666669
+                ]
+              }
+            }
+          }
+        },
+        "20": {
+          "adapter": {
+            "0.500": {
+              "wrongly_denied_n": 27.46,
+              "wrongly_denied_rate": 0.13076190476190477,
+              "wrongly_approved_n": 53.343333333333334,
+              "wrongly_approved_rate": 0.5927037037037037,
+              "default_among_approved": 0.22612503942090817,
+              "cost": 0.980588888888889,
+              "changed": 7.65,
+              "coin_flip": 22,
+              "induced_errors": 4.226666666666667
+            },
+            "0.833": {
+              "wrongly_denied_n": 100.24333333333334,
+              "wrongly_denied_rate": 0.47734920634920636,
+              "wrongly_approved_n": 13.35,
+              "wrongly_approved_rate": 0.14833333333333332,
+              "default_among_approved": 0.10830054325559559,
+              "cost": 0.5566444444444445,
+              "changed": 9.046666666666667,
+              "coin_flip": 31,
+              "induced_errors": 4.32
+            },
+            "paired_vs_none": {
+              "cost_half": {
+                "diff": -2.736666666666679,
+                "ci95": [
+                  -4.339999999999977,
+                  -1.106666666666682
+                ]
+              },
+              "wrongly_denied_half": {
+                "diff": -1.3200000000000003,
+                "ci95": [
+                  -1.7199999999999989,
+                  -0.9265833333333339
+                ]
+              }
+            }
+          },
+          "GD exact line search": {
+            "0.500": {
+              "wrongly_denied_n": 27.133333333333333,
+              "wrongly_denied_rate": 0.1292063492063492,
+              "wrongly_approved_n": 53.0,
+              "wrongly_approved_rate": 0.5888888888888889,
+              "default_among_approved": 0.22470369034739757,
+              "cost": 0.9737777777777777,
+              "changed": 0.13333333333333333,
+              "coin_flip": 1,
+              "induced_errors": 0.13333333333333333
+            },
+            "0.833": {
+              "wrongly_denied_n": 101.0,
+              "wrongly_denied_rate": 0.48095238095238096,
+              "wrongly_approved_n": 13.0,
+              "wrongly_approved_rate": 0.14444444444444443,
+              "default_among_approved": 0.10655737704918032,
+              "cost": 0.5533333333333333,
+              "changed": 0.0,
+              "coin_flip": 0,
+              "induced_errors": 0.0
+            },
+            "paired_vs_none": {
+              "cost_half": {
+                "diff": -4.78000000000003,
+                "ci95": [
+                  -6.286666666666635,
+                  -3.2432500000000073
+                ]
+              },
+              "wrongly_denied_half": {
+                "diff": -1.6466666666666683,
+                "ci95": [
+                  -2.0599999999999987,
+                  -1.2332499999999986
+                ]
+              }
+            }
+          },
+          "risk-averse step R1 (\u03b8=5)": {
+            "0.500": {
+              "wrongly_denied_n": 27.126666666666665,
+              "wrongly_denied_rate": 0.12917460317460316,
+              "wrongly_approved_n": 53.153333333333336,
+              "wrongly_approved_rate": 0.5905925925925927,
+              "default_among_approved": 0.22520056693219728,
+              "cost": 0.976311111111111,
+              "changed": 0.74,
+              "coin_flip": 3,
+              "induced_errors": 0.51
+            },
+            "0.833": {
+              "wrongly_denied_n": 100.69666666666667,
+              "wrongly_denied_rate": 0.47950793650793655,
+              "wrongly_approved_n": 13.0,
+              "wrongly_approved_rate": 0.14444444444444443,
+              "default_among_approved": 0.10629501708010773,
+              "cost": 0.5523222222222222,
+              "changed": 0.3566666666666667,
+              "coin_flip": 1,
+              "induced_errors": 0.02666666666666667
+            },
+            "paired_vs_none": {
+              "cost_half": {
+                "diff": -4.020000000000039,
+                "ci95": [
+                  -5.556750000000004,
+                  -2.463249999999979
+                ]
+              },
+              "wrongly_denied_half": {
+                "diff": -1.653333333333336,
+                "ci95": [
+                  -2.0600833333333357,
+                  -1.240000000000002
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "Adam (lr 0.001, default)": {
+      "none": {
+        "0.500": {
+          "wrongly_denied_n": 29.053333333333335,
+          "wrongly_denied_rate": 0.13834920634920636,
+          "wrongly_approved_n": 51.5,
+          "wrongly_approved_rate": 0.5722222222222222,
+          "default_among_approved": 0.22154112513053065,
+          "cost": 0.9551777777777778,
+          "changed": 7.08,
+          "coin_flip": 22,
+          "induced_errors": 3.816666666666667
+        },
+        "0.833": {
+          "wrongly_denied_n": 118.01,
+          "wrongly_denied_rate": 0.561952380952381,
+          "wrongly_approved_n": 8.716666666666667,
+          "wrongly_approved_rate": 0.09685185185185186,
+          "default_among_approved": 0.08644948757802462,
+          "cost": 0.5386444444444445,
+          "changed": 21.82,
+          "coin_flip": 26,
+          "induced_errors": 17.273333333333333
+        }
+      },
+      "polished": {
+        "5": {
+          "adapter": {
+            "0.500": {
+              "wrongly_denied_n": 28.7,
+              "wrongly_denied_rate": 0.13666666666666666,
+              "wrongly_approved_n": 51.64,
+              "wrongly_approved_rate": 0.5737777777777778,
+              "default_among_approved": 0.22168045467344366,
+              "cost": 0.9563333333333333,
+              "changed": 6.16,
+              "coin_flip": 19,
+              "induced_errors": 3.25
+            },
+            "0.833": {
+              "wrongly_denied_n": 117.02666666666667,
+              "wrongly_denied_rate": 0.5572698412698412,
+              "wrongly_approved_n": 9.033333333333333,
+              "wrongly_approved_rate": 0.10037037037037037,
+              "default_among_approved": 0.08846227715063502,
+              "cost": 0.5406444444444444,
+              "changed": 20.446666666666665,
+              "coin_flip": 24,
+              "induced_errors": 16.253333333333334
+            },
+            "paired_vs_none": {
+              "cost_half": {
+                "diff": 0.3466666666666356,
+                "ci95": [
+                  -0.21333333333331125,
+                  0.9000833333333648
+                ]
+              },
+              "wrongly_denied_half": {
+                "diff": -0.3533333333333353,
+                "ci95": [
+                  -0.5,
+                  -0.2099999999999973
+                ]
+              }
+            }
+          },
+          "GD exact line search": {
+            "0.500": {
+              "wrongly_denied_n": 26.553333333333335,
+              "wrongly_denied_rate": 0.12644444444444444,
+              "wrongly_approved_n": 53.11333333333334,
+              "wrongly_approved_rate": 0.5901481481481482,
+              "default_among_approved": 0.2245214137719833,
+              "cost": 0.9737333333333333,
+              "changed": 2.5933333333333333,
+              "coin_flip": 6,
+              "induced_errors": 1.13
+            },
+            "0.833": {
+              "wrongly_denied_n": 102.03333333333333,
+              "wrongly_denied_rate": 0.48587301587301585,
+              "wrongly_approved_n": 13.0,
+              "wrongly_approved_rate": 0.14444444444444443,
+              "default_among_approved": 0.10746786042240586,
+              "cost": 0.5567777777777778,
+              "changed": 1.0333333333333334,
+              "coin_flip": 0,
+              "induced_errors": 1.0333333333333334
+            },
+            "paired_vs_none": {
+              "cost_half": {
+                "diff": 5.566666666666663,
+                "ci95": [
+                  4.663333333333355,
+                  6.46333333333331
+                ]
+              },
+              "wrongly_denied_half": {
+                "diff": -2.5,
+                "ci95": [
+                  -2.7534166666666673,
+                  -2.25
+                ]
+              }
+            }
+          },
+          "risk-averse step R1 (\u03b8=5)": {
+            "0.500": {
+              "wrongly_denied_n": 27.12,
+              "wrongly_denied_rate": 0.12914285714285714,
+              "wrongly_approved_n": 52.946666666666665,
+              "wrongly_approved_rate": 0.5882962962962963,
+              "default_among_approved": 0.22451711731090052,
+              "cost": 0.9728444444444445,
+              "changed": 2.013333333333333,
+              "coin_flip": 2,
+              "induced_errors": 1.04
+            },
+            "0.833": {
+              "wrongly_denied_n": 106.41,
+              "wrongly_denied_rate": 0.5067142857142857,
+              "wrongly_approved_n": 11.646666666666667,
+              "wrongly_approved_rate": 0.12940740740740742,
+              "default_among_approved": 0.10100808563423423,
+              "cost": 0.5488111111111111,
+              "changed": 6.77,
+              "coin_flip": 12,
+              "induced_errors": 5.413333333333333
+            },
+            "paired_vs_none": {
+              "cost_half": {
+                "diff": 5.300000000000011,
+                "ci95": [
+                  4.436583333333334,
+                  6.150083333333365
+                ]
+              },
+              "wrongly_denied_half": {
+                "diff": -1.9333333333333336,
+                "ci95": [
+                  -2.173333333333332,
+                  -1.6966666666666654
+                ]
+              }
+            }
+          }
+        },
+        "20": {
+          "adapter": {
+            "0.500": {
+              "wrongly_denied_n": 27.67,
+              "wrongly_denied_rate": 0.13176190476190477,
+              "wrongly_approved_n": 52.343333333333334,
+              "wrongly_approved_rate": 0.5815925925925925,
+              "default_among_approved": 0.22304148537514842,
+              "cost": 0.9646222222222222,
+              "changed": 5.333333333333333,
+              "coin_flip": 17,
+              "induced_errors": 2.6733333333333333
+            },
+            "0.833": {
+              "wrongly_denied_n": 110.05666666666667,
+              "wrongly_denied_rate": 0.5240793650793651,
+              "wrongly_approved_n": 10.626666666666667,
+              "wrongly_approved_rate": 0.11807407407407408,
+              "default_among_approved": 0.09601590034943298,
+              "cost": 0.5439666666666667,
+              "changed": 12.55,
+              "coin_flip": 26,
+              "induced_errors": 9.616666666666667
+            },
+            "paired_vs_none": {
+              "cost_half": {
+                "diff": 2.8333333333333144,
+                "ci95": [
+                  1.8365833333333115,
+                  3.823416666666711
+                ]
+              },
+              "wrongly_denied_half": {
+                "diff": -1.3833333333333329,
+                "ci95": [
+                  -1.6666666666666679,
+                  -1.1066666666666656
+                ]
+              }
+            }
+          },
+          "GD exact line search": {
+            "0.500": {
+              "wrongly_denied_n": 27.01,
+              "wrongly_denied_rate": 0.12861904761904763,
+              "wrongly_approved_n": 53.0,
+              "wrongly_approved_rate": 0.5888888888888889,
+              "default_among_approved": 0.22458582762351245,
+              "cost": 0.9733666666666666,
+              "changed": 0.01,
+              "coin_flip": 0,
+              "induced_errors": 0.01
+            },
+            "0.833": {
+              "wrongly_denied_n": 101.0,
+              "wrongly_denied_rate": 0.48095238095238096,
+              "wrongly_approved_n": 13.0,
+              "wrongly_approved_rate": 0.14444444444444443,
+              "default_among_approved": 0.10655737704918032,
+              "cost": 0.5533333333333333,
+              "changed": 0.0,
+              "coin_flip": 0,
+              "induced_errors": 0.0
+            },
+            "paired_vs_none": {
+              "cost_half": {
+                "diff": 5.456666666666649,
+                "ci95": [
+                  4.610000000000014,
+                  6.280083333333304
+                ]
+              },
+              "wrongly_denied_half": {
+                "diff": -2.043333333333333,
+                "ci95": [
+                  -2.293333333333333,
+                  -1.8000000000000007
+                ]
+              }
+            }
+          },
+          "risk-averse step R1 (\u03b8=5)": {
+            "0.500": {
+              "wrongly_denied_n": 27.006666666666668,
+              "wrongly_denied_rate": 0.1286031746031746,
+              "wrongly_approved_n": 53.0,
+              "wrongly_approved_rate": 0.5888888888888889,
+              "default_among_approved": 0.2245826421444885,
+              "cost": 0.9733555555555555,
+              "changed": 0.006666666666666667,
+              "coin_flip": 0,
+              "induced_errors": 0.006666666666666667
+            },
+            "0.833": {
+              "wrongly_denied_n": 101.0,
+              "wrongly_denied_rate": 0.48095238095238096,
+              "wrongly_approved_n": 13.0,
+              "wrongly_approved_rate": 0.14444444444444443,
+              "default_among_approved": 0.10655737704918032,
+              "cost": 0.5533333333333333,
+              "changed": 0.0,
+              "coin_flip": 0,
+              "induced_errors": 0.0
+            },
+            "paired_vs_none": {
+              "cost_half": {
+                "diff": 5.453333333333319,
+                "ci95": [
+                  4.610000000000012,
+                  6.2700833333333135
+                ]
+              },
+              "wrongly_denied_half": {
+                "diff": -2.046666666666667,
+                "ci95": [
+                  -2.3000000000000007,
+                  -1.8033333333333346
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "Adam (lr 0.01)": {
+      "none": {
+        "0.500": {
+          "wrongly_denied_n": 28.743333333333332,
+          "wrongly_denied_rate": 0.13687301587301587,
+          "wrongly_approved_n": 53.596666666666664,
+          "wrongly_approved_rate": 0.5955185185185184,
+          "default_among_approved": 0.22812428548489588,
+          "cost": 0.9890888888888889,
+          "changed": 18.073333333333334,
+          "coin_flip": 58,
+          "induced_errors": 10.206666666666667
+        },
+        "0.833": {
+          "wrongly_denied_n": 100.66333333333333,
+          "wrongly_denied_rate": 0.4793492063492063,
+          "wrongly_approved_n": 14.586666666666666,
+          "wrongly_approved_rate": 0.16207407407407406,
+          "default_among_approved": 0.11725005946123748,
+          "cost": 0.5786555555555556,
+          "changed": 22.923333333333332,
+          "coin_flip": 71,
+          "induced_errors": 12.086666666666666
+        }
+      },
+      "polished": {
+        "5": {
+          "adapter": {
+            "0.500": {
+              "wrongly_denied_n": 27.826666666666668,
+              "wrongly_denied_rate": 0.13250793650793652,
+              "wrongly_approved_n": 53.39333333333333,
+              "wrongly_approved_rate": 0.5932592592592593,
+              "default_among_approved": 0.22662757809043774,
+              "cost": 0.9826444444444445,
+              "changed": 10.413333333333334,
+              "coin_flip": 30,
+              "induced_errors": 5.816666666666666
+            },
+            "0.833": {
+              "wrongly_denied_n": 100.14666666666666,
+              "wrongly_denied_rate": 0.47688888888888886,
+              "wrongly_approved_n": 13.883333333333333,
+              "wrongly_approved_rate": 0.15425925925925926,
+              "default_among_approved": 0.1119873461236719,
+              "cost": 0.5652111111111111,
+              "changed": 14.103333333333333,
+              "coin_flip": 49,
+              "induced_errors": 7.066666666666666
+            },
+            "paired_vs_none": {
+              "cost_half": {
+                "diff": -1.9333333333333371,
+                "ci95": [
+                  -3.507000000000049,
+                  -0.3333333333333698
+                ]
+              },
+              "wrongly_denied_half": {
+                "diff": -0.9166666666666643,
+                "ci95": [
+                  -1.2899999999999991,
+                  -0.5399999999999991
+                ]
+              }
+            }
+          },
+          "GD exact line search": {
+            "0.500": {
+              "wrongly_denied_n": 26.503333333333334,
+              "wrongly_denied_rate": 0.1262063492063492,
+              "wrongly_approved_n": 53.1,
+              "wrongly_approved_rate": 0.59,
+              "default_among_approved": 0.22443252589004156,
+              "cost": 0.9733444444444445,
+              "changed": 3.1366666666666667,
+              "coin_flip": 9,
+              "induced_errors": 1.37
+            },
+            "0.833": {
+              "wrongly_denied_n": 99.98333333333333,
+              "wrongly_denied_rate": 0.4761111111111111,
+              "wrongly_approved_n": 13.026666666666667,
+              "wrongly_approved_rate": 0.14474074074074075,
+              "default_among_approved": 0.1058712358403302,
+              "cost": 0.5503888888888889,
+              "changed": 1.7833333333333334,
+              "coin_flip": 5,
+              "induced_errors": 0.39666666666666667
+            },
+            "paired_vs_none": {
+              "cost_half": {
+                "diff": -4.723333333333358,
+                "ci95": [
+                  -6.293416666666682,
+                  -3.163333333333354
+                ]
+              },
+              "wrongly_denied_half": {
+                "diff": -2.2399999999999984,
+                "ci95": [
+                  -2.6634166666666674,
+                  -1.7999999999999972
+                ]
+              }
+            }
+          },
+          "risk-averse step R1 (\u03b8=5)": {
+            "0.500": {
+              "wrongly_denied_n": 27.47,
+              "wrongly_denied_rate": 0.1308095238095238,
+              "wrongly_approved_n": 53.29333333333334,
+              "wrongly_approved_rate": 0.5921481481481482,
+              "default_among_approved": 0.22596664325246452,
+              "cost": 0.9797888888888889,
+              "changed": 8.263333333333334,
+              "coin_flip": 24,
+              "induced_errors": 4.513333333333334
+            },
+            "0.833": {
+              "wrongly_denied_n": 100.24,
+              "wrongly_denied_rate": 0.47733333333333333,
+              "wrongly_approved_n": 13.686666666666667,
+              "wrongly_approved_rate": 0.15207407407407408,
+              "default_among_approved": 0.11069411718032929,
+              "cost": 0.5622444444444444,
+              "changed": 11.026666666666667,
+              "coin_flip": 42,
+              "induced_errors": 5.476666666666667
+            },
+            "paired_vs_none": {
+              "cost_half": {
+                "diff": -2.7900000000000205,
+                "ci95": [
+                  -3.9634166666666983,
+                  -1.6065833333333512
+                ]
+              },
+              "wrongly_denied_half": {
+                "diff": -1.2733333333333334,
+                "ci95": [
+                  -1.586666666666666,
+                  -0.9499166666666673
+                ]
+              }
+            }
+          }
+        },
+        "20": {
+          "adapter": {
+            "0.500": {
+              "wrongly_denied_n": 27.46,
+              "wrongly_denied_rate": 0.13076190476190477,
+              "wrongly_approved_n": 53.32666666666667,
+              "wrongly_approved_rate": 0.5925185185185186,
+              "default_among_approved": 0.2260716670765167,
+              "cost": 0.980311111111111,
+              "changed": 7.626666666666667,
+              "coin_flip": 22,
+              "induced_errors": 4.206666666666667
+            },
+            "0.833": {
+              "wrongly_denied_n": 100.20666666666666,
+              "wrongly_denied_rate": 0.47717460317460314,
+              "wrongly_approved_n": 13.34,
+              "wrongly_approved_rate": 0.14822222222222223,
+              "default_among_approved": 0.10819150057367968,
+              "cost": 0.5563555555555556,
+              "changed": 9.133333333333333,
+              "coin_flip": 31,
+              "induced_errors": 4.34
+            },
+            "paired_vs_none": {
+              "cost_half": {
+                "diff": -2.6333333333333826,
+                "ci95": [
+                  -4.2134166666667,
+                  -1.0532499999999543
+                ]
+              },
+              "wrongly_denied_half": {
+                "diff": -1.2833333333333314,
+                "ci95": [
+                  -1.6867500000000006,
+                  -0.879999999999999
+                ]
+              }
+            }
+          },
+          "GD exact line search": {
+            "0.500": {
+              "wrongly_denied_n": 27.133333333333333,
+              "wrongly_denied_rate": 0.1292063492063492,
+              "wrongly_approved_n": 53.0,
+              "wrongly_approved_rate": 0.5888888888888889,
+              "default_among_approved": 0.2247036903473975,
+              "cost": 0.9737777777777777,
+              "changed": 0.13333333333333333,
+              "coin_flip": 1,
+              "induced_errors": 0.13333333333333333
+            },
+            "0.833": {
+              "wrongly_denied_n": 101.0,
+              "wrongly_denied_rate": 0.48095238095238096,
+              "wrongly_approved_n": 13.0,
+              "wrongly_approved_rate": 0.14444444444444443,
+              "default_among_approved": 0.10655737704918032,
+              "cost": 0.5533333333333333,
+              "changed": 0.0,
+              "coin_flip": 0,
+              "induced_errors": 0.0
+            },
+            "paired_vs_none": {
+              "cost_half": {
+                "diff": -4.593333333333362,
+                "ci95": [
+                  -6.123500000000002,
+                  -3.056666666666615
+                ]
+              },
+              "wrongly_denied_half": {
+                "diff": -1.6099999999999994,
+                "ci95": [
+                  -2.0166666666666657,
+                  -1.1933333333333316
+                ]
+              }
+            }
+          },
+          "risk-averse step R1 (\u03b8=5)": {
+            "0.500": {
+              "wrongly_denied_n": 27.14,
+              "wrongly_denied_rate": 0.12923809523809524,
+              "wrongly_approved_n": 53.14333333333333,
+              "wrongly_approved_rate": 0.5904814814814815,
+              "default_among_approved": 0.22518043460434872,
+              "cost": 0.976188888888889,
+              "changed": 0.6966666666666667,
+              "coin_flip": 3,
+              "induced_errors": 0.49
+            },
+            "0.833": {
+              "wrongly_denied_n": 100.73,
+              "wrongly_denied_rate": 0.4796666666666667,
+              "wrongly_approved_n": 13.0,
+              "wrongly_approved_rate": 0.14444444444444443,
+              "default_among_approved": 0.10632375237943568,
+              "cost": 0.5524333333333333,
+              "changed": 0.30333333333333334,
+              "coin_flip": 1,
+              "induced_errors": 0.016666666666666666
+            },
+            "paired_vs_none": {
+              "cost_half": {
+                "diff": -3.8700000000000045,
+                "ci95": [
+                  -5.4035000000000295,
+                  -2.2900000000000205
+                ]
+              },
+              "wrongly_denied_half": {
+                "diff": -1.6033333333333317,
+                "ci95": [
+                  -2.013333333333332,
+                  -1.1866666666666674
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "ADMM (5 iterations)": {
+      "none": {
+        "0.500": {
+          "wrongly_denied_n": 34.17666666666667,
+          "wrongly_denied_rate": 0.16274603174603175,
+          "wrongly_approved_n": 48.0,
+          "wrongly_approved_rate": 0.5333333333333333,
+          "default_among_approved": 0.21445596127838276,
+          "cost": 0.9139222222222223,
+          "changed": 12.176666666666666,
+          "coin_flip": 1,
+          "induced_errors": 7.176666666666667
+        },
+        "0.833": {
+          "wrongly_denied_n": 167.35666666666665,
+          "wrongly_denied_rate": 0.7969365079365078,
+          "wrongly_approved_n": 1.0,
+          "wrongly_approved_rate": 0.011111111111111112,
+          "default_among_approved": 0.02291744689419108,
+          "cost": 0.5745222222222222,
+          "changed": 78.35666666666667,
+          "coin_flip": 1,
+          "induced_errors": 66.35666666666667
+        }
+      },
+      "polished": {
+        "5": {
+          "adapter": {
+            "0.500": {
+              "wrongly_denied_n": 29.816666666666666,
+              "wrongly_denied_rate": 0.141984126984127,
+              "wrongly_approved_n": 52.02,
+              "wrongly_approved_rate": 0.5780000000000001,
+              "default_among_approved": 0.22397331668061427,
+              "cost": 0.966388888888889,
+              "changed": 12.456666666666667,
+              "coin_flip": 38,
+              "induced_errors": 7.1466666666666665
+            },
+            "0.833": {
+              "wrongly_denied_n": 123.89,
+              "wrongly_denied_rate": 0.589952380952381,
+              "wrongly_approved_n": 7.53,
+              "wrongly_approved_rate": 0.08366666666666667,
+              "default_among_approved": 0.08016290859345389,
+              "cost": 0.5384666666666666,
+              "changed": 29.833333333333332,
+              "coin_flip": 38,
+              "induced_errors": 23.626666666666665
+            },
+            "paired_vs_none": {
+              "cost_half": {
+                "diff": 15.740000000000009,
+                "ci95": [
+                  14.476666666666688,
+                  17.01666666666665
+                ]
+              },
+              "wrongly_denied_half": {
+                "diff": -4.360000000000003,
+                "ci95": [
+                  -4.686666666666671,
+                  -4.036666666666665
+                ]
+              }
+            }
+          },
+          "GD exact line search": {
+            "0.500": {
+              "wrongly_denied_n": 26.0,
+              "wrongly_denied_rate": 0.12380952380952381,
+              "wrongly_approved_n": 53.0,
+              "wrongly_approved_rate": 0.5888888888888889,
+              "default_among_approved": 0.2236286919831223,
+              "cost": 0.97,
+              "changed": 3.0,
+              "coin_flip": 0,
+              "induced_errors": 1.0
+            },
+            "0.833": {
+              "wrongly_denied_n": 102.0,
+              "wrongly_denied_rate": 0.4857142857142857,
+              "wrongly_approved_n": 13.0,
+              "wrongly_approved_rate": 0.14444444444444443,
+              "default_among_approved": 0.10743801652892562,
+              "cost": 0.5566666666666666,
+              "changed": 1.0,
+              "coin_flip": 0,
+              "induced_errors": 1.0
+            },
+            "paired_vs_none": {
+              "cost_half": {
+                "diff": 16.823333333333323,
+                "ci95": [
+                  16.76333333333332,
+                  16.879999999999995
+                ]
+              },
+              "wrongly_denied_half": {
+                "diff": -8.17666666666667,
+                "ci95": [
+                  -8.236666666666665,
+                  -8.119999999999997
+                ]
+              }
+            }
+          },
+          "risk-averse step R1 (\u03b8=5)": {
+            "0.500": {
+              "wrongly_denied_n": 27.0,
+              "wrongly_denied_rate": 0.12857142857142856,
+              "wrongly_approved_n": 53.0,
+              "wrongly_approved_rate": 0.5888888888888889,
+              "default_among_approved": 0.2245762711864407,
+              "cost": 0.9733333333333334,
+              "changed": 2.0,
+              "coin_flip": 0,
+              "induced_errors": 1.0
+            },
+            "0.833": {
+              "wrongly_denied_n": 116.0,
+              "wrongly_denied_rate": 0.5523809523809524,
+              "wrongly_approved_n": 9.0,
+              "wrongly_approved_rate": 0.1,
+              "default_among_approved": 0.08737864077669902,
+              "cost": 0.5366666666666666,
+              "changed": 19.0,
+              "coin_flip": 0,
+              "induced_errors": 15.0
+            },
+            "paired_vs_none": {
+              "cost_half": {
+                "diff": 17.823333333333323,
+                "ci95": [
+                  17.76333333333332,
+                  17.879999999999995
+                ]
+              },
+              "wrongly_denied_half": {
+                "diff": -7.176666666666669,
+                "ci95": [
+                  -7.236666666666665,
+                  -7.119999999999997
+                ]
+              }
+            }
+          }
+        },
+        "20": {
+          "adapter": {
+            "0.500": {
+              "wrongly_denied_n": 28.356666666666666,
+              "wrongly_denied_rate": 0.13503174603174603,
+              "wrongly_approved_n": 51.82666666666667,
+              "wrongly_approved_rate": 0.5758518518518518,
+              "default_among_approved": 0.22196455835610535,
+              "cost": 0.9583,
+              "changed": 7.196666666666666,
+              "coin_flip": 23,
+              "induced_errors": 3.69
+            },
+            "0.833": {
+              "wrongly_denied_n": 119.50666666666666,
+              "wrongly_denied_rate": 0.5690793650793651,
+              "wrongly_approved_n": 8.29,
+              "wrongly_approved_rate": 0.0921111111111111,
+              "default_among_approved": 0.08377241671353922,
+              "cost": 0.5365222222222222,
+              "changed": 23.796666666666667,
+              "coin_flip": 23,
+              "induced_errors": 18.796666666666667
+            },
+            "paired_vs_none": {
+              "cost_half": {
+                "diff": 13.313333333333333,
+                "ci95": [
+                  12.439749999999998,
+                  14.19999999999999
+                ]
+              },
+              "wrongly_denied_half": {
+                "diff": -5.820000000000004,
+                "ci95": [
+                  -6.066666666666666,
+                  -5.57
+                ]
+              }
+            }
+          },
+          "GD exact line search": {
+            "0.500": {
+              "wrongly_denied_n": 27.0,
+              "wrongly_denied_rate": 0.12857142857142856,
+              "wrongly_approved_n": 53.0,
+              "wrongly_approved_rate": 0.5888888888888889,
+              "default_among_approved": 0.2245762711864407,
+              "cost": 0.9733333333333334,
+              "changed": 0.0,
+              "coin_flip": 0,
+              "induced_errors": 0.0
+            },
+            "0.833": {
+              "wrongly_denied_n": 101.0,
+              "wrongly_denied_rate": 0.48095238095238096,
+              "wrongly_approved_n": 13.0,
+              "wrongly_approved_rate": 0.14444444444444443,
+              "default_among_approved": 0.10655737704918032,
+              "cost": 0.5533333333333333,
+              "changed": 0.0,
+              "coin_flip": 0,
+              "induced_errors": 0.0
+            },
+            "paired_vs_none": {
+              "cost_half": {
+                "diff": 17.823333333333323,
+                "ci95": [
+                  17.76333333333332,
+                  17.879999999999995
+                ]
+              },
+              "wrongly_denied_half": {
+                "diff": -7.176666666666669,
+                "ci95": [
+                  -7.236666666666665,
+                  -7.119999999999997
+                ]
+              }
+            }
+          },
+          "risk-averse step R1 (\u03b8=5)": {
+            "0.500": {
+              "wrongly_denied_n": 27.0,
+              "wrongly_denied_rate": 0.12857142857142856,
+              "wrongly_approved_n": 53.0,
+              "wrongly_approved_rate": 0.5888888888888889,
+              "default_among_approved": 0.2245762711864407,
+              "cost": 0.9733333333333334,
+              "changed": 0.0,
+              "coin_flip": 0,
+              "induced_errors": 0.0
+            },
+            "0.833": {
+              "wrongly_denied_n": 101.0,
+              "wrongly_denied_rate": 0.48095238095238096,
+              "wrongly_approved_n": 13.0,
+              "wrongly_approved_rate": 0.14444444444444443,
+              "default_among_approved": 0.10655737704918032,
+              "cost": 0.5533333333333333,
+              "changed": 0.0,
+              "coin_flip": 0,
+              "induced_errors": 0.0
+            },
+            "paired_vs_none": {
+              "cost_half": {
+                "diff": 17.823333333333323,
+                "ci95": [
+                  17.76333333333332,
+                  17.879999999999995
+                ]
+              },
+              "wrongly_denied_half": {
+                "diff": -7.176666666666669,
+                "ci95": [
+                  -7.236666666666665,
+                  -7.119999999999997
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "RA-GMM from scratch (paper)": {
+      "none": {
+        "0.500": {
+          "wrongly_denied_n": 33.28666666666667,
+          "wrongly_denied_rate": 0.15850793650793651,
+          "wrongly_approved_n": 53.59,
+          "wrongly_approved_rate": 0.5954444444444444,
+          "default_among_approved": 0.2323235250574542,
+          "cost": 1.0041222222222224,
+          "changed": 39.85666666666667,
+          "coin_flip": 128,
+          "induced_errors": 23.366666666666667
+        },
+        "0.833": {
+          "wrongly_denied_n": 92.41333333333333,
+          "wrongly_denied_rate": 0.44006349206349205,
+          "wrongly_approved_n": 21.043333333333333,
+          "wrongly_approved_rate": 0.2338148148148148,
+          "default_among_approved": 0.1509539711857547,
+          "cost": 0.6587666666666666,
+          "changed": 50.483333333333334,
+          "coin_flip": 159,
+          "induced_errors": 24.97
+        }
+      },
+      "polished": {
+        "5": {
+          "adapter": {
+            "0.500": {
+              "wrongly_denied_n": 28.406666666666666,
+              "wrongly_denied_rate": 0.13526984126984126,
+              "wrongly_approved_n": 54.10666666666667,
+              "wrongly_approved_rate": 0.6011851851851853,
+              "default_among_approved": 0.22944432999924277,
+              "cost": 0.9964666666666666,
+              "changed": 17.72,
+              "coin_flip": 60,
+              "induced_errors": 10.116666666666667
+            },
+            "0.833": {
+              "wrongly_denied_n": 98.91666666666667,
+              "wrongly_denied_rate": 0.4710317460317461,
+              "wrongly_approved_n": 14.92,
+              "wrongly_approved_rate": 0.16577777777777777,
+              "default_among_approved": 0.11799915742032416,
+              "cost": 0.578388888888889,
+              "changed": 23.10333333333333,
+              "coin_flip": 73,
+              "induced_errors": 11.47
+            },
+            "paired_vs_none": {
+              "cost_half": {
+                "diff": -2.296666666666681,
+                "ci95": [
+                  -5.460166666666647,
+                  0.7768333333333619
+                ]
+              },
+              "wrongly_denied_half": {
+                "diff": -4.880000000000003,
+                "ci95": [
+                  -5.680000000000003,
+                  -4.106500000000001
+                ]
+              }
+            }
+          },
+          "GD exact line search": {
+            "0.500": {
+              "wrongly_denied_n": 27.06,
+              "wrongly_denied_rate": 0.12885714285714286,
+              "wrongly_approved_n": 53.43333333333333,
+              "wrongly_approved_rate": 0.5937037037037036,
+              "default_among_approved": 0.22605032813805753,
+              "cost": 0.9807555555555556,
+              "changed": 5.706666666666667,
+              "coin_flip": 15,
+              "induced_errors": 3.1
+            },
+            "0.833": {
+              "wrongly_denied_n": 97.0,
+              "wrongly_denied_rate": 0.46190476190476193,
+              "wrongly_approved_n": 14.093333333333334,
+              "wrongly_approved_rate": 0.1565925925925926,
+              "default_among_approved": 0.11075409570687382,
+              "cost": 0.5582222222222222,
+              "changed": 7.453333333333333,
+              "coin_flip": 20,
+              "induced_errors": 2.2733333333333334
+            },
+            "paired_vs_none": {
+              "cost_half": {
+                "diff": -7.009999999999991,
+                "ci95": [
+                  -9.610083333333346,
+                  -4.4165000000000205
+                ]
+              },
+              "wrongly_denied_half": {
+                "diff": -6.22666666666667,
+                "ci95": [
+                  -6.853333333333332,
+                  -5.596666666666671
+                ]
+              }
+            }
+          },
+          "risk-averse step R1 (\u03b8=5)": {
+            "0.500": {
+              "wrongly_denied_n": 28.53,
+              "wrongly_denied_rate": 0.13585714285714287,
+              "wrongly_approved_n": 54.18666666666667,
+              "wrongly_approved_rate": 0.6020740740740741,
+              "default_among_approved": 0.229868108467374,
+              "cost": 0.998211111111111,
+              "changed": 19.276666666666667,
+              "coin_flip": 62,
+              "induced_errors": 10.996666666666666
+            },
+            "0.833": {
+              "wrongly_denied_n": 93.92666666666666,
+              "wrongly_denied_rate": 0.44726984126984126,
+              "wrongly_approved_n": 17.253333333333334,
+              "wrongly_approved_rate": 0.1917037037037037,
+              "default_among_approved": 0.1289863134734398,
+              "cost": 0.6006444444444444,
+              "changed": 26.406666666666666,
+              "coin_flip": 80,
+              "induced_errors": 11.793333333333333
+            },
+            "paired_vs_none": {
+              "cost_half": {
+                "diff": -1.773333333333369,
+                "ci95": [
+                  -4.000166666666667,
+                  0.4235000000000103
+                ]
+              },
+              "wrongly_denied_half": {
+                "diff": -4.756666666666668,
+                "ci95": [
+                  -5.223333333333333,
+                  -4.286666666666669
+                ]
+              }
+            }
+          }
+        },
+        "20": {
+          "adapter": {
+            "0.500": {
+              "wrongly_denied_n": 27.576666666666668,
+              "wrongly_denied_rate": 0.13131746031746033,
+              "wrongly_approved_n": 53.64,
+              "wrongly_approved_rate": 0.596,
+              "default_among_approved": 0.22720337543933064,
+              "cost": 0.9859222222222221,
+              "changed": 9.73,
+              "coin_flip": 27,
+              "induced_errors": 5.473333333333334
+            },
+            "0.833": {
+              "wrongly_denied_n": 98.48,
+              "wrongly_denied_rate": 0.46895238095238095,
+              "wrongly_approved_n": 14.376666666666667,
+              "wrongly_approved_rate": 0.15974074074074074,
+              "default_among_approved": 0.11393925296690549,
+              "cost": 0.5678777777777778,
+              "changed": 12.47,
+              "coin_flip": 44,
+              "induced_errors": 5.663333333333333
+            },
+            "paired_vs_none": {
+              "cost_half": {
+                "diff": -5.460000000000036,
+                "ci95": [
+                  -8.206749999999982,
+                  -2.7731666666666492
+                ]
+              },
+              "wrongly_denied_half": {
+                "diff": -5.710000000000001,
+                "ci95": [
+                  -6.376666666666665,
+                  -5.036666666666669
+                ]
+              }
+            }
+          },
+          "GD exact line search": {
+            "0.500": {
+              "wrongly_denied_n": 27.183333333333334,
+              "wrongly_denied_rate": 0.12944444444444445,
+              "wrongly_approved_n": 53.07666666666667,
+              "wrongly_approved_rate": 0.5897407407407408,
+              "default_among_approved": 0.22500296121071675,
+              "cost": 0.9752222222222222,
+              "changed": 0.49333333333333335,
+              "coin_flip": 2,
+              "induced_errors": 0.37666666666666665
+            },
+            "0.833": {
+              "wrongly_denied_n": 100.86666666666666,
+              "wrongly_denied_rate": 0.4803174603174603,
+              "wrongly_approved_n": 13.0,
+              "wrongly_approved_rate": 0.14444444444444443,
+              "default_among_approved": 0.1064418676973655,
+              "cost": 0.5528888888888889,
+              "changed": 0.13333333333333333,
+              "coin_flip": 1,
+              "induced_errors": 0.0
+            },
+            "paired_vs_none": {
+              "cost_half": {
+                "diff": -8.670000000000016,
+                "ci95": [
+                  -11.306916666666671,
+                  -6.086583333333313
+                ]
+              },
+              "wrongly_denied_half": {
+                "diff": -6.103333333333335,
+                "ci95": [
+                  -6.7500000000000036,
+                  -5.459916666666665
+                ]
+              }
+            }
+          },
+          "risk-averse step R1 (\u03b8=5)": {
+            "0.500": {
+              "wrongly_denied_n": 26.966666666666665,
+              "wrongly_denied_rate": 0.1284126984126984,
+              "wrongly_approved_n": 53.3,
+              "wrongly_approved_rate": 0.5922222222222222,
+              "default_among_approved": 0.22552873057916506,
+              "cost": 0.9782222222222221,
+              "changed": 1.7133333333333334,
+              "coin_flip": 5,
+              "induced_errors": 0.99
+            },
+            "0.833": {
+              "wrongly_denied_n": 100.26333333333334,
+              "wrongly_denied_rate": 0.47744444444444445,
+              "wrongly_approved_n": 12.986666666666666,
+              "wrongly_approved_rate": 0.14429629629629628,
+              "default_among_approved": 0.10582458898399455,
+              "cost": 0.5506555555555556,
+              "changed": 0.9366666666666666,
+              "coin_flip": 2,
+              "induced_errors": 0.09333333333333334
+            },
+            "paired_vs_none": {
+              "cost_half": {
+                "diff": -7.770000000000039,
+                "ci95": [
+                  -10.443333333333328,
+                  -5.146500000000039
+                ]
+              },
+              "wrongly_denied_half": {
+                "diff": -6.320000000000004,
+                "ci95": [
+                  -6.973333333333329,
+                  -5.6699166666666665
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "SGD careful (tuned + averaging)": {
+      "none": {
+        "0.500": {
+          "wrongly_denied_n": 26.956666666666667,
+          "wrongly_denied_rate": 0.12836507936507938,
+          "wrongly_approved_n": 52.88666666666666,
+          "wrongly_approved_rate": 0.5876296296296296,
+          "default_among_approved": 0.22415447306224714,
+          "cost": 0.9712999999999999,
+          "changed": 5.743333333333333,
+          "coin_flip": 18,
+          "induced_errors": 2.7933333333333334
+        },
+        "0.833": {
+          "wrongly_denied_n": 102.19333333333333,
+          "wrongly_denied_rate": 0.4866349206349206,
+          "wrongly_approved_n": 12.49,
+          "wrongly_approved_rate": 0.13877777777777778,
+          "default_among_approved": 0.10374557528348276,
+          "cost": 0.5488111111111111,
+          "changed": 6.676666666666667,
+          "coin_flip": 23,
+          "induced_errors": 3.68
+        }
+      },
+      "polished": {
+        "5": {
+          "adapter": {
+            "0.500": {
+              "wrongly_denied_n": 26.913333333333334,
+              "wrongly_denied_rate": 0.12815873015873017,
+              "wrongly_approved_n": 52.946666666666665,
+              "wrongly_approved_rate": 0.5882962962962963,
+              "default_among_approved": 0.22431292037960057,
+              "cost": 0.9721555555555554,
+              "changed": 5.426666666666667,
+              "coin_flip": 15,
+              "induced_errors": 2.6433333333333335
+            },
+            "0.833": {
+              "wrongly_denied_n": 101.97,
+              "wrongly_denied_rate": 0.48557142857142854,
+              "wrongly_approved_n": 12.533333333333333,
+              "wrongly_approved_rate": 0.13925925925925925,
+              "default_among_approved": 0.10390109228264811,
+              "cost": 0.5487888888888889,
+              "changed": 6.056666666666667,
+              "coin_flip": 22,
+              "induced_errors": 3.28
+            },
+            "paired_vs_none": {
+              "cost_half": {
+                "diff": 0.2566666666666606,
+                "ci95": [
+                  -0.2834166666666917,
+                  0.8000000000000114
+                ]
+              },
+              "wrongly_denied_half": {
+                "diff": -0.043333333333333,
+                "ci95": [
+                  -0.17666666666666941,
+                  0.086666666666666
+                ]
+              }
+            }
+          },
+          "GD exact line search": {
+            "0.500": {
+              "wrongly_denied_n": 27.01,
+              "wrongly_denied_rate": 0.12861904761904763,
+              "wrongly_approved_n": 53.13333333333333,
+              "wrongly_approved_rate": 0.5903703703703703,
+              "default_among_approved": 0.2250236683037494,
+              "cost": 0.975588888888889,
+              "changed": 1.2366666666666666,
+              "coin_flip": 4,
+              "induced_errors": 0.69
+            },
+            "0.833": {
+              "wrongly_denied_n": 101.32,
+              "wrongly_denied_rate": 0.48247619047619045,
+              "wrongly_approved_n": 13.0,
+              "wrongly_approved_rate": 0.14444444444444443,
+              "default_among_approved": 0.10684066019316375,
+              "cost": 0.5544,
+              "changed": 0.5666666666666667,
+              "coin_flip": 2,
+              "induced_errors": 0.44333333333333336
+            },
+            "paired_vs_none": {
+              "cost_half": {
+                "diff": 1.2866666666666902,
+                "ci95": [
+                  0.4900000000000091,
+                  2.0600000000000023
+                ]
+              },
+              "wrongly_denied_half": {
+                "diff": 0.053333333333334565,
+                "ci95": [
+                  -0.15333333333333243,
+                  0.26333333333333186
+                ]
+              }
+            }
+          },
+          "risk-averse step R1 (\u03b8=5)": {
+            "0.500": {
+              "wrongly_denied_n": 26.52,
+              "wrongly_denied_rate": 0.12628571428571428,
+              "wrongly_approved_n": 53.03,
+              "wrongly_approved_rate": 0.5892222222222222,
+              "default_among_approved": 0.22421911344633982,
+              "cost": 0.9722333333333334,
+              "changed": 3.07,
+              "coin_flip": 9,
+              "induced_errors": 1.31
+            },
+            "0.833": {
+              "wrongly_denied_n": 101.31,
+              "wrongly_denied_rate": 0.48242857142857143,
+              "wrongly_approved_n": 12.893333333333333,
+              "wrongly_approved_rate": 0.14325925925925925,
+              "default_among_approved": 0.10604068912770973,
+              "cost": 0.5525888888888889,
+              "changed": 2.316666666666667,
+              "coin_flip": 9,
+              "induced_errors": 1.26
+            },
+            "paired_vs_none": {
+              "cost_half": {
+                "diff": 0.28000000000002956,
+                "ci95": [
+                  -0.44666666666665833,
+                  0.9833333333332931
+                ]
+              },
+              "wrongly_denied_half": {
+                "diff": -0.4366666666666674,
+                "ci95": [
+                  -0.5934166666666669,
+                  -0.28000000000000114
+                ]
+              }
+            }
+          }
+        },
+        "20": {
+          "adapter": {
+            "0.500": {
+              "wrongly_denied_n": 26.883333333333333,
+              "wrongly_denied_rate": 0.12801587301587303,
+              "wrongly_approved_n": 52.88666666666666,
+              "wrongly_approved_rate": 0.5876296296296296,
+              "default_among_approved": 0.2240930026718939,
+              "cost": 0.9710555555555556,
+              "changed": 4.903333333333333,
+              "coin_flip": 14,
+              "induced_errors": 2.3366666666666664
+            },
+            "0.833": {
+              "wrongly_denied_n": 101.59,
+              "wrongly_denied_rate": 0.4837619047619048,
+              "wrongly_approved_n": 12.646666666666667,
+              "wrongly_approved_rate": 0.14051851851851851,
+              "default_among_approved": 0.10441950355059605,
+              "cost": 0.5494111111111111,
+              "changed": 4.923333333333333,
+              "coin_flip": 19,
+              "induced_errors": 2.58
+            },
+            "paired_vs_none": {
+              "cost_half": {
+                "diff": -0.07333333333332348,
+                "ci95": [
+                  -0.7966666666666257,
+                  0.6334166666667133
+                ]
+              },
+              "wrongly_denied_half": {
+                "diff": -0.07333333333333414,
+                "ci95": [
+                  -0.27333333333333343,
+                  0.12333333333333485
+                ]
+              }
+            }
+          },
+          "GD exact line search": {
+            "0.500": {
+              "wrongly_denied_n": 27.026666666666667,
+              "wrongly_denied_rate": 0.1286984126984127,
+              "wrongly_approved_n": 53.0,
+              "wrongly_approved_rate": 0.5888888888888889,
+              "default_among_approved": 0.22460175501863205,
+              "cost": 0.9734222222222222,
+              "changed": 0.02666666666666667,
+              "coin_flip": 0,
+              "induced_errors": 0.02666666666666667
+            },
+            "0.833": {
+              "wrongly_denied_n": 101.0,
+              "wrongly_denied_rate": 0.48095238095238096,
+              "wrongly_approved_n": 13.0,
+              "wrongly_approved_rate": 0.14444444444444443,
+              "default_among_approved": 0.10655737704918032,
+              "cost": 0.5533333333333333,
+              "changed": 0.0,
+              "coin_flip": 0,
+              "induced_errors": 0.0
+            },
+            "paired_vs_none": {
+              "cost_half": {
+                "diff": 0.6366666666666561,
+                "ci95": [
+                  -0.14333333333331807,
+                  1.3867500000000434
+                ]
+              },
+              "wrongly_denied_half": {
+                "diff": 0.07000000000000028,
+                "ci95": [
+                  -0.13666666666666671,
+                  0.2699999999999996
+                ]
+              }
+            }
+          },
+          "risk-averse step R1 (\u03b8=5)": {
+            "0.500": {
+              "wrongly_denied_n": 27.086666666666666,
+              "wrongly_denied_rate": 0.12898412698412698,
+              "wrongly_approved_n": 53.0,
+              "wrongly_approved_rate": 0.5888888888888889,
+              "default_among_approved": 0.22465909364106262,
+              "cost": 0.9736222222222222,
+              "changed": 0.08666666666666667,
+              "coin_flip": 0,
+              "induced_errors": 0.08666666666666667
+            },
+            "0.833": {
+              "wrongly_denied_n": 101.0,
+              "wrongly_denied_rate": 0.48095238095238096,
+              "wrongly_approved_n": 13.0,
+              "wrongly_approved_rate": 0.14444444444444443,
+              "default_among_approved": 0.10655737704918032,
+              "cost": 0.5533333333333333,
+              "changed": 0.0,
+              "coin_flip": 0,
+              "induced_errors": 0.0
+            },
+            "paired_vs_none": {
+              "cost_half": {
+                "diff": 0.6966666666666583,
+                "ci95": [
+                  -0.0899999999999764,
+                  1.4533333333333203
+                ]
+              },
+              "wrongly_denied_half": {
+                "diff": 0.129999999999999,
+                "ci95": [
+                  -0.07666666666666799,
+                  0.33333333333333226
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

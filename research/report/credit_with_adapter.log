@@ -1,0 +1,7 @@
+SGD (textbook) {'5': {'adapter': 0.595, 'GD exact line search': 0.592, 'risk-averse step R1 (θ=5)': 0.658}, '20': {'adapter': 0.568, 'GD exact line search': 0.552, 'risk-averse step R1 (θ=5)': 0.547}} none 0.751
+SGD + momentum 0.9 (lr 0.01) {'5': {'adapter': 0.564, 'GD exact line search': 0.55, 'risk-averse step R1 (θ=5)': 0.562}, '20': {'adapter': 0.557, 'GD exact line search': 0.553, 'risk-averse step R1 (θ=5)': 0.552}} none 0.579
+Adam (lr 0.001, default) {'5': {'adapter': 0.541, 'GD exact line search': 0.557, 'risk-averse step R1 (θ=5)': 0.549}, '20': {'adapter': 0.544, 'GD exact line search': 0.553, 'risk-averse step R1 (θ=5)': 0.553}} none 0.539
+Adam (lr 0.01) {'5': {'adapter': 0.565, 'GD exact line search': 0.55, 'risk-averse step R1 (θ=5)': 0.562}, '20': {'adapter': 0.556, 'GD exact line search': 0.553, 'risk-averse step R1 (θ=5)': 0.552}} none 0.579
+ADMM (5 iterations) {'5': {'adapter': 0.538, 'GD exact line search': 0.557, 'risk-averse step R1 (θ=5)': 0.537}, '20': {'adapter': 0.537, 'GD exact line search': 0.553, 'risk-averse step R1 (θ=5)': 0.553}} none 0.575
+RA-GMM from scratch (paper) {'5': {'adapter': 0.578, 'GD exact line search': 0.558, 'risk-averse step R1 (θ=5)': 0.601}, '20': {'adapter': 0.568, 'GD exact line search': 0.553, 'risk-averse step R1 (θ=5)': 0.551}} none 0.659
+SGD careful (tuned + averaging) {'5': {'adapter': 0.549, 'GD exact line search': 0.554, 'risk-averse step R1 (θ=5)': 0.553}, '20': {'adapter': 0.549, 'GD exact line search': 0.553, 'risk-averse step R1 (θ=5)': 0.553}} none 0.549

@@ -235,6 +235,14 @@ a rerun.
    wrongly refused; with a cost-based rule, fewer defaults approved). Careful tuning removes almost all of them.
    Either way, **measure the tail** before deploying.
 
+## 9b. What a post-training polish step changes (added later)
+
+Starting from each way of training (SGD, momentum, Adam, ADMM, RA-GMM, careful SGD), a short polish step (5 epochs of compute) moves credit outcomes toward those of the exactly trained
+model. For textbook SGD at the cost-based 83% rule: defaulters wrongly approved 28.5 → 16.4 per model, default rate among approved loans 18.2% → 12.6%, expected cost 0.751 → 0.595; at the 50% rule,
+good applicants wrongly denied 19.6% → 13.9% and coin-flip applicants 177 → 71. For baselines already near the exact model (careful SGD, Adam at its default learning rate) it changes little, and a
+deterministic full-batch polish beats the stochastic adapter at equal compute. Polishing makes outcomes reproducible; it does not make them better than the exact model.
+Full tables, caveats and hypotheses: [`CREDIT_WITH_ADAPTER.md`](CREDIT_WITH_ADAPTER.md).
+
 ## 9. Try it on your own data
 
 The repository is now a package (`risk-averse-tuning` 0.3.0, NumPy and pandas only):
