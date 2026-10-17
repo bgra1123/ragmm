@@ -243,6 +243,12 @@ good applicants wrongly denied 19.6% → 13.9% and coin-flip applicants 177 → 
 deterministic full-batch polish beats the stochastic adapter at equal compute. Polishing makes outcomes reproducible; it does not make them better than the exact model.
 Full tables, caveats and hypotheses: [`CREDIT_WITH_ADAPTER.md`](CREDIT_WITH_ADAPTER.md).
 
+## 8c. Who is wrongly refused because of the training run, by group (added later)
+
+On five train/test splits, textbook SGD flips 19–29% of decisions for applicants with unusual profiles (unemployed, housing for free, negative checking balance, no property, large long loans, ...) against
+12.5% for the rest. For group X = "housing for free", 34.6% of applicants who repaid were refused, 9.9 points above the exactly trained model's own 24.7%; with the adapter the excess falls to 3.7 points.
+Three concrete applicants, and the limits (the model's own error pattern remains), are in [`../groups/RESULTS.md`](../groups/RESULTS.md).
+
 ## 9. Try it on your own data
 
 The repository is now a package (`risk-averse-tuning` 0.3.0, NumPy and pandas only):

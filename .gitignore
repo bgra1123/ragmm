@@ -12,3 +12,4 @@ research/trees/run_*.log
 research/selection/run_*.log
 research/linesearch/run_*.log
 research/sota/run_*.log
+research/groups/run.log

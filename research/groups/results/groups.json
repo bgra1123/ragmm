@@ -1,0 +1,934 @@
+{
+  "seeds": 100,
+  "splits": 5,
+  "groups": {
+    "G1 unemployed now": {
+      "SGD": {
+        "instances": 102,
+        "flip_rate": 0.28568627450980394,
+        "wrongly_denied_rate": 0.3604838709677419,
+        "exact_wrongly_denied_rate": 0.2903225806451613,
+        "n_good": 62,
+        "coin_flip_share": 0.8431372549019608,
+        "excess_wrongly_denied": 0.07016129032258062,
+        "flip_rate_ci95": [
+          0.27538970588235295,
+          0.2958823529411765
+        ]
+      },
+      "SGD + adapter": {
+        "instances": 102,
+        "flip_rate": 0.1285294117647059,
+        "wrongly_denied_rate": 0.32387096774193547,
+        "exact_wrongly_denied_rate": 0.2903225806451613,
+        "n_good": 62,
+        "coin_flip_share": 0.4019607843137255,
+        "excess_wrongly_denied": 0.03354838709677416,
+        "flip_rate_ci95": [
+          0.12068382352941176,
+          0.1362769607843137
+        ]
+      },
+      "SGD + line search": {
+        "instances": 102,
+        "flip_rate": 0.0496078431372549,
+        "wrongly_denied_rate": 0.2990322580645161,
+        "exact_wrongly_denied_rate": 0.2903225806451613,
+        "n_good": 62,
+        "coin_flip_share": 0.1568627450980392,
+        "excess_wrongly_denied": 0.0087096774193548,
+        "flip_rate_ci95": [
+          0.04558578431372549,
+          0.05401960784313725
+        ]
+      },
+      "Adam": {
+        "instances": 102,
+        "flip_rate": 0.11647058823529412,
+        "wrongly_denied_rate": 0.32193548387096776,
+        "exact_wrongly_denied_rate": 0.2903225806451613,
+        "n_good": 62,
+        "coin_flip_share": 0.38235294117647056,
+        "excess_wrongly_denied": 0.031612903225806455,
+        "flip_rate_ci95": [
+          0.11049019607843137,
+          0.12313725490196079
+        ]
+      },
+      "Adam + adapter": {
+        "instances": 102,
+        "flip_rate": 0.06901960784313725,
+        "wrongly_denied_rate": 0.31274193548387097,
+        "exact_wrongly_denied_rate": 0.2903225806451613,
+        "n_good": 62,
+        "coin_flip_share": 0.24509803921568626,
+        "excess_wrongly_denied": 0.02241935483870966,
+        "flip_rate_ci95": [
+          0.06392156862745098,
+          0.07392156862745099
+        ]
+      },
+      "Adam + line search": {
+        "instances": 102,
+        "flip_rate": 0.022549019607843137,
+        "wrongly_denied_rate": 0.2882258064516129,
+        "exact_wrongly_denied_rate": 0.2903225806451613,
+        "n_good": 62,
+        "coin_flip_share": 0.058823529411764705,
+        "excess_wrongly_denied": -0.002096774193548423,
+        "flip_rate_ci95": [
+          0.020588235294117647,
+          0.02441176470588235
+        ]
+      }
+    },
+    "G2 job unemployed/unskilled non-resident": {
+      "SGD": {
+        "instances": 36,
+        "flip_rate": 0.25555555555555554,
+        "wrongly_denied_rate": 0.3162962962962963,
+        "exact_wrongly_denied_rate": 0.1111111111111111,
+        "n_good": 27,
+        "coin_flip_share": 0.8333333333333334,
+        "excess_wrongly_denied": 0.2051851851851852,
+        "flip_rate_ci95": [
+          0.2363888888888889,
+          0.2752777777777778
+        ]
+      },
+      "SGD + adapter": {
+        "instances": 36,
+        "flip_rate": 0.09833333333333333,
+        "wrongly_denied_rate": 0.2174074074074074,
+        "exact_wrongly_denied_rate": 0.1111111111111111,
+        "n_good": 27,
+        "coin_flip_share": 0.25,
+        "excess_wrongly_denied": 0.1062962962962963,
+        "flip_rate_ci95": [
+          0.08583333333333333,
+          0.11084027777777775
+        ]
+      },
+      "SGD + line search": {
+        "instances": 36,
+        "flip_rate": 0.04388888888888889,
+        "wrongly_denied_rate": 0.1637037037037037,
+        "exact_wrongly_denied_rate": 0.1111111111111111,
+        "n_good": 27,
+        "coin_flip_share": 0.1388888888888889,
+        "excess_wrongly_denied": 0.05259259259259261,
+        "flip_rate_ci95": [
+          0.03611111111111111,
+          0.051944444444444446
+        ]
+      },
+      "Adam": {
+        "instances": 36,
+        "flip_rate": 0.0961111111111111,
+        "wrongly_denied_rate": 0.21851851851851853,
+        "exact_wrongly_denied_rate": 0.1111111111111111,
+        "n_good": 27,
+        "coin_flip_share": 0.25,
+        "excess_wrongly_denied": 0.10740740740740742,
+        "flip_rate_ci95": [
+          0.0844375,
+          0.10833333333333334
+        ]
+      },
+      "Adam + adapter": {
+        "instances": 36,
+        "flip_rate": 0.06111111111111111,
+        "wrongly_denied_rate": 0.18777777777777777,
+        "exact_wrongly_denied_rate": 0.1111111111111111,
+        "n_good": 27,
+        "coin_flip_share": 0.19444444444444445,
+        "excess_wrongly_denied": 0.07666666666666666,
+        "flip_rate_ci95": [
+          0.050833333333333335,
+          0.07166666666666667
+        ]
+      },
+      "Adam + line search": {
+        "instances": 36,
+        "flip_rate": 0.013055555555555556,
+        "wrongly_denied_rate": 0.12851851851851853,
+        "exact_wrongly_denied_rate": 0.1111111111111111,
+        "n_good": 27,
+        "coin_flip_share": 0.027777777777777776,
+        "excess_wrongly_denied": 0.017407407407407427,
+        "flip_rate_ci95": [
+          0.010277777777777778,
+          0.015833333333333335
+        ]
+      }
+    },
+    "G3 housing for free": {
+      "SGD": {
+        "instances": 157,
+        "flip_rate": 0.2621656050955414,
+        "wrongly_denied_rate": 0.3461855670103093,
+        "exact_wrongly_denied_rate": 0.24742268041237114,
+        "n_good": 97,
+        "coin_flip_share": 0.8089171974522293,
+        "excess_wrongly_denied": 0.09876288659793814,
+        "flip_rate_ci95": [
+          0.25445859872611465,
+          0.26961783439490444
+        ]
+      },
+      "SGD + adapter": {
+        "instances": 157,
+        "flip_rate": 0.11611464968152867,
+        "wrongly_denied_rate": 0.2841237113402062,
+        "exact_wrongly_denied_rate": 0.24742268041237114,
+        "n_good": 97,
+        "coin_flip_share": 0.3885350318471338,
+        "excess_wrongly_denied": 0.036701030927835054,
+        "flip_rate_ci95": [
+          0.1113375796178344,
+          0.12057324840764332
+        ]
+      },
+      "SGD + line search": {
+        "instances": 157,
+        "flip_rate": 0.048853503184713376,
+        "wrongly_denied_rate": 0.2520618556701031,
+        "exact_wrongly_denied_rate": 0.24742268041237114,
+        "n_good": 97,
+        "coin_flip_share": 0.1337579617834395,
+        "excess_wrongly_denied": 0.004639175257731942,
+        "flip_rate_ci95": [
+          0.04579458598726115,
+          0.052038216560509554
+        ]
+      },
+      "Adam": {
+        "instances": 157,
+        "flip_rate": 0.10592356687898088,
+        "wrongly_denied_rate": 0.285979381443299,
+        "exact_wrongly_denied_rate": 0.24742268041237114,
+        "n_good": 97,
+        "coin_flip_share": 0.3821656050955414,
+        "excess_wrongly_denied": 0.03855670103092784,
+        "flip_rate_ci95": [
+          0.10121019108280255,
+          0.11076592356687898
+        ]
+      },
+      "Adam + adapter": {
+        "instances": 157,
+        "flip_rate": 0.06063694267515923,
+        "wrongly_denied_rate": 0.2656701030927835,
+        "exact_wrongly_denied_rate": 0.24742268041237114,
+        "n_good": 97,
+        "coin_flip_share": 0.18471337579617833,
+        "excess_wrongly_denied": 0.01824742268041235,
+        "flip_rate_ci95": [
+          0.05732484076433121,
+          0.06401273885350318
+        ]
+      },
+      "Adam + line search": {
+        "instances": 157,
+        "flip_rate": 0.018662420382165604,
+        "wrongly_denied_rate": 0.24484536082474226,
+        "exact_wrongly_denied_rate": 0.24742268041237114,
+        "n_good": 97,
+        "coin_flip_share": 0.050955414012738856,
+        "excess_wrongly_denied": -0.0025773195876288846,
+        "flip_rate_ci95": [
+          0.017070063694267515,
+          0.020063694267515923
+        ]
+      }
+    },
+    "G4 age < 25": {
+      "SGD": {
+        "instances": 226,
+        "flip_rate": 0.2275221238938053,
+        "wrongly_denied_rate": 0.28794117647058826,
+        "exact_wrongly_denied_rate": 0.25735294117647056,
+        "n_good": 136,
+        "coin_flip_share": 0.7389380530973452,
+        "excess_wrongly_denied": 0.030588235294117694,
+        "flip_rate_ci95": [
+          0.22159181415929205,
+          0.23331858407079645
+        ]
+      },
+      "SGD + adapter": {
+        "instances": 226,
+        "flip_rate": 0.08942477876106195,
+        "wrongly_denied_rate": 0.2464705882352941,
+        "exact_wrongly_denied_rate": 0.25735294117647056,
+        "n_good": 136,
+        "coin_flip_share": 0.30973451327433627,
+        "excess_wrongly_denied": -0.010882352941176454,
+        "flip_rate_ci95": [
+          0.0860608407079646,
+          0.09292146017699116
+        ]
+      },
+      "SGD + line search": {
+        "instances": 226,
+        "flip_rate": 0.033849557522123895,
+        "wrongly_denied_rate": 0.2549264705882353,
+        "exact_wrongly_denied_rate": 0.25735294117647056,
+        "n_good": 136,
+        "coin_flip_share": 0.09292035398230089,
+        "excess_wrongly_denied": -0.002426470588235252,
+        "flip_rate_ci95": [
+          0.03194690265486726,
+          0.03579646017699115
+        ]
+      },
+      "Adam": {
+        "instances": 226,
+        "flip_rate": 0.08230088495575222,
+        "wrongly_denied_rate": 0.24963235294117647,
+        "exact_wrongly_denied_rate": 0.25735294117647056,
+        "n_good": 136,
+        "coin_flip_share": 0.26991150442477874,
+        "excess_wrongly_denied": -0.00772058823529409,
+        "flip_rate_ci95": [
+          0.07853982300884955,
+          0.08588495575221239
+        ]
+      },
+      "Adam + adapter": {
+        "instances": 226,
+        "flip_rate": 0.048584070796460176,
+        "wrongly_denied_rate": 0.25338235294117645,
+        "exact_wrongly_denied_rate": 0.25735294117647056,
+        "n_good": 136,
+        "coin_flip_share": 0.1592920353982301,
+        "excess_wrongly_denied": -0.003970588235294115,
+        "flip_rate_ci95": [
+          0.046194690265486726,
+          0.05115154867256636
+        ]
+      },
+      "Adam + line search": {
+        "instances": 226,
+        "flip_rate": 0.009424778761061946,
+        "wrongly_denied_rate": 0.25036764705882353,
+        "exact_wrongly_denied_rate": 0.25735294117647056,
+        "n_good": 136,
+        "coin_flip_share": 0.022123893805309734,
+        "excess_wrongly_denied": -0.006985294117647034,
+        "flip_rate_ci95": [
+          0.008451327433628319,
+          0.010530973451327433
+        ]
+      }
+    },
+    "G5 not a foreign worker": {
+      "SGD": {
+        "instances": 54,
+        "flip_rate": 0.18888888888888888,
+        "wrongly_denied_rate": 0.21458333333333332,
+        "exact_wrongly_denied_rate": 0.125,
+        "n_good": 48,
+        "coin_flip_share": 0.5185185185185185,
+        "excess_wrongly_denied": 0.08958333333333332,
+        "flip_rate_ci95": [
+          0.17981018518518518,
+          0.19814814814814816
+        ]
+      },
+      "SGD + adapter": {
+        "instances": 54,
+        "flip_rate": 0.08055555555555556,
+        "wrongly_denied_rate": 0.13875,
+        "exact_wrongly_denied_rate": 0.125,
+        "n_good": 48,
+        "coin_flip_share": 0.2777777777777778,
+        "excess_wrongly_denied": 0.013750000000000012,
+        "flip_rate_ci95": [
+          0.07444444444444444,
+          0.0862962962962963
+        ]
+      },
+      "SGD + line search": {
+        "instances": 54,
+        "flip_rate": 0.02388888888888889,
+        "wrongly_denied_rate": 0.13125,
+        "exact_wrongly_denied_rate": 0.125,
+        "n_good": 48,
+        "coin_flip_share": 0.07407407407407407,
+        "excess_wrongly_denied": 0.0062500000000000056,
+        "flip_rate_ci95": [
+          0.020555555555555556,
+          0.027407407407407408
+        ]
+      },
+      "Adam": {
+        "instances": 54,
+        "flip_rate": 0.07555555555555556,
+        "wrongly_denied_rate": 0.14083333333333334,
+        "exact_wrongly_denied_rate": 0.125,
+        "n_good": 48,
+        "coin_flip_share": 0.2222222222222222,
+        "excess_wrongly_denied": 0.015833333333333338,
+        "flip_rate_ci95": [
+          0.07,
+          0.08166666666666667
+        ]
+      },
+      "Adam + adapter": {
+        "instances": 54,
+        "flip_rate": 0.04314814814814815,
+        "wrongly_denied_rate": 0.13770833333333332,
+        "exact_wrongly_denied_rate": 0.125,
+        "n_good": 48,
+        "coin_flip_share": 0.16666666666666666,
+        "excess_wrongly_denied": 0.012708333333333321,
+        "flip_rate_ci95": [
+          0.038703703703703705,
+          0.047592592592592596
+        ]
+      },
+      "Adam + line search": {
+        "instances": 54,
+        "flip_rate": 0.00037037037037037035,
+        "wrongly_denied_rate": 0.12541666666666668,
+        "exact_wrongly_denied_rate": 0.125,
+        "n_good": 48,
+        "coin_flip_share": 0.0,
+        "excess_wrongly_denied": 0.0004166666666666763,
+        "flip_rate_ci95": [
+          0.0,
+          0.000925925925925926
+        ]
+      }
+    },
+    "G6 female": {
+      "SGD": {
+        "instances": 466,
+        "flip_rate": 0.19931330472103004,
+        "wrongly_denied_rate": 0.21802469135802469,
+        "exact_wrongly_denied_rate": 0.12654320987654322,
+        "n_good": 324,
+        "coin_flip_share": 0.6244635193133047,
+        "excess_wrongly_denied": 0.09148148148148147,
+        "flip_rate_ci95": [
+          0.19557886266094418,
+          0.2028969957081545
+        ]
+      },
+      "SGD + adapter": {
+        "instances": 466,
+        "flip_rate": 0.0771030042918455,
+        "wrongly_denied_rate": 0.1469135802469136,
+        "exact_wrongly_denied_rate": 0.12654320987654322,
+        "n_good": 324,
+        "coin_flip_share": 0.2446351931330472,
+        "excess_wrongly_denied": 0.020370370370370372,
+        "flip_rate_ci95": [
+          0.07484978540772533,
+          0.07946405579399142
+        ]
+      },
+      "SGD + line search": {
+        "instances": 466,
+        "flip_rate": 0.02907725321888412,
+        "wrongly_denied_rate": 0.1337037037037037,
+        "exact_wrongly_denied_rate": 0.12654320987654322,
+        "n_good": 324,
+        "coin_flip_share": 0.08369098712446352,
+        "excess_wrongly_denied": 0.007160493827160497,
+        "flip_rate_ci95": [
+          0.027682403433476395,
+          0.0305793991416309
+        ]
+      },
+      "Adam": {
+        "instances": 466,
+        "flip_rate": 0.06899141630901287,
+        "wrongly_denied_rate": 0.14348765432098765,
+        "exact_wrongly_denied_rate": 0.12654320987654322,
+        "n_good": 324,
+        "coin_flip_share": 0.21888412017167383,
+        "excess_wrongly_denied": 0.01694444444444443,
+        "flip_rate_ci95": [
+          0.06669474248927039,
+          0.07118025751072961
+        ]
+      },
+      "Adam + adapter": {
+        "instances": 466,
+        "flip_rate": 0.03854077253218884,
+        "wrongly_denied_rate": 0.13364197530864197,
+        "exact_wrongly_denied_rate": 0.12654320987654322,
+        "n_good": 324,
+        "coin_flip_share": 0.13733905579399142,
+        "excess_wrongly_denied": 0.0070987654320987525,
+        "flip_rate_ci95": [
+          0.0369093347639485,
+          0.04019366952789699
+        ]
+      },
+      "Adam + line search": {
+        "instances": 466,
+        "flip_rate": 0.007532188841201716,
+        "wrongly_denied_rate": 0.12780864197530864,
+        "exact_wrongly_denied_rate": 0.12654320987654322,
+        "n_good": 324,
+        "coin_flip_share": 0.02145922746781116,
+        "excess_wrongly_denied": 0.0012654320987654233,
+        "flip_rate_ci95": [
+          0.006824034334763949,
+          0.008240343347639486
+        ]
+      }
+    },
+    "G7 checking account < 0 DM": {
+      "SGD": {
+        "instances": 435,
+        "flip_rate": 0.28273563218390807,
+        "wrongly_denied_rate": 0.40085201793721975,
+        "exact_wrongly_denied_rate": 0.34080717488789236,
+        "n_good": 223,
+        "coin_flip_share": 0.8850574712643678,
+        "excess_wrongly_denied": 0.06004484304932739,
+        "flip_rate_ci95": [
+          0.2774252873563218,
+          0.2883919540229885
+        ]
+      },
+      "SGD + adapter": {
+        "instances": 435,
+        "flip_rate": 0.1252183908045977,
+        "wrongly_denied_rate": 0.3467713004484305,
+        "exact_wrongly_denied_rate": 0.34080717488789236,
+        "n_good": 223,
+        "coin_flip_share": 0.4068965517241379,
+        "excess_wrongly_denied": 0.005964125560538158,
+        "flip_rate_ci95": [
+          0.12142528735632184,
+          0.12896609195402298
+        ]
+      },
+      "SGD + line search": {
+        "instances": 435,
+        "flip_rate": 0.05062068965517241,
+        "wrongly_denied_rate": 0.32762331838565023,
+        "exact_wrongly_denied_rate": 0.34080717488789236,
+        "n_good": 223,
+        "coin_flip_share": 0.13793103448275862,
+        "excess_wrongly_denied": -0.01318385650224213,
+        "flip_rate_ci95": [
+          0.048735057471264366,
+          0.05262126436781609
+        ]
+      },
+      "Adam": {
+        "instances": 435,
+        "flip_rate": 0.11482758620689655,
+        "wrongly_denied_rate": 0.34690582959641253,
+        "exact_wrongly_denied_rate": 0.34080717488789236,
+        "n_good": 223,
+        "coin_flip_share": 0.3724137931034483,
+        "excess_wrongly_denied": 0.006098654708520168,
+        "flip_rate_ci95": [
+          0.11149425287356322,
+          0.1181155172413793
+        ]
+      },
+      "Adam + adapter": {
+        "instances": 435,
+        "flip_rate": 0.06629885057471264,
+        "wrongly_denied_rate": 0.3400896860986547,
+        "exact_wrongly_denied_rate": 0.34080717488789236,
+        "n_good": 223,
+        "coin_flip_share": 0.22298850574712645,
+        "excess_wrongly_denied": -0.0007174887892376636,
+        "flip_rate_ci95": [
+          0.06406896551724138,
+          0.06859827586206896
+        ]
+      },
+      "Adam + line search": {
+        "instances": 435,
+        "flip_rate": 0.013379310344827587,
+        "wrongly_denied_rate": 0.33426008968609866,
+        "exact_wrongly_denied_rate": 0.34080717488789236,
+        "n_good": 223,
+        "coin_flip_share": 0.034482758620689655,
+        "excess_wrongly_denied": -0.006547085201793701,
+        "flip_rate_ci95": [
+          0.012528735632183909,
+          0.014252873563218391
+        ]
+      }
+    },
+    "G8 large and long loan": {
+      "SGD": {
+        "instances": 230,
+        "flip_rate": 0.23973913043478262,
+        "wrongly_denied_rate": 0.35589147286821704,
+        "exact_wrongly_denied_rate": 0.26356589147286824,
+        "n_good": 129,
+        "coin_flip_share": 0.7652173913043478,
+        "excess_wrongly_denied": 0.0923255813953488,
+        "flip_rate_ci95": [
+          0.233825,
+          0.2457391304347826
+        ]
+      },
+      "SGD + adapter": {
+        "instances": 230,
+        "flip_rate": 0.08486956521739131,
+        "wrongly_denied_rate": 0.29472868217054266,
+        "exact_wrongly_denied_rate": 0.26356589147286824,
+        "n_good": 129,
+        "coin_flip_share": 0.28695652173913044,
+        "excess_wrongly_denied": 0.031162790697674414,
+        "flip_rate_ci95": [
+          0.08165217391304348,
+          0.08808695652173913
+        ]
+      },
+      "SGD + line search": {
+        "instances": 230,
+        "flip_rate": 0.03304347826086956,
+        "wrongly_denied_rate": 0.27674418604651163,
+        "exact_wrongly_denied_rate": 0.26356589147286824,
+        "n_good": 129,
+        "coin_flip_share": 0.08695652173913043,
+        "excess_wrongly_denied": 0.01317829457364339,
+        "flip_rate_ci95": [
+          0.031130434782608695,
+          0.035
+        ]
+      },
+      "Adam": {
+        "instances": 230,
+        "flip_rate": 0.07991304347826086,
+        "wrongly_denied_rate": 0.2895348837209302,
+        "exact_wrongly_denied_rate": 0.26356589147286824,
+        "n_good": 129,
+        "coin_flip_share": 0.27391304347826084,
+        "excess_wrongly_denied": 0.025968992248061984,
+        "flip_rate_ci95": [
+          0.07678260869565218,
+          0.08326195652173912
+        ]
+      },
+      "Adam + adapter": {
+        "instances": 230,
+        "flip_rate": 0.041391304347826084,
+        "wrongly_denied_rate": 0.2791472868217054,
+        "exact_wrongly_denied_rate": 0.26356589147286824,
+        "n_good": 129,
+        "coin_flip_share": 0.14782608695652175,
+        "excess_wrongly_denied": 0.01558139534883718,
+        "flip_rate_ci95": [
+          0.03939130434782609,
+          0.043434782608695655
+        ]
+      },
+      "Adam + line search": {
+        "instances": 230,
+        "flip_rate": 0.009478260869565217,
+        "wrongly_denied_rate": 0.26961240310077517,
+        "exact_wrongly_denied_rate": 0.26356589147286824,
+        "n_good": 129,
+        "coin_flip_share": 0.030434782608695653,
+        "excess_wrongly_denied": 0.006046511627906925,
+        "flip_rate_ci95": [
+          0.008521739130434783,
+          0.010434782608695653
+        ]
+      }
+    },
+    "G9 no property": {
+      "SGD": {
+        "instances": 219,
+        "flip_rate": 0.2454337899543379,
+        "wrongly_denied_rate": 0.3310236220472441,
+        "exact_wrongly_denied_rate": 0.23622047244094488,
+        "n_good": 127,
+        "coin_flip_share": 0.7671232876712328,
+        "excess_wrongly_denied": 0.09480314960629924,
+        "flip_rate_ci95": [
+          0.23863013698630137,
+          0.25269520547945207
+        ]
+      },
+      "SGD + adapter": {
+        "instances": 219,
+        "flip_rate": 0.10406392694063928,
+        "wrongly_denied_rate": 0.27062992125984253,
+        "exact_wrongly_denied_rate": 0.23622047244094488,
+        "n_good": 127,
+        "coin_flip_share": 0.3287671232876712,
+        "excess_wrongly_denied": 0.03440944881889765,
+        "flip_rate_ci95": [
+          0.1,
+          0.10812785388127853
+        ]
+      },
+      "SGD + line search": {
+        "instances": 219,
+        "flip_rate": 0.04694063926940639,
+        "wrongly_denied_rate": 0.24511811023622046,
+        "exact_wrongly_denied_rate": 0.23622047244094488,
+        "n_good": 127,
+        "coin_flip_share": 0.1232876712328767,
+        "excess_wrongly_denied": 0.008897637795275581,
+        "flip_rate_ci95": [
+          0.044429223744292236,
+          0.049361872146118715
+        ]
+      },
+      "Adam": {
+        "instances": 219,
+        "flip_rate": 0.09191780821917808,
+        "wrongly_denied_rate": 0.26716535433070865,
+        "exact_wrongly_denied_rate": 0.23622047244094488,
+        "n_good": 127,
+        "coin_flip_share": 0.3059360730593607,
+        "excess_wrongly_denied": 0.03094488188976377,
+        "flip_rate_ci95": [
+          0.08858447488584476,
+          0.095662100456621
+        ]
+      },
+      "Adam + adapter": {
+        "instances": 219,
+        "flip_rate": 0.05442922374429224,
+        "wrongly_denied_rate": 0.2526771653543307,
+        "exact_wrongly_denied_rate": 0.23622047244094488,
+        "n_good": 127,
+        "coin_flip_share": 0.1689497716894977,
+        "excess_wrongly_denied": 0.016456692913385834,
+        "flip_rate_ci95": [
+          0.05155251141552512,
+          0.0573972602739726
+        ]
+      },
+      "Adam + line search": {
+        "instances": 219,
+        "flip_rate": 0.014840182648401826,
+        "wrongly_denied_rate": 0.23377952755905512,
+        "exact_wrongly_denied_rate": 0.23622047244094488,
+        "n_good": 127,
+        "coin_flip_share": 0.0410958904109589,
+        "excess_wrongly_denied": -0.002440944881889756,
+        "flip_rate_ci95": [
+          0.013470319634703196,
+          0.016164383561643837
+        ]
+      }
+    },
+    "G10 male divorced/separated": {
+      "SGD": {
+        "instances": 74,
+        "flip_rate": 0.2110810810810811,
+        "wrongly_denied_rate": 0.22690909090909092,
+        "exact_wrongly_denied_rate": 0.10909090909090909,
+        "n_good": 55,
+        "coin_flip_share": 0.6216216216216216,
+        "excess_wrongly_denied": 0.11781818181818184,
+        "flip_rate_ci95": [
+          0.20121283783783783,
+          0.22000337837837836
+        ]
+      },
+      "SGD + adapter": {
+        "instances": 74,
+        "flip_rate": 0.07445945945945946,
+        "wrongly_denied_rate": 0.1378181818181818,
+        "exact_wrongly_denied_rate": 0.10909090909090909,
+        "n_good": 55,
+        "coin_flip_share": 0.22972972972972974,
+        "excess_wrongly_denied": 0.028727272727272726,
+        "flip_rate_ci95": [
+          0.06918918918918919,
+          0.07972972972972973
+        ]
+      },
+      "SGD + line search": {
+        "instances": 74,
+        "flip_rate": 0.03189189189189189,
+        "wrongly_denied_rate": 0.11654545454545455,
+        "exact_wrongly_denied_rate": 0.10909090909090909,
+        "n_good": 55,
+        "coin_flip_share": 0.0945945945945946,
+        "excess_wrongly_denied": 0.007454545454545464,
+        "flip_rate_ci95": [
+          0.028648648648648647,
+          0.0351385135135135
+        ]
+      },
+      "Adam": {
+        "instances": 74,
+        "flip_rate": 0.07324324324324324,
+        "wrongly_denied_rate": 0.13727272727272727,
+        "exact_wrongly_denied_rate": 0.10909090909090909,
+        "n_good": 55,
+        "coin_flip_share": 0.25675675675675674,
+        "excess_wrongly_denied": 0.028181818181818183,
+        "flip_rate_ci95": [
+          0.06783783783783784,
+          0.07878378378378378
+        ]
+      },
+      "Adam + adapter": {
+        "instances": 74,
+        "flip_rate": 0.0377027027027027,
+        "wrongly_denied_rate": 0.12436363636363636,
+        "exact_wrongly_denied_rate": 0.10909090909090909,
+        "n_good": 55,
+        "coin_flip_share": 0.12162162162162163,
+        "excess_wrongly_denied": 0.015272727272727271,
+        "flip_rate_ci95": [
+          0.03405405405405405,
+          0.04135135135135135
+        ]
+      },
+      "Adam + line search": {
+        "instances": 74,
+        "flip_rate": 0.0024324324324324323,
+        "wrongly_denied_rate": 0.112,
+        "exact_wrongly_denied_rate": 0.10909090909090909,
+        "n_good": 55,
+        "coin_flip_share": 0.013513513513513514,
+        "excess_wrongly_denied": 0.0029090909090909167,
+        "flip_rate_ci95": [
+          0.0014864864864864865,
+          0.0035135135135135136
+        ]
+      }
+    }
+  },
+  "non_members": {
+    "SGD": {
+      "instances": 403,
+      "flip_rate": 0.1254590570719603,
+      "wrongly_denied_rate": 0.1172782874617737,
+      "exact_wrongly_denied_rate": 0.04281345565749235,
+      "n_good": 327,
+      "coin_flip_share": 0.40694789081885857
+    },
+    "SGD + adapter": {
+      "instances": 403,
+      "flip_rate": 0.039057071960297764,
+      "wrongly_denied_rate": 0.050489296636085625,
+      "exact_wrongly_denied_rate": 0.04281345565749235,
+      "n_good": 327,
+      "coin_flip_share": 0.12406947890818859
+    },
+    "SGD + line search": {
+      "instances": 403,
+      "flip_rate": 0.013349875930521091,
+      "wrongly_denied_rate": 0.04140672782874618,
+      "exact_wrongly_denied_rate": 0.04281345565749235,
+      "n_good": 327,
+      "coin_flip_share": 0.04466501240694789
+    },
+    "Adam": {
+      "instances": 403,
+      "flip_rate": 0.03441687344913151,
+      "wrongly_denied_rate": 0.04617737003058104,
+      "exact_wrongly_denied_rate": 0.04281345565749235,
+      "n_good": 327,
+      "coin_flip_share": 0.10918114143920596
+    },
+    "Adam + adapter": {
+      "instances": 403,
+      "flip_rate": 0.02129032258064516,
+      "wrongly_denied_rate": 0.04180428134556575,
+      "exact_wrongly_denied_rate": 0.04281345565749235,
+      "n_good": 327,
+      "coin_flip_share": 0.06451612903225806
+    },
+    "Adam + line search": {
+      "instances": 403,
+      "flip_rate": 0.003449131513647643,
+      "wrongly_denied_rate": 0.04275229357798165,
+      "exact_wrongly_denied_rate": 0.04281345565749235,
+      "n_good": 327,
+      "coin_flip_share": 0.01240694789081886
+    }
+  },
+  "showcase_group": "G3 housing for free",
+  "examples": [
+    {
+      "row": {
+        "status_of_existing_checking_account": "0 <= ... < 200 DM",
+        "duration_in_month": 16,
+        "credit_history": "critical account/ other credits existing (not at this bank)",
+        "purpose": "car (new)",
+        "credit_amount": 1175,
+        "savings_account_and_bonds": "... < 100 DM",
+        "present_employment_since": "unemployed",
+        "job": "unemployed/ unskilled - non-resident",
+        "housing": "for free",
+        "property": "car or other, not in attribute Savings account/bonds"
+      },
+      "repaid": true,
+      "exact_probability_repay": 0.5021215804620816,
+      "exact_decision": "approve",
+      "approval_share": {
+        "SGD": 0.47,
+        "SGD + adapter": 0.52,
+        "SGD + line search": 0.59,
+        "Adam": 0.41,
+        "Adam + adapter": 0.49,
+        "Adam + line search": 0.62
+      }
+    },
+    {
+      "row": {
+        "status_of_existing_checking_account": "... >= 200 DM / salary assignments for at least 1 year",
+        "duration_in_month": 12,
+        "credit_history": "critical account/ other credits existing (not at this bank)",
+        "purpose": "car (new)",
+        "credit_amount": 1480,
+        "savings_account_and_bonds": "500 <= ... < 1000 DM",
+        "present_employment_since": "unemployed",
+        "job": "unemployed/ unskilled - non-resident",
+        "housing": "for free",
+        "property": "unknown / no property"
+      },
+      "repaid": true,
+      "exact_probability_repay": 0.5683396077266506,
+      "exact_decision": "approve",
+      "approval_share": {
+        "SGD": 0.56,
+        "SGD + adapter": 0.74,
+        "SGD + line search": 0.9,
+        "Adam": 0.63,
+        "Adam + adapter": 0.74,
+        "Adam + line search": 1.0
+      }
+    },
+    {
+      "row": {
+        "status_of_existing_checking_account": "no checking account",
+        "duration_in_month": 24,
+        "credit_history": "existing credits paid back duly till now",
+        "purpose": "car (new)",
+        "credit_amount": 3757,
+        "savings_account_and_bonds": "... < 100 DM",
+        "present_employment_since": "... >= 7 years",
+        "job": "skilled employee / official",
+        "housing": "for free",
+        "property": "unknown / no property"
+      },
+      "repaid": true,
+      "exact_probability_repay": 0.62133663445286,
+      "exact_decision": "approve",
+      "approval_share": {
+        "SGD": 0.57,
+        "SGD + adapter": 0.81,
+        "SGD + line search": 1.0,
+        "Adam": 0.85,
+        "Adam + adapter": 0.95,
+        "Adam + line search": 1.0
+      }
+    }
+  ]
+}
