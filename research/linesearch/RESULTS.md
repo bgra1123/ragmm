@@ -46,12 +46,12 @@ problem unbounded below once any `a_i < 0`, so the entropic **risk** of the loss
 
 ## Hypotheses
 
-* **H1 mostly supported.** At 20 epochs, exact line search and R1 (θ = 1) beat the stochastic adapter on all four datasets (CVaR₅% below 1e-5 vs 0.0006–0.013).
-  At 5 epochs they win on German, Pima and Heart (10–50×) but **not on COMPAS** (adapter 0.0023 vs 0.0108), where n = 4,320 makes a full pass relatively
+* **H1 mostly supported.** At 20 epochs, exact line search and R1 (θ = 1) beat the stochastic adapter on all four datasets (CVaR₅% at most 5e-5 vs 0.0007–0.013).
+  At 5 epochs they win on German, Pima and Heart (3–50×) but **not on COMPAS** (adapter 0.0023 vs 0.0108), where n = 4,320 makes a full pass relatively
   costlier than 16-row steps. At 1 epoch the stochastic polishers win on German and COMPAS and lose on Heart and tie on Pima.
 * **H2 partly supported:** R1/R3 at θ = 5 make fewer training rows worse than the exact line search (German 0.34 vs 0.41, Heart 0.39 vs 0.43; Pima 0.48 vs 0.49,
-  COMPAS 0.49 vs 0.50) and cut the 95th-percentile per-row loss increase by 85–90% (German +0.07 vs +0.69; COMPAS +0.06 vs +0.40), **but at similar
-  budget their objective tail is 2–7× worse** (they take 4–10× smaller steps). At 20 epochs all methods have converged and the differences vanish
+  COMPAS 0.49 vs 0.50) and cut the 95th-percentile per-row loss increase by 80–90% (German +0.07 vs +0.69; COMPAS +0.06 vs +0.40), **but at the
+  same budget (1 epoch) their objective tail is 2.5–5× worse** (they take 4–6× smaller steps). At 20 epochs all methods have converged and the differences vanish
   (about half of the rows are "worse" than at the noisy stage-1 point).
 * **H3 mixed:** R3's step is smaller than the line search's at θ = 1 and 5 on every dataset; R1 at θ = 1 is not (7.0 vs 5.6 on Heart).
 * **H4 false:** R4 (risk of the new loss, step along the plain gradient) is the worst variant: it stalls (Heart CVaR₅% 0.087 at 20 epochs, German 0.015, Pima 0.018)
@@ -65,7 +65,7 @@ problem unbounded below once any `a_i < 0`, so the entropic **risk** of the loss
    improving the average), not repairing run-to-run variance.
 2. **It exposes a baseline my adapter should have been compared with: deterministic full-batch descent on the head.** For these four problems (condition number ~50–150),
    five to twenty epochs of full-gradient steps with a line search reach the optimum's neighbourhood and make the seed-to-seed tail disappear, beating the stochastic
-   adapter by 10–1,000× at 20 epochs (and by 3–50× at 5 epochs, except COMPAS). Newton or L-BFGS would be faster still. The earlier adapter gains
+   adapter by at least 70× at 20 epochs (and by 3–50× at 5 epochs, except COMPAS). Newton or L-BFGS would be faster still. The earlier adapter gains
    are real relative to continuing SGD, but **when full passes over the head are affordable, solve the head deterministically**; the stochastic adapter's role is limited
    to the regime where a handful of full passes are not available (very large n, streaming data, or one pass per update) and the first 1–5 epochs.
 3. The tail the paper measures (across runs) and the tail this proposal measures (across data points) are different and need different tests: for the second I would measure
