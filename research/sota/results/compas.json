@@ -1,0 +1,99 @@
+{
+  "dataset": "compas",
+  "n_train": 4320,
+  "n_test": 1852,
+  "configs": {
+    "XGBoost default": {
+      "units": 200,
+      "retrain_disagreement": 0.023190629171776812,
+      "coin_flip_rows": 88,
+      "auc_mean": 0.7107355008952642,
+      "changed_vs_consensus": 31.04
+    },
+    "XGBoost seed-average m=5": {
+      "units": 40,
+      "retrain_disagreement": 0.01091058869136623,
+      "coin_flip_rows": 43,
+      "auc_mean": 0.7114758249303128,
+      "changed_vs_consensus": 17.625
+    },
+    "XGBoost seed-average m=20": {
+      "units": 10,
+      "retrain_disagreement": 0.008207343412526998,
+      "coin_flip_rows": 33,
+      "auc_mean": 0.7116098647169543,
+      "changed_vs_consensus": 11.4
+    },
+    "XGBoost no subsampling": {
+      "units": 5,
+      "retrain_disagreement": 0.0,
+      "coin_flip_rows": 0,
+      "auc_mean": 0.7146664597507368,
+      "changed_vs_consensus": 28.0
+    },
+    "XGBoost + exact head refit": {
+      "units": 200,
+      "retrain_disagreement": 0.022497503717290555,
+      "coin_flip_rows": 104,
+      "auc_mean": 0.709594638761232,
+      "changed_vs_consensus": 54.225
+    },
+    "MLP default": {
+      "units": 200,
+      "retrain_disagreement": 0.046952825683493064,
+      "coin_flip_rows": 208,
+      "auc_mean": 0.7253414406756746,
+      "changed_vs_consensus": 59.475
+    },
+    "MLP seed-average m=5": {
+      "units": 40,
+      "retrain_disagreement": 0.01911654759926898,
+      "coin_flip_rows": 81,
+      "auc_mean": 0.7269853936164085,
+      "changed_vs_consensus": 23.675
+    },
+    "MLP seed-average m=20": {
+      "units": 10,
+      "retrain_disagreement": 0.00992320614350852,
+      "coin_flip_rows": 45,
+      "auc_mean": 0.7271841681097877,
+      "changed_vs_consensus": 11.5
+    },
+    "MLP + exact head refit": {
+      "units": 200,
+      "retrain_disagreement": 0.02285591022064969,
+      "coin_flip_rows": 94,
+      "auc_mean": 0.7296702218585517,
+      "changed_vs_consensus": 32.56
+    },
+    "MLP + head refit + seed-average m=5": {
+      "units": 40,
+      "retrain_disagreement": 0.009470703882150967,
+      "coin_flip_rows": 40,
+      "auc_mean": 0.7302251856658989,
+      "changed_vs_consensus": 17.225
+    },
+    "MLP + head refit + seed-average m=20": {
+      "units": 10,
+      "retrain_disagreement": 0.00497960163186945,
+      "coin_flip_rows": 20,
+      "auc_mean": 0.7303332874826444,
+      "changed_vs_consensus": 13.3
+    },
+    "Logistic regression (exact)": {
+      "units": 2,
+      "retrain_disagreement": 0.0,
+      "coin_flip_rows": 0,
+      "auc_mean": 0.7269967681142552,
+      "changed_vs_consensus": 0.0
+    },
+    "Logistic careful SGD": {
+      "units": 200,
+      "retrain_disagreement": 0.015453617981918232,
+      "coin_flip_rows": 61,
+      "auc_mean": 0.7272087805245084,
+      "changed_vs_consensus": 19.95
+    }
+  },
+  "seconds": 1952.1292798519135
+}

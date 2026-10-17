@@ -1,6 +1,6 @@
 # XGBoost and neural networks: seed instability and credit outcomes (German Credit)
 
-Design: `PLAN.md` (pre-registered). Code: `sota_experiment.py`; raw: `results/german.json` (COMPAS: see the end). 700 training and 300 held-out applicants
+Design: `PLAN.md` (pre-registered). Code: `sota_experiment.py`; raw: `results/german.json`, `results/compas.json`. 700 training and 300 held-out applicants
 (210 repaid, 90 defaulted); 200 seeds per model; scikit-learn `MLPClassifier` (64, 64), Adam, 60 epochs; XGBoost 300 trees, depth 4, subsample 0.8, colsample 0.8.
 "Exact head refit" freezes the model and re-solves its last logistic layer exactly (L2, λ = 0.01); for XGBoost the "last layer" is the leaf indicators.
 
@@ -45,11 +45,31 @@ Design: `PLAN.md` (pre-registered). Code: `sota_experiment.py`; raw: `results/ge
 | MLP avg 20 | 31.5% | 37.7% | 19.1% | 0.786 [0.758, 0.819] |
 | MLP + head refit + avg 20 | 32.9% | 35.1% | 18.3% | 0.757 [0.733, 0.798] |
 
+## COMPAS (4,320 training, 1,852 held-out; stability only)
+
+| Model | Retrain disagreement | Coin-flip rows (of 1,852) | Mean AUC |
+|---|---|---|---|
+| Logistic regression, exact | 0 | 0 | 0.727 |
+| Logistic careful SGD | 1.5% | 61 | 0.727 |
+| XGBoost default | 2.3% | 88 | 0.711 |
+| XGBoost + exact head refit | 2.2% | 104 | 0.710 |
+| XGBoost, average of 20 | 0.8% | 33 | 0.712 |
+| XGBoost, no subsampling | 0 | 0 | 0.715 |
+| MLP default | 4.7% | 208 | 0.725 |
+| **MLP + exact head refit** | **2.3%** | **94** | **0.730** |
+| MLP, average of 20 | 1.0% | 45 | 0.727 |
+| MLP + head refit + average of 5 | 0.9% | 40 | 0.730 |
+| MLP + head refit + average of 20 | **0.5%** | **20** | 0.730 |
+
+**On COMPAS the head refit works for the network** (4.7% → 2.3%, a 51% cut; AUC 0.725 → 0.730), unlike on German (15.1% → 15.0%). With 4,320 rows and a short, noisy Adam run the last layer is not
+converged and its optimization noise is a large share of the variation; on German's 700 rows it is not. The refit still does nothing for XGBoost's leaves (2.3% → 2.2%). Refit plus an average of 20 gives the lowest
+disagreement of any non-deterministic model (0.5%, below careful logistic SGD at 1.5%).
+
 ## Hypotheses
 
 * **H1 supported (German):** MLP default disagrees on 15.1% of applicants against 2.5% for careful logistic SGD.
-* **H2 not supported:** the exact head refit leaves the MLP's disagreement at 15.0% (from 15.1%) and its coin-flip applicants at 103 (from 102). The head was already converged; the variation is in the
-  hidden layers, which differ per seed. The same is true for XGBoost's leaf refit (5.5% → 6.2%).
+* **H2 mixed:** on German the exact head refit leaves the MLP's disagreement at 15.0% (from 15.1%); on COMPAS it halves it (4.7% → 2.3%). On German the head was already converged and the
+  variation is in the hidden layers, which differ per seed; on COMPAS the head's optimization noise was a large share. For XGBoost's leaf refit there is no gain on either (German 5.5% → 6.2%, COMPAS 2.3% → 2.2%).
 * **H3 supported:** averaging 20 seeds cuts disagreement 85% for XGBoost (5.5% → 0.8%) and 74% for the MLP (15.1% → 4.0%).
 * **H4 tie:** refit + average of 20 equals the average alone (4.0% and 4.0%; AUC 0.734 vs 0.733).
 * **H5 supported:** averaging 20 seeds narrows the spread of cost across retrains by 74% (XGBoost, 0.110 → 0.029) and 63% (MLP, 0.177 → 0.066) at the 50% rule.
@@ -58,17 +78,18 @@ Design: `PLAN.md` (pre-registered). Code: `sota_experiment.py`; raw: `results/ge
 
 ## What this means for applying it to XGBoost and neural networks
 
-1. **The polish idea (exact head solve) does not transfer to these models.** It leaves the variation unchanged, because their instability is in the learned structure (trees, hidden layers), not in the head.
-   For logistic models the same step removed it.
+1. **The polish idea (exact head solve) transfers only partly.** For XGBoost it never helps (the instability is in the tree structure). For the network it did nothing on German (700 rows) and halved the disagreement on COMPAS (4,320 rows),
+   where the last layer was not converged. For logistic models the same step removed the variation. Whether it helps depends on how much of the variation sits in the head: measure it first (compare disagreement before and after the refit).
 2. **What does reduce it is the old, simple remedy: average several seeds.** 20 seeds take XGBoost to 0.8% disagreement (better than careful logistic regression) and cut the MLP's by 74%;
    the single-retrain risk (spread of cost) falls by 63–74%, and accuracy improves.
-3. **The risk-averse selection and the tail report still apply, as measurement:** they say how many applicants are coin flips (36 for XGBoost, 102 for the MLP, 18 for careful logistic) and how many seeds
+3. **The tail report is the way to decide:** it also shows whether the refit helps your model.
+   **The risk-averse selection and the tail report apply as measurement:** they say how many applicants are coin flips (36 for XGBoost, 102 for the MLP, 18 for careful logistic) and how many seeds
    are enough. This is a tool for choosing the ensemble size and flagging the unstable applicants, not an optimizer.
 4. **On this small credit dataset, a regularized logistic regression is better than both under the cost-based rule** (cost 0.553 vs 0.71–0.89): XGBoost and the MLP are overconfident, so the 83% cutoff,
    which presumes calibrated probabilities, does not do what it should. Calibrating (e.g. a one-dimensional logistic fit of the scores) is a prerequisite for using them with a cost-based rule; I did not test it here.
 
 ## Caveats
 
-* German Credit is small (700 training rows), where SOTA models have little advantage; results may differ at scale. One MLP architecture and one XGBoost configuration, untuned.
+* German Credit is small (700 training rows), where SOTA models have little advantage; COMPAS (4,320 rows) shows a different pattern for the network head refit, so results depend on size. One MLP architecture and one XGBoost configuration, untuned.
 * Disagreement for averaged models is estimated from fewer units (40 for m = 5, 10 for m = 20).
 * "Consensus" is the decision of the mean probability over all 200 seeds; there is no exact optimum for these models.
