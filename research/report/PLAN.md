@@ -49,3 +49,34 @@ threshold for 5:1 default-to-lost-business cost):
 Hypotheses: **H1** RA-GMM's two error rates are both lower than textbook SGD's. **H2** the training-induced errors
 concentrate on a few characteristics (top-5% error-prone applicants carry ≥ 20% of events). **H3** (open) RA-GMM equals
 matched SGD within the bootstrap interval.
+
+## Addendum 2: credit outcomes with and without the polish step (written before running `credit_with_adapter.py`)
+
+Question (user): how does the post-training adapter change **credit outcomes** relative to the same trainers without it?
+
+Setting: German Credit as in the report (700 training, 300 held-out applicants: 210 good, 90 bad; L2 logistic regression, λ = 0.01,
+batch 16). 300 seeds. **Stage-1 trainers (no adapter = the baselines):** textbook SGD (α = 1/L, 2,000 steps); SGD + momentum 0.9 (lr 0.01);
+Adam (lr 0.001, the PyTorch default, and lr 0.01); consensus ADMM (4 blocks, 5 iterations); RA-GMM from scratch (paper, problem 51);
+carefully tuned SGD with averaging (as in the report).
+
+**With a polish step (same stage-1 weights, then B = 5 epochs of row-gradient compute = 219 minibatch steps or 5 full-batch steps):**
+* **adapter**: step and momentum from the exact EV@R model (6 pilots), as in `research/polish`;
+* **GD exact line search** (deterministic full-batch, the strong baseline found in `research/linesearch`);
+* **R1, θ = 5** (the user's risk-averse step along the full gradient);
+and a sensitivity at B = 20 epochs.
+
+Outcome metrics (held-out, thresholds 0.5 and the cost-based 5/6): good applicants wrongly denied (rate and count), bad applicants wrongly approved
+(rate and count), share of approved loans that default, expected cost per applicant (5 per default approved, 1 per good denied),
+decisions changed vs the exactly-trained model, coin-flip applicants (decision differs from the majority in ≥ 10% of seeds), and the
+errors **caused by the training run** (the retrain errs where the exact model does not). Paired bootstrap over seeds (5,000) for the
+change in wrongly denied count and in cost relative to the same stage-1 trainer without a polish.
+
+Hypotheses:
+* **H1** With the adapter, wrongly denied (at 0.5) and expected cost (at 5/6) move toward the exact model's values for every stage-1 trainer, and for the
+  worst trainers (textbook SGD, momentum, Adam 0.01) the training-induced errors fall by ≥ 50%.
+* **H2** Mean decisions changed vs the exact model fall by ≥ 50% for trainers that change ≥ 10 decisions.
+* **H3** Coin-flip applicants fall by ≥ 50% for those trainers.
+* **H4** GD exact line search at B = 5 reaches outcomes at least as close to the exact model's as the adapter for every trainer (deterministic polish).
+* **H5 (open)** Polishing cannot beat the exact model: the remaining errors equal the exact model's own (27 wrongly denied, 53 wrongly approved at 0.5),
+  so for a trainer that is already close (careful SGD) the polish changes outcomes little.
+* **H6 (open)** At the 0.5 threshold, wrongly approved defaulters may **rise** after polishing (the exact model approves 53 of the 90 defaulters).
