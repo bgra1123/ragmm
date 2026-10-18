@@ -35,3 +35,7 @@ HistGradientBoosting (300 iterations, depth 4, lr 0.1; no randomness expected) Â
 * **H7 (open)** After the best adapter combination, the SOTA models match or beat exactly-trained logistic regression on cost at the 5/6 rule on this dataset.
 
 Reported whichever way it falls; the previous XGBoost/MLP results (`research/sota`) used 200 seeds and no calibration or other models, so numbers will differ in detail.
+
+> **Deviation recorded before any result was seen.** Averaged ensembles are formed from **200 random 10-subsets of the 100 seeds** (per split) instead of 10 disjoint groups, so that
+> tail metrics (worst 5% of retrains) are estimated from a comparable number of units for every configuration; the subsets overlap, so the unit-to-unit variation is somewhat understated for averaged models.
+> Raw probabilities (`results/probs_split*.npz`) are committed; `analyze.py` computes every number.
