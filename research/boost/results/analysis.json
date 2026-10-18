@@ -1,0 +1,80 @@
+{
+  "XGBoost, 300 noisy rounds (baseline)": {
+    "units": 100,
+    "disagreement": 0.0556615039281706,
+    "coin_flip_share": 0.11777777777777777,
+    "auc": 0.800989947089947,
+    "logloss": 0.531210024064193,
+    "changed_mean": 35.04,
+    "changed_worst5": 46.0,
+    "cost_833": 0.5618222222222223,
+    "wrongly_denied_833": 0.324031746031746,
+    "wrongly_approved_833": 0.22333333333333333,
+    "default_among_approved_833": 0.12400947680814854
+  },
+  "200 noisy + 100 deterministic rounds (budget matched)": {
+    "units": 100,
+    "disagreement": 0.057498316498316486,
+    "coin_flip_share": 0.1288888888888889,
+    "auc": 0.8021774838330394,
+    "logloss": 0.5245223438910771,
+    "changed_mean": 35.95,
+    "changed_worst5": 45.4,
+    "cost_833": 0.5580555555555555,
+    "wrongly_denied_833": 0.3368253968253968,
+    "wrongly_approved_833": 0.21485185185185185,
+    "default_among_approved_833": 0.12189494461429623
+  },
+  "300 noisy + 100 deterministic rounds": {
+    "units": 100,
+    "disagreement": 0.05327003367003367,
+    "coin_flip_share": 0.12111111111111111,
+    "auc": 0.7990101116990006,
+    "logloss": 0.5539429322382274,
+    "changed_mean": 32.94,
+    "changed_worst5": 46.6,
+    "cost_833": 0.5711888888888889,
+    "wrongly_denied_833": 0.3083650793650794,
+    "wrongly_approved_833": 0.2368888888888889,
+    "default_among_approved_833": 0.12798694175916137
+  },
+  "200 noisy + 100 deterministic, line-search steps": {
+    "units": 100,
+    "disagreement": 0.1032500561167228,
+    "coin_flip_share": 0.2311111111111111,
+    "auc": 0.7713077013521459,
+    "logloss": 0.9134235256213682,
+    "changed_mean": 65.17,
+    "changed_worst5": 78.4,
+    "cost_833": 0.6986222222222223,
+    "wrongly_denied_833": 0.23565079365079367,
+    "wrongly_approved_833": 0.3557777777777778,
+    "default_among_approved_833": 0.1662844174052504
+  },
+  "200 noisy + 100 deterministic, risk-averse steps (\u03b8 = 5)": {
+    "units": 100,
+    "disagreement": 0.07704287317620649,
+    "coin_flip_share": 0.17222222222222222,
+    "auc": 0.7794159905937685,
+    "logloss": 0.7889520516051856,
+    "changed_mean": 48.34,
+    "changed_worst5": 60.0,
+    "cost_833": 0.6651777777777778,
+    "wrongly_denied_833": 0.24525396825396825,
+    "wrongly_approved_833": 0.329,
+    "default_among_approved_833": 0.15737552525061613
+  },
+  "averaging 10 seeds of the baseline (reference)": {
+    "units": 200,
+    "disagreement": 0.015541261864879955,
+    "coin_flip_share": 0.03333333333333333,
+    "auc": 0.8043916813639036,
+    "logloss": 0.5192306883781954,
+    "changed_mean": 9.68,
+    "changed_worst5": 15.3,
+    "cost_833": 0.554988888888889,
+    "wrongly_denied_833": 0.32871428571428574,
+    "wrongly_approved_833": 0.2165925925925926,
+    "default_among_approved_833": 0.12148125254061032
+  }
+}

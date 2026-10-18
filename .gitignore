@@ -14,3 +14,4 @@ research/linesearch/run_*.log
 research/sota/run_*.log
 research/groups/run.log
 research/sota2/run_*.log
+research/boost/run_*.log
