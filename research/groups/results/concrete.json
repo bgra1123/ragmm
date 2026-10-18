@@ -1,0 +1,919 @@
+{
+  "seeds": 100,
+  "splits": 5,
+  "groups": {
+    "G1 unemployed now": {
+      "member_instances": 102,
+      "repaid": 62,
+      "defaulted": 40,
+      "rules": {
+        "0.500": {
+          "SGD": {
+            "p_wrong": 0.42901960784313725,
+            "p_wrongly_denied": 0.3604838709677419,
+            "p_wrongly_approved": 0.53525,
+            "p_differs_from_exact": 0.28568627450980394,
+            "p_wrong_ci95": [
+              0.4202941176470588,
+              0.43823529411764706
+            ]
+          },
+          "SGD + adapter": {
+            "p_wrong": 0.40088235294117647,
+            "p_wrongly_denied": 0.3209677419354839,
+            "p_wrongly_approved": 0.52475,
+            "p_differs_from_exact": 0.12519607843137254,
+            "p_wrong_ci95": [
+              0.3948995098039216,
+              0.40627450980392155
+            ]
+          },
+          "SGD + line search": {
+            "p_wrong": 0.3803921568627451,
+            "p_wrongly_denied": 0.2990322580645161,
+            "p_wrongly_approved": 0.5065,
+            "p_differs_from_exact": 0.0496078431372549,
+            "p_wrong_ci95": [
+              0.37686274509803924,
+              0.3842156862745098
+            ]
+          },
+          "exact": {
+            "p_wrong": 0.37254901960784315,
+            "p_wrongly_denied": 0.2903225806451613,
+            "p_wrongly_approved": 0.5,
+            "p_differs_from_exact": 0.0
+          }
+        },
+        "0.833": {
+          "SGD": {
+            "p_wrong": 0.4476470588235294,
+            "p_wrongly_denied": 0.535483870967742,
+            "p_wrongly_approved": 0.3115,
+            "p_differs_from_exact": 0.27627450980392154,
+            "p_wrong_ci95": [
+              0.4371544117647059,
+              0.4572573529411765
+            ]
+          },
+          "SGD + adapter": {
+            "p_wrong": 0.4549019607843137,
+            "p_wrongly_denied": 0.6591935483870968,
+            "p_wrongly_approved": 0.13825,
+            "p_differs_from_exact": 0.0815686274509804,
+            "p_wrong_ci95": [
+              0.4505882352941176,
+              0.4590196078431373
+            ]
+          },
+          "SGD + line search": {
+            "p_wrong": 0.4512745098039216,
+            "p_wrongly_denied": 0.6558064516129032,
+            "p_wrongly_approved": 0.13425,
+            "p_differs_from_exact": 0.04303921568627451,
+            "p_wrong_ci95": [
+              0.4484313725490196,
+              0.453921568627451
+            ]
+          },
+          "exact": {
+            "p_wrong": 0.45098039215686275,
+            "p_wrongly_denied": 0.6774193548387096,
+            "p_wrongly_approved": 0.1,
+            "p_differs_from_exact": 0.0
+          }
+        }
+      }
+    },
+    "G2 job unemployed/unskilled non-resident": {
+      "member_instances": 36,
+      "repaid": 27,
+      "defaulted": 9,
+      "rules": {
+        "0.500": {
+          "SGD": {
+            "p_wrong": 0.3438888888888889,
+            "p_wrongly_denied": 0.3162962962962963,
+            "p_wrongly_approved": 0.4266666666666667,
+            "p_differs_from_exact": 0.25555555555555554,
+            "p_wrong_ci95": [
+              0.32555555555555554,
+              0.36277777777777775
+            ]
+          },
+          "SGD + adapter": {
+            "p_wrong": 0.2608333333333333,
+            "p_wrongly_denied": 0.21703703703703703,
+            "p_wrongly_approved": 0.39222222222222225,
+            "p_differs_from_exact": 0.09861111111111111,
+            "p_wrong_ci95": [
+              0.2497152777777778,
+              0.27166666666666667
+            ]
+          },
+          "SGD + line search": {
+            "p_wrong": 0.22944444444444445,
+            "p_wrongly_denied": 0.1637037037037037,
+            "p_wrongly_approved": 0.4266666666666667,
+            "p_differs_from_exact": 0.04388888888888889,
+            "p_wrong_ci95": [
+              0.2225,
+              0.23722222222222222
+            ]
+          },
+          "exact": {
+            "p_wrong": 0.19444444444444445,
+            "p_wrongly_denied": 0.1111111111111111,
+            "p_wrongly_approved": 0.4444444444444444,
+            "p_differs_from_exact": 0.0
+          }
+        },
+        "0.833": {
+          "SGD": {
+            "p_wrong": 0.43027777777777776,
+            "p_wrongly_denied": 0.4722222222222222,
+            "p_wrongly_approved": 0.30444444444444446,
+            "p_differs_from_exact": 0.31472222222222224,
+            "p_wrong_ci95": [
+              0.4086111111111111,
+              0.45195138888888886
+            ]
+          },
+          "SGD + adapter": {
+            "p_wrong": 0.4736111111111111,
+            "p_wrongly_denied": 0.5811111111111111,
+            "p_wrongly_approved": 0.1511111111111111,
+            "p_differs_from_exact": 0.11583333333333333,
+            "p_wrong_ci95": [
+              0.46415972222222224,
+              0.48305555555555557
+            ]
+          },
+          "SGD + line search": {
+            "p_wrong": 0.4608333333333333,
+            "p_wrongly_denied": 0.5788888888888889,
+            "p_wrongly_approved": 0.10666666666666667,
+            "p_differs_from_exact": 0.05361111111111111,
+            "p_wrong_ci95": [
+              0.4549930555555556,
+              0.4669513888888889
+            ]
+          },
+          "exact": {
+            "p_wrong": 0.5,
+            "p_wrongly_denied": 0.6296296296296297,
+            "p_wrongly_approved": 0.1111111111111111,
+            "p_differs_from_exact": 0.0
+          }
+        }
+      }
+    },
+    "G3 housing for free": {
+      "member_instances": 157,
+      "repaid": 97,
+      "defaulted": 60,
+      "rules": {
+        "0.500": {
+          "SGD": {
+            "p_wrong": 0.3778343949044586,
+            "p_wrongly_denied": 0.3461855670103093,
+            "p_wrongly_approved": 0.429,
+            "p_differs_from_exact": 0.2621656050955414,
+            "p_wrong_ci95": [
+              0.37095382165605095,
+              0.3845891719745223
+            ]
+          },
+          "SGD + adapter": {
+            "p_wrong": 0.31471337579617836,
+            "p_wrongly_denied": 0.2795876288659794,
+            "p_wrongly_approved": 0.3715,
+            "p_differs_from_exact": 0.11280254777070063,
+            "p_wrong_ci95": [
+              0.31,
+              0.31936305732484077
+            ]
+          },
+          "SGD + line search": {
+            "p_wrong": 0.29038216560509555,
+            "p_wrongly_denied": 0.2520618556701031,
+            "p_wrongly_approved": 0.35233333333333333,
+            "p_differs_from_exact": 0.048853503184713376,
+            "p_wrong_ci95": [
+              0.2878964968152866,
+              0.2929299363057325
+            ]
+          },
+          "exact": {
+            "p_wrong": 0.27388535031847133,
+            "p_wrongly_denied": 0.24742268041237114,
+            "p_wrongly_approved": 0.31666666666666665,
+            "p_differs_from_exact": 0.0
+          }
+        },
+        "0.833": {
+          "SGD": {
+            "p_wrong": 0.4291082802547771,
+            "p_wrongly_denied": 0.5549484536082474,
+            "p_wrongly_approved": 0.22566666666666665,
+            "p_differs_from_exact": 0.2429936305732484,
+            "p_wrong_ci95": [
+              0.4205732484076433,
+              0.438156050955414
+            ]
+          },
+          "SGD + adapter": {
+            "p_wrong": 0.45171974522292996,
+            "p_wrongly_denied": 0.6698969072164949,
+            "p_wrongly_approved": 0.099,
+            "p_differs_from_exact": 0.07095541401273886,
+            "p_wrong_ci95": [
+              0.4475796178343949,
+              0.45579777070063693
+            ]
+          },
+          "SGD + line search": {
+            "p_wrong": 0.45363057324840766,
+            "p_wrongly_denied": 0.6768041237113402,
+            "p_wrongly_approved": 0.09283333333333334,
+            "p_differs_from_exact": 0.039235668789808914,
+            "p_wrong_ci95": [
+              0.4507643312101911,
+              0.45636942675159237
+            ]
+          },
+          "exact": {
+            "p_wrong": 0.4713375796178344,
+            "p_wrongly_denied": 0.7216494845360825,
+            "p_wrongly_approved": 0.06666666666666667,
+            "p_differs_from_exact": 0.0
+          }
+        }
+      }
+    },
+    "G4 age < 25": {
+      "member_instances": 226,
+      "repaid": 136,
+      "defaulted": 90,
+      "rules": {
+        "0.500": {
+          "SGD": {
+            "p_wrong": 0.3997345132743363,
+            "p_wrongly_denied": 0.28794117647058826,
+            "p_wrongly_approved": 0.5686666666666667,
+            "p_differs_from_exact": 0.2275221238938053,
+            "p_wrong_ci95": [
+              0.3948230088495575,
+              0.40473561946902653
+            ]
+          },
+          "SGD + adapter": {
+            "p_wrong": 0.3845575221238938,
+            "p_wrongly_denied": 0.2475735294117647,
+            "p_wrongly_approved": 0.5915555555555555,
+            "p_differs_from_exact": 0.0902212389380531,
+            "p_wrong_ci95": [
+              0.38150331858407077,
+              0.3876991150442478
+            ]
+          },
+          "SGD + line search": {
+            "p_wrong": 0.3849115044247788,
+            "p_wrongly_denied": 0.2549264705882353,
+            "p_wrongly_approved": 0.5813333333333334,
+            "p_differs_from_exact": 0.033849557522123895,
+            "p_wrong_ci95": [
+              0.3830088495575221,
+              0.38694800884955755
+            ]
+          },
+          "exact": {
+            "p_wrong": 0.38495575221238937,
+            "p_wrongly_denied": 0.25735294117647056,
+            "p_wrongly_approved": 0.5777777777777777,
+            "p_differs_from_exact": 0.0
+          }
+        },
+        "0.833": {
+          "SGD": {
+            "p_wrong": 0.4184955752212389,
+            "p_wrongly_denied": 0.5052205882352941,
+            "p_wrongly_approved": 0.28744444444444445,
+            "p_differs_from_exact": 0.24433628318584072,
+            "p_wrong_ci95": [
+              0.41367146017699113,
+              0.42305309734513274
+            ]
+          },
+          "SGD + adapter": {
+            "p_wrong": 0.4040265486725664,
+            "p_wrongly_denied": 0.5814705882352941,
+            "p_wrongly_approved": 0.1358888888888889,
+            "p_differs_from_exact": 0.08066371681415929,
+            "p_wrong_ci95": [
+              0.40092920353982303,
+              0.4070353982300885
+            ]
+          },
+          "SGD + line search": {
+            "p_wrong": 0.39831858407079646,
+            "p_wrongly_denied": 0.58125,
+            "p_wrongly_approved": 0.1218888888888889,
+            "p_differs_from_exact": 0.047168141592920355,
+            "p_wrong_ci95": [
+              0.395929203539823,
+              0.4005320796460177
+            ]
+          },
+          "exact": {
+            "p_wrong": 0.4026548672566372,
+            "p_wrongly_denied": 0.6176470588235294,
+            "p_wrongly_approved": 0.07777777777777778,
+            "p_differs_from_exact": 0.0
+          }
+        }
+      }
+    },
+    "G5 not a foreign worker": {
+      "member_instances": 54,
+      "repaid": 48,
+      "defaulted": 6,
+      "rules": {
+        "0.500": {
+          "SGD": {
+            "p_wrong": 0.25222222222222224,
+            "p_wrongly_denied": 0.21458333333333332,
+            "p_wrongly_approved": 0.5533333333333333,
+            "p_differs_from_exact": 0.18888888888888888,
+            "p_wrong_ci95": [
+              0.2411111111111111,
+              0.2627824074074074
+            ]
+          },
+          "SGD + adapter": {
+            "p_wrong": 0.19055555555555556,
+            "p_wrongly_denied": 0.14708333333333334,
+            "p_wrongly_approved": 0.5383333333333333,
+            "p_differs_from_exact": 0.0787037037037037,
+            "p_wrong_ci95": [
+              0.18425462962962963,
+              0.19704166666666667
+            ]
+          },
+          "SGD + line search": {
+            "p_wrong": 0.16425925925925927,
+            "p_wrongly_denied": 0.13125,
+            "p_wrongly_approved": 0.42833333333333334,
+            "p_differs_from_exact": 0.02388888888888889,
+            "p_wrong_ci95": [
+              0.16092592592592592,
+              0.1677824074074074
+            ]
+          },
+          "exact": {
+            "p_wrong": 0.14814814814814814,
+            "p_wrongly_denied": 0.125,
+            "p_wrongly_approved": 0.3333333333333333,
+            "p_differs_from_exact": 0.0
+          }
+        },
+        "0.833": {
+          "SGD": {
+            "p_wrong": 0.3924074074074074,
+            "p_wrongly_denied": 0.40625,
+            "p_wrongly_approved": 0.2816666666666667,
+            "p_differs_from_exact": 0.2683333333333333,
+            "p_wrong_ci95": [
+              0.37722222222222224,
+              0.4066666666666667
+            ]
+          },
+          "SGD + adapter": {
+            "p_wrong": 0.41055555555555556,
+            "p_wrongly_denied": 0.4527083333333333,
+            "p_wrongly_approved": 0.07333333333333333,
+            "p_differs_from_exact": 0.1335185185185185,
+            "p_wrong_ci95": [
+              0.4027731481481482,
+              0.4187037037037037
+            ]
+          },
+          "SGD + line search": {
+            "p_wrong": 0.40425925925925926,
+            "p_wrongly_denied": 0.44166666666666665,
+            "p_wrongly_approved": 0.105,
+            "p_differs_from_exact": 0.12648148148148147,
+            "p_wrong_ci95": [
+              0.3987037037037037,
+              0.4098194444444444
+            ]
+          },
+          "exact": {
+            "p_wrong": 0.5,
+            "p_wrongly_denied": 0.5625,
+            "p_wrongly_approved": 0.0,
+            "p_differs_from_exact": 0.0
+          }
+        }
+      }
+    },
+    "G6 female": {
+      "member_instances": 466,
+      "repaid": 324,
+      "defaulted": 142,
+      "rules": {
+        "0.500": {
+          "SGD": {
+            "p_wrong": 0.31206008583690986,
+            "p_wrongly_denied": 0.21802469135802469,
+            "p_wrongly_approved": 0.5266197183098592,
+            "p_differs_from_exact": 0.19931330472103004,
+            "p_wrong_ci95": [
+              0.30821781115879826,
+              0.31566577253218886
+            ]
+          },
+          "SGD + adapter": {
+            "p_wrong": 0.2693991416309013,
+            "p_wrongly_denied": 0.14336419753086418,
+            "p_wrongly_approved": 0.5569718309859155,
+            "p_differs_from_exact": 0.075793991416309,
+            "p_wrong_ci95": [
+              0.26761748927038626,
+              0.27120171673819743
+            ]
+          },
+          "SGD + line search": {
+            "p_wrong": 0.2627682403433476,
+            "p_wrongly_denied": 0.1337037037037037,
+            "p_wrongly_approved": 0.5572535211267605,
+            "p_differs_from_exact": 0.02907725321888412,
+            "p_wrong_ci95": [
+              0.26163036480686697,
+              0.2640343347639485
+            ]
+          },
+          "exact": {
+            "p_wrong": 0.259656652360515,
+            "p_wrongly_denied": 0.12654320987654322,
+            "p_wrongly_approved": 0.5633802816901409,
+            "p_differs_from_exact": 0.0
+          }
+        },
+        "0.833": {
+          "SGD": {
+            "p_wrong": 0.3828540772532189,
+            "p_wrongly_denied": 0.42660493827160495,
+            "p_wrongly_approved": 0.2830281690140845,
+            "p_differs_from_exact": 0.24585836909871245,
+            "p_wrong_ci95": [
+              0.37834603004291845,
+              0.38751233905579396
+            ]
+          },
+          "SGD + adapter": {
+            "p_wrong": 0.3834549356223176,
+            "p_wrongly_denied": 0.49626543209876545,
+            "p_wrongly_approved": 0.126056338028169,
+            "p_differs_from_exact": 0.0942274678111588,
+            "p_wrong_ci95": [
+              0.3815016094420601,
+              0.3855584763948498
+            ]
+          },
+          "SGD + line search": {
+            "p_wrong": 0.37946351931330474,
+            "p_wrongly_denied": 0.49358024691358027,
+            "p_wrongly_approved": 0.11908450704225353,
+            "p_differs_from_exact": 0.05890557939914163,
+            "p_wrong_ci95": [
+              0.37802521459227467,
+              0.38083690987124463
+            ]
+          },
+          "exact": {
+            "p_wrong": 0.40772532188841204,
+            "p_wrongly_denied": 0.5524691358024691,
+            "p_wrongly_approved": 0.07746478873239436,
+            "p_differs_from_exact": 0.0
+          }
+        }
+      }
+    },
+    "G7 checking account < 0 DM": {
+      "member_instances": 435,
+      "repaid": 223,
+      "defaulted": 212,
+      "rules": {
+        "0.500": {
+          "SGD": {
+            "p_wrong": 0.40039080459770116,
+            "p_wrongly_denied": 0.40085201793721975,
+            "p_wrongly_approved": 0.3999056603773585,
+            "p_differs_from_exact": 0.28273563218390807,
+            "p_wrong_ci95": [
+              0.39655114942528735,
+              0.40457471264367817
+            ]
+          },
+          "SGD + adapter": {
+            "p_wrong": 0.3410344827586207,
+            "p_wrongly_denied": 0.3459641255605381,
+            "p_wrongly_approved": 0.33584905660377357,
+            "p_differs_from_exact": 0.1252183908045977,
+            "p_wrong_ci95": [
+              0.33832126436781607,
+              0.34370114942528734
+            ]
+          },
+          "SGD + line search": {
+            "p_wrong": 0.31360919540229887,
+            "p_wrongly_denied": 0.32762331838565023,
+            "p_wrongly_approved": 0.2988679245283019,
+            "p_differs_from_exact": 0.05062068965517241,
+            "p_wrong_ci95": [
+              0.3121379310344828,
+              0.31510344827586206
+            ]
+          },
+          "exact": {
+            "p_wrong": 0.31264367816091954,
+            "p_wrongly_denied": 0.34080717488789236,
+            "p_wrongly_approved": 0.2830188679245283,
+            "p_differs_from_exact": 0.0
+          }
+        },
+        "0.833": {
+          "SGD": {
+            "p_wrong": 0.4302758620689655,
+            "p_wrongly_denied": 0.683542600896861,
+            "p_wrongly_approved": 0.1638679245283019,
+            "p_differs_from_exact": 0.21239080459770115,
+            "p_wrong_ci95": [
+              0.426551724137931,
+              0.43420862068965516
+            ]
+          },
+          "SGD + adapter": {
+            "p_wrong": 0.46227586206896554,
+            "p_wrongly_denied": 0.855695067264574,
+            "p_wrongly_approved": 0.048443396226415095,
+            "p_differs_from_exact": 0.05749425287356322,
+            "p_wrong_ci95": [
+              0.46018333333333333,
+              0.46427586206896554
+            ]
+          },
+          "SGD + line search": {
+            "p_wrong": 0.46073563218390806,
+            "p_wrongly_denied": 0.8533632286995516,
+            "p_wrongly_approved": 0.047735849056603774,
+            "p_differs_from_exact": 0.04114942528735632,
+            "p_wrong_ci95": [
+              0.4594936781609195,
+              0.4619086206896552
+            ]
+          },
+          "exact": {
+            "p_wrong": 0.4804597701149425,
+            "p_wrongly_denied": 0.9103139013452914,
+            "p_wrongly_approved": 0.02830188679245283,
+            "p_differs_from_exact": 0.0
+          }
+        }
+      }
+    },
+    "G8 large and long loan": {
+      "member_instances": 230,
+      "repaid": 129,
+      "defaulted": 101,
+      "rules": {
+        "0.500": {
+          "SGD": {
+            "p_wrong": 0.3873913043478261,
+            "p_wrongly_denied": 0.35589147286821704,
+            "p_wrongly_approved": 0.4276237623762376,
+            "p_differs_from_exact": 0.23973913043478262,
+            "p_wrong_ci95": [
+              0.3828673913043478,
+              0.39208695652173914
+            ]
+          },
+          "SGD + adapter": {
+            "p_wrong": 0.3411304347826087,
+            "p_wrongly_denied": 0.28968992248062014,
+            "p_wrongly_approved": 0.4068316831683168,
+            "p_differs_from_exact": 0.08278260869565217,
+            "p_wrong_ci95": [
+              0.3379989130434783,
+              0.3442173913043478
+            ]
+          },
+          "SGD + line search": {
+            "p_wrong": 0.3322608695652174,
+            "p_wrongly_denied": 0.27674418604651163,
+            "p_wrongly_approved": 0.4031683168316832,
+            "p_differs_from_exact": 0.03304347826086956,
+            "p_wrong_ci95": [
+              0.3303913043478261,
+              0.33408695652173914
+            ]
+          },
+          "exact": {
+            "p_wrong": 0.3173913043478261,
+            "p_wrongly_denied": 0.26356589147286824,
+            "p_wrongly_approved": 0.38613861386138615,
+            "p_differs_from_exact": 0.0
+          }
+        },
+        "0.833": {
+          "SGD": {
+            "p_wrong": 0.41243478260869565,
+            "p_wrongly_denied": 0.5677519379844961,
+            "p_wrongly_approved": 0.21405940594059406,
+            "p_differs_from_exact": 0.22652173913043477,
+            "p_wrong_ci95": [
+              0.4079119565217391,
+              0.4167826086956522
+            ]
+          },
+          "SGD + adapter": {
+            "p_wrong": 0.4103478260869565,
+            "p_wrongly_denied": 0.6679069767441861,
+            "p_wrongly_approved": 0.08138613861386139,
+            "p_differs_from_exact": 0.06452173913043478,
+            "p_wrong_ci95": [
+              0.4072173913043478,
+              0.413479347826087
+            ]
+          },
+          "SGD + line search": {
+            "p_wrong": 0.4204782608695652,
+            "p_wrongly_denied": 0.6875193798449613,
+            "p_wrongly_approved": 0.07940594059405941,
+            "p_differs_from_exact": 0.03291304347826087,
+            "p_wrong_ci95": [
+              0.4188695652173913,
+              0.4220434782608696
+            ]
+          },
+          "exact": {
+            "p_wrong": 0.41739130434782606,
+            "p_wrongly_denied": 0.7131782945736435,
+            "p_wrongly_approved": 0.039603960396039604,
+            "p_differs_from_exact": 0.0
+          }
+        }
+      }
+    },
+    "G9 no property": {
+      "member_instances": 219,
+      "repaid": 127,
+      "defaulted": 92,
+      "rules": {
+        "0.500": {
+          "SGD": {
+            "p_wrong": 0.35447488584474884,
+            "p_wrongly_denied": 0.3310236220472441,
+            "p_wrongly_approved": 0.3868478260869565,
+            "p_differs_from_exact": 0.2454337899543379,
+            "p_wrong_ci95": [
+              0.3485376712328767,
+              0.3603675799086758
+            ]
+          },
+          "SGD + adapter": {
+            "p_wrong": 0.2921004566210046,
+            "p_wrongly_denied": 0.26448818897637794,
+            "p_wrongly_approved": 0.33021739130434785,
+            "p_differs_from_exact": 0.10004566210045662,
+            "p_wrong_ci95": [
+              0.28858105022831054,
+              0.2958036529680365
+            ]
+          },
+          "SGD + line search": {
+            "p_wrong": 0.2710502283105023,
+            "p_wrongly_denied": 0.24511811023622046,
+            "p_wrongly_approved": 0.30684782608695654,
+            "p_differs_from_exact": 0.04694063926940639,
+            "p_wrong_ci95": [
+              0.26885844748858445,
+              0.2733344748858447
+            ]
+          },
+          "exact": {
+            "p_wrong": 0.2557077625570776,
+            "p_wrongly_denied": 0.23622047244094488,
+            "p_wrongly_approved": 0.2826086956521739,
+            "p_differs_from_exact": 0.0
+          }
+        },
+        "0.833": {
+          "SGD": {
+            "p_wrong": 0.3910502283105023,
+            "p_wrongly_denied": 0.5368503937007874,
+            "p_wrongly_approved": 0.18978260869565217,
+            "p_differs_from_exact": 0.22876712328767124,
+            "p_wrong_ci95": [
+              0.3841986301369863,
+              0.3989052511415525
+            ]
+          },
+          "SGD + adapter": {
+            "p_wrong": 0.3987671232876712,
+            "p_wrongly_denied": 0.6377952755905512,
+            "p_wrongly_approved": 0.06880434782608695,
+            "p_differs_from_exact": 0.07337899543378995,
+            "p_wrong_ci95": [
+              0.3953413242009132,
+              0.4019189497716895
+            ]
+          },
+          "SGD + line search": {
+            "p_wrong": 0.39684931506849314,
+            "p_wrongly_denied": 0.6388976377952756,
+            "p_wrongly_approved": 0.06271739130434782,
+            "p_differs_from_exact": 0.04178082191780822,
+            "p_wrong_ci95": [
+              0.3941084474885845,
+              0.39963584474885844
+            ]
+          },
+          "exact": {
+            "p_wrong": 0.4155251141552511,
+            "p_wrongly_denied": 0.6850393700787402,
+            "p_wrongly_approved": 0.043478260869565216,
+            "p_differs_from_exact": 0.0
+          }
+        }
+      }
+    },
+    "G10 male divorced/separated": {
+      "member_instances": 74,
+      "repaid": 55,
+      "defaulted": 19,
+      "rules": {
+        "0.500": {
+          "SGD": {
+            "p_wrong": 0.2702702702702703,
+            "p_wrongly_denied": 0.22690909090909092,
+            "p_wrongly_approved": 0.3957894736842105,
+            "p_differs_from_exact": 0.2110810810810811,
+            "p_wrong_ci95": [
+              0.26094256756756756,
+              0.2790574324324324
+            ]
+          },
+          "SGD + adapter": {
+            "p_wrong": 0.1945945945945946,
+            "p_wrongly_denied": 0.14345454545454545,
+            "p_wrongly_approved": 0.3426315789473684,
+            "p_differs_from_exact": 0.07702702702702703,
+            "p_wrong_ci95": [
+              0.18905405405405407,
+              0.2004054054054054
+            ]
+          },
+          "SGD + line search": {
+            "p_wrong": 0.16648648648648648,
+            "p_wrongly_denied": 0.11654545454545455,
+            "p_wrongly_approved": 0.31105263157894736,
+            "p_differs_from_exact": 0.03189189189189189,
+            "p_wrong_ci95": [
+              0.16283783783783784,
+              0.17027027027027028
+            ]
+          },
+          "exact": {
+            "p_wrong": 0.14864864864864866,
+            "p_wrongly_denied": 0.10909090909090909,
+            "p_wrongly_approved": 0.2631578947368421,
+            "p_differs_from_exact": 0.0
+          }
+        },
+        "0.833": {
+          "SGD": {
+            "p_wrong": 0.3581081081081081,
+            "p_wrongly_denied": 0.432,
+            "p_wrongly_approved": 0.14421052631578948,
+            "p_differs_from_exact": 0.23540540540540542,
+            "p_wrong_ci95": [
+              0.3495912162162162,
+              0.3673006756756757
+            ]
+          },
+          "SGD + adapter": {
+            "p_wrong": 0.3783783783783784,
+            "p_wrongly_denied": 0.5074545454545455,
+            "p_wrongly_approved": 0.004736842105263158,
+            "p_differs_from_exact": 0.0827027027027027,
+            "p_wrong_ci95": [
+              0.37364864864864866,
+              0.38391891891891894
+            ]
+          },
+          "SGD + line search": {
+            "p_wrong": 0.3768918918918919,
+            "p_wrongly_denied": 0.5067272727272727,
+            "p_wrongly_approved": 0.0010526315789473684,
+            "p_differs_from_exact": 0.03256756756756757,
+            "p_wrong_ci95": [
+              0.37405405405405406,
+              0.37986824324324325
+            ]
+          },
+          "exact": {
+            "p_wrong": 0.40540540540540543,
+            "p_wrongly_denied": 0.5454545454545454,
+            "p_wrongly_approved": 0.0,
+            "p_differs_from_exact": 0.0
+          }
+        }
+      }
+    },
+    "All applicants": {
+      "member_instances": 1500,
+      "repaid": 1050,
+      "defaulted": 450,
+      "rules": {
+        "0.500": {
+          "SGD": {
+            "p_wrong": 0.3039,
+            "p_wrongly_denied": 0.2141809523809524,
+            "p_wrongly_approved": 0.5132444444444444,
+            "p_differs_from_exact": 0.19608666666666666,
+            "p_wrong_ci95": [
+              0.30143933333333334,
+              0.30612066666666665
+            ]
+          },
+          "SGD + adapter": {
+            "p_wrong": 0.2580133333333333,
+            "p_wrongly_denied": 0.14812380952380952,
+            "p_wrongly_approved": 0.5144222222222222,
+            "p_differs_from_exact": 0.07453333333333333,
+            "p_wrong_ci95": [
+              0.25700666666666666,
+              0.25911366666666663
+            ]
+          },
+          "SGD + line search": {
+            "p_wrong": 0.24688666666666667,
+            "p_wrongly_denied": 0.13812380952380954,
+            "p_wrongly_approved": 0.5006666666666667,
+            "p_differs_from_exact": 0.028553333333333333,
+            "p_wrong_ci95": [
+              0.24620666666666666,
+              0.24755333333333332
+            ]
+          },
+          "exact": {
+            "p_wrong": 0.244,
+            "p_wrongly_denied": 0.13714285714285715,
+            "p_wrongly_approved": 0.49333333333333335,
+            "p_differs_from_exact": 0.0
+          }
+        },
+        "0.833": {
+          "SGD": {
+            "p_wrong": 0.3767466666666667,
+            "p_wrongly_denied": 0.42405714285714285,
+            "p_wrongly_approved": 0.26635555555555557,
+            "p_differs_from_exact": 0.24109333333333333,
+            "p_wrong_ci95": [
+              0.3738185,
+              0.38006033333333333
+            ]
+          },
+          "SGD + adapter": {
+            "p_wrong": 0.38654,
+            "p_wrongly_denied": 0.496,
+            "p_wrongly_approved": 0.13113333333333332,
+            "p_differs_from_exact": 0.08711333333333333,
+            "p_wrong_ci95": [
+              0.38513316666666664,
+              0.38781333333333334
+            ]
+          },
+          "SGD + line search": {
+            "p_wrong": 0.38404,
+            "p_wrongly_denied": 0.4942,
+            "p_wrongly_approved": 0.127,
+            "p_differs_from_exact": 0.050293333333333336,
+            "p_wrong_ci95": [
+              0.3830395,
+              0.38502
+            ]
+          },
+          "exact": {
+            "p_wrong": 0.408,
+            "p_wrongly_denied": 0.5438095238095239,
+            "p_wrongly_approved": 0.09111111111111111,
+            "p_differs_from_exact": 0.0
+          }
+        }
+      }
+    }
+  }
+}

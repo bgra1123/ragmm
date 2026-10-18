@@ -21,11 +21,26 @@ With the textbook training settings:
 
 * each retrained model decided **55 of the 300 applicants (18%) differently** from the exactly-trained model;
 * **284 of the 300 applicants** got a different answer from at least one retrain; only 16 got the same answer every time;
-* **175 applicants (58%) were "coin-flip" applicants**: their decision changed in at least one retrain out of ten.
+* For **58% of applicants (175 of 300) the decision was different in at least 1 retrain out of 10** (an "unstable" applicant).
 
 ![How many decisions depend on the training run](figures/decisions_by_method.png)
 
 Nothing about these applicants changed. Only the luck of the training run did.
+
+## 1b. In plain numbers: the chance of a wrong decision, by type of applicant
+
+Counting a "wrong decision" as refusing someone who repaid or approving someone who defaulted, a model trained the standard way (textbook SGD) gets it wrong **30.4% of the time** across all applicants; a model without any training
+randomness would get it wrong 24.4% of the time, so **6.0 percentage points are caused by the randomness of training**. It is not spread evenly:
+
+* Applicants with **no property**: 35.4% chance of a wrong decision (25.6% without training randomness: +9.9 points from randomness).
+* Applicants with a **negative checking balance**: 40.0% (31.3%: +8.8 points).
+* Applicants living in housing **"for free"**: 37.8% (27.4%: +10.4 points).
+* Applicants who are **currently unemployed**: 42.9% (37.3%: +5.6 points).
+* Applicants asking for a **large and long loan** (over 4,000 DM and over 24 months): 38.7% (31.7%: +7.0 points).
+
+With the polish step, the part caused by randomness falls by 50–100% for every group (for example housing "for free": 37.8% → 31.5%, no-randomness floor 27.4%; no property: 35.4% → 29.2%). At the cost-based cutoff (approve only at 83%) the chance that a
+defaulter is approved is 26.6% with standard training, 9.1% without training randomness and 13.1% with the polish step (housing "for free": 22.6% → 9.9%, floor 6.7%). Tables, intervals and caveats: [`../groups/CONCRETE.md`](../groups/CONCRETE.md).
+(Group labels describe where wrong decisions land; sex, age and foreign-worker status are not model inputs.)
 
 ## 2. Why look at the tail, not the average
 
@@ -72,9 +87,9 @@ the US (89% vs 6%), in COMPAS young people with juvenile records, in bank market
 
 Because their scores move the most, their decisions are the ones that flip:
 
-* **87% of tail applicants are coin-flip applicants** (decision changes in at least 10% of retrains), against 57% of everyone else;
+* **87% of tail applicants have an unstable decision** (it differs from the majority in at least 10% of retrains), against 57% of everyone else;
 * on average their decision differs from the exactly-trained model's in **28% of retrains** (others: 18%);
-* and they can be found **before any retraining**: leverage, computed from a single fit, picks out the coin-flip
+* and they can be found **before any retraining**: leverage, computed from a single fit, picks out the unstable
   applicants with an accuracy (ROC AUC) of **0.95**.
 
 Three real applicants from the held-out data (all three **did repay**; the exactly-trained model approves all three):
@@ -85,7 +100,7 @@ Three real applicants from the held-out data (all three **did repay**; the exact
 | New-car loan, 1,175 DM over 16 months; unemployed; housed for free | **46%** | 42% |
 | TV / radio, 3,758 DM over 24 months; unemployed; no property; renting | **46%** | 72% |
 
-For these people, whether the loan is approved depends on the training run about as much as on a coin toss.
+For these people, whether the loan is approved depends heavily on the training run: about half of the retrains approve them and half refuse them.
 
 > **Disclaimer.** This report describes a statistical property of training procedures: how much a model's outputs
 > vary between training runs and which applicants are most affected. It is **not an accusation** of bias,
@@ -115,7 +130,7 @@ On this dataset RA-GMM chose a small step (1/100 of the textbook step) with stro
 
 Same 1,000 retrains, same random orders, same 300 new applicants:
 
-| Training method | Decisions changed per retrain (avg) | ... in the worst 5% of retrains | Coin-flip applicants | Accuracy | Training loss in the worst 5% (vs the exact model) | Trial runs needed |
+| Training method | Decisions changed per retrain (avg) | ... in the worst 5% of retrains | Applicants with an unstable decision (10%+ of retrains) | Accuracy | Training loss in the worst 5% (vs the exact model) | Trial runs needed |
 |---|---|---|---|---|---|---|
 | Textbook SGD | 55.2 | 78.8 | 175 | 69.0% | 0.374 | 0 |
 | **RA-GMM (paper)** | **40.0** | **59.3** | **128** | **70.9%** | **0.140** | **0** |
@@ -123,7 +138,7 @@ Same 1,000 retrains, same random orders, same 300 new applicants:
 | Carefully tuned SGD (step tuned + averaging the last half of training) | 5.7 | 10.3 | 18 | 73.3% | 0.0015 | 240 |
 
 **What RA-GMM achieves.** With no trial runs, RA-GMM cut decision changes by **15.2 per retrain** compared with the
-textbook settings (95% confidence interval 14.4 to 16.0), turned **47 coin-flip applicants** into stable ones, cut the
+textbook settings (95% confidence interval 14.4 to 16.0), made **47 more applicants stable** (decision no longer changing in 10%+ of retrains), cut the
 worst-case training loss by **63%**, and improved accuracy slightly. The same holds on the other five datasets
 (changed decisions 3.3–13.3% with RA-GMM vs 5.2–21.5% with textbook SGD, `research/gate0/RESULTS.md`).
 
@@ -132,11 +147,11 @@ worst-case training loss by **63%**, and improved accuracy slightly. The same ho
 * Plain SGD with a step size chosen to give the same average quality does just as well (difference −0.03 decisions,
   interval −0.7 to +0.6). RA-GMM's gain comes from choosing a smaller step automatically; it does not give a better
   worst case than SGD at the same average (`research/tail_analysis/RESULTS.md`).
-* Carefully tuned SGD with averaging is far better: 5.7 changed decisions and 18 coin-flip applicants. It costs 240
+* Carefully tuned SGD with averaging is far better: 5.7 changed decisions and 18 unstable applicants. It costs 240
   trial runs to tune; RA-GMM costs none. RA-GMM's practical value here is a principled no-tuning default, not the
   best possible stability.
 
-**Who still flips.** With RA-GMM, 80% of tail applicants are still coin-flip applicants (others 41%), and leverage still
+**Who still flips.** With RA-GMM, 80% of tail applicants still have an unstable decision (others 41%), and leverage still
 identifies them (ROC AUC 0.92). With carefully tuned SGD only 27% are (others 5%). Better training shrinks the problem
 but the people at risk are the same kind of people, and they can be identified in advance.
 
@@ -239,7 +254,7 @@ a rerun.
 
 Starting from each way of training (SGD, momentum, Adam, ADMM, RA-GMM, careful SGD), a short polish step (5 epochs of compute) moves credit outcomes toward those of the exactly trained
 model. For textbook SGD at the cost-based 83% rule: defaulters wrongly approved 28.5 → 16.4 per model, default rate among approved loans 18.2% → 12.6%, expected cost 0.751 → 0.595; at the 50% rule,
-good applicants wrongly denied 19.6% → 13.9% and coin-flip applicants 177 → 71. For baselines already near the exact model (careful SGD, Adam at its default learning rate) it changes little, and a
+good applicants wrongly denied 19.6% → 13.9% and applicants with an unstable decision 177 → 71. For baselines already near the exact model (careful SGD, Adam at its default learning rate) it changes little, and a
 deterministic full-batch polish beats the stochastic adapter at equal compute. Polishing makes outcomes reproducible; it does not make them better than the exact model.
 Full tables, caveats and hypotheses: [`CREDIT_WITH_ADAPTER.md`](CREDIT_WITH_ADAPTER.md).
 
@@ -261,7 +276,7 @@ ragmm applications.csv --target repaid --positive yes --drop applicant_id \
 
 * `--method ragmm` (default) trains with the paper's settings; `sgd` and `careful` are the two baselines.
 * `--report` is optional: it retrains each method 200 times on a held-out split and writes a tail report: decisions
-  changed per retrain (average and worst 5%), coin-flip rows, the profile of the tail rows, and the rows at risk found
+  changed per retrain (average and worst 5%), rows with an unstable decision, the profile of the tail rows, and the rows at risk found
   from leverage without retraining. Same disclaimer included.
 
 In Python:

@@ -194,3 +194,31 @@ def test_cli_end_to_end(tmp_path):
     m = json.loads(model.read_text())
     assert len(m["coefficients"]) == len(m["features"]) and m["method"] == "ragmm"
     assert report.read_text().startswith("# Tail report") and report.with_suffix(".json").exists()
+
+
+def test_group_risk_statements_and_consistency():
+    df = toy(400)
+    df["age"] = np.random.default_rng(1).integers(20, 70, len(df))
+    rep = tail_report(df, "label", positive="yes", methods=["sgd", "careful"], retrains=40, steps=300, drop=["age"],
+                      groups={"age under 30": lambda d: d.age < 30}, group_columns=["region"], min_group_size=10)
+    for m, res in rep.group_risk.items():
+        allr = res["All held-out rows"]
+        assert allr["rows"] == rep.summary["n_test"]
+        assert allr["p_wrong"] == pytest.approx(allr["p_wrong_exact"] + allr["excess"])
+        assert 0 <= allr["p_wrong"] <= 1 and allr["p_wrong_ci95"][0] <= allr["p_wrong"] <= allr["p_wrong_ci95"][1] + 1e-9
+        assert "age under 30" in res and any(k.startswith("region = ") for k in res)
+        # groups partition by region: row counts add up
+        assert sum(r["rows"] for k, r in res.items() if k.startswith("region = ")) <= rep.summary["n_test"]
+    md = rep.to_markdown()
+    assert "Chance of a wrong decision, by type of row" in md and "randomness of training" in md
+    for sent in rep.statements(min_rows=10):
+        assert "gives a wrong decision" in sent
+    with pytest.raises(ValueError):
+        tail_report(df, "label", retrains=20, group_columns=["nope"])
+
+
+def test_group_risk_matches_direct_count_for_exact_model_floor():
+    df = toy(300)
+    rep = tail_report(df, "label", positive="yes", methods=["careful"], retrains=20, steps=400)
+    r = rep.group_risk["careful"]["All held-out rows"]
+    assert r["p_wrong_exact"] == pytest.approx(1 - rep.summary["exact_accuracy"])

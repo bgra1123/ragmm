@@ -10,7 +10,9 @@ Everything is computed on a held-out split. Definitions:
 * a **retrain** is one training run with a different random seed (same data, same settings);
 * the **tail runs** are the 5% of retrains with the highest training objective (the "bad days");
 * a row's **decision changes** in a retrain if it differs from the decision of the exactly-trained model;
-* a **coin-flip row** gets a different decision from the majority in at least 10% of retrains;
+* an **unstable row** gets a different decision from the majority in at least 10% of retrains;
+* the **chance of a wrong decision** for a group of rows is the average, over retrains and over the group's rows, of "the decision disagrees with the row's true label"; the exactly trained model gives the floor for
+  the same rows, and the difference is the part **due to the randomness of training**;
 * **leverage** (computed from one exact fit, no retraining) measures how much a row's prediction depends on directions
   of the model that the data pins down poorly; high-leverage rows are the ones retraining moves the most.
 """
@@ -67,10 +69,25 @@ class TailReport:
     tail_rows: dict
     at_risk_rows: pd.DataFrame
     notes: list = field(default_factory=list)
+    group_risk: dict = field(default_factory=dict)
 
     def to_dict(self):
-        return dict(summary=self.summary, methods=self.methods, tail_rows=self.tail_rows,
+        return dict(summary=self.summary, methods=self.methods, tail_rows=self.tail_rows, group_risk=self.group_risk,
                     at_risk_rows=self.at_risk_rows.to_dict(orient="records"), notes=self.notes, disclaimer=DISCLAIMER)
+
+    def statements(self, method=None, top=3, min_rows=30):
+        """Plain sentences about the chance of a wrong decision for the groups most affected by training randomness."""
+        method = method or self.tail_rows["method"]
+        rows = [(g, r) for g, r in self.group_risk[method].items()
+                if g != "All held-out rows" and r["rows"] >= min_rows and r["excess"] > 0]
+        rows.sort(key=lambda t: -t[1]["excess"])
+        out = []
+        for g, r in rows[:top]:
+            out.append(f"For rows with {g} ({r['rows']} held-out rows), a model trained with {NAMES[method]} gives a wrong decision "
+                       f"{r['p_wrong']:.1%} of the time (95% interval across retrains {r['p_wrong_ci95'][0]:.1%} to "
+                       f"{r['p_wrong_ci95'][1]:.1%}). A model trained without randomness gives {r['p_wrong_exact']:.1%}; the other "
+                       f"{r['excess'] * 100:.1f} percentage points come from the randomness of training.")
+        return out
 
     def to_markdown(self) -> str:
         s = self.summary
@@ -80,13 +97,26 @@ class TailReport:
                f"Decision: positive if the predicted probability is at least {s['threshold']}.",
                f"Exactly-trained model: held-out AUC {s['exact_auc']:.3f}, positive rate {s['exact_positive_rate']:.1%}.", "",
                "## How much do outputs change between training runs?", "",
-               "| Method | Decisions changed per retrain (avg) | ... in the worst 5% of retrains | Coin-flip rows | Accuracy (avg / worst 5%) | Objective: avg / tail (CVaR 5%) / EV@R |",
+               "| Method | Decisions changed per retrain (avg) | ... in the worst 5% of retrains | Rows with an unstable decision (changes in 10%+ of retrains) | Accuracy (avg / worst 5%) | Objective: avg / tail (CVaR 5%) / EV@R |",
                "|---|---|---|---|---|---|"]
         for nm, m in self.methods.items():
             out.append(f"| {NAMES[nm]} | {m['changed_mean']:.1f} ({m['changed_mean'] / s['n_test']:.1%}) | "
                        f"{m['changed_worst5']:.1f} | {m['coin_flip_rows']} ({m['coin_flip_rows'] / s['n_test']:.1%}) | "
                        f"{m['accuracy_mean']:.3f} / {m['accuracy_worst5']:.3f} | "
                        f"{m['objective_mean']:.4f} / {m['objective_cvar5']:.4f} / {m['objective_evar']:.4f} |")
+        if self.group_risk:
+            names = list(self.methods)
+            out += ["", "## Chance of a wrong decision, by type of row", "",
+                    "Chance that a retrained model gives the wrong decision for a row of this type (in brackets: percentage points "
+                    "above a model trained without randomness, i.e. caused by the randomness of training).", "",
+                    "| Type of row | Held-out rows | " + " | ".join(NAMES[m] for m in names) + " | Model without randomness |",
+                    "|---|---|" + "---|" * (len(names) + 1)]
+            for g in self.group_risk[names[0]]:
+                r0 = self.group_risk[names[0]][g]
+                out.append(f"| {g} | {r0['rows']}{' (indicative only)' if r0['rows'] < 60 else ''} | " + " | ".join(
+                    f"{self.group_risk[m][g]['p_wrong']:.1%} ({self.group_risk[m][g]['excess'] * 100:+.1f})" for m in names)
+                    + f" | {r0['p_wrong_exact']:.1%} |")
+            out += [""] + [f"* {t}" for t in self.statements()] + [""]
         out += ["", "## Which rows are affected?", ""]
         tr = self.tail_rows
         out.append(f"Rows with the largest extra loss in the worst 5% of {NAMES[tr['method']]} retrains, compared "
@@ -103,7 +133,7 @@ class TailReport:
         for nm, m in self.methods.items():
             auc = m["leverage_auc_for_coin_flip"]
             out.append(f"* {NAMES[nm]}: {m['changes_in_top_leverage']:.0%}"
-                       + (f" (leverage identifies coin-flip rows with ROC AUC {auc:.2f})" if auc is not None else ""))
+                       + (f" (leverage identifies unstable rows with ROC AUC {auc:.2f})" if auc is not None else ""))
         out += ["", "Their row indices (in the input data) are in `at_risk_rows`.", ""]
         if self.notes:
             out += ["## Notes", ""] + [f"* {n}" for n in self.notes] + [""]
@@ -114,7 +144,13 @@ class TailReport:
 def tail_report(df: pd.DataFrame, target: str, positive=None, drop: Optional[Iterable[str]] = None,
                 methods: Iterable[str] = ("ragmm", "sgd", "careful"), retrains: int = 200, threshold: float = 0.5,
                 test_size: float = 0.3, lam: float = 0.01, steps: int = 2000, batch_size: int = 16,
-                zeta: float = 0.05, top_fraction: float = 0.10, seed: int = 0) -> TailReport:
+                zeta: float = 0.05, top_fraction: float = 0.10, seed: int = 0, groups: Optional[dict] = None,
+                group_columns: Optional[Iterable[str]] = None, min_group_size: int = 30) -> TailReport:
+    """
+    ``groups`` maps a name to a function ``f(held_out_dataframe) -> boolean mask`` (any rule, including columns that are not model
+    inputs such as age or sex); ``group_columns`` adds one group per value of each listed column that has at least
+    ``min_group_size`` held-out rows. The report then states the chance of a wrong decision for each group.
+    """
     methods = list(methods)
     bad = [m for m in methods if m not in METHODS]
     if bad or not methods:
@@ -138,7 +174,7 @@ def tail_report(df: pd.DataFrame, target: str, positive=None, drop: Optional[Ite
     top_lev[np.argsort(-lev)[:k_top]] = True
     idx = batch_indices(range(seed, seed + retrains), steps, len(ytr), batch_size)
 
-    out, per = {}, {}
+    out, per, decs = {}, {}, {}
     for m in methods:
         params, info = choose_parameters(m, Xtr, ytr, lam, steps, batch_size, zeta)
         W = train_gmm(Xtr, ytr, lam, idx, params["alpha"], params["beta"], params["gamma"], params["tail_average"])
@@ -165,6 +201,7 @@ def tail_report(df: pd.DataFrame, target: str, positive=None, drop: Optional[Ite
                       changes_in_top_leverage=float(flipprob[top_lev].sum() / max(flipprob.sum(), 1e-12)),
                       leverage_auc_for_coin_flip=_auc(lev, coin))
         per[m] = dict(excess=excess, flipprob=flipprob)
+        decs[m] = dec
 
     # profile of the tail rows for the method with the most decision changes (the most informative tail)
     ref = max(methods, key=lambda m: out[m]["changed_mean"])
@@ -182,6 +219,37 @@ def tail_report(df: pd.DataFrame, target: str, positive=None, drop: Optional[Ite
                      flip_prob_rest=float(per[ref]["flipprob"][~top].mean()),
                      leverage_ratio=float(np.median(lev[top]) / max(np.median(lev[~top]), 1e-300)),
                      row_index=[int(i) for i in np.flatnonzero(test)[top]])
+    # chance of a wrong decision by group
+    spec = {"All held-out rows": np.ones(len(yte), bool)}
+    for c in (group_columns or []):
+        if c not in raw.columns:
+            raise ValueError(f"group column {c!r} not in the data")
+        for v, cnt in raw[c].value_counts().items():
+            if cnt >= min_group_size:
+                spec[f"{c} = {v}"] = (raw[c] == v).to_numpy()
+    for name, f in (groups or {}).items():
+        spec[name] = np.asarray(f(raw), bool)
+    truth = yte > 0
+    gen = np.random.default_rng(seed)
+    group_risk = {}
+    for m in methods:
+        D = decs[m]
+        wrong = np.where(truth[None], ~D, D)
+        wrong_exact = np.where(truth, ~exact_dec, exact_dec)
+        res = {}
+        for g, mk in spec.items():
+            if mk.sum() == 0:
+                continue
+            w = wrong[:, mk]
+            boots = [w[j].mean() for j in (gen.integers(0, len(w), len(w)) for _ in range(500))]
+            pos_m, neg_m = mk & truth, mk & ~truth
+            res[g] = dict(rows=int(mk.sum()), p_wrong=float(w.mean()), p_wrong_exact=float(wrong_exact[mk].mean()),
+                          excess=float(w.mean() - wrong_exact[mk].mean()),
+                          p_wrong_ci95=[float(np.quantile(boots, .025)), float(np.quantile(boots, .975))],
+                          p_negative_given_positive=float((~D[:, pos_m]).mean()) if pos_m.any() else None,
+                          p_positive_given_negative=float(D[:, neg_m].mean()) if neg_m.any() else None,
+                          p_differs_from_exact=float((D[:, mk] != exact_dec[mk][None]).mean()))
+        group_risk[m] = res
     test_index = np.flatnonzero(test)
     at_risk = pd.DataFrame(dict(row_index=test_index[top_lev], leverage=lev[top_lev],
                                 exact_probability=p_star[top_lev])).sort_values("leverage", ascending=False)
@@ -197,5 +265,6 @@ def tail_report(df: pd.DataFrame, target: str, positive=None, drop: Optional[Ite
     summary = dict(target=target, positive=pos if not isinstance(pos, np.generic) else pos.item(),
                    n_train=int(len(ytr)), n_test=int(len(yte)), n_features=int(Xtr.shape[1]),
                    retrains=retrains, threshold=threshold, lam=lam, steps=steps, batch_size=batch_size,
-                   exact_auc=_auc(p_star, yte > 0), exact_positive_rate=float(exact_dec.mean()))
-    return TailReport(summary, out, tail_rows, at_risk, notes)
+                   exact_auc=_auc(p_star, yte > 0), exact_positive_rate=float(exact_dec.mean()),
+                   exact_accuracy=float((exact_dec == (yte > 0)).mean()))
+    return TailReport(summary, out, tail_rows, at_risk, notes, group_risk)
