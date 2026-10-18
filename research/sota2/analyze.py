@@ -61,7 +61,6 @@ def main():
         for thr in (0.5, 5 / 6):
             A = P >= thr
             wd, wa = (~A) & good[None], A & (~good)[None]
-            cost = (5.0 * wa.sum(1) + wd.sum(1)) / len(y) * 3        # per applicant over 3 splits: sums over 900 applicants -> divide by 900 and * 3 -> per 300-split normalisation not needed
             cost = (5.0 * wa.sum(1) + wd.sum(1)) / len(y)
             k5 = max(1, int(round(0.05 * S)))
             r[f"{thr:.3f}"] = dict(wrongly_denied=float(wd.sum(1).mean() / good.sum()), wrongly_approved=float(wa.sum(1).mean() / (~good).sum()),

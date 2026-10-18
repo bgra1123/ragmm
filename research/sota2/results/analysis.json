@@ -1,0 +1,2306 @@
+{
+  "Logistic regression, exact": {
+    "0.500": {
+      "wrongly_denied": 0.12222222222222222,
+      "wrongly_approved": 0.5296296296296297,
+      "default_among_approved": 0.20545977011494254,
+      "cost": 0.88,
+      "cost_cvar5": 0.88,
+      "cost_p05": 0.88,
+      "cost_p95": 0.88
+    },
+    "0.833": {
+      "wrongly_denied": 0.5031746031746032,
+      "wrongly_approved": 0.0962962962962963,
+      "default_among_approved": 0.07669616519174041,
+      "cost": 0.49666666666666665,
+      "cost_cvar5": 0.49666666666666665,
+      "cost_p05": 0.49666666666666665,
+      "cost_p95": 0.49666666666666665
+    },
+    "units": 2,
+    "disagreement": 0.0,
+    "coin_flip_share": 0.0,
+    "changed_mean": 0.0,
+    "changed_worst5": 0.0,
+    "auc": 0.7918400940623163,
+    "groups": {
+      "G1 unemployed now": {
+        "flip_rate": 0.0,
+        "wrongly_denied": 0.2564102564102564
+      },
+      "G2 job unemployed/unskilled non-resident": {
+        "flip_rate": 0.0,
+        "wrongly_denied": 0.15789473684210525
+      },
+      "G3 housing for free": {
+        "flip_rate": 0.0,
+        "wrongly_denied": 0.16666666666666666
+      },
+      "G4 age < 25": {
+        "flip_rate": 0.0,
+        "wrongly_denied": 0.2125
+      },
+      "G5 not a foreign worker": {
+        "flip_rate": 0.0,
+        "wrongly_denied": 0.14285714285714285
+      },
+      "G6 female": {
+        "flip_rate": 0.0,
+        "wrongly_denied": 0.09947643979057591
+      },
+      "G7 checking account < 0 DM": {
+        "flip_rate": 0.0,
+        "wrongly_denied": 0.34615384615384615
+      },
+      "G8 large and long loan": {
+        "flip_rate": 0.0,
+        "wrongly_denied": 0.23943661971830985
+      },
+      "G9 no property": {
+        "flip_rate": 0.0,
+        "wrongly_denied": 0.1791044776119403
+      },
+      "G10 male divorced/separated": {
+        "flip_rate": 0.0,
+        "wrongly_denied": 0.15789473684210525
+      },
+      "others": {
+        "flip_rate": 0.0,
+        "wrongly_denied": 0.035
+      }
+    }
+  },
+  "Logistic SGD (no adapter)": {
+    "0.500": {
+      "wrongly_denied": 0.1954126984126984,
+      "wrongly_approved": 0.5231111111111112,
+      "default_among_approved": 0.21768778948775855,
+      "cost": 0.9214555555555555,
+      "cost_cvar5": 1.0426666666666666,
+      "cost_p05": 0.8427777777777778,
+      "cost_p95": 1.0235555555555556
+    },
+    "0.833": {
+      "wrongly_denied": 0.39866666666666667,
+      "wrongly_approved": 0.27244444444444443,
+      "default_among_approved": 0.16233659151323507,
+      "cost": 0.6877333333333334,
+      "cost_cvar5": 0.804,
+      "cost_p05": 0.6120555555555556,
+      "cost_p95": 0.7712777777777777
+    },
+    "units": 100,
+    "disagreement": 0.24890347923681255,
+    "coin_flip_share": 0.58,
+    "changed_mean": 161.73,
+    "changed_worst5": 195.6,
+    "auc": 0.7235054673721341,
+    "groups": {
+      "G1 unemployed now": {
+        "flip_rate": 0.24639344262295082,
+        "wrongly_denied": 0.31384615384615383
+      },
+      "G2 job unemployed/unskilled non-resident": {
+        "flip_rate": 0.24666666666666667,
+        "wrongly_denied": 0.35368421052631577
+      },
+      "G3 housing for free": {
+        "flip_rate": 0.24839506172839507,
+        "wrongly_denied": 0.283125
+      },
+      "G4 age < 25": {
+        "flip_rate": 0.21210526315789474,
+        "wrongly_denied": 0.256375
+      },
+      "G5 not a foreign worker": {
+        "flip_rate": 0.145625,
+        "wrongly_denied": 0.18535714285714286
+      },
+      "G6 female": {
+        "flip_rate": 0.1829136690647482,
+        "wrongly_denied": 0.18895287958115184
+      },
+      "G7 checking account < 0 DM": {
+        "flip_rate": 0.2683333333333333,
+        "wrongly_denied": 0.40476923076923077
+      },
+      "G8 large and long loan": {
+        "flip_rate": 0.22282442748091602,
+        "wrongly_denied": 0.31380281690140843
+      },
+      "G9 no property": {
+        "flip_rate": 0.23052173913043478,
+        "wrongly_denied": 0.2892537313432836
+      },
+      "G10 male divorced/separated": {
+        "flip_rate": 0.213921568627451,
+        "wrongly_denied": 0.24710526315789474
+      },
+      "others": {
+        "flip_rate": 0.11146938775510204,
+        "wrongly_denied": 0.09985
+      }
+    }
+  },
+  "Logistic SGD + polish adapter": {
+    "0.500": {
+      "wrongly_denied": 0.13415873015873014,
+      "wrongly_approved": 0.5333703703703704,
+      "default_among_approved": 0.20880912463863208,
+      "cost": 0.8939666666666666,
+      "cost_cvar5": 0.953111111111111,
+      "cost_p05": 0.8466666666666667,
+      "cost_p95": 0.9389444444444445
+    },
+    "0.833": {
+      "wrongly_denied": 0.4592698412698412,
+      "wrongly_approved": 0.13614814814814813,
+      "default_among_approved": 0.09726506839251808,
+      "cost": 0.5257111111111111,
+      "cost_cvar5": 0.5766666666666668,
+      "cost_p05": 0.48994444444444446,
+      "cost_p95": 0.5555555555555556
+    },
+    "units": 100,
+    "disagreement": 0.08524107744107745,
+    "coin_flip_share": 0.2011111111111111,
+    "changed_mean": 53.91,
+    "changed_worst5": 67.2,
+    "auc": 0.7825831863609642,
+    "groups": {
+      "G1 unemployed now": {
+        "flip_rate": 0.08672131147540983,
+        "wrongly_denied": 0.2925641025641026
+      },
+      "G2 job unemployed/unskilled non-resident": {
+        "flip_rate": 0.095,
+        "wrongly_denied": 0.2710526315789474
+      },
+      "G3 housing for free": {
+        "flip_rate": 0.09604938271604939,
+        "wrongly_denied": 0.20479166666666668
+      },
+      "G4 age < 25": {
+        "flip_rate": 0.08,
+        "wrongly_denied": 0.210625
+      },
+      "G5 not a foreign worker": {
+        "flip_rate": 0.06,
+        "wrongly_denied": 0.1432142857142857
+      },
+      "G6 female": {
+        "flip_rate": 0.06003597122302158,
+        "wrongly_denied": 0.11418848167539267
+      },
+      "G7 checking account < 0 DM": {
+        "flip_rate": 0.10767441860465116,
+        "wrongly_denied": 0.3587692307692308
+      },
+      "G8 large and long loan": {
+        "flip_rate": 0.06916030534351145,
+        "wrongly_denied": 0.2571830985915493
+      },
+      "G9 no property": {
+        "flip_rate": 0.08582608695652173,
+        "wrongly_denied": 0.21850746268656718
+      },
+      "G10 male divorced/separated": {
+        "flip_rate": 0.07588235294117647,
+        "wrongly_denied": 0.1713157894736842
+      },
+      "others": {
+        "flip_rate": 0.028081632653061225,
+        "wrongly_denied": 0.03865
+      }
+    }
+  },
+  "Logistic SGD + line search": {
+    "0.500": {
+      "wrongly_denied": 0.1262063492063492,
+      "wrongly_approved": 0.533037037037037,
+      "default_among_approved": 0.20724580762449146,
+      "cost": 0.8878999999999998,
+      "cost_cvar5": 0.9142222222222223,
+      "cost_p05": 0.8632777777777777,
+      "cost_p95": 0.9079444444444444
+    },
+    "0.833": {
+      "wrongly_denied": 0.4529206349206349,
+      "wrongly_approved": 0.13548148148148148,
+      "default_among_approved": 0.09587426115292748,
+      "cost": 0.5202666666666667,
+      "cost_cvar5": 0.5453333333333333,
+      "cost_p05": 0.5021666666666667,
+      "cost_p95": 0.5433333333333333
+    },
+    "units": 100,
+    "disagreement": 0.033237037037037044,
+    "coin_flip_share": 0.07555555555555556,
+    "changed_mean": 20.79,
+    "changed_worst5": 30.8,
+    "auc": 0.7882649029982364,
+    "groups": {
+      "G1 unemployed now": {
+        "flip_rate": 0.03163934426229508,
+        "wrongly_denied": 0.2774358974358974
+      },
+      "G2 job unemployed/unskilled non-resident": {
+        "flip_rate": 0.05583333333333333,
+        "wrongly_denied": 0.22842105263157894
+      },
+      "G3 housing for free": {
+        "flip_rate": 0.049135802469135806,
+        "wrongly_denied": 0.17541666666666667
+      },
+      "G4 age < 25": {
+        "flip_rate": 0.02526315789473684,
+        "wrongly_denied": 0.219375
+      },
+      "G5 not a foreign worker": {
+        "flip_rate": 0.0215625,
+        "wrongly_denied": 0.14214285714285715
+      },
+      "G6 female": {
+        "flip_rate": 0.023741007194244605,
+        "wrongly_denied": 0.10554973821989529
+      },
+      "G7 checking account < 0 DM": {
+        "flip_rate": 0.04368217054263566,
+        "wrongly_denied": 0.3412307692307692
+      },
+      "G8 large and long loan": {
+        "flip_rate": 0.027404580152671755,
+        "wrongly_denied": 0.24816901408450703
+      },
+      "G9 no property": {
+        "flip_rate": 0.04382608695652174,
+        "wrongly_denied": 0.19567164179104476
+      },
+      "G10 male divorced/separated": {
+        "flip_rate": 0.03411764705882353,
+        "wrongly_denied": 0.15973684210526315
+      },
+      "others": {
+        "flip_rate": 0.009428571428571429,
+        "wrongly_denied": 0.035
+      }
+    }
+  },
+  "XGBoost (no adapter)": {
+    "0.500": {
+      "wrongly_denied": 0.13117460317460317,
+      "wrongly_approved": 0.4852592592592593,
+      "default_among_approved": 0.1931070917961634,
+      "cost": 0.8197111111111112,
+      "cost_cvar5": 0.8615555555555556,
+      "cost_p05": 0.7844444444444445,
+      "cost_p95": 0.8566666666666667
+    },
+    "0.833": {
+      "wrongly_denied": 0.324031746031746,
+      "wrongly_approved": 0.22333333333333333,
+      "default_among_approved": 0.12400947680814854,
+      "cost": 0.5618222222222223,
+      "cost_cvar5": 0.6008888888888888,
+      "cost_p05": 0.5355555555555556,
+      "cost_p95": 0.589
+    },
+    "units": 100,
+    "disagreement": 0.0556615039281706,
+    "coin_flip_share": 0.11777777777777777,
+    "changed_mean": 35.04,
+    "changed_worst5": 46.0,
+    "auc": 0.800989947089947,
+    "groups": {
+      "G1 unemployed now": {
+        "flip_rate": 0.038524590163934426,
+        "wrongly_denied": 0.23333333333333334
+      },
+      "G2 job unemployed/unskilled non-resident": {
+        "flip_rate": 0.009166666666666667,
+        "wrongly_denied": 0.1631578947368421
+      },
+      "G3 housing for free": {
+        "flip_rate": 0.03925925925925926,
+        "wrongly_denied": 0.18291666666666667
+      },
+      "G4 age < 25": {
+        "flip_rate": 0.04954887218045113,
+        "wrongly_denied": 0.151875
+      },
+      "G5 not a foreign worker": {
+        "flip_rate": 0.0225,
+        "wrongly_denied": 0.025357142857142856
+      },
+      "G6 female": {
+        "flip_rate": 0.028992805755395683,
+        "wrongly_denied": 0.12727748691099477
+      },
+      "G7 checking account < 0 DM": {
+        "flip_rate": 0.057015503875968994,
+        "wrongly_denied": 0.3310769230769231
+      },
+      "G8 large and long loan": {
+        "flip_rate": 0.05053435114503817,
+        "wrongly_denied": 0.2971830985915493
+      },
+      "G9 no property": {
+        "flip_rate": 0.036608695652173916,
+        "wrongly_denied": 0.11134328358208956
+      },
+      "G10 male divorced/separated": {
+        "flip_rate": 0.04,
+        "wrongly_denied": 0.2236842105263158
+      },
+      "others": {
+        "flip_rate": 0.030571428571428572,
+        "wrongly_denied": 0.06525
+      }
+    }
+  },
+  "XGBoost + averaging (10 seeds)": {
+    "0.500": {
+      "wrongly_denied": 0.130015873015873,
+      "wrongly_approved": 0.4868148148148148,
+      "default_among_approved": 0.19342172229233623,
+      "cost": 0.8212333333333334,
+      "cost_cvar5": 0.8433333333333334,
+      "cost_p05": 0.8022222222222222,
+      "cost_p95": 0.8389444444444445
+    },
+    "0.833": {
+      "wrongly_denied": 0.32871428571428574,
+      "wrongly_approved": 0.2165925925925926,
+      "default_among_approved": 0.12148125254061032,
+      "cost": 0.554988888888889,
+      "cost_cvar5": 0.5723333333333334,
+      "cost_p05": 0.5388333333333333,
+      "cost_p95": 0.57
+    },
+    "units": 200,
+    "disagreement": 0.015541261864879955,
+    "coin_flip_share": 0.03333333333333333,
+    "changed_mean": 9.68,
+    "changed_worst5": 15.3,
+    "auc": 0.804391607877719,
+    "groups": {
+      "G1 unemployed now": {
+        "flip_rate": 0.01540983606557377,
+        "wrongly_denied": 0.22423076923076923
+      },
+      "G2 job unemployed/unskilled non-resident": {
+        "flip_rate": 0.0,
+        "wrongly_denied": 0.15789473684210525
+      },
+      "G3 housing for free": {
+        "flip_rate": 0.011728395061728396,
+        "wrongly_denied": 0.1771875
+      },
+      "G4 age < 25": {
+        "flip_rate": 0.014586466165413535,
+        "wrongly_denied": 0.15225
+      },
+      "G5 not a foreign worker": {
+        "flip_rate": 0.00796875,
+        "wrongly_denied": 0.009107142857142857
+      },
+      "G6 female": {
+        "flip_rate": 0.0066546762589928055,
+        "wrongly_denied": 0.12452879581151832
+      },
+      "G7 checking account < 0 DM": {
+        "flip_rate": 0.018837209302325582,
+        "wrongly_denied": 0.3348076923076923
+      },
+      "G8 large and long loan": {
+        "flip_rate": 0.00801526717557252,
+        "wrongly_denied": 0.2925352112676056
+      },
+      "G9 no property": {
+        "flip_rate": 0.01191304347826087,
+        "wrongly_denied": 0.1064179104477612
+      },
+      "G10 male divorced/separated": {
+        "flip_rate": 0.005,
+        "wrongly_denied": 0.21473684210526317
+      },
+      "others": {
+        "flip_rate": 0.008591836734693877,
+        "wrongly_denied": 0.0686
+      }
+    }
+  },
+  "XGBoost + calibration": {
+    "0.500": {
+      "wrongly_denied": 0.07266666666666667,
+      "wrongly_approved": 0.6385185185185185,
+      "default_among_approved": 0.22779395219393564,
+      "cost": 1.0086444444444445,
+      "cost_cvar5": 1.0773333333333333,
+      "cost_p05": 0.9620555555555556,
+      "cost_p95": 1.0571666666666666
+    },
+    "0.833": {
+      "wrongly_denied": 0.6210952380952381,
+      "wrongly_approved": 0.06333333333333334,
+      "default_among_approved": 0.06669829896836277,
+      "cost": 0.5297666666666666,
+      "cost_cvar5": 0.5564444444444445,
+      "cost_p05": 0.5099444444444444,
+      "cost_p95": 0.55
+    },
+    "units": 100,
+    "disagreement": 0.054531986531986536,
+    "coin_flip_share": 0.12666666666666668,
+    "changed_mean": 35.06,
+    "changed_worst5": 45.2,
+    "auc": 0.7999384479717813,
+    "groups": {
+      "G1 unemployed now": {
+        "flip_rate": 0.054754098360655735,
+        "wrongly_denied": 0.1723076923076923
+      },
+      "G2 job unemployed/unskilled non-resident": {
+        "flip_rate": 0.00875,
+        "wrongly_denied": 0.14684210526315788
+      },
+      "G3 housing for free": {
+        "flip_rate": 0.05,
+        "wrongly_denied": 0.13395833333333335
+      },
+      "G4 age < 25": {
+        "flip_rate": 0.04616541353383458,
+        "wrongly_denied": 0.0665
+      },
+      "G5 not a foreign worker": {
+        "flip_rate": 0.014375,
+        "wrongly_denied": 0.00035714285714285714
+      },
+      "G6 female": {
+        "flip_rate": 0.040827338129496404,
+        "wrongly_denied": 0.08057591623036649
+      },
+      "G7 checking account < 0 DM": {
+        "flip_rate": 0.0662015503875969,
+        "wrongly_denied": 0.21323076923076922
+      },
+      "G8 large and long loan": {
+        "flip_rate": 0.06656488549618321,
+        "wrongly_denied": 0.1919718309859155
+      },
+      "G9 no property": {
+        "flip_rate": 0.03930434782608696,
+        "wrongly_denied": 0.08134328358208955
+      },
+      "G10 male divorced/separated": {
+        "flip_rate": 0.07450980392156863,
+        "wrongly_denied": 0.13789473684210526
+      },
+      "others": {
+        "flip_rate": 0.01657142857142857,
+        "wrongly_denied": 0.01895
+      }
+    }
+  },
+  "XGBoost + calibration + averaging": {
+    "0.500": {
+      "wrongly_denied": 0.06956349206349206,
+      "wrongly_approved": 0.6380740740740741,
+      "default_among_approved": 0.2271353243186967,
+      "cost": 1.0058055555555554,
+      "cost_cvar5": 1.0363333333333333,
+      "cost_p05": 0.9844444444444445,
+      "cost_p95": 1.0289444444444444
+    },
+    "0.833": {
+      "wrongly_denied": 0.6179761904761905,
+      "wrongly_approved": 0.060500000000000005,
+      "default_among_approved": 0.06353947877727752,
+      "cost": 0.5233333333333333,
+      "cost_cvar5": 0.5361111111111112,
+      "cost_p05": 0.5122222222222222,
+      "cost_p95": 0.5322222222222223
+    },
+    "units": 200,
+    "disagreement": 0.017484812953657176,
+    "coin_flip_share": 0.03888888888888889,
+    "changed_mean": 11.225,
+    "changed_worst5": 17.5,
+    "auc": 0.8036784244562023,
+    "groups": {
+      "G1 unemployed now": {
+        "flip_rate": 0.015901639344262294,
+        "wrongly_denied": 0.17051282051282052
+      },
+      "G2 job unemployed/unskilled non-resident": {
+        "flip_rate": 0.00020833333333333335,
+        "wrongly_denied": 0.15763157894736843
+      },
+      "G3 housing for free": {
+        "flip_rate": 0.019012345679012346,
+        "wrongly_denied": 0.13822916666666665
+      },
+      "G4 age < 25": {
+        "flip_rate": 0.016428571428571428,
+        "wrongly_denied": 0.0654375
+      },
+      "G5 not a foreign worker": {
+        "flip_rate": 0.0021875,
+        "wrongly_denied": 0.0
+      },
+      "G6 female": {
+        "flip_rate": 0.014658273381294964,
+        "wrongly_denied": 0.08390052356020943
+      },
+      "G7 checking account < 0 DM": {
+        "flip_rate": 0.01936046511627907,
+        "wrongly_denied": 0.21665384615384614
+      },
+      "G8 large and long loan": {
+        "flip_rate": 0.025114503816793893,
+        "wrongly_denied": 0.18422535211267604
+      },
+      "G9 no property": {
+        "flip_rate": 0.014565217391304348,
+        "wrongly_denied": 0.08365671641791045
+      },
+      "G10 male divorced/separated": {
+        "flip_rate": 0.025098039215686273,
+        "wrongly_denied": 0.13355263157894737
+      },
+      "others": {
+        "flip_rate": 0.0027142857142857142,
+        "wrongly_denied": 0.01095
+      }
+    }
+  },
+  "XGBoost + head refit": {
+    "0.500": {
+      "wrongly_denied": 0.13799999999999998,
+      "wrongly_approved": 0.48499999999999993,
+      "default_among_approved": 0.1942625995199508,
+      "cost": 0.8240999999999999,
+      "cost_cvar5": 0.8697777777777779,
+      "cost_p05": 0.7842777777777779,
+      "cost_p95": 0.8614444444444445
+    },
+    "0.833": {
+      "wrongly_denied": 0.2843174603174603,
+      "wrongly_approved": 0.27,
+      "default_among_approved": 0.13916341607493934,
+      "cost": 0.6040222222222222,
+      "cost_cvar5": 0.6395555555555555,
+      "cost_p05": 0.5711111111111111,
+      "cost_p95": 0.6322222222222222
+    },
+    "units": 100,
+    "disagreement": 0.06402760942760943,
+    "coin_flip_share": 0.14777777777777779,
+    "changed_mean": 40.47,
+    "changed_worst5": 54.2,
+    "auc": 0.7892438565549678,
+    "groups": {
+      "G1 unemployed now": {
+        "flip_rate": 0.03819672131147541,
+        "wrongly_denied": 0.23051282051282052
+      },
+      "G2 job unemployed/unskilled non-resident": {
+        "flip_rate": 0.02,
+        "wrongly_denied": 0.1705263157894737
+      },
+      "G3 housing for free": {
+        "flip_rate": 0.05,
+        "wrongly_denied": 0.166875
+      },
+      "G4 age < 25": {
+        "flip_rate": 0.05954887218045113,
+        "wrongly_denied": 0.160375
+      },
+      "G5 not a foreign worker": {
+        "flip_rate": 0.023125,
+        "wrongly_denied": 0.026071428571428572
+      },
+      "G6 female": {
+        "flip_rate": 0.038489208633093526,
+        "wrongly_denied": 0.13214659685863875
+      },
+      "G7 checking account < 0 DM": {
+        "flip_rate": 0.06627906976744186,
+        "wrongly_denied": 0.3310769230769231
+      },
+      "G8 large and long loan": {
+        "flip_rate": 0.06305343511450381,
+        "wrongly_denied": 0.28943661971830986
+      },
+      "G9 no property": {
+        "flip_rate": 0.03947826086956522,
+        "wrongly_denied": 0.09671641791044776
+      },
+      "G10 male divorced/separated": {
+        "flip_rate": 0.053137254901960786,
+        "wrongly_denied": 0.24842105263157896
+      },
+      "others": {
+        "flip_rate": 0.029020408163265305,
+        "wrongly_denied": 0.0711
+      }
+    }
+  },
+  "XGBoost + head refit + averaging": {
+    "0.500": {
+      "wrongly_denied": 0.13926984126984127,
+      "wrongly_approved": 0.49220370370370375,
+      "default_among_approved": 0.19682844286703316,
+      "cost": 0.8357944444444445,
+      "cost_cvar5": 0.8602222222222222,
+      "cost_p05": 0.8144444444444444,
+      "cost_p95": 0.8556666666666666
+    },
+    "0.833": {
+      "wrongly_denied": 0.2887777777777778,
+      "wrongly_approved": 0.24985185185185182,
+      "default_among_approved": 0.13084724342168896,
+      "cost": 0.5769222222222222,
+      "cost_cvar5": 0.5966666666666666,
+      "cost_p05": 0.5599444444444445,
+      "cost_p95": 0.5911111111111111
+    },
+    "units": 200,
+    "disagreement": 0.01821468453378001,
+    "coin_flip_share": 0.04555555555555556,
+    "changed_mean": 11.125,
+    "changed_worst5": 17.4,
+    "auc": 0.7932232510288065,
+    "groups": {
+      "G1 unemployed now": {
+        "flip_rate": 0.009426229508196722,
+        "wrongly_denied": 0.23192307692307693
+      },
+      "G2 job unemployed/unskilled non-resident": {
+        "flip_rate": 0.0,
+        "wrongly_denied": 0.15789473684210525
+      },
+      "G3 housing for free": {
+        "flip_rate": 0.018333333333333333,
+        "wrongly_denied": 0.16708333333333333
+      },
+      "G4 age < 25": {
+        "flip_rate": 0.01650375939849624,
+        "wrongly_denied": 0.1598125
+      },
+      "G5 not a foreign worker": {
+        "flip_rate": 0.00125,
+        "wrongly_denied": 0.0014285714285714286
+      },
+      "G6 female": {
+        "flip_rate": 0.009244604316546763,
+        "wrongly_denied": 0.1268586387434555
+      },
+      "G7 checking account < 0 DM": {
+        "flip_rate": 0.017965116279069767,
+        "wrongly_denied": 0.33876923076923077
+      },
+      "G8 large and long loan": {
+        "flip_rate": 0.013969465648854961,
+        "wrongly_denied": 0.30140845070422534
+      },
+      "G9 no property": {
+        "flip_rate": 0.01382608695652174,
+        "wrongly_denied": 0.09022388059701493
+      },
+      "G10 male divorced/separated": {
+        "flip_rate": 0.012941176470588235,
+        "wrongly_denied": 0.27342105263157895
+      },
+      "others": {
+        "flip_rate": 0.009020408163265306,
+        "wrongly_denied": 0.075425
+      }
+    }
+  },
+  "LightGBM (no adapter)": {
+    "0.500": {
+      "wrongly_denied": 0.13295238095238096,
+      "wrongly_approved": 0.49744444444444447,
+      "default_among_approved": 0.1973362222601801,
+      "cost": 0.8392333333333332,
+      "cost_cvar5": 0.8835555555555554,
+      "cost_p05": 0.8111111111111111,
+      "cost_p95": 0.8722222222222222
+    },
+    "0.833": {
+      "wrongly_denied": 0.2523968253968254,
+      "wrongly_approved": 0.30514814814814817,
+      "default_among_approved": 0.1488597199555226,
+      "cost": 0.6344,
+      "cost_cvar5": 0.6773333333333333,
+      "cost_p05": 0.6032777777777778,
+      "cost_p95": 0.6668333333333333
+    },
+    "units": 100,
+    "disagreement": 0.06327115600448933,
+    "coin_flip_share": 0.14333333333333334,
+    "changed_mean": 40.81,
+    "changed_worst5": 51.8,
+    "auc": 0.7933816578483246,
+    "groups": {
+      "G1 unemployed now": {
+        "flip_rate": 0.045737704918032786,
+        "wrongly_denied": 0.22256410256410256
+      },
+      "G2 job unemployed/unskilled non-resident": {
+        "flip_rate": 0.024166666666666666,
+        "wrongly_denied": 0.1773684210526316
+      },
+      "G3 housing for free": {
+        "flip_rate": 0.04691358024691358,
+        "wrongly_denied": 0.18604166666666666
+      },
+      "G4 age < 25": {
+        "flip_rate": 0.06263157894736843,
+        "wrongly_denied": 0.158375
+      },
+      "G5 not a foreign worker": {
+        "flip_rate": 0.0421875,
+        "wrongly_denied": 0.045714285714285714
+      },
+      "G6 female": {
+        "flip_rate": 0.0358273381294964,
+        "wrongly_denied": 0.12916230366492146
+      },
+      "G7 checking account < 0 DM": {
+        "flip_rate": 0.0737984496124031,
+        "wrongly_denied": 0.33807692307692305
+      },
+      "G8 large and long loan": {
+        "flip_rate": 0.06290076335877863,
+        "wrongly_denied": 0.292112676056338
+      },
+      "G9 no property": {
+        "flip_rate": 0.044434782608695655,
+        "wrongly_denied": 0.11761194029850747
+      },
+      "G10 male divorced/separated": {
+        "flip_rate": 0.043333333333333335,
+        "wrongly_denied": 0.21473684210526317
+      },
+      "others": {
+        "flip_rate": 0.03016326530612245,
+        "wrongly_denied": 0.06525
+      }
+    }
+  },
+  "LightGBM + averaging (10 seeds)": {
+    "0.500": {
+      "wrongly_denied": 0.1316904761904762,
+      "wrongly_approved": 0.48785185185185187,
+      "default_among_approved": 0.1940573848558717,
+      "cost": 0.8239611111111111,
+      "cost_cvar5": 0.8464444444444446,
+      "cost_p05": 0.8044444444444444,
+      "cost_p95": 0.8411666666666667
+    },
+    "0.833": {
+      "wrongly_denied": 0.2618412698412699,
+      "wrongly_approved": 0.2909259259259259,
+      "default_among_approved": 0.14449696705860657,
+      "cost": 0.6196777777777778,
+      "cost_cvar5": 0.6387777777777778,
+      "cost_p05": 0.6044444444444445,
+      "cost_p95": 0.6355555555555555
+    },
+    "units": 200,
+    "disagreement": 0.020281909547738695,
+    "coin_flip_share": 0.04777777777777778,
+    "changed_mean": 12.685,
+    "changed_worst5": 18.8,
+    "auc": 0.7973048206937096,
+    "groups": {
+      "G1 unemployed now": {
+        "flip_rate": 0.01918032786885246,
+        "wrongly_denied": 0.20743589743589744
+      },
+      "G2 job unemployed/unskilled non-resident": {
+        "flip_rate": 0.0008333333333333334,
+        "wrongly_denied": 0.15894736842105264
+      },
+      "G3 housing for free": {
+        "flip_rate": 0.015370370370370371,
+        "wrongly_denied": 0.170625
+      },
+      "G4 age < 25": {
+        "flip_rate": 0.02236842105263158,
+        "wrongly_denied": 0.160375
+      },
+      "G5 not a foreign worker": {
+        "flip_rate": 0.01890625,
+        "wrongly_denied": 0.05017857142857143
+      },
+      "G6 female": {
+        "flip_rate": 0.010071942446043165,
+        "wrongly_denied": 0.12133507853403142
+      },
+      "G7 checking account < 0 DM": {
+        "flip_rate": 0.027810077519379844,
+        "wrongly_denied": 0.34057692307692305
+      },
+      "G8 large and long loan": {
+        "flip_rate": 0.017748091603053434,
+        "wrongly_denied": 0.3084507042253521
+      },
+      "G9 no property": {
+        "flip_rate": 0.012956521739130434,
+        "wrongly_denied": 0.10477611940298508
+      },
+      "G10 male divorced/separated": {
+        "flip_rate": 0.00980392156862745,
+        "wrongly_denied": 0.22552631578947369
+      },
+      "others": {
+        "flip_rate": 0.007979591836734693,
+        "wrongly_denied": 0.063425
+      }
+    }
+  },
+  "LightGBM + calibration": {
+    "0.500": {
+      "wrongly_denied": 0.06757142857142857,
+      "wrongly_approved": 0.6642962962962964,
+      "default_among_approved": 0.2338433224639437,
+      "cost": 1.0437444444444446,
+      "cost_cvar5": 1.1166666666666667,
+      "cost_p05": 0.9966111111111111,
+      "cost_p95": 1.1046666666666665
+    },
+    "0.833": {
+      "wrongly_denied": 0.7080793650793651,
+      "wrongly_approved": 0.03774074074074074,
+      "default_among_approved": 0.05219281451980154,
+      "cost": 0.5522666666666667,
+      "cost_cvar5": 0.5808888888888888,
+      "cost_p05": 0.5276666666666667,
+      "cost_p95": 0.5745555555555555
+    },
+    "units": 100,
+    "disagreement": 0.05246666666666668,
+    "coin_flip_share": 0.12777777777777777,
+    "changed_mean": 32.79,
+    "changed_worst5": 43.0,
+    "auc": 0.7928166960611405,
+    "groups": {
+      "G1 unemployed now": {
+        "flip_rate": 0.04967213114754098,
+        "wrongly_denied": 0.16666666666666666
+      },
+      "G2 job unemployed/unskilled non-resident": {
+        "flip_rate": 0.007916666666666667,
+        "wrongly_denied": 0.15157894736842106
+      },
+      "G3 housing for free": {
+        "flip_rate": 0.0482716049382716,
+        "wrongly_denied": 0.13833333333333334
+      },
+      "G4 age < 25": {
+        "flip_rate": 0.042706766917293235,
+        "wrongly_denied": 0.053625
+      },
+      "G5 not a foreign worker": {
+        "flip_rate": 0.014375,
+        "wrongly_denied": 0.0035714285714285713
+      },
+      "G6 female": {
+        "flip_rate": 0.03762589928057554,
+        "wrongly_denied": 0.08157068062827225
+      },
+      "G7 checking account < 0 DM": {
+        "flip_rate": 0.06426356589147286,
+        "wrongly_denied": 0.2003076923076923
+      },
+      "G8 large and long loan": {
+        "flip_rate": 0.057862595419847326,
+        "wrongly_denied": 0.17169014084507042
+      },
+      "G9 no property": {
+        "flip_rate": 0.03304347826086956,
+        "wrongly_denied": 0.08014925373134328
+      },
+      "G10 male divorced/separated": {
+        "flip_rate": 0.07549019607843137,
+        "wrongly_denied": 0.12447368421052632
+      },
+      "others": {
+        "flip_rate": 0.013387755102040816,
+        "wrongly_denied": 0.02175
+      }
+    }
+  },
+  "LightGBM + calibration + averaging": {
+    "0.500": {
+      "wrongly_denied": 0.06411111111111112,
+      "wrongly_approved": 0.6732222222222223,
+      "default_among_approved": 0.2356348036028686,
+      "cost": 1.0547111111111112,
+      "cost_cvar5": 1.0831111111111111,
+      "cost_p05": 1.033277777777778,
+      "cost_p95": 1.0766666666666667
+    },
+    "0.833": {
+      "wrongly_denied": 0.7133412698412698,
+      "wrongly_approved": 0.030722222222222224,
+      "default_among_approved": 0.04387798196997603,
+      "cost": 0.5454222222222223,
+      "cost_cvar5": 0.5583333333333333,
+      "cost_p05": 0.5344444444444445,
+      "cost_p95": 0.5566666666666666
+    },
+    "units": 200,
+    "disagreement": 0.01435499720826354,
+    "coin_flip_share": 0.03111111111111111,
+    "changed_mean": 9.1,
+    "changed_worst5": 14.7,
+    "auc": 0.7970630511463844,
+    "groups": {
+      "G1 unemployed now": {
+        "flip_rate": 0.01360655737704918,
+        "wrongly_denied": 0.1782051282051282
+      },
+      "G2 job unemployed/unskilled non-resident": {
+        "flip_rate": 0.0,
+        "wrongly_denied": 0.15789473684210525
+      },
+      "G3 housing for free": {
+        "flip_rate": 0.01462962962962963,
+        "wrongly_denied": 0.16
+      },
+      "G4 age < 25": {
+        "flip_rate": 0.013796992481203007,
+        "wrongly_denied": 0.04175
+      },
+      "G5 not a foreign worker": {
+        "flip_rate": 0.0,
+        "wrongly_denied": 0.0
+      },
+      "G6 female": {
+        "flip_rate": 0.012464028776978418,
+        "wrongly_denied": 0.07717277486910995
+      },
+      "G7 checking account < 0 DM": {
+        "flip_rate": 0.018585271317829458,
+        "wrongly_denied": 0.19846153846153847
+      },
+      "G8 large and long loan": {
+        "flip_rate": 0.016374045801526717,
+        "wrongly_denied": 0.17302816901408452
+      },
+      "G9 no property": {
+        "flip_rate": 0.00808695652173913,
+        "wrongly_denied": 0.08880597014925373
+      },
+      "G10 male divorced/separated": {
+        "flip_rate": 0.02176470588235294,
+        "wrongly_denied": 0.1388157894736842
+      },
+      "others": {
+        "flip_rate": 0.0018775510204081633,
+        "wrongly_denied": 0.015725
+      }
+    }
+  },
+  "LightGBM + head refit": {
+    "0.500": {
+      "wrongly_denied": 0.13498412698412698,
+      "wrongly_approved": 0.49296296296296294,
+      "default_among_approved": 0.19627556894078932,
+      "cost": 0.8339333333333334,
+      "cost_cvar5": 0.8802222222222224,
+      "cost_p05": 0.8011111111111111,
+      "cost_p95": 0.8733333333333333
+    },
+    "0.833": {
+      "wrongly_denied": 0.2797301587301587,
+      "wrongly_approved": 0.2771851851851852,
+      "default_among_approved": 0.1415579631734176,
+      "cost": 0.611588888888889,
+      "cost_cvar5": 0.642888888888889,
+      "cost_p05": 0.5854444444444445,
+      "cost_p95": 0.6356666666666666
+    },
+    "units": 100,
+    "disagreement": 0.06176745230078563,
+    "coin_flip_share": 0.13555555555555557,
+    "changed_mean": 39.32,
+    "changed_worst5": 51.6,
+    "auc": 0.7907554379776603,
+    "groups": {
+      "G1 unemployed now": {
+        "flip_rate": 0.039180327868852456,
+        "wrongly_denied": 0.22948717948717948
+      },
+      "G2 job unemployed/unskilled non-resident": {
+        "flip_rate": 0.018333333333333333,
+        "wrongly_denied": 0.1705263157894737
+      },
+      "G3 housing for free": {
+        "flip_rate": 0.04679012345679012,
+        "wrongly_denied": 0.18395833333333333
+      },
+      "G4 age < 25": {
+        "flip_rate": 0.06037593984962406,
+        "wrongly_denied": 0.167875
+      },
+      "G5 not a foreign worker": {
+        "flip_rate": 0.049375,
+        "wrongly_denied": 0.05035714285714286
+      },
+      "G6 female": {
+        "flip_rate": 0.03571942446043166,
+        "wrongly_denied": 0.13209424083769633
+      },
+      "G7 checking account < 0 DM": {
+        "flip_rate": 0.06786821705426356,
+        "wrongly_denied": 0.3453076923076923
+      },
+      "G8 large and long loan": {
+        "flip_rate": 0.06748091603053435,
+        "wrongly_denied": 0.2812676056338028
+      },
+      "G9 no property": {
+        "flip_rate": 0.042434782608695654,
+        "wrongly_denied": 0.1091044776119403
+      },
+      "G10 male divorced/separated": {
+        "flip_rate": 0.05372549019607843,
+        "wrongly_denied": 0.22421052631578947
+      },
+      "others": {
+        "flip_rate": 0.026081632653061224,
+        "wrongly_denied": 0.06425
+      }
+    }
+  },
+  "LightGBM + head refit + averaging": {
+    "0.500": {
+      "wrongly_denied": 0.13101587301587303,
+      "wrongly_approved": 0.4842222222222223,
+      "default_among_approved": 0.1927711294531517,
+      "cost": 0.8180444444444445,
+      "cost_cvar5": 0.8406666666666667,
+      "cost_p05": 0.8010555555555555,
+      "cost_p95": 0.8366666666666667
+    },
+    "0.833": {
+      "wrongly_denied": 0.28430952380952385,
+      "wrongly_approved": 0.2665370370370371,
+      "default_among_approved": 0.13763517375312145,
+      "cost": 0.5988222222222223,
+      "cost_cvar5": 0.6161111111111112,
+      "cost_p05": 0.5855555555555556,
+      "cost_p95": 0.6122222222222222
+    },
+    "units": 200,
+    "disagreement": 0.019021887213847018,
+    "coin_flip_share": 0.04111111111111111,
+    "changed_mean": 12.06,
+    "changed_worst5": 18.6,
+    "auc": 0.7943484714873603,
+    "groups": {
+      "G1 unemployed now": {
+        "flip_rate": 0.013032786885245902,
+        "wrongly_denied": 0.225
+      },
+      "G2 job unemployed/unskilled non-resident": {
+        "flip_rate": 0.0,
+        "wrongly_denied": 0.15789473684210525
+      },
+      "G3 housing for free": {
+        "flip_rate": 0.021111111111111112,
+        "wrongly_denied": 0.17510416666666667
+      },
+      "G4 age < 25": {
+        "flip_rate": 0.02142857142857143,
+        "wrongly_denied": 0.1671875
+      },
+      "G5 not a foreign worker": {
+        "flip_rate": 0.0365625,
+        "wrongly_denied": 0.04357142857142857
+      },
+      "G6 female": {
+        "flip_rate": 0.007266187050359712,
+        "wrongly_denied": 0.12492146596858639
+      },
+      "G7 checking account < 0 DM": {
+        "flip_rate": 0.0236046511627907,
+        "wrongly_denied": 0.3453076923076923
+      },
+      "G8 large and long loan": {
+        "flip_rate": 0.0233587786259542,
+        "wrongly_denied": 0.27422535211267607
+      },
+      "G9 no property": {
+        "flip_rate": 0.01634782608695652,
+        "wrongly_denied": 0.09567164179104477
+      },
+      "G10 male divorced/separated": {
+        "flip_rate": 0.023431372549019606,
+        "wrongly_denied": 0.21539473684210525
+      },
+      "others": {
+        "flip_rate": 0.005857142857142857,
+        "wrongly_denied": 0.06165
+      }
+    }
+  },
+  "Random forest (no adapter)": {
+    "0.500": {
+      "wrongly_denied": 0.0533015873015873,
+      "wrongly_approved": 0.7397407407407407,
+      "default_among_approved": 0.25084727962111775,
+      "cost": 1.1469222222222222,
+      "cost_cvar5": 1.1962222222222223,
+      "cost_p05": 1.1108333333333333,
+      "cost_p95": 1.1845555555555556
+    },
+    "0.833": {
+      "wrongly_denied": 0.6626349206349206,
+      "wrongly_approved": 0.04377777777777778,
+      "default_among_approved": 0.0526018697693991,
+      "cost": 0.5295111111111113,
+      "cost_cvar5": 0.5477777777777778,
+      "cost_p05": 0.5132222222222222,
+      "cost_p95": 0.5456111111111112
+    },
+    "units": 100,
+    "disagreement": 0.04094927048260383,
+    "coin_flip_share": 0.08888888888888889,
+    "changed_mean": 25.77,
+    "changed_worst5": 33.8,
+    "auc": 0.8042924162257497,
+    "groups": {
+      "G1 unemployed now": {
+        "flip_rate": 0.033934426229508194,
+        "wrongly_denied": 0.14384615384615385
+      },
+      "G2 job unemployed/unskilled non-resident": {
+        "flip_rate": 0.016666666666666666,
+        "wrongly_denied": 0.019473684210526317
+      },
+      "G3 housing for free": {
+        "flip_rate": 0.05271604938271605,
+        "wrongly_denied": 0.15958333333333333
+      },
+      "G4 age < 25": {
+        "flip_rate": 0.036466165413533834,
+        "wrongly_denied": 0.05225
+      },
+      "G5 not a foreign worker": {
+        "flip_rate": 0.0209375,
+        "wrongly_denied": 0.025357142857142856
+      },
+      "G6 female": {
+        "flip_rate": 0.026942446043165466,
+        "wrongly_denied": 0.05958115183246073
+      },
+      "G7 checking account < 0 DM": {
+        "flip_rate": 0.0732170542635659,
+        "wrongly_denied": 0.20307692307692307
+      },
+      "G8 large and long loan": {
+        "flip_rate": 0.053587786259541983,
+        "wrongly_denied": 0.20183098591549295
+      },
+      "G9 no property": {
+        "flip_rate": 0.05565217391304348,
+        "wrongly_denied": 0.11208955223880597
+      },
+      "G10 male divorced/separated": {
+        "flip_rate": 0.03431372549019608,
+        "wrongly_denied": 0.12289473684210526
+      },
+      "others": {
+        "flip_rate": 0.003510204081632653,
+        "wrongly_denied": 0.00035
+      }
+    }
+  },
+  "Random forest + averaging (10 seeds)": {
+    "0.500": {
+      "wrongly_denied": 0.053309523809523814,
+      "wrongly_approved": 0.7468148148148147,
+      "default_among_approved": 0.2526587262552074,
+      "cost": 1.157538888888889,
+      "cost_cvar5": 1.1814444444444447,
+      "cost_p05": 1.1355555555555557,
+      "cost_p95": 1.1766666666666667
+    },
+    "0.833": {
+      "wrongly_denied": 0.6681031746031746,
+      "wrongly_approved": 0.04385185185185185,
+      "default_among_approved": 0.05358393320956061,
+      "cost": 0.53345,
+      "cost_cvar5": 0.5418888888888889,
+      "cost_p05": 0.5255,
+      "cost_p95": 0.5411111111111111
+    },
+    "units": 200,
+    "disagreement": 0.012037353433835846,
+    "coin_flip_share": 0.028888888888888888,
+    "changed_mean": 7.315,
+    "changed_worst5": 12.3,
+    "auc": 0.8065993533215753,
+    "groups": {
+      "G1 unemployed now": {
+        "flip_rate": 0.0038524590163934425,
+        "wrongly_denied": 0.15294871794871795
+      },
+      "G2 job unemployed/unskilled non-resident": {
+        "flip_rate": 0.003958333333333334,
+        "wrongly_denied": 0.005
+      },
+      "G3 housing for free": {
+        "flip_rate": 0.011111111111111112,
+        "wrongly_denied": 0.16645833333333335
+      },
+      "G4 age < 25": {
+        "flip_rate": 0.01150375939849624,
+        "wrongly_denied": 0.0494375
+      },
+      "G5 not a foreign worker": {
+        "flip_rate": 0.00203125,
+        "wrongly_denied": 0.03339285714285714
+      },
+      "G6 female": {
+        "flip_rate": 0.007086330935251799,
+        "wrongly_denied": 0.05963350785340314
+      },
+      "G7 checking account < 0 DM": {
+        "flip_rate": 0.023391472868217054,
+        "wrongly_denied": 0.19857692307692307
+      },
+      "G8 large and long loan": {
+        "flip_rate": 0.015610687022900763,
+        "wrongly_denied": 0.20816901408450705
+      },
+      "G9 no property": {
+        "flip_rate": 0.013130434782608696,
+        "wrongly_denied": 0.11925373134328358
+      },
+      "G10 male divorced/separated": {
+        "flip_rate": 0.005,
+        "wrongly_denied": 0.11131578947368422
+      },
+      "others": {
+        "flip_rate": 0.0008571428571428571,
+        "wrongly_denied": 0.0
+      }
+    }
+  },
+  "Random forest + calibration": {
+    "0.500": {
+      "wrongly_denied": 0.09831746031746032,
+      "wrongly_approved": 0.569037037037037,
+      "default_among_approved": 0.21282208627673938,
+      "cost": 0.9223777777777776,
+      "cost_cvar5": 0.9837777777777778,
+      "cost_p05": 0.8711111111111111,
+      "cost_p95": 0.973388888888889
+    },
+    "0.833": {
+      "wrongly_denied": 0.5373968253968254,
+      "wrongly_approved": 0.0827037037037037,
+      "default_among_approved": 0.07103306276835188,
+      "cost": 0.5002333333333334,
+      "cost_cvar5": 0.5284444444444445,
+      "cost_p05": 0.481,
+      "cost_p95": 0.5211111111111111
+    },
+    "units": 100,
+    "disagreement": 0.05188821548821549,
+    "coin_flip_share": 0.11888888888888889,
+    "changed_mean": 33.02,
+    "changed_worst5": 46.0,
+    "auc": 0.8034773662551439,
+    "groups": {
+      "G1 unemployed now": {
+        "flip_rate": 0.04622950819672131,
+        "wrongly_denied": 0.21794871794871795
+      },
+      "G2 job unemployed/unskilled non-resident": {
+        "flip_rate": 0.0325,
+        "wrongly_denied": 0.08473684210526315
+      },
+      "G3 housing for free": {
+        "flip_rate": 0.04703703703703704,
+        "wrongly_denied": 0.229375
+      },
+      "G4 age < 25": {
+        "flip_rate": 0.048270676691729325,
+        "wrongly_denied": 0.127375
+      },
+      "G5 not a foreign worker": {
+        "flip_rate": 0.0434375,
+        "wrongly_denied": 0.06464285714285714
+      },
+      "G6 female": {
+        "flip_rate": 0.03172661870503597,
+        "wrongly_denied": 0.09732984293193717
+      },
+      "G7 checking account < 0 DM": {
+        "flip_rate": 0.07627906976744186,
+        "wrongly_denied": 0.35507692307692307
+      },
+      "G8 large and long loan": {
+        "flip_rate": 0.06709923664122137,
+        "wrongly_denied": 0.2988732394366197
+      },
+      "G9 no property": {
+        "flip_rate": 0.049043478260869564,
+        "wrongly_denied": 0.16940298507462687
+      },
+      "G10 male divorced/separated": {
+        "flip_rate": 0.05764705882352941,
+        "wrongly_denied": 0.18973684210526315
+      },
+      "others": {
+        "flip_rate": 0.008857142857142857,
+        "wrongly_denied": 0.00665
+      }
+    }
+  },
+  "Random forest + calibration + averaging": {
+    "0.500": {
+      "wrongly_denied": 0.09595238095238096,
+      "wrongly_approved": 0.5688148148148149,
+      "default_among_approved": 0.21237203972942453,
+      "cost": 0.9203888888888889,
+      "cost_cvar5": 0.953111111111111,
+      "cost_p05": 0.8955555555555555,
+      "cost_p95": 0.9444444444444444
+    },
+    "0.833": {
+      "wrongly_denied": 0.5321269841269841,
+      "wrongly_approved": 0.07640740740740741,
+      "default_among_approved": 0.06539373654986484,
+      "cost": 0.48710000000000003,
+      "cost_cvar5": 0.5018888888888888,
+      "cost_p05": 0.47555555555555556,
+      "cost_p95": 0.5
+    },
+    "units": 200,
+    "disagreement": 0.015973981016192074,
+    "coin_flip_share": 0.04,
+    "changed_mean": 9.92,
+    "changed_worst5": 16.1,
+    "auc": 0.80603468547913,
+    "groups": {
+      "G1 unemployed now": {
+        "flip_rate": 0.015901639344262294,
+        "wrongly_denied": 0.2078205128205128
+      },
+      "G2 job unemployed/unskilled non-resident": {
+        "flip_rate": 0.011875,
+        "wrongly_denied": 0.06763157894736842
+      },
+      "G3 housing for free": {
+        "flip_rate": 0.011666666666666667,
+        "wrongly_denied": 0.21677083333333333
+      },
+      "G4 age < 25": {
+        "flip_rate": 0.011729323308270676,
+        "wrongly_denied": 0.1323125
+      },
+      "G5 not a foreign worker": {
+        "flip_rate": 0.008125,
+        "wrongly_denied": 0.06642857142857143
+      },
+      "G6 female": {
+        "flip_rate": 0.00658273381294964,
+        "wrongly_denied": 0.09403141361256545
+      },
+      "G7 checking account < 0 DM": {
+        "flip_rate": 0.02118217054263566,
+        "wrongly_denied": 0.3553076923076923
+      },
+      "G8 large and long loan": {
+        "flip_rate": 0.027748091603053436,
+        "wrongly_denied": 0.30288732394366197
+      },
+      "G9 no property": {
+        "flip_rate": 0.009608695652173913,
+        "wrongly_denied": 0.15559701492537314
+      },
+      "G10 male divorced/separated": {
+        "flip_rate": 0.025098039215686273,
+        "wrongly_denied": 0.19592105263157894
+      },
+      "others": {
+        "flip_rate": 0.0027551020408163266,
+        "wrongly_denied": 0.00325
+      }
+    }
+  },
+  "Random forest + head refit": {
+    "0.500": {
+      "wrongly_denied": 0.11914285714285715,
+      "wrongly_approved": 0.5108148148148147,
+      "default_among_approved": 0.1990250371781273,
+      "cost": 0.8496222222222223,
+      "cost_cvar5": 0.9028888888888889,
+      "cost_p05": 0.8055555555555556,
+      "cost_p95": 0.8892222222222221
+    },
+    "0.833": {
+      "wrongly_denied": 0.3504285714285714,
+      "wrongly_approved": 0.21814814814814815,
+      "default_among_approved": 0.12578635866838583,
+      "cost": 0.5725222222222222,
+      "cost_cvar5": 0.6171111111111112,
+      "cost_p05": 0.5377222222222222,
+      "cost_p95": 0.6056666666666666
+    },
+    "units": 100,
+    "disagreement": 0.09093378226711558,
+    "coin_flip_share": 0.20666666666666667,
+    "changed_mean": 57.94,
+    "changed_worst5": 69.0,
+    "auc": 0.793627748383304,
+    "groups": {
+      "G1 unemployed now": {
+        "flip_rate": 0.07344262295081967,
+        "wrongly_denied": 0.2517948717948718
+      },
+      "G2 job unemployed/unskilled non-resident": {
+        "flip_rate": 0.0525,
+        "wrongly_denied": 0.17894736842105263
+      },
+      "G3 housing for free": {
+        "flip_rate": 0.06975308641975309,
+        "wrongly_denied": 0.21833333333333332
+      },
+      "G4 age < 25": {
+        "flip_rate": 0.08676691729323309,
+        "wrongly_denied": 0.149625
+      },
+      "G5 not a foreign worker": {
+        "flip_rate": 0.0634375,
+        "wrongly_denied": 0.05964285714285714
+      },
+      "G6 female": {
+        "flip_rate": 0.06323741007194245,
+        "wrongly_denied": 0.12581151832460732
+      },
+      "G7 checking account < 0 DM": {
+        "flip_rate": 0.09883720930232558,
+        "wrongly_denied": 0.3373076923076923
+      },
+      "G8 large and long loan": {
+        "flip_rate": 0.09587786259541985,
+        "wrongly_denied": 0.27338028169014084
+      },
+      "G9 no property": {
+        "flip_rate": 0.07234782608695652,
+        "wrongly_denied": 0.15940298507462686
+      },
+      "G10 male divorced/separated": {
+        "flip_rate": 0.07882352941176471,
+        "wrongly_denied": 0.17763157894736842
+      },
+      "others": {
+        "flip_rate": 0.03783673469387755,
+        "wrongly_denied": 0.0455
+      }
+    }
+  },
+  "Random forest + head refit + averaging": {
+    "0.500": {
+      "wrongly_denied": 0.11025396825396824,
+      "wrongly_approved": 0.5005185185185185,
+      "default_among_approved": 0.19424913592385898,
+      "cost": 0.8279555555555556,
+      "cost_cvar5": 0.8565555555555555,
+      "cost_p05": 0.8033333333333333,
+      "cost_p95": 0.850111111111111
+    },
+    "0.833": {
+      "wrongly_denied": 0.3689761904761905,
+      "wrongly_approved": 0.19805555555555557,
+      "default_among_approved": 0.11855634066394334,
+      "cost": 0.5553666666666666,
+      "cost_cvar5": 0.5756666666666667,
+      "cost_p05": 0.5377222222222222,
+      "cost_p95": 0.5700555555555555
+    },
+    "units": 200,
+    "disagreement": 0.028156225572305977,
+    "coin_flip_share": 0.06111111111111111,
+    "changed_mean": 18.02,
+    "changed_worst5": 25.5,
+    "auc": 0.8041191945914168,
+    "groups": {
+      "G1 unemployed now": {
+        "flip_rate": 0.017704918032786884,
+        "wrongly_denied": 0.2432051282051282
+      },
+      "G2 job unemployed/unskilled non-resident": {
+        "flip_rate": 0.001875,
+        "wrongly_denied": 0.15921052631578947
+      },
+      "G3 housing for free": {
+        "flip_rate": 0.02030864197530864,
+        "wrongly_denied": 0.23364583333333333
+      },
+      "G4 age < 25": {
+        "flip_rate": 0.030225563909774437,
+        "wrongly_denied": 0.12525
+      },
+      "G5 not a foreign worker": {
+        "flip_rate": 0.02359375,
+        "wrongly_denied": 0.04946428571428572
+      },
+      "G6 female": {
+        "flip_rate": 0.02264388489208633,
+        "wrongly_denied": 0.11916230366492146
+      },
+      "G7 checking account < 0 DM": {
+        "flip_rate": 0.0275,
+        "wrongly_denied": 0.3382307692307692
+      },
+      "G8 large and long loan": {
+        "flip_rate": 0.03935114503816794,
+        "wrongly_denied": 0.272887323943662
+      },
+      "G9 no property": {
+        "flip_rate": 0.022391304347826088,
+        "wrongly_denied": 0.15261194029850747
+      },
+      "G10 male divorced/separated": {
+        "flip_rate": 0.01843137254901961,
+        "wrongly_denied": 0.17842105263157895
+      },
+      "others": {
+        "flip_rate": 0.009142857142857144,
+        "wrongly_denied": 0.03085
+      }
+    }
+  },
+  "HistGradientBoosting (no adapter)": {
+    "0.500": {
+      "wrongly_denied": 0.14126984126984127,
+      "wrongly_approved": 0.48148148148148145,
+      "default_among_approved": 0.19374068554396426,
+      "cost": 0.8211111111111112,
+      "cost_cvar5": 0.8211111111111112,
+      "cost_p05": 0.8211111111111111,
+      "cost_p95": 0.8211111111111111
+    },
+    "0.833": {
+      "wrongly_denied": 0.3396825396825397,
+      "wrongly_approved": 0.22962962962962963,
+      "default_among_approved": 0.12970711297071127,
+      "cost": 0.5822222222222223,
+      "cost_cvar5": 0.5822222222222222,
+      "cost_p05": 0.5822222222222222,
+      "cost_p95": 0.5822222222222222
+    },
+    "units": 100,
+    "disagreement": 0.0,
+    "coin_flip_share": 0.0,
+    "changed_mean": 0.0,
+    "changed_worst5": 0.0,
+    "auc": 0.7847325102880659,
+    "groups": {
+      "G1 unemployed now": {
+        "flip_rate": 0.0,
+        "wrongly_denied": 0.2564102564102564
+      },
+      "G2 job unemployed/unskilled non-resident": {
+        "flip_rate": 0.0,
+        "wrongly_denied": 0.21052631578947367
+      },
+      "G3 housing for free": {
+        "flip_rate": 0.0,
+        "wrongly_denied": 0.20833333333333334
+      },
+      "G4 age < 25": {
+        "flip_rate": 0.0,
+        "wrongly_denied": 0.175
+      },
+      "G5 not a foreign worker": {
+        "flip_rate": 0.0,
+        "wrongly_denied": 0.07142857142857142
+      },
+      "G6 female": {
+        "flip_rate": 0.0,
+        "wrongly_denied": 0.14659685863874344
+      },
+      "G7 checking account < 0 DM": {
+        "flip_rate": 0.0,
+        "wrongly_denied": 0.35384615384615387
+      },
+      "G8 large and long loan": {
+        "flip_rate": 0.0,
+        "wrongly_denied": 0.30985915492957744
+      },
+      "G9 no property": {
+        "flip_rate": 0.0,
+        "wrongly_denied": 0.13432835820895522
+      },
+      "G10 male divorced/separated": {
+        "flip_rate": 0.0,
+        "wrongly_denied": 0.18421052631578946
+      },
+      "others": {
+        "flip_rate": 0.0,
+        "wrongly_denied": 0.085
+      }
+    }
+  },
+  "HistGradientBoosting + averaging (10 seeds)": {
+    "0.500": {
+      "wrongly_denied": 0.14126984126984127,
+      "wrongly_approved": 0.48148148148148145,
+      "default_among_approved": 0.19374068554396423,
+      "cost": 0.8211111111111115,
+      "cost_cvar5": 0.8211111111111112,
+      "cost_p05": 0.8211111111111111,
+      "cost_p95": 0.8211111111111111
+    },
+    "0.833": {
+      "wrongly_denied": 0.3396825396825397,
+      "wrongly_approved": 0.22962962962962963,
+      "default_among_approved": 0.12970711297071127,
+      "cost": 0.5822222222222223,
+      "cost_cvar5": 0.5822222222222223,
+      "cost_p05": 0.5822222222222222,
+      "cost_p95": 0.5822222222222222
+    },
+    "units": 200,
+    "disagreement": 0.0,
+    "coin_flip_share": 0.0,
+    "changed_mean": 0.0,
+    "changed_worst5": 0.0,
+    "auc": 0.7847325102880659,
+    "groups": {
+      "G1 unemployed now": {
+        "flip_rate": 0.0,
+        "wrongly_denied": 0.2564102564102564
+      },
+      "G2 job unemployed/unskilled non-resident": {
+        "flip_rate": 0.0,
+        "wrongly_denied": 0.21052631578947367
+      },
+      "G3 housing for free": {
+        "flip_rate": 0.0,
+        "wrongly_denied": 0.20833333333333334
+      },
+      "G4 age < 25": {
+        "flip_rate": 0.0,
+        "wrongly_denied": 0.175
+      },
+      "G5 not a foreign worker": {
+        "flip_rate": 0.0,
+        "wrongly_denied": 0.07142857142857142
+      },
+      "G6 female": {
+        "flip_rate": 0.0,
+        "wrongly_denied": 0.14659685863874344
+      },
+      "G7 checking account < 0 DM": {
+        "flip_rate": 0.0,
+        "wrongly_denied": 0.35384615384615387
+      },
+      "G8 large and long loan": {
+        "flip_rate": 0.0,
+        "wrongly_denied": 0.30985915492957744
+      },
+      "G9 no property": {
+        "flip_rate": 0.0,
+        "wrongly_denied": 0.13432835820895522
+      },
+      "G10 male divorced/separated": {
+        "flip_rate": 0.0,
+        "wrongly_denied": 0.18421052631578946
+      },
+      "others": {
+        "flip_rate": 0.0,
+        "wrongly_denied": 0.085
+      }
+    }
+  },
+  "HistGradientBoosting + calibration": {
+    "0.500": {
+      "wrongly_denied": 0.0656984126984127,
+      "wrongly_approved": 0.6838148148148148,
+      "default_among_approved": 0.23872916824118642,
+      "cost": 1.071711111111111,
+      "cost_cvar5": 1.1126666666666667,
+      "cost_p05": 1.0255,
+      "cost_p95": 1.1034444444444444
+    },
+    "0.833": {
+      "wrongly_denied": 0.6515238095238095,
+      "wrongly_approved": 0.05685185185185185,
+      "default_among_approved": 0.06498196003532962,
+      "cost": 0.5413444444444445,
+      "cost_cvar5": 0.5553333333333333,
+      "cost_p05": 0.5287777777777778,
+      "cost_p95": 0.5522777777777778
+    },
+    "units": 100,
+    "disagreement": 0.0204013468013468,
+    "coin_flip_share": 0.043333333333333335,
+    "changed_mean": 13.04,
+    "changed_worst5": 27.8,
+    "auc": 0.7841539094650204,
+    "groups": {
+      "G1 unemployed now": {
+        "flip_rate": 0.018032786885245903,
+        "wrongly_denied": 0.16153846153846155
+      },
+      "G2 job unemployed/unskilled non-resident": {
+        "flip_rate": 0.0,
+        "wrongly_denied": 0.15789473684210525
+      },
+      "G3 housing for free": {
+        "flip_rate": 0.009135802469135803,
+        "wrongly_denied": 0.14416666666666667
+      },
+      "G4 age < 25": {
+        "flip_rate": 0.010601503759398495,
+        "wrongly_denied": 0.070875
+      },
+      "G5 not a foreign worker": {
+        "flip_rate": 0.0028125,
+        "wrongly_denied": 0.03892857142857143
+      },
+      "G6 female": {
+        "flip_rate": 0.01197841726618705,
+        "wrongly_denied": 0.08376963350785341
+      },
+      "G7 checking account < 0 DM": {
+        "flip_rate": 0.021705426356589147,
+        "wrongly_denied": 0.18384615384615385
+      },
+      "G8 large and long loan": {
+        "flip_rate": 0.017251908396946566,
+        "wrongly_denied": 0.16507042253521126
+      },
+      "G9 no property": {
+        "flip_rate": 0.009304347826086957,
+        "wrongly_denied": 0.08970149253731344
+      },
+      "G10 male divorced/separated": {
+        "flip_rate": 0.01980392156862745,
+        "wrongly_denied": 0.1286842105263158
+      },
+      "others": {
+        "flip_rate": 0.015551020408163266,
+        "wrongly_denied": 0.02635
+      }
+    }
+  },
+  "HistGradientBoosting + calibration + averaging": {
+    "0.500": {
+      "wrongly_denied": 0.06598412698412698,
+      "wrongly_approved": 0.6905185185185185,
+      "default_among_approved": 0.24060395241608126,
+      "cost": 1.0819666666666665,
+      "cost_cvar5": 1.0968888888888888,
+      "cost_p05": 1.0666666666666667,
+      "cost_p95": 1.0955555555555556
+    },
+    "0.833": {
+      "wrongly_denied": 0.6500714285714286,
+      "wrongly_approved": 0.05531481481481482,
+      "default_among_approved": 0.06339344379061344,
+      "cost": 0.5380222222222223,
+      "cost_cvar5": 0.5474444444444444,
+      "cost_p05": 0.5322222222222223,
+      "cost_p95": 0.5455555555555556
+    },
+    "units": 200,
+    "disagreement": 0.006098715801228364,
+    "coin_flip_share": 0.012222222222222223,
+    "changed_mean": 3.98,
+    "changed_worst5": 8.1,
+    "auc": 0.7839514991181658,
+    "groups": {
+      "G1 unemployed now": {
+        "flip_rate": 0.005819672131147541,
+        "wrongly_denied": 0.1544871794871795
+      },
+      "G2 job unemployed/unskilled non-resident": {
+        "flip_rate": 0.0,
+        "wrongly_denied": 0.15789473684210525
+      },
+      "G3 housing for free": {
+        "flip_rate": 0.0001234567901234568,
+        "wrongly_denied": 0.14583333333333334
+      },
+      "G4 age < 25": {
+        "flip_rate": 0.0040977443609022555,
+        "wrongly_denied": 0.0726875
+      },
+      "G5 not a foreign worker": {
+        "flip_rate": 0.0,
+        "wrongly_denied": 0.03571428571428571
+      },
+      "G6 female": {
+        "flip_rate": 0.005539568345323741,
+        "wrongly_denied": 0.08358638743455497
+      },
+      "G7 checking account < 0 DM": {
+        "flip_rate": 0.009903100775193798,
+        "wrongly_denied": 0.17992307692307694
+      },
+      "G8 large and long loan": {
+        "flip_rate": 0.005305343511450382,
+        "wrongly_denied": 0.16908450704225353
+      },
+      "G9 no property": {
+        "flip_rate": 0.0004347826086956522,
+        "wrongly_denied": 0.08955223880597014
+      },
+      "G10 male divorced/separated": {
+        "flip_rate": 0.006372549019607843,
+        "wrongly_denied": 0.13157894736842105
+      },
+      "others": {
+        "flip_rate": 0.003163265306122449,
+        "wrongly_denied": 0.0268
+      }
+    }
+  },
+  "MLP (no adapter)": {
+    "0.500": {
+      "wrongly_denied": 0.1675873015873016,
+      "wrongly_approved": 0.513,
+      "default_among_approved": 0.20890403690036272,
+      "cost": 0.8868111111111111,
+      "cost_cvar5": 0.9482222222222223,
+      "cost_p05": 0.8407777777777778,
+      "cost_p95": 0.9328333333333333
+    },
+    "0.833": {
+      "wrongly_denied": 0.23507936507936508,
+      "wrongly_approved": 0.41011111111111115,
+      "default_among_approved": 0.1868045749039586,
+      "cost": 0.7797222222222221,
+      "cost_cvar5": 0.8417777777777777,
+      "cost_p05": 0.7318333333333333,
+      "cost_p95": 0.8323333333333333
+    },
+    "units": 100,
+    "disagreement": 0.147872278338945,
+    "coin_flip_share": 0.3277777777777778,
+    "changed_mean": 93.93,
+    "changed_worst5": 113.8,
+    "auc": 0.7506854203409759,
+    "groups": {
+      "G1 unemployed now": {
+        "flip_rate": 0.16327868852459015,
+        "wrongly_denied": 0.26564102564102565
+      },
+      "G2 job unemployed/unskilled non-resident": {
+        "flip_rate": 0.17541666666666667,
+        "wrongly_denied": 0.3021052631578947
+      },
+      "G3 housing for free": {
+        "flip_rate": 0.14555555555555555,
+        "wrongly_denied": 0.18875
+      },
+      "G4 age < 25": {
+        "flip_rate": 0.11390977443609022,
+        "wrongly_denied": 0.23825
+      },
+      "G5 not a foreign worker": {
+        "flip_rate": 0.1084375,
+        "wrongly_denied": 0.17107142857142857
+      },
+      "G6 female": {
+        "flip_rate": 0.1058273381294964,
+        "wrongly_denied": 0.17534031413612566
+      },
+      "G7 checking account < 0 DM": {
+        "flip_rate": 0.14193798449612402,
+        "wrongly_denied": 0.35215384615384615
+      },
+      "G8 large and long loan": {
+        "flip_rate": 0.13595419847328244,
+        "wrongly_denied": 0.23901408450704226
+      },
+      "G9 no property": {
+        "flip_rate": 0.15356521739130435,
+        "wrongly_denied": 0.1919402985074627
+      },
+      "G10 male divorced/separated": {
+        "flip_rate": 0.11568627450980393,
+        "wrongly_denied": 0.15736842105263157
+      },
+      "others": {
+        "flip_rate": 0.07485714285714286,
+        "wrongly_denied": 0.0969
+      }
+    }
+  },
+  "MLP + averaging (10 seeds)": {
+    "0.500": {
+      "wrongly_denied": 0.14512698412698413,
+      "wrongly_approved": 0.5000370370370371,
+      "default_among_approved": 0.20042731464132374,
+      "cost": 0.8516444444444444,
+      "cost_cvar5": 0.8875555555555555,
+      "cost_p05": 0.8222222222222222,
+      "cost_p95": 0.8811111111111111
+    },
+    "0.833": {
+      "wrongly_denied": 0.3038095238095238,
+      "wrongly_approved": 0.30892592592592594,
+      "default_among_approved": 0.15977466920522568,
+      "cost": 0.6760555555555555,
+      "cost_cvar5": 0.7093333333333333,
+      "cost_p05": 0.6488888888888888,
+      "cost_p95": 0.7000555555555555
+    },
+    "units": 200,
+    "disagreement": 0.04726689000558347,
+    "coin_flip_share": 0.10444444444444445,
+    "changed_mean": 30.2,
+    "changed_worst5": 40.1,
+    "auc": 0.772694885361552,
+    "groups": {
+      "G1 unemployed now": {
+        "flip_rate": 0.0659016393442623,
+        "wrongly_denied": 0.2662820512820513
+      },
+      "G2 job unemployed/unskilled non-resident": {
+        "flip_rate": 0.0425,
+        "wrongly_denied": 0.2702631578947368
+      },
+      "G3 housing for free": {
+        "flip_rate": 0.0665432098765432,
+        "wrongly_denied": 0.17239583333333333
+      },
+      "G4 age < 25": {
+        "flip_rate": 0.031654135338345865,
+        "wrongly_denied": 0.21925
+      },
+      "G5 not a foreign worker": {
+        "flip_rate": 0.05125,
+        "wrongly_denied": 0.1757142857142857
+      },
+      "G6 female": {
+        "flip_rate": 0.03525179856115108,
+        "wrongly_denied": 0.15492146596858639
+      },
+      "G7 checking account < 0 DM": {
+        "flip_rate": 0.0501937984496124,
+        "wrongly_denied": 0.334
+      },
+      "G8 large and long loan": {
+        "flip_rate": 0.0467175572519084,
+        "wrongly_denied": 0.21929577464788733
+      },
+      "G9 no property": {
+        "flip_rate": 0.06565217391304348,
+        "wrongly_denied": 0.17619402985074628
+      },
+      "G10 male divorced/separated": {
+        "flip_rate": 0.033823529411764704,
+        "wrongly_denied": 0.11671052631578947
+      },
+      "others": {
+        "flip_rate": 0.018551020408163265,
+        "wrongly_denied": 0.066775
+      }
+    }
+  },
+  "MLP + calibration": {
+    "0.500": {
+      "wrongly_denied": 0.07539682539682539,
+      "wrongly_approved": 0.7122592592592593,
+      "default_among_approved": 0.24811357883647145,
+      "cost": 1.1211666666666664,
+      "cost_cvar5": 1.2046666666666668,
+      "cost_p05": 1.0631666666666666,
+      "cost_p95": 1.1880555555555556
+    },
+    "0.833": {
+      "wrongly_denied": 0.6351111111111111,
+      "wrongly_approved": 0.08900000000000001,
+      "default_among_approved": 0.09425661720885067,
+      "cost": 0.5780777777777778,
+      "cost_cvar5": 0.6346666666666667,
+      "cost_p05": 0.5399444444444444,
+      "cost_p95": 0.6191111111111112
+    },
+    "units": 100,
+    "disagreement": 0.1091759820426487,
+    "coin_flip_share": 0.24666666666666667,
+    "changed_mean": 70.21,
+    "changed_worst5": 86.0,
+    "auc": 0.7496547912992358,
+    "groups": {
+      "G1 unemployed now": {
+        "flip_rate": 0.12557377049180327,
+        "wrongly_denied": 0.1564102564102564
+      },
+      "G2 job unemployed/unskilled non-resident": {
+        "flip_rate": 0.15833333333333333,
+        "wrongly_denied": 0.19157894736842104
+      },
+      "G3 housing for free": {
+        "flip_rate": 0.1082716049382716,
+        "wrongly_denied": 0.08541666666666667
+      },
+      "G4 age < 25": {
+        "flip_rate": 0.08819548872180451,
+        "wrongly_denied": 0.100625
+      },
+      "G5 not a foreign worker": {
+        "flip_rate": 0.0953125,
+        "wrongly_denied": 0.06714285714285714
+      },
+      "G6 female": {
+        "flip_rate": 0.07737410071942447,
+        "wrongly_denied": 0.07591623036649214
+      },
+      "G7 checking account < 0 DM": {
+        "flip_rate": 0.132015503875969,
+        "wrongly_denied": 0.18669230769230769
+      },
+      "G8 large and long loan": {
+        "flip_rate": 0.12213740458015267,
+        "wrongly_denied": 0.11859154929577465
+      },
+      "G9 no property": {
+        "flip_rate": 0.12513043478260868,
+        "wrongly_denied": 0.08940298507462686
+      },
+      "G10 male divorced/separated": {
+        "flip_rate": 0.08137254901960785,
+        "wrongly_denied": 0.08526315789473685
+      },
+      "others": {
+        "flip_rate": 0.03661224489795918,
+        "wrongly_denied": 0.0319
+      }
+    }
+  },
+  "MLP + calibration + averaging": {
+    "0.500": {
+      "wrongly_denied": 0.058230158730158736,
+      "wrongly_approved": 0.7357777777777778,
+      "default_among_approved": 0.25082307440661905,
+      "cost": 1.1444277777777778,
+      "cost_cvar5": 1.1821111111111113,
+      "cost_p05": 1.1066666666666667,
+      "cost_p95": 1.1755555555555555
+    },
+    "0.833": {
+      "wrongly_denied": 0.6605238095238095,
+      "wrongly_approved": 0.051370370370370365,
+      "default_among_approved": 0.060866871499759875,
+      "cost": 0.5394222222222222,
+      "cost_cvar5": 0.5606666666666668,
+      "cost_p05": 0.5221666666666667,
+      "cost_p95": 0.5566666666666666
+    },
+    "units": 200,
+    "disagreement": 0.0356998883305416,
+    "coin_flip_share": 0.07555555555555556,
+    "changed_mean": 23.405,
+    "changed_worst5": 32.8,
+    "auc": 0.771320252792475,
+    "groups": {
+      "G1 unemployed now": {
+        "flip_rate": 0.05221311475409836,
+        "wrongly_denied": 0.10794871794871795
+      },
+      "G2 job unemployed/unskilled non-resident": {
+        "flip_rate": 0.08645833333333333,
+        "wrongly_denied": 0.16289473684210526
+      },
+      "G3 housing for free": {
+        "flip_rate": 0.03382716049382716,
+        "wrongly_denied": 0.048541666666666664
+      },
+      "G4 age < 25": {
+        "flip_rate": 0.029022556390977443,
+        "wrongly_denied": 0.0774375
+      },
+      "G5 not a foreign worker": {
+        "flip_rate": 0.03734375,
+        "wrongly_denied": 0.03767857142857143
+      },
+      "G6 female": {
+        "flip_rate": 0.02447841726618705,
+        "wrongly_denied": 0.059450261780104714
+      },
+      "G7 checking account < 0 DM": {
+        "flip_rate": 0.043313953488372095,
+        "wrongly_denied": 0.1735
+      },
+      "G8 large and long loan": {
+        "flip_rate": 0.042595419847328245,
+        "wrongly_denied": 0.0873943661971831
+      },
+      "G9 no property": {
+        "flip_rate": 0.04626086956521739,
+        "wrongly_denied": 0.06373134328358208
+      },
+      "G10 male divorced/separated": {
+        "flip_rate": 0.03823529411764706,
+        "wrongly_denied": 0.0718421052631579
+      },
+      "others": {
+        "flip_rate": 0.01173469387755102,
+        "wrongly_denied": 0.01495
+      }
+    }
+  },
+  "MLP + head refit": {
+    "0.500": {
+      "wrongly_denied": 0.16655555555555557,
+      "wrongly_approved": 0.5130740740740741,
+      "default_among_approved": 0.2087253890476627,
+      "cost": 0.8862000000000001,
+      "cost_cvar5": 0.9424444444444445,
+      "cost_p05": 0.8408333333333333,
+      "cost_p95": 0.9303333333333333
+    },
+    "0.833": {
+      "wrongly_denied": 0.25485714285714284,
+      "wrongly_approved": 0.3822962962962963,
+      "default_among_approved": 0.1802098559535156,
+      "cost": 0.7518444444444445,
+      "cost_cvar5": 0.8122222222222222,
+      "cost_p05": 0.7029444444444445,
+      "cost_p95": 0.8078333333333334
+    },
+    "units": 100,
+    "disagreement": 0.14804893378226713,
+    "coin_flip_share": 0.33444444444444443,
+    "changed_mean": 93.76,
+    "changed_worst5": 113.8,
+    "auc": 0.7513863609641389,
+    "groups": {
+      "G1 unemployed now": {
+        "flip_rate": 0.16114754098360656,
+        "wrongly_denied": 0.26256410256410256
+      },
+      "G2 job unemployed/unskilled non-resident": {
+        "flip_rate": 0.17166666666666666,
+        "wrongly_denied": 0.29894736842105263
+      },
+      "G3 housing for free": {
+        "flip_rate": 0.14407407407407408,
+        "wrongly_denied": 0.18791666666666668
+      },
+      "G4 age < 25": {
+        "flip_rate": 0.11345864661654136,
+        "wrongly_denied": 0.237125
+      },
+      "G5 not a foreign worker": {
+        "flip_rate": 0.1115625,
+        "wrongly_denied": 0.16964285714285715
+      },
+      "G6 female": {
+        "flip_rate": 0.1046043165467626,
+        "wrongly_denied": 0.1737696335078534
+      },
+      "G7 checking account < 0 DM": {
+        "flip_rate": 0.14135658914728683,
+        "wrongly_denied": 0.35
+      },
+      "G8 large and long loan": {
+        "flip_rate": 0.1364885496183206,
+        "wrongly_denied": 0.23943661971830985
+      },
+      "G9 no property": {
+        "flip_rate": 0.1505217391304348,
+        "wrongly_denied": 0.19014925373134328
+      },
+      "G10 male divorced/separated": {
+        "flip_rate": 0.11372549019607843,
+        "wrongly_denied": 0.1586842105263158
+      },
+      "others": {
+        "flip_rate": 0.07546938775510204,
+        "wrongly_denied": 0.09645
+      }
+    }
+  },
+  "MLP + head refit + averaging": {
+    "0.500": {
+      "wrongly_denied": 0.14392063492063492,
+      "wrongly_approved": 0.5018148148148148,
+      "default_among_approved": 0.20076854122630913,
+      "cost": 0.8534666666666666,
+      "cost_cvar5": 0.8855555555555557,
+      "cost_p05": 0.8243333333333334,
+      "cost_p95": 0.8788888888888889
+    },
+    "0.833": {
+      "wrongly_denied": 0.31806349206349205,
+      "wrongly_approved": 0.2900925925925926,
+      "default_among_approved": 0.15418447279404268,
+      "cost": 0.6577833333333334,
+      "cost_cvar5": 0.689,
+      "cost_p05": 0.6298888888888889,
+      "cost_p95": 0.6822777777777778
+    },
+    "units": 200,
+    "disagreement": 0.04699207146845338,
+    "coin_flip_share": 0.10888888888888888,
+    "changed_mean": 29.82,
+    "changed_worst5": 41.0,
+    "auc": 0.7746393298059966,
+    "groups": {
+      "G1 unemployed now": {
+        "flip_rate": 0.06418032786885246,
+        "wrongly_denied": 0.2743589743589744
+      },
+      "G2 job unemployed/unskilled non-resident": {
+        "flip_rate": 0.041041666666666664,
+        "wrongly_denied": 0.275
+      },
+      "G3 housing for free": {
+        "flip_rate": 0.060432098765432096,
+        "wrongly_denied": 0.174375
+      },
+      "G4 age < 25": {
+        "flip_rate": 0.03240601503759399,
+        "wrongly_denied": 0.2183125
+      },
+      "G5 not a foreign worker": {
+        "flip_rate": 0.0521875,
+        "wrongly_denied": 0.1742857142857143
+      },
+      "G6 female": {
+        "flip_rate": 0.034316546762589925,
+        "wrongly_denied": 0.1531413612565445
+      },
+      "G7 checking account < 0 DM": {
+        "flip_rate": 0.04808139534883721,
+        "wrongly_denied": 0.3287307692307692
+      },
+      "G8 large and long loan": {
+        "flip_rate": 0.04732824427480916,
+        "wrongly_denied": 0.2182394366197183
+      },
+      "G9 no property": {
+        "flip_rate": 0.06147826086956522,
+        "wrongly_denied": 0.17701492537313432
+      },
+      "G10 male divorced/separated": {
+        "flip_rate": 0.034019607843137255,
+        "wrongly_denied": 0.11763157894736842
+      },
+      "others": {
+        "flip_rate": 0.018326530612244898,
+        "wrongly_denied": 0.066175
+      }
+    }
+  }
+}
