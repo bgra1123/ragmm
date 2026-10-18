@@ -105,7 +105,7 @@ Exact logistic regression: AUC 0.792 and cost 0.497 on these three splits (the s
 2. **The head refit, the closest analogue of the polish step, does not help these models and can hurt (random forest +122%).** The polish idea works for logistic regression because the head is the model.
 3. **Combining calibration with averaging is the best adapter set**: XGBoost 0.562 → 0.523, LightGBM 0.634 → 0.545, RF 0.530 → 0.487, MLP 0.780 → 0.539. With it, a calibrated and averaged random forest beats exactly trained logistic regression here (0.487 vs 0.497), while XGBoost and the MLP do not.
 4. **Baseline comparison:** without adapters, SOTA models are more stable than textbook SGD logistic regression (5.6–6.3% vs 24.9%) but this is a weak baseline; with the polish step logistic regression (8.5%, or 3.3% with line search) is comparable to XGBoost with averaging (1.6%).
-5. **Group view:** where noise lands depends on the model: logistic SGD, the MLP and the random forest concentrate it on unusual profiles (flip rates 2–20× those of other applicants), XGBoost much less. Averaging lowers every group's flip rate; for random forest and MLP the unusual-profile groups still flip more than others after averaging.
+5. **Group view:** where noise lands depends on the model: logistic SGD, the MLP and the random forest concentrate it on unusual profiles (flip rates about 2× those of other applicants for logistic SGD and the MLP, 5–21× for the random forest, whose flip rate for typical applicants is only 0.4%), XGBoost much less. Averaging lowers every group's flip rate; for random forest and MLP the unusual-profile groups still flip more than others after averaging.
 
 ## Caveats
 
