@@ -37,3 +37,18 @@ For each example: approval share across retrains for textbook SGD, SGD + adapter
 * **H3** The adapter reduces the flip rate in at least 8 of the 10 groups; the groups where it does not are reported.
 * **H4** The deterministic line search cuts flips at least as much as the adapter in every group.
 * **H5 (check)** After polishing, the showcase group's wrongly-denied rate approaches the exact model's own rate; it is not driven below it (the exact model's errors for this group remain).
+
+## Addendum: concrete "chance of a wrong decision" statements by category (written before running `concrete_statements.py`)
+
+Request: replace "how many applicants are coin flips" by concrete statements of the form *"there is an X% chance that the model makes a wrong decision for applicants of type Y"*.
+
+Definitions (same data, five splits, 100 retrains per split of textbook SGD, then + adapter and + line search at 5 epochs; the ten fixed groups plus "all applicants"):
+* **Wrong decision** = the model denies an applicant who repaid, or approves one who defaulted (the label is the dataset's own).
+* **Chance of a wrong decision for group Y** = average over retrains and over members of Y of the indicator "wrong". The **exactly trained model** gives the floor for the same members;
+  the difference is the part **due to training randomness**. Also reported separately: chance that a good applicant is wrongly denied, and that a defaulter is wrongly approved.
+* **Chance that training randomness changes the decision** = average of "the retrain's decision differs from the exact model's".
+* Uncertainty: 95% interval from resampling retrains (applicants fixed); groups with fewer than 60 member-instances are flagged as indicative only.
+* Rules: approve at 50% and at the cost-based 83% cutoff.
+
+Hypotheses: **H1** the chance of a wrong decision for the unusual-profile groups is higher than for the rest under textbook SGD, and the training-randomness part (excess over the exact model) is larger for them;
+**H2** the adapter reduces the training-randomness part for every group by ≥ 40%; **H3** the part left after the adapter is under 5 percentage points for every group of ≥ 60 member-instances.
