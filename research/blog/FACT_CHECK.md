@@ -18,6 +18,6 @@
 ## Things to check or soften before publishing
 
 * "about 15 fewer changed decisions" is per retrain out of 300 (RA-GMM vs textbook; interval 14.4–16.0).
-* The "5 passes bring every trainer within about one decision in 300" statement is for the deterministic line search: changed decisions 1.2–8.2 at 5 passes in the credit-outcome table, ≤ 0.9 at 20 passes. "About one decision" is true at 20 passes, not 5. **Edit the post to say "within a handful of decisions (1–8 of 300) after five passes and under one after twenty".**
+* The post says five passes bring every trainer to within 1–8 of 300 decisions and twenty passes to under one (from `CREDIT_WITH_ADAPTER.md`: 1.2–8.2 at 5 epochs; ≤ 0.9 at 20). Already corrected in the draft.
 * The 26.6% → 13.1% figure is the stochastic adapter; the deterministic version was only measured at the 0.5 cutoff in `CREDIT_WITH_ADAPTER.md` (and cost 0.592 at the cost cutoff for textbook SGD).
 * German Credit is a 1990s dataset; do not present the percentages as claims about current lending.
