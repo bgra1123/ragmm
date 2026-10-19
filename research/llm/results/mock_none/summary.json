@@ -1,0 +1,22 @@
+{
+  "n_applicants": 30,
+  "unstable_share_all_randomness": 1.0,
+  "unstable_share_sampling_only": 0.7333333333333333,
+  "mean_disagreement_with_majority": 0.29888888888888887,
+  "single_run_error": 0.39222222222222225,
+  "majority_all_runs_error": 0.16666666666666666,
+  "greedy_error": 0.23333333333333334,
+  "voting_error_by_k": {
+    "1": 0.382,
+    "3": 0.34733333333333327,
+    "5": 0.3046666666666667,
+    "9": 0.254
+  },
+  "agreement5_auc_for_unstable": null,
+  "groups": {},
+  "not_in_any_group": {
+    "n": 13,
+    "wrong_single_run": 0.3487179487179487,
+    "unstable_share": 1.0
+  }
+}
