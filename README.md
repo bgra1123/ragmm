@@ -22,6 +22,30 @@ change between training runs, which rows are affected, and which rows are at ris
 `RiskAverseClassifier`, `TabularEncoder`, `tail_report`. The story and evidence behind it:
 [`research/report/REPORT.md`](research/report/REPORT.md).
 
+## Stability adapter (new in 0.4.0)
+
+Retrain a model with a different random seed and some of its decisions change. The adapter measures this and reduces it for
+a model you already have:
+
+```python
+from risk_averse_tuning import StabilityAdapter, stability_check
+from xgboost import XGBClassifier
+
+model = StabilityAdapter(XGBClassifier(subsample=0.8), n_seeds=10).fit(X_train, y_train)   # averages 10 seeds
+report = stability_check(lambda s: XGBClassifier(subsample=0.8, random_state=s), X_train, y_train, X_test, y_test,
+                         seeds=30, groups={"housing for free": mask})                       # how much do decisions move?
+```
+
+For logistic models (`SGDClassifier(loss="log_loss")`, `LogisticRegression`, `RiskAverseClassifier`, a network's last layer)
+the adapter instead polishes the trained weights with deterministic full-batch steps; `step="entropic"` uses a risk-averse
+line search based on the entropic risk measure of the paper. Command line: `ragmm-adapter data.csv --target y --model xgboost`.
+Benchmark (pre-registered, German Credit): disagreement between retrains SGD logistic 15.5% → 0.1%, XGBoost 6.5% → 2.1%,
+MLP 14.4% → 5.1%, with no loss of accuracy; for tree models 10× more trees is an equally good fix
+([`research/product/RESULTS.md`](research/product/RESULTS.md)).
+
+* Tutorial: [`docs/TUTORIAL.md`](docs/TUTORIAL.md) · runnable: [`examples/tutorial.py`](examples/tutorial.py)
+* The story: [`research/blog/BLOG.md`](research/blog/BLOG.md) · videos and shorts: [`content/`](content/README.md)
+
 ## Overview
 
 The Generalized Momentum Method (GMM) covers gradient descent (GD), Nesterov's accelerated gradient (AGD) and the heavy-ball (HB) method through three parameters: step size $\alpha$, momentum $\beta$ and lookahead $\gamma$.
@@ -43,6 +67,7 @@ Two special cases are available for comparison with standard methods: `method="a
 ```bash
 pip install -e .                 # tabular API and CLI (numpy, pandas)
 pip install -e ".[torch]"        # plus the PyTorch optimizers GMM / RAGMM
+pip install -e ".[boosting]"     # plus scikit-learn, XGBoost, LightGBM for the stability adapter
 pip install -e ".[dev]" && pytest   # optional: run the tests
 ```
 

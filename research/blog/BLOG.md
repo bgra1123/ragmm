@@ -87,3 +87,10 @@ I turned this into an open-source tool: `ragmm data.csv --target repaid --positi
 *Notes. This post describes statistical behaviour of training procedures on public data from the 1990s. It is not legal, credit or compliance advice, and it makes no claim about any real lender.*
 
 *Reproduce: `research/report/REPORT.md`, `research/groups/CONCRETE.md`, `research/sota2/RESULTS.md`, `research/polish/RESULTS.md`, `research/linesearch/RESULTS.md` in the repository; every number in this post is traced in `research/blog/FACT_CHECK.md`.*
+
+---
+
+**More:** how to use the fix on your own model: [tutorial](../../docs/TUTORIAL.md) · videos and shorts: [content hub](../../content/README.md) ·
+references: [content/REFERENCES.md](../../content/REFERENCES.md) · the paper: Can & Gürbüzbalaban, *Entropic Risk-Averse Generalized
+Momentum Methods*, Optimization Methods and Software 40(6), 2025, doi:10.1080/10556788.2025.2549356 (arXiv:2204.11292).
+

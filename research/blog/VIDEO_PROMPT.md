@@ -33,7 +33,7 @@ Cinematic, 16:9, 24 fps, soft ambient music mood, no dialogue.
 1. "We trained the same model on the same data, with a different random seed."
 2. "Out of 300 applicants, 55 got a different decision depending on the seed. About one in six."
 3. "The chance of a wrong decision was higher for some groups, for example 37.8% versus 27.4% for applicants living in housing 'for free'."
-4. "A short, deterministic polish step cut that gap, to 31.5% in that group."
+4. "A short polish step after training cut that gap, to 31.5% in that group."
 5. "Ask your model twice. See how often it changes its mind."
 Disclaimer caption: "Statistical behaviour of a model on a public dataset (German Credit); not an accusation of bias and not credit advice."
 

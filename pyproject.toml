@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "risk-averse-tuning"
-version = "0.3.0"
-description = "Risk-averse training (RA-GMM, Can & Gurbuzbalaban 2025) and retraining-tail reports for tabular models"
+version = "0.4.0"
+description = "Risk-averse training (RA-GMM, Can & Gurbuzbalaban 2025), a stability adapter for trained classifiers, and retraining-tail reports"
 requires-python = ">=3.9"
 dependencies = [
     "numpy>=1.24",
@@ -14,13 +14,17 @@ dependencies = [
 
 [project.optional-dependencies]
 torch = ["torch>=2.0.0"]
+adapter = ["scikit-learn>=1.2"]
+boosting = ["scikit-learn>=1.2", "xgboost>=1.7", "lightgbm>=3.3"]
 dev = [
     "pytest>=7.0",
+    "scikit-learn>=1.2",
     "torch>=2.0.0",
 ]
 
 [project.scripts]
 ragmm = "risk_averse_tuning.cli:main"
+ragmm-adapter = "risk_averse_tuning.cli_adapter:main"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
@@ -29,3 +33,6 @@ pythonpath = ["."]
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["risk_averse_tuning*"]
+
+[tool.setuptools.package-data]
+risk_averse_tuning = ["data/*.csv"]

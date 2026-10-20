@@ -1,0 +1,30 @@
+## XGBoost
+
+- Retrains: 30; rows checked: 300; seconds per retrain: 0.05
+- Chance that two retrains disagree on a row: 9.0%
+- Unstable rows (decision differs from the majority in at least 10% of retrains): 20.7%
+- Decisions that differ from the majority, per retrain: 18.8 on average, 24.0 in the worst 5% of retrains
+- Chance of a wrong decision: 25.7% for one retrain, 24.0% for the majority vote (+1.7% due to training randomness)
+
+| Group | Rows | Wrong (one retrain) | Wrong (majority) | Due to randomness | Unstable rows |
+|---|---|---|---|---|---|
+| housing for free | 22 | 30.6% | 31.8% | -1.2% | 36.4% |
+| no property | 35 | 20.9% | 20.0% | +0.9% | 20.0% |
+{'strategy': 'average', 'fits': 10, 'fit_seconds': 0.3764718120000907, 'calibrated': False}
+| Model | Two retrains disagree | Unstable rows | Changes per retrain (avg / worst 5%) | Wrong decision (one retrain) | Due to randomness | Seconds per fit |
+|---|---|---|---|---|---|---|
+| XGBoost | 9.0% | 20.7% | 18.8 / 24.0 | 25.7% | +1.7% | 0.05 |
+| XGBoost + adapter | 3.2% | 7.7% | 7.0 / 12.0 | 24.9% | +0.2% | 0.40 |
+| Model | Two retrains disagree | Unstable rows | Changes per retrain (avg / worst 5%) | Wrong decision (one retrain) | Due to randomness | Seconds per fit |
+|---|---|---|---|---|---|---|
+| XGBoost | 13.4% | 36.4% | 2.0 / 5.0 | 30.6% | -1.2% | 0.05 |
+| XGBoost + adapter | 5.0% | 9.1% | 0.8 / 2.5 | 30.6% | -1.2% | 0.40 |
+| Model | Two retrains disagree | Unstable rows | Changes per retrain (avg / worst 5%) | Wrong decision (one retrain) | Due to randomness | Seconds per fit |
+|---|---|---|---|---|---|---|
+| SGD logistic | 14.0% | 31.7% | 28.9 / 42.0 | 28.0% | +2.3% | 0.00 |
+| SGD + polish | 0.1% | 0.3% | 0.3 / 1.0 | 25.9% | -0.1% | 0.05 |
+| SGD + entropic polish | 0.0% | 0.0% | 0.0 / 0.0 | 26.0% | +0.0% | 0.04 |
+{'step': 'line_search', 'epochs': 20, 'objective_before': 0.5080983405034654, 'objective_after': 0.4423436636392466, 'mean_step_times_L': 2.8442802471147206, 'lam': 0.01}
+{'step': 'line_search', 'epochs': 20, 'objective_before': 0.6931471805599454, 'objective_after': 0.4496162968074408, 'mean_step_times_L': 2.6548816333386864}
+approved 32.0% of held-out applicants at the 5/6 cutoff
+- For rows in 'no property', a single retrain of XGBoost makes a wrong decision 20.9% of the time; the majority vote of 30 retrains does so 20.0% of the time, so 0.9 percentage points come from training randomness.

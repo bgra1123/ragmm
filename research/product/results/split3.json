@@ -1,0 +1,1787 @@
+{
+  "SGD logistic": {
+    "name": "SGD logistic",
+    "summary": {
+      "rows": 300,
+      "disagreement": 0.16033716475095786,
+      "unstable_share": 0.36333333333333334,
+      "changes_mean": 33.13333333333333,
+      "changes_worst5": 41.0,
+      "wrong": 0.2702222222222222,
+      "wrong_majority": 0.23666666666666666,
+      "wrong_excess": 0.03355555555555553,
+      "retrains": 30,
+      "fit_seconds": 0.0017236662000035116,
+      "threshold": 0.5
+    },
+    "groups": {
+      "G1 unemployed now": {
+        "rows": 20,
+        "disagreement": 0.2833333333333333,
+        "unstable_share": 0.65,
+        "changes_mean": 3.9,
+        "changes_worst5": 8.333333333333334,
+        "wrong": 0.465,
+        "wrong_majority": 0.35,
+        "wrong_excess": 0.11500000000000005
+      },
+      "G2 job unemployed/unskilled non-resident": {
+        "rows": 5,
+        "disagreement": 0.19954022988505746,
+        "unstable_share": 0.6,
+        "changes_mean": 0.6,
+        "changes_worst5": 2.2,
+        "wrong": 0.21333333333333335,
+        "wrong_majority": 0.2,
+        "wrong_excess": 0.013333333333333336
+      },
+      "G3 housing for free": {
+        "rows": 38,
+        "disagreement": 0.2019963702359346,
+        "unstable_share": 0.4473684210526316,
+        "changes_mean": 5.1,
+        "changes_worst5": 9.0,
+        "wrong": 0.3482456140350877,
+        "wrong_majority": 0.2894736842105263,
+        "wrong_excess": 0.058771929824561364
+      },
+      "G4 age < 25": {
+        "rows": 47,
+        "disagreement": 0.2018097334311568,
+        "unstable_share": 0.44680851063829785,
+        "changes_mean": 6.6,
+        "changes_worst5": 11.5,
+        "wrong": 0.4014184397163121,
+        "wrong_majority": 0.40425531914893614,
+        "wrong_excess": -0.002836879432624062
+      },
+      "G5 not a foreign worker": {
+        "rows": 9,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.1111111111111111,
+        "wrong_majority": 0.1111111111111111,
+        "wrong_excess": 0.0
+      },
+      "G6 female": {
+        "rows": 90,
+        "disagreement": 0.1553256704980843,
+        "unstable_share": 0.35555555555555557,
+        "changes_mean": 9.233333333333333,
+        "changes_worst5": 12.333333333333334,
+        "wrong": 0.28629629629629627,
+        "wrong_majority": 0.2777777777777778,
+        "wrong_excess": 0.00851851851851848
+      },
+      "G7 checking account < 0 DM": {
+        "rows": 90,
+        "disagreement": 0.24390804597701152,
+        "unstable_share": 0.5777777777777777,
+        "changes_mean": 15.366666666666667,
+        "changes_worst5": 22.5,
+        "wrong": 0.32407407407407407,
+        "wrong_majority": 0.25555555555555554,
+        "wrong_excess": 0.06851851851851853
+      },
+      "G8 large and long loan": {
+        "rows": 48,
+        "disagreement": 0.17782567049808432,
+        "unstable_share": 0.3958333333333333,
+        "changes_mean": 5.633333333333334,
+        "changes_worst5": 10.5,
+        "wrong": 0.39375,
+        "wrong_majority": 0.375,
+        "wrong_excess": 0.01874999999999999
+      },
+      "G9 no property": {
+        "rows": 50,
+        "disagreement": 0.17268965517241383,
+        "unstable_share": 0.38,
+        "changes_mean": 5.666666666666667,
+        "changes_worst5": 10.333333333333334,
+        "wrong": 0.296,
+        "wrong_majority": 0.24,
+        "wrong_excess": 0.055999999999999994
+      },
+      "G10 male divorced/separated": {
+        "rows": 14,
+        "disagreement": 0.14761904761904762,
+        "unstable_share": 0.35714285714285715,
+        "changes_mean": 1.3,
+        "changes_worst5": 4.0,
+        "wrong": 0.09285714285714286,
+        "wrong_majority": 0.0,
+        "wrong_excess": 0.09285714285714286
+      }
+    },
+    "disclaimer": "These numbers describe how much a model's decisions vary between training runs, overall and by group. They are a statistical diagnostic, not a finding of bias or wrongdoing, and not legal, credit or compliance advice."
+  },
+  "SGD logistic + adapter (polish)": {
+    "name": "SGD logistic + adapter (polish)",
+    "summary": {
+      "rows": 300,
+      "disagreement": 0.0012337164750957853,
+      "unstable_share": 0.0033333333333333335,
+      "changes_mean": 0.23333333333333334,
+      "changes_worst5": 1.0,
+      "wrong": 0.24588888888888888,
+      "wrong_majority": 0.24666666666666667,
+      "wrong_excess": -0.0007777777777777939,
+      "retrains": 30,
+      "fit_seconds": 0.06268686479999701,
+      "threshold": 0.5
+    },
+    "groups": {
+      "G1 unemployed now": {
+        "rows": 20,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.4,
+        "wrong_majority": 0.4,
+        "wrong_excess": 0.0
+      },
+      "G2 job unemployed/unskilled non-resident": {
+        "rows": 5,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.2,
+        "wrong_majority": 0.2,
+        "wrong_excess": 0.0
+      },
+      "G3 housing for free": {
+        "rows": 38,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.2894736842105263,
+        "wrong_majority": 0.2894736842105263,
+        "wrong_excess": 0.0
+      },
+      "G4 age < 25": {
+        "rows": 47,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.44680851063829785,
+        "wrong_majority": 0.44680851063829785,
+        "wrong_excess": 0.0
+      },
+      "G5 not a foreign worker": {
+        "rows": 9,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.1111111111111111,
+        "wrong_majority": 0.1111111111111111,
+        "wrong_excess": 0.0
+      },
+      "G6 female": {
+        "rows": 90,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.2777777777777778,
+        "wrong_majority": 0.2777777777777778,
+        "wrong_excess": 0.0
+      },
+      "G7 checking account < 0 DM": {
+        "rows": 90,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.25555555555555554,
+        "wrong_majority": 0.25555555555555554,
+        "wrong_excess": 0.0
+      },
+      "G8 large and long loan": {
+        "rows": 48,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.375,
+        "wrong_majority": 0.375,
+        "wrong_excess": 0.0
+      },
+      "G9 no property": {
+        "rows": 50,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.26,
+        "wrong_majority": 0.26,
+        "wrong_excess": 0.0
+      },
+      "G10 male divorced/separated": {
+        "rows": 14,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.0,
+        "wrong_majority": 0.0,
+        "wrong_excess": 0.0
+      }
+    },
+    "disclaimer": "These numbers describe how much a model's decisions vary between training runs, overall and by group. They are a statistical diagnostic, not a finding of bias or wrongdoing, and not legal, credit or compliance advice."
+  },
+  "SGD logistic + adapter (entropic step)": {
+    "name": "SGD logistic + adapter (entropic step)",
+    "summary": {
+      "rows": 300,
+      "disagreement": 0.00042911877394636,
+      "unstable_share": 0.0,
+      "changes_mean": 0.06666666666666667,
+      "changes_worst5": 1.0,
+      "wrong": 0.24644444444444444,
+      "wrong_majority": 0.24666666666666667,
+      "wrong_excess": -0.00022222222222223476,
+      "retrains": 30,
+      "fit_seconds": 0.02403727699999649,
+      "threshold": 0.5
+    },
+    "groups": {
+      "G1 unemployed now": {
+        "rows": 20,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.4,
+        "wrong_majority": 0.4,
+        "wrong_excess": 0.0
+      },
+      "G2 job unemployed/unskilled non-resident": {
+        "rows": 5,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.2,
+        "wrong_majority": 0.2,
+        "wrong_excess": 0.0
+      },
+      "G3 housing for free": {
+        "rows": 38,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.2894736842105263,
+        "wrong_majority": 0.2894736842105263,
+        "wrong_excess": 0.0
+      },
+      "G4 age < 25": {
+        "rows": 47,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.44680851063829785,
+        "wrong_majority": 0.44680851063829785,
+        "wrong_excess": 0.0
+      },
+      "G5 not a foreign worker": {
+        "rows": 9,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.1111111111111111,
+        "wrong_majority": 0.1111111111111111,
+        "wrong_excess": 0.0
+      },
+      "G6 female": {
+        "rows": 90,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.2777777777777778,
+        "wrong_majority": 0.2777777777777778,
+        "wrong_excess": 0.0
+      },
+      "G7 checking account < 0 DM": {
+        "rows": 90,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.25555555555555554,
+        "wrong_majority": 0.25555555555555554,
+        "wrong_excess": 0.0
+      },
+      "G8 large and long loan": {
+        "rows": 48,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.375,
+        "wrong_majority": 0.375,
+        "wrong_excess": 0.0
+      },
+      "G9 no property": {
+        "rows": 50,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.26,
+        "wrong_majority": 0.26,
+        "wrong_excess": 0.0
+      },
+      "G10 male divorced/separated": {
+        "rows": 14,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.0,
+        "wrong_majority": 0.0,
+        "wrong_excess": 0.0
+      }
+    },
+    "disclaimer": "These numbers describe how much a model's decisions vary between training runs, overall and by group. They are a statistical diagnostic, not a finding of bias or wrongdoing, and not legal, credit or compliance advice."
+  },
+  "SGD logistic, 25x longer": {
+    "name": "SGD logistic, 25x longer",
+    "summary": {
+      "rows": 300,
+      "disagreement": 0.0020996168582375478,
+      "unstable_share": 0.0033333333333333335,
+      "changes_mean": 0.4,
+      "changes_worst5": 1.0909090909090908,
+      "wrong": 0.24422222222222223,
+      "wrong_majority": 0.24333333333333335,
+      "wrong_excess": 0.0008888888888888835,
+      "retrains": 30,
+      "fit_seconds": 0.016049108333330273,
+      "threshold": 0.5
+    },
+    "groups": {
+      "G1 unemployed now": {
+        "rows": 20,
+        "disagreement": 0.003333333333333333,
+        "unstable_share": 0.0,
+        "changes_mean": 0.03333333333333333,
+        "changes_worst5": 0.03333333333333333,
+        "wrong": 0.40166666666666667,
+        "wrong_majority": 0.4,
+        "wrong_excess": 0.0016666666666666496
+      },
+      "G2 job unemployed/unskilled non-resident": {
+        "rows": 5,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.2,
+        "wrong_majority": 0.2,
+        "wrong_excess": 0.0
+      },
+      "G3 housing for free": {
+        "rows": 38,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.2894736842105263,
+        "wrong_majority": 0.2894736842105263,
+        "wrong_excess": 0.0
+      },
+      "G4 age < 25": {
+        "rows": 47,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.44680851063829785,
+        "wrong_majority": 0.44680851063829785,
+        "wrong_excess": 0.0
+      },
+      "G5 not a foreign worker": {
+        "rows": 9,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.1111111111111111,
+        "wrong_majority": 0.1111111111111111,
+        "wrong_excess": 0.0
+      },
+      "G6 female": {
+        "rows": 90,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.2777777777777778,
+        "wrong_majority": 0.2777777777777778,
+        "wrong_excess": 0.0
+      },
+      "G7 checking account < 0 DM": {
+        "rows": 90,
+        "disagreement": 0.0014303959131545339,
+        "unstable_share": 0.0,
+        "changes_mean": 0.06666666666666667,
+        "changes_worst5": 1.0,
+        "wrong": 0.2548148148148148,
+        "wrong_majority": 0.25555555555555554,
+        "wrong_excess": -0.0007407407407407085
+      },
+      "G8 large and long loan": {
+        "rows": 48,
+        "disagreement": 0.0013888888888888887,
+        "unstable_share": 0.0,
+        "changes_mean": 0.03333333333333333,
+        "changes_worst5": 0.03333333333333333,
+        "wrong": 0.37569444444444444,
+        "wrong_majority": 0.375,
+        "wrong_excess": 0.000694444444444442
+      },
+      "G9 no property": {
+        "rows": 50,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.26,
+        "wrong_majority": 0.26,
+        "wrong_excess": 0.0
+      },
+      "G10 male divorced/separated": {
+        "rows": 14,
+        "disagreement": 0.0047619047619047615,
+        "unstable_share": 0.0,
+        "changes_mean": 0.03333333333333333,
+        "changes_worst5": 0.03333333333333333,
+        "wrong": 0.002380952380952381,
+        "wrong_majority": 0.0,
+        "wrong_excess": 0.002380952380952381
+      }
+    },
+    "disclaimer": "These numbers describe how much a model's decisions vary between training runs, overall and by group. They are a statistical diagnostic, not a finding of bias or wrongdoing, and not legal, credit or compliance advice."
+  },
+  "XGBoost": {
+    "name": "XGBoost",
+    "summary": {
+      "rows": 300,
+      "disagreement": 0.07124137931034483,
+      "unstable_share": 0.16,
+      "changes_mean": 14.566666666666666,
+      "changes_worst5": 20.0,
+      "wrong": 0.279,
+      "wrong_majority": 0.28,
+      "wrong_excess": -0.0010000000000000009,
+      "retrains": 30,
+      "fit_seconds": 0.040416162666665895,
+      "threshold": 0.5
+    },
+    "groups": {
+      "G1 unemployed now": {
+        "rows": 20,
+        "disagreement": 0.15850574712643675,
+        "unstable_share": 0.35,
+        "changes_mean": 2.3666666666666667,
+        "changes_worst5": 4.2,
+        "wrong": 0.41833333333333333,
+        "wrong_majority": 0.45,
+        "wrong_excess": -0.031666666666666676
+      },
+      "G2 job unemployed/unskilled non-resident": {
+        "rows": 5,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.2,
+        "wrong_majority": 0.2,
+        "wrong_excess": 0.0
+      },
+      "G3 housing for free": {
+        "rows": 38,
+        "disagreement": 0.11258318209316394,
+        "unstable_share": 0.2631578947368421,
+        "changes_mean": 2.966666666666667,
+        "changes_worst5": 6.0,
+        "wrong": 0.31491228070175437,
+        "wrong_majority": 0.3157894736842105,
+        "wrong_excess": -0.0008771929824561431
+      },
+      "G4 age < 25": {
+        "rows": 47,
+        "disagreement": 0.09806798728295427,
+        "unstable_share": 0.19148936170212766,
+        "changes_mean": 3.1666666666666665,
+        "changes_worst5": 6.0,
+        "wrong": 0.36666666666666664,
+        "wrong_majority": 0.3617021276595745,
+        "wrong_excess": 0.00496453900709215
+      },
+      "G5 not a foreign worker": {
+        "rows": 9,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.0,
+        "wrong_majority": 0.0,
+        "wrong_excess": 0.0
+      },
+      "G6 female": {
+        "rows": 90,
+        "disagreement": 0.05826309067688378,
+        "unstable_share": 0.13333333333333333,
+        "changes_mean": 3.7666666666666666,
+        "changes_worst5": 6.666666666666667,
+        "wrong": 0.29074074074074074,
+        "wrong_majority": 0.3,
+        "wrong_excess": -0.009259259259259245
+      },
+      "G7 checking account < 0 DM": {
+        "rows": 90,
+        "disagreement": 0.0899616858237548,
+        "unstable_share": 0.2111111111111111,
+        "changes_mean": 5.4,
+        "changes_worst5": 9.5,
+        "wrong": 0.36148148148148146,
+        "wrong_majority": 0.35555555555555557,
+        "wrong_excess": 0.00592592592592589
+      },
+      "G8 large and long loan": {
+        "rows": 48,
+        "disagreement": 0.11609195402298851,
+        "unstable_share": 0.2916666666666667,
+        "changes_mean": 3.8,
+        "changes_worst5": 8.0,
+        "wrong": 0.41805555555555557,
+        "wrong_majority": 0.4375,
+        "wrong_excess": -0.01944444444444443
+      },
+      "G9 no property": {
+        "rows": 50,
+        "disagreement": 0.0845977011494253,
+        "unstable_share": 0.2,
+        "changes_mean": 2.8666666666666667,
+        "changes_worst5": 6.0,
+        "wrong": 0.2773333333333333,
+        "wrong_majority": 0.28,
+        "wrong_excess": -0.002666666666666706
+      },
+      "G10 male divorced/separated": {
+        "rows": 14,
+        "disagreement": 0.1285714285714286,
+        "unstable_share": 0.2857142857142857,
+        "changes_mean": 1.3,
+        "changes_worst5": 3.0,
+        "wrong": 0.19285714285714287,
+        "wrong_majority": 0.14285714285714285,
+        "wrong_excess": 0.05000000000000002
+      }
+    },
+    "disclaimer": "These numbers describe how much a model's decisions vary between training runs, overall and by group. They are a statistical diagnostic, not a finding of bias or wrongdoing, and not legal, credit or compliance advice."
+  },
+  "XGBoost + adapter (average 10)": {
+    "name": "XGBoost + adapter (average 10)",
+    "summary": {
+      "rows": 300,
+      "disagreement": 0.027310344827586208,
+      "unstable_share": 0.06333333333333334,
+      "changes_mean": 6.133333333333334,
+      "changes_worst5": 10.0,
+      "wrong": 0.2788888888888889,
+      "wrong_majority": 0.2866666666666667,
+      "wrong_excess": -0.007777777777777772,
+      "retrains": 30,
+      "fit_seconds": 0.4633788751333308,
+      "threshold": 0.5
+    },
+    "groups": {
+      "G1 unemployed now": {
+        "rows": 20,
+        "disagreement": 0.09126436781609196,
+        "unstable_share": 0.2,
+        "changes_mean": 1.5333333333333334,
+        "changes_worst5": 3.142857142857143,
+        "wrong": 0.39,
+        "wrong_majority": 0.45,
+        "wrong_excess": -0.06
+      },
+      "G2 job unemployed/unskilled non-resident": {
+        "rows": 5,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.2,
+        "wrong_majority": 0.2,
+        "wrong_excess": 0.0
+      },
+      "G3 housing for free": {
+        "rows": 38,
+        "disagreement": 0.042770719903206286,
+        "unstable_share": 0.13157894736842105,
+        "changes_mean": 1.1,
+        "changes_worst5": 3.5,
+        "wrong": 0.31666666666666665,
+        "wrong_majority": 0.3157894736842105,
+        "wrong_excess": 0.0008771929824561431
+      },
+      "G4 age < 25": {
+        "rows": 47,
+        "disagreement": 0.03687943262411348,
+        "unstable_share": 0.0851063829787234,
+        "changes_mean": 1.2,
+        "changes_worst5": 3.0,
+        "wrong": 0.3773049645390071,
+        "wrong_majority": 0.3829787234042553,
+        "wrong_excess": -0.005673758865248235
+      },
+      "G5 not a foreign worker": {
+        "rows": 9,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.0,
+        "wrong_majority": 0.0,
+        "wrong_excess": 0.0
+      },
+      "G6 female": {
+        "rows": 90,
+        "disagreement": 0.024572158365261818,
+        "unstable_share": 0.05555555555555555,
+        "changes_mean": 1.6,
+        "changes_worst5": 3.2,
+        "wrong": 0.29185185185185186,
+        "wrong_majority": 0.28888888888888886,
+        "wrong_excess": 0.0029629629629630005
+      },
+      "G7 checking account < 0 DM": {
+        "rows": 90,
+        "disagreement": 0.03185185185185185,
+        "unstable_share": 0.06666666666666667,
+        "changes_mean": 2.1666666666666665,
+        "changes_worst5": 4.5,
+        "wrong": 0.36333333333333334,
+        "wrong_majority": 0.37777777777777777,
+        "wrong_excess": -0.014444444444444426
+      },
+      "G8 large and long loan": {
+        "rows": 48,
+        "disagreement": 0.03922413793103448,
+        "unstable_share": 0.08333333333333333,
+        "changes_mean": 1.4333333333333333,
+        "changes_worst5": 3.6666666666666665,
+        "wrong": 0.4201388888888889,
+        "wrong_majority": 0.4375,
+        "wrong_excess": -0.017361111111111105
+      },
+      "G9 no property": {
+        "rows": 50,
+        "disagreement": 0.03475862068965516,
+        "unstable_share": 0.1,
+        "changes_mean": 1.3333333333333333,
+        "changes_worst5": 3.0,
+        "wrong": 0.2853333333333333,
+        "wrong_majority": 0.3,
+        "wrong_excess": -0.014666666666666661
+      },
+      "G10 male divorced/separated": {
+        "rows": 14,
+        "disagreement": 0.04696223316912972,
+        "unstable_share": 0.14285714285714285,
+        "changes_mean": 0.4,
+        "changes_worst5": 1.0909090909090908,
+        "wrong": 0.15714285714285714,
+        "wrong_majority": 0.14285714285714285,
+        "wrong_excess": 0.01428571428571429
+      }
+    },
+    "disclaimer": "These numbers describe how much a model's decisions vary between training runs, overall and by group. They are a statistical diagnostic, not a finding of bias or wrongdoing, and not legal, credit or compliance advice."
+  },
+  "XGBoost, 10x trees": {
+    "name": "XGBoost, 10x trees",
+    "summary": {
+      "rows": 300,
+      "disagreement": 0.024045977011494253,
+      "unstable_share": 0.05,
+      "changes_mean": 5.2,
+      "changes_worst5": 9.333333333333334,
+      "wrong": 0.2806666666666667,
+      "wrong_majority": 0.2866666666666667,
+      "wrong_excess": -0.006000000000000005,
+      "retrains": 30,
+      "fit_seconds": 0.4476218488000029,
+      "threshold": 0.5
+    },
+    "groups": {
+      "G1 unemployed now": {
+        "rows": 20,
+        "disagreement": 0.09091954022988505,
+        "unstable_share": 0.2,
+        "changes_mean": 1.3666666666666667,
+        "changes_worst5": 4.0,
+        "wrong": 0.40166666666666667,
+        "wrong_majority": 0.45,
+        "wrong_excess": -0.04833333333333334
+      },
+      "G2 job unemployed/unskilled non-resident": {
+        "rows": 5,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.2,
+        "wrong_majority": 0.2,
+        "wrong_excess": 0.0
+      },
+      "G3 housing for free": {
+        "rows": 38,
+        "disagreement": 0.040471869328493636,
+        "unstable_share": 0.07894736842105263,
+        "changes_mean": 1.1,
+        "changes_worst5": 3.0,
+        "wrong": 0.3201754385964912,
+        "wrong_majority": 0.3157894736842105,
+        "wrong_excess": 0.004385964912280715
+      },
+      "G4 age < 25": {
+        "rows": 47,
+        "disagreement": 0.02670579603815114,
+        "unstable_share": 0.06382978723404255,
+        "changes_mean": 0.8,
+        "changes_worst5": 3.0,
+        "wrong": 0.38156028368794326,
+        "wrong_majority": 0.3829787234042553,
+        "wrong_excess": -0.0014184397163120588
+      },
+      "G5 not a foreign worker": {
+        "rows": 9,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.0,
+        "wrong_majority": 0.0,
+        "wrong_excess": 0.0
+      },
+      "G6 female": {
+        "rows": 90,
+        "disagreement": 0.018646232439335882,
+        "unstable_share": 0.03333333333333333,
+        "changes_mean": 1.0666666666666667,
+        "changes_worst5": 3.0,
+        "wrong": 0.2962962962962963,
+        "wrong_majority": 0.3,
+        "wrong_excess": -0.003703703703703709
+      },
+      "G7 checking account < 0 DM": {
+        "rows": 90,
+        "disagreement": 0.030727969348659005,
+        "unstable_share": 0.06666666666666667,
+        "changes_mean": 2.1,
+        "changes_worst5": 4.0,
+        "wrong": 0.3662962962962963,
+        "wrong_majority": 0.36666666666666664,
+        "wrong_excess": -0.00037037037037035425
+      },
+      "G8 large and long loan": {
+        "rows": 48,
+        "disagreement": 0.04363026819923372,
+        "unstable_share": 0.08333333333333333,
+        "changes_mean": 1.5,
+        "changes_worst5": 3.1666666666666665,
+        "wrong": 0.4270833333333333,
+        "wrong_majority": 0.4375,
+        "wrong_excess": -0.010416666666666685
+      },
+      "G9 no property": {
+        "rows": 50,
+        "disagreement": 0.030988505747126437,
+        "unstable_share": 0.06,
+        "changes_mean": 1.1333333333333333,
+        "changes_worst5": 3.0,
+        "wrong": 0.2866666666666667,
+        "wrong_majority": 0.3,
+        "wrong_excess": -0.013333333333333308
+      },
+      "G10 male divorced/separated": {
+        "rows": 14,
+        "disagreement": 0.04942528735632183,
+        "unstable_share": 0.07142857142857142,
+        "changes_mean": 0.5,
+        "changes_worst5": 2.0,
+        "wrong": 0.16904761904761906,
+        "wrong_majority": 0.14285714285714285,
+        "wrong_excess": 0.02619047619047621
+      }
+    },
+    "disclaimer": "These numbers describe how much a model's decisions vary between training runs, overall and by group. They are a statistical diagnostic, not a finding of bias or wrongdoing, and not legal, credit or compliance advice."
+  },
+  "LightGBM": {
+    "name": "LightGBM",
+    "summary": {
+      "rows": 300,
+      "disagreement": 0.07363218390804596,
+      "unstable_share": 0.16,
+      "changes_mean": 15.033333333333333,
+      "changes_worst5": 22.0,
+      "wrong": 0.2836666666666667,
+      "wrong_majority": 0.28,
+      "wrong_excess": 0.0036666666666666514,
+      "retrains": 30,
+      "fit_seconds": 0.05697082463332777,
+      "threshold": 0.5
+    },
+    "groups": {
+      "G1 unemployed now": {
+        "rows": 20,
+        "disagreement": 0.09896551724137931,
+        "unstable_share": 0.2,
+        "changes_mean": 1.3666666666666667,
+        "changes_worst5": 3.25,
+        "wrong": 0.43833333333333335,
+        "wrong_majority": 0.45,
+        "wrong_excess": -0.011666666666666659
+      },
+      "G2 job unemployed/unskilled non-resident": {
+        "rows": 5,
+        "disagreement": 0.013333333333333329,
+        "unstable_share": 0.0,
+        "changes_mean": 0.03333333333333333,
+        "changes_worst5": 0.03333333333333333,
+        "wrong": 0.20666666666666667,
+        "wrong_majority": 0.2,
+        "wrong_excess": 0.006666666666666654
+      },
+      "G3 housing for free": {
+        "rows": 38,
+        "disagreement": 0.08735632183908046,
+        "unstable_share": 0.21052631578947367,
+        "changes_mean": 2.2,
+        "changes_worst5": 5.5,
+        "wrong": 0.3087719298245614,
+        "wrong_majority": 0.3157894736842105,
+        "wrong_excess": -0.007017543859649089
+      },
+      "G4 age < 25": {
+        "rows": 47,
+        "disagreement": 0.10183418928833456,
+        "unstable_share": 0.19148936170212766,
+        "changes_mean": 3.3333333333333335,
+        "changes_worst5": 7.5,
+        "wrong": 0.3829787234042553,
+        "wrong_majority": 0.40425531914893614,
+        "wrong_excess": -0.021276595744680826
+      },
+      "G5 not a foreign worker": {
+        "rows": 9,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.0,
+        "wrong_majority": 0.0,
+        "wrong_excess": 0.0
+      },
+      "G6 female": {
+        "rows": 90,
+        "disagreement": 0.06715197956577265,
+        "unstable_share": 0.12222222222222222,
+        "changes_mean": 4.166666666666667,
+        "changes_worst5": 9.333333333333334,
+        "wrong": 0.2922222222222222,
+        "wrong_majority": 0.28888888888888886,
+        "wrong_excess": 0.003333333333333355
+      },
+      "G7 checking account < 0 DM": {
+        "rows": 90,
+        "disagreement": 0.08413793103448276,
+        "unstable_share": 0.2111111111111111,
+        "changes_mean": 5.0,
+        "changes_worst5": 8.333333333333334,
+        "wrong": 0.38666666666666666,
+        "wrong_majority": 0.3888888888888889,
+        "wrong_excess": -0.0022222222222222365
+      },
+      "G8 large and long loan": {
+        "rows": 48,
+        "disagreement": 0.10636973180076628,
+        "unstable_share": 0.2708333333333333,
+        "changes_mean": 3.3666666666666667,
+        "changes_worst5": 7.0,
+        "wrong": 0.3770833333333333,
+        "wrong_majority": 0.3958333333333333,
+        "wrong_excess": -0.01874999999999999
+      },
+      "G9 no property": {
+        "rows": 50,
+        "disagreement": 0.06501149425287356,
+        "unstable_share": 0.16,
+        "changes_mean": 2.1333333333333333,
+        "changes_worst5": 5.5,
+        "wrong": 0.2733333333333333,
+        "wrong_majority": 0.28,
+        "wrong_excess": -0.00666666666666671
+      },
+      "G10 male divorced/separated": {
+        "rows": 14,
+        "disagreement": 0.08144499178981936,
+        "unstable_share": 0.21428571428571427,
+        "changes_mean": 0.6666666666666666,
+        "changes_worst5": 2.0,
+        "wrong": 0.11428571428571428,
+        "wrong_majority": 0.07142857142857142,
+        "wrong_excess": 0.04285714285714286
+      }
+    },
+    "disclaimer": "These numbers describe how much a model's decisions vary between training runs, overall and by group. They are a statistical diagnostic, not a finding of bias or wrongdoing, and not legal, credit or compliance advice."
+  },
+  "LightGBM + adapter (average 10)": {
+    "name": "LightGBM + adapter (average 10)",
+    "summary": {
+      "rows": 300,
+      "disagreement": 0.019524904214559387,
+      "unstable_share": 0.043333333333333335,
+      "changes_mean": 4.066666666666666,
+      "changes_worst5": 7.333333333333333,
+      "wrong": 0.2828888888888889,
+      "wrong_majority": 0.2833333333333333,
+      "wrong_excess": -0.000444444444444414,
+      "retrains": 30,
+      "fit_seconds": 0.6298485684333325,
+      "threshold": 0.5
+    },
+    "groups": {
+      "G1 unemployed now": {
+        "rows": 20,
+        "disagreement": 0.009770114942528732,
+        "unstable_share": 0.0,
+        "changes_mean": 0.1,
+        "changes_worst5": 1.0,
+        "wrong": 0.45166666666666666,
+        "wrong_majority": 0.45,
+        "wrong_excess": 0.0016666666666666496
+      },
+      "G2 job unemployed/unskilled non-resident": {
+        "rows": 5,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.2,
+        "wrong_majority": 0.2,
+        "wrong_excess": 0.0
+      },
+      "G3 housing for free": {
+        "rows": 38,
+        "disagreement": 0.020145190562613432,
+        "unstable_share": 0.05263157894736842,
+        "changes_mean": 0.5,
+        "changes_worst5": 1.0714285714285714,
+        "wrong": 0.3201754385964912,
+        "wrong_majority": 0.3157894736842105,
+        "wrong_excess": 0.004385964912280715
+      },
+      "G4 age < 25": {
+        "rows": 47,
+        "disagreement": 0.03296649547566642,
+        "unstable_share": 0.0851063829787234,
+        "changes_mean": 1.1333333333333333,
+        "changes_worst5": 3.0,
+        "wrong": 0.3659574468085106,
+        "wrong_majority": 0.3617021276595745,
+        "wrong_excess": 0.004255319148936121
+      },
+      "G5 not a foreign worker": {
+        "rows": 9,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.0,
+        "wrong_majority": 0.0,
+        "wrong_excess": 0.0
+      },
+      "G6 female": {
+        "rows": 90,
+        "disagreement": 0.029604086845466154,
+        "unstable_share": 0.06666666666666667,
+        "changes_mean": 2.033333333333333,
+        "changes_worst5": 5.0,
+        "wrong": 0.2974074074074074,
+        "wrong_majority": 0.3,
+        "wrong_excess": -0.002592592592592591
+      },
+      "G7 checking account < 0 DM": {
+        "rows": 90,
+        "disagreement": 0.01839080459770115,
+        "unstable_share": 0.03333333333333333,
+        "changes_mean": 1.1333333333333333,
+        "changes_worst5": 2.1,
+        "wrong": 0.3962962962962963,
+        "wrong_majority": 0.4,
+        "wrong_excess": -0.003703703703703709
+      },
+      "G8 large and long loan": {
+        "rows": 48,
+        "disagreement": 0.021982758620689657,
+        "unstable_share": 0.041666666666666664,
+        "changes_mean": 0.8333333333333334,
+        "changes_worst5": 2.0,
+        "wrong": 0.39375,
+        "wrong_majority": 0.3958333333333333,
+        "wrong_excess": -0.002083333333333326
+      },
+      "G9 no property": {
+        "rows": 50,
+        "disagreement": 0.015310344827586208,
+        "unstable_share": 0.04,
+        "changes_mean": 0.5,
+        "changes_worst5": 1.0714285714285714,
+        "wrong": 0.2833333333333333,
+        "wrong_majority": 0.28,
+        "wrong_excess": 0.0033333333333332993
+      },
+      "G10 male divorced/separated": {
+        "rows": 14,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.07142857142857142,
+        "wrong_majority": 0.07142857142857142,
+        "wrong_excess": 0.0
+      }
+    },
+    "disclaimer": "These numbers describe how much a model's decisions vary between training runs, overall and by group. They are a statistical diagnostic, not a finding of bias or wrongdoing, and not legal, credit or compliance advice."
+  },
+  "LightGBM, 10x trees": {
+    "name": "LightGBM, 10x trees",
+    "summary": {
+      "rows": 300,
+      "disagreement": 0.02131800766283525,
+      "unstable_share": 0.04666666666666667,
+      "changes_mean": 4.466666666666667,
+      "changes_worst5": 8.0,
+      "wrong": 0.2828888888888889,
+      "wrong_majority": 0.27666666666666667,
+      "wrong_excess": 0.00622222222222224,
+      "retrains": 30,
+      "fit_seconds": 0.6383855287000036,
+      "threshold": 0.5
+    },
+    "groups": {
+      "G1 unemployed now": {
+        "rows": 20,
+        "disagreement": 0.009770114942528732,
+        "unstable_share": 0.0,
+        "changes_mean": 0.1,
+        "changes_worst5": 1.0,
+        "wrong": 0.45166666666666666,
+        "wrong_majority": 0.45,
+        "wrong_excess": 0.0016666666666666496
+      },
+      "G2 job unemployed/unskilled non-resident": {
+        "rows": 5,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.2,
+        "wrong_majority": 0.2,
+        "wrong_excess": 0.0
+      },
+      "G3 housing for free": {
+        "rows": 38,
+        "disagreement": 0.014156079854809437,
+        "unstable_share": 0.02631578947368421,
+        "changes_mean": 0.3333333333333333,
+        "changes_worst5": 1.1111111111111112,
+        "wrong": 0.32280701754385965,
+        "wrong_majority": 0.3157894736842105,
+        "wrong_excess": 0.007017543859649145
+      },
+      "G4 age < 25": {
+        "rows": 47,
+        "disagreement": 0.03619466862313524,
+        "unstable_share": 0.10638297872340426,
+        "changes_mean": 1.2,
+        "changes_worst5": 3.0,
+        "wrong": 0.3574468085106383,
+        "wrong_majority": 0.3404255319148936,
+        "wrong_excess": 0.017021276595744705
+      },
+      "G5 not a foreign worker": {
+        "rows": 9,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.0,
+        "wrong_majority": 0.0,
+        "wrong_excess": 0.0
+      },
+      "G6 female": {
+        "rows": 90,
+        "disagreement": 0.03507024265644955,
+        "unstable_share": 0.07777777777777778,
+        "changes_mean": 2.5,
+        "changes_worst5": 4.142857142857143,
+        "wrong": 0.2966666666666667,
+        "wrong_majority": 0.2777777777777778,
+        "wrong_excess": 0.0188888888888889
+      },
+      "G7 checking account < 0 DM": {
+        "rows": 90,
+        "disagreement": 0.018646232439335882,
+        "unstable_share": 0.03333333333333333,
+        "changes_mean": 1.1333333333333333,
+        "changes_worst5": 3.0,
+        "wrong": 0.39481481481481484,
+        "wrong_majority": 0.3888888888888889,
+        "wrong_excess": 0.005925925925925946
+      },
+      "G8 large and long loan": {
+        "rows": 48,
+        "disagreement": 0.03160919540229885,
+        "unstable_share": 0.0625,
+        "changes_mean": 1.2,
+        "changes_worst5": 3.0,
+        "wrong": 0.39166666666666666,
+        "wrong_majority": 0.375,
+        "wrong_excess": 0.016666666666666663
+      },
+      "G9 no property": {
+        "rows": 50,
+        "disagreement": 0.00942528735632184,
+        "unstable_share": 0.02,
+        "changes_mean": 0.3,
+        "changes_worst5": 1.0,
+        "wrong": 0.2846666666666667,
+        "wrong_majority": 0.28,
+        "wrong_excess": 0.004666666666666652
+      },
+      "G10 male divorced/separated": {
+        "rows": 14,
+        "disagreement": 0.004761904761904761,
+        "unstable_share": 0.0,
+        "changes_mean": 0.03333333333333333,
+        "changes_worst5": 0.03333333333333333,
+        "wrong": 0.07380952380952381,
+        "wrong_majority": 0.07142857142857142,
+        "wrong_excess": 0.0023809523809523864
+      }
+    },
+    "disclaimer": "These numbers describe how much a model's decisions vary between training runs, overall and by group. They are a statistical diagnostic, not a finding of bias or wrongdoing, and not legal, credit or compliance advice."
+  },
+  "Random forest": {
+    "name": "Random forest",
+    "summary": {
+      "rows": 300,
+      "disagreement": 0.038505747126436785,
+      "unstable_share": 0.09333333333333334,
+      "changes_mean": 8.033333333333333,
+      "changes_worst5": 13.0,
+      "wrong": 0.26744444444444443,
+      "wrong_majority": 0.2633333333333333,
+      "wrong_excess": 0.004111111111111121,
+      "retrains": 30,
+      "fit_seconds": 0.4126602655000094,
+      "threshold": 0.5
+    },
+    "groups": {
+      "G1 unemployed now": {
+        "rows": 20,
+        "disagreement": 0.05505747126436781,
+        "unstable_share": 0.15,
+        "changes_mean": 0.6333333333333333,
+        "changes_worst5": 2.0,
+        "wrong": 0.465,
+        "wrong_majority": 0.45,
+        "wrong_excess": 0.015000000000000013
+      },
+      "G2 job unemployed/unskilled non-resident": {
+        "rows": 5,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.2,
+        "wrong_majority": 0.2,
+        "wrong_excess": 0.0
+      },
+      "G3 housing for free": {
+        "rows": 38,
+        "disagreement": 0.07017543859649124,
+        "unstable_share": 0.15789473684210525,
+        "changes_mean": 1.8,
+        "changes_worst5": 3.142857142857143,
+        "wrong": 0.2736842105263158,
+        "wrong_majority": 0.23684210526315788,
+        "wrong_excess": 0.036842105263157926
+      },
+      "G4 age < 25": {
+        "rows": 47,
+        "disagreement": 0.05512350207874786,
+        "unstable_share": 0.1276595744680851,
+        "changes_mean": 1.9,
+        "changes_worst5": 4.0,
+        "wrong": 0.3851063829787234,
+        "wrong_majority": 0.3829787234042553,
+        "wrong_excess": 0.002127659574468088
+      },
+      "G5 not a foreign worker": {
+        "rows": 9,
+        "disagreement": 0.05338441890166027,
+        "unstable_share": 0.1111111111111111,
+        "changes_mean": 0.36666666666666664,
+        "changes_worst5": 1.0,
+        "wrong": 0.040740740740740744,
+        "wrong_majority": 0.0,
+        "wrong_excess": 0.040740740740740744
+      },
+      "G6 female": {
+        "rows": 90,
+        "disagreement": 0.02669220945083014,
+        "unstable_share": 0.07777777777777778,
+        "changes_mean": 1.4333333333333333,
+        "changes_worst5": 3.25,
+        "wrong": 0.2625925925925926,
+        "wrong_majority": 0.25555555555555554,
+        "wrong_excess": 0.007037037037037064
+      },
+      "G7 checking account < 0 DM": {
+        "rows": 90,
+        "disagreement": 0.08265644955300128,
+        "unstable_share": 0.2,
+        "changes_mean": 5.266666666666667,
+        "changes_worst5": 9.5,
+        "wrong": 0.38296296296296295,
+        "wrong_majority": 0.37777777777777777,
+        "wrong_excess": 0.005185185185185182
+      },
+      "G8 large and long loan": {
+        "rows": 48,
+        "disagreement": 0.0507183908045977,
+        "unstable_share": 0.10416666666666667,
+        "changes_mean": 1.7666666666666666,
+        "changes_worst5": 3.2,
+        "wrong": 0.38125,
+        "wrong_majority": 0.375,
+        "wrong_excess": 0.006249999999999978
+      },
+      "G9 no property": {
+        "rows": 50,
+        "disagreement": 0.06142528735632184,
+        "unstable_share": 0.14,
+        "changes_mean": 2.066666666666667,
+        "changes_worst5": 4.5,
+        "wrong": 0.25333333333333335,
+        "wrong_majority": 0.22,
+        "wrong_excess": 0.033333333333333354
+      },
+      "G10 male divorced/separated": {
+        "rows": 14,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.14285714285714285,
+        "wrong_majority": 0.14285714285714285,
+        "wrong_excess": 0.0
+      }
+    },
+    "disclaimer": "These numbers describe how much a model's decisions vary between training runs, overall and by group. They are a statistical diagnostic, not a finding of bias or wrongdoing, and not legal, credit or compliance advice."
+  },
+  "Random forest + adapter (average 10)": {
+    "name": "Random forest + adapter (average 10)",
+    "summary": {
+      "rows": 300,
+      "disagreement": 0.013586206896551723,
+      "unstable_share": 0.03,
+      "changes_mean": 2.8333333333333335,
+      "changes_worst5": 6.0,
+      "wrong": 0.26722222222222225,
+      "wrong_majority": 0.27,
+      "wrong_excess": -0.002777777777777768,
+      "retrains": 30,
+      "fit_seconds": 4.519432504933332,
+      "threshold": 0.5
+    },
+    "groups": {
+      "G1 unemployed now": {
+        "rows": 20,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.45,
+        "wrong_majority": 0.45,
+        "wrong_excess": 0.0
+      },
+      "G2 job unemployed/unskilled non-resident": {
+        "rows": 5,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.2,
+        "wrong_majority": 0.2,
+        "wrong_excess": 0.0
+      },
+      "G3 housing for free": {
+        "rows": 38,
+        "disagreement": 0.031094978826376286,
+        "unstable_share": 0.07894736842105263,
+        "changes_mean": 0.8,
+        "changes_worst5": 2.0,
+        "wrong": 0.2578947368421053,
+        "wrong_majority": 0.23684210526315788,
+        "wrong_excess": 0.021052631578947406
+      },
+      "G4 age < 25": {
+        "rows": 47,
+        "disagreement": 0.020347273171924675,
+        "unstable_share": 0.0425531914893617,
+        "changes_mean": 0.7333333333333333,
+        "changes_worst5": 2.0,
+        "wrong": 0.38865248226950355,
+        "wrong_majority": 0.40425531914893614,
+        "wrong_excess": -0.015602836879432591
+      },
+      "G5 not a foreign worker": {
+        "rows": 9,
+        "disagreement": 0.020689655172413796,
+        "unstable_share": 0.1111111111111111,
+        "changes_mean": 0.1,
+        "changes_worst5": 1.0,
+        "wrong": 0.011111111111111112,
+        "wrong_majority": 0.0,
+        "wrong_excess": 0.011111111111111112
+      },
+      "G6 female": {
+        "rows": 90,
+        "disagreement": 0.002068965517241379,
+        "unstable_share": 0.0,
+        "changes_mean": 0.1,
+        "changes_worst5": 1.0,
+        "wrong": 0.2544444444444444,
+        "wrong_majority": 0.25555555555555554,
+        "wrong_excess": -0.0011111111111111183
+      },
+      "G7 checking account < 0 DM": {
+        "rows": 90,
+        "disagreement": 0.029348659003831414,
+        "unstable_share": 0.06666666666666667,
+        "changes_mean": 1.9,
+        "changes_worst5": 4.0,
+        "wrong": 0.3825925925925926,
+        "wrong_majority": 0.4,
+        "wrong_excess": -0.017407407407407427
+      },
+      "G8 large and long loan": {
+        "rows": 48,
+        "disagreement": 0.01910919540229885,
+        "unstable_share": 0.041666666666666664,
+        "changes_mean": 0.6333333333333333,
+        "changes_worst5": 2.0,
+        "wrong": 0.38680555555555557,
+        "wrong_majority": 0.375,
+        "wrong_excess": 0.011805555555555569
+      },
+      "G9 no property": {
+        "rows": 50,
+        "disagreement": 0.023632183908045976,
+        "unstable_share": 0.06,
+        "changes_mean": 0.8,
+        "changes_worst5": 2.0,
+        "wrong": 0.236,
+        "wrong_majority": 0.22,
+        "wrong_excess": 0.015999999999999986
+      },
+      "G10 male divorced/separated": {
+        "rows": 14,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.14285714285714285,
+        "wrong_majority": 0.14285714285714285,
+        "wrong_excess": 0.0
+      }
+    },
+    "disclaimer": "These numbers describe how much a model's decisions vary between training runs, overall and by group. They are a statistical diagnostic, not a finding of bias or wrongdoing, and not legal, credit or compliance advice."
+  },
+  "Random forest, 10x trees": {
+    "name": "Random forest, 10x trees",
+    "summary": {
+      "rows": 300,
+      "disagreement": 0.012973180076628354,
+      "unstable_share": 0.02666666666666667,
+      "changes_mean": 2.6333333333333333,
+      "changes_worst5": 6.5,
+      "wrong": 0.26566666666666666,
+      "wrong_majority": 0.26666666666666666,
+      "wrong_excess": -0.0010000000000000009,
+      "retrains": 30,
+      "fit_seconds": 4.360764306266662,
+      "threshold": 0.5
+    },
+    "groups": {
+      "G1 unemployed now": {
+        "rows": 20,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.45,
+        "wrong_majority": 0.45,
+        "wrong_excess": 0.0
+      },
+      "G2 job unemployed/unskilled non-resident": {
+        "rows": 5,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.2,
+        "wrong_majority": 0.2,
+        "wrong_excess": 0.0
+      },
+      "G3 housing for free": {
+        "rows": 38,
+        "disagreement": 0.02837265577737447,
+        "unstable_share": 0.07894736842105263,
+        "changes_mean": 0.7,
+        "changes_worst5": 2.0,
+        "wrong": 0.25526315789473686,
+        "wrong_majority": 0.23684210526315788,
+        "wrong_excess": 0.018421052631578977
+      },
+      "G4 age < 25": {
+        "rows": 47,
+        "disagreement": 0.02318415260454879,
+        "unstable_share": 0.0425531914893617,
+        "changes_mean": 0.8,
+        "changes_worst5": 2.0,
+        "wrong": 0.38156028368794326,
+        "wrong_majority": 0.3829787234042553,
+        "wrong_excess": -0.0014184397163120588
+      },
+      "G5 not a foreign worker": {
+        "rows": 9,
+        "disagreement": 0.007407407407407407,
+        "unstable_share": 0.0,
+        "changes_mean": 0.03333333333333333,
+        "changes_worst5": 0.03333333333333333,
+        "wrong": 0.003703703703703704,
+        "wrong_majority": 0.0,
+        "wrong_excess": 0.003703703703703704
+      },
+      "G6 female": {
+        "rows": 90,
+        "disagreement": 0.0007407407407407406,
+        "unstable_share": 0.0,
+        "changes_mean": 0.03333333333333333,
+        "changes_worst5": 0.03333333333333333,
+        "wrong": 0.25592592592592595,
+        "wrong_majority": 0.25555555555555554,
+        "wrong_excess": 0.00037037037037040976
+      },
+      "G7 checking account < 0 DM": {
+        "rows": 90,
+        "disagreement": 0.030523627075351216,
+        "unstable_share": 0.05555555555555555,
+        "changes_mean": 1.9,
+        "changes_worst5": 5.0,
+        "wrong": 0.3781481481481481,
+        "wrong_majority": 0.3888888888888889,
+        "wrong_excess": -0.010740740740740773
+      },
+      "G8 large and long loan": {
+        "rows": 48,
+        "disagreement": 0.021024904214559388,
+        "unstable_share": 0.041666666666666664,
+        "changes_mean": 0.6333333333333333,
+        "changes_worst5": 2.3333333333333335,
+        "wrong": 0.3840277777777778,
+        "wrong_majority": 0.375,
+        "wrong_excess": 0.009027777777777801
+      },
+      "G9 no property": {
+        "rows": 50,
+        "disagreement": 0.021563218390804596,
+        "unstable_share": 0.06,
+        "changes_mean": 0.7,
+        "changes_worst5": 2.0,
+        "wrong": 0.234,
+        "wrong_majority": 0.22,
+        "wrong_excess": 0.014000000000000012
+      },
+      "G10 male divorced/separated": {
+        "rows": 14,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.14285714285714285,
+        "wrong_majority": 0.14285714285714285,
+        "wrong_excess": 0.0
+      }
+    },
+    "disclaimer": "These numbers describe how much a model's decisions vary between training runs, overall and by group. They are a statistical diagnostic, not a finding of bias or wrongdoing, and not legal, credit or compliance advice."
+  },
+  "MLP": {
+    "name": "MLP",
+    "summary": {
+      "rows": 300,
+      "disagreement": 0.15137164750957857,
+      "unstable_share": 0.36,
+      "changes_mean": 30.733333333333334,
+      "changes_worst5": 39.0,
+      "wrong": 0.2777777777777778,
+      "wrong_majority": 0.25666666666666665,
+      "wrong_excess": 0.021111111111111136,
+      "retrains": 30,
+      "fit_seconds": 0.7705841820333376,
+      "threshold": 0.5
+    },
+    "groups": {
+      "G1 unemployed now": {
+        "rows": 20,
+        "disagreement": 0.277816091954023,
+        "unstable_share": 0.7,
+        "changes_mean": 4.166666666666667,
+        "changes_worst5": 7.5,
+        "wrong": 0.44166666666666665,
+        "wrong_majority": 0.45,
+        "wrong_excess": -0.00833333333333336
+      },
+      "G2 job unemployed/unskilled non-resident": {
+        "rows": 5,
+        "disagreement": 0.0832183908045977,
+        "unstable_share": 0.2,
+        "changes_mean": 0.23333333333333334,
+        "changes_worst5": 1.0,
+        "wrong": 0.24666666666666667,
+        "wrong_majority": 0.2,
+        "wrong_excess": 0.04666666666666666
+      },
+      "G3 housing for free": {
+        "rows": 38,
+        "disagreement": 0.18408953418027826,
+        "unstable_share": 0.4473684210526316,
+        "changes_mean": 4.7,
+        "changes_worst5": 8.0,
+        "wrong": 0.3078947368421053,
+        "wrong_majority": 0.2631578947368421,
+        "wrong_excess": 0.044736842105263186
+      },
+      "G4 age < 25": {
+        "rows": 47,
+        "disagreement": 0.1797505502567865,
+        "unstable_share": 0.40425531914893614,
+        "changes_mean": 5.766666666666667,
+        "changes_worst5": 10.5,
+        "wrong": 0.38085106382978723,
+        "wrong_majority": 0.3404255319148936,
+        "wrong_excess": 0.04042553191489362
+      },
+      "G5 not a foreign worker": {
+        "rows": 9,
+        "disagreement": 0.014814814814814812,
+        "unstable_share": 0.0,
+        "changes_mean": 0.06666666666666667,
+        "changes_worst5": 1.0,
+        "wrong": 0.1111111111111111,
+        "wrong_majority": 0.1111111111111111,
+        "wrong_excess": 0.0
+      },
+      "G6 female": {
+        "rows": 90,
+        "disagreement": 0.1459259259259259,
+        "unstable_share": 0.35555555555555557,
+        "changes_mean": 8.633333333333333,
+        "changes_worst5": 13.333333333333334,
+        "wrong": 0.2788888888888889,
+        "wrong_majority": 0.24444444444444444,
+        "wrong_excess": 0.03444444444444447
+      },
+      "G7 checking account < 0 DM": {
+        "rows": 90,
+        "disagreement": 0.1594891443167305,
+        "unstable_share": 0.4,
+        "changes_mean": 9.6,
+        "changes_worst5": 14.5,
+        "wrong": 0.3022222222222222,
+        "wrong_majority": 0.25555555555555554,
+        "wrong_excess": 0.04666666666666669
+      },
+      "G8 large and long loan": {
+        "rows": 48,
+        "disagreement": 0.14956896551724136,
+        "unstable_share": 0.3541666666666667,
+        "changes_mean": 5.033333333333333,
+        "changes_worst5": 8.0,
+        "wrong": 0.33819444444444446,
+        "wrong_majority": 0.3125,
+        "wrong_excess": 0.025694444444444464
+      },
+      "G9 no property": {
+        "rows": 50,
+        "disagreement": 0.18059770114942533,
+        "unstable_share": 0.44,
+        "changes_mean": 6.133333333333334,
+        "changes_worst5": 10.333333333333334,
+        "wrong": 0.29333333333333333,
+        "wrong_majority": 0.26,
+        "wrong_excess": 0.033333333333333326
+      },
+      "G10 male divorced/separated": {
+        "rows": 14,
+        "disagreement": 0.112807881773399,
+        "unstable_share": 0.21428571428571427,
+        "changes_mean": 1.0333333333333334,
+        "changes_worst5": 2.142857142857143,
+        "wrong": 0.13095238095238096,
+        "wrong_majority": 0.07142857142857142,
+        "wrong_excess": 0.059523809523809534
+      }
+    },
+    "disclaimer": "These numbers describe how much a model's decisions vary between training runs, overall and by group. They are a statistical diagnostic, not a finding of bias or wrongdoing, and not legal, credit or compliance advice."
+  },
+  "MLP + adapter (average 10)": {
+    "name": "MLP + adapter (average 10)",
+    "summary": {
+      "rows": 300,
+      "disagreement": 0.05019923371647509,
+      "unstable_share": 0.11666666666666667,
+      "changes_mean": 10.1,
+      "changes_worst5": 14.5,
+      "wrong": 0.26055555555555554,
+      "wrong_majority": 0.27,
+      "wrong_excess": -0.009444444444444478,
+      "retrains": 30,
+      "fit_seconds": 6.363515255333319,
+      "threshold": 0.5
+    },
+    "groups": {
+      "G1 unemployed now": {
+        "rows": 20,
+        "disagreement": 0.09172413793103447,
+        "unstable_share": 0.15,
+        "changes_mean": 1.4,
+        "changes_worst5": 3.0,
+        "wrong": 0.44333333333333336,
+        "wrong_majority": 0.45,
+        "wrong_excess": -0.006666666666666654
+      },
+      "G2 job unemployed/unskilled non-resident": {
+        "rows": 5,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.2,
+        "wrong_majority": 0.2,
+        "wrong_excess": 0.0
+      },
+      "G3 housing for free": {
+        "rows": 38,
+        "disagreement": 0.049848759830611,
+        "unstable_share": 0.10526315789473684,
+        "changes_mean": 1.4,
+        "changes_worst5": 3.0,
+        "wrong": 0.2789473684210526,
+        "wrong_majority": 0.2894736842105263,
+        "wrong_excess": -0.010526315789473717
+      },
+      "G4 age < 25": {
+        "rows": 47,
+        "disagreement": 0.05796038151137197,
+        "unstable_share": 0.10638297872340426,
+        "changes_mean": 1.8333333333333333,
+        "changes_worst5": 3.142857142857143,
+        "wrong": 0.3453900709219858,
+        "wrong_majority": 0.3617021276595745,
+        "wrong_excess": -0.016312056737588676
+      },
+      "G5 not a foreign worker": {
+        "rows": 9,
+        "disagreement": 0.0,
+        "unstable_share": 0.0,
+        "changes_mean": 0.0,
+        "changes_worst5": 0.0,
+        "wrong": 0.1111111111111111,
+        "wrong_majority": 0.1111111111111111,
+        "wrong_excess": 0.0
+      },
+      "G6 female": {
+        "rows": 90,
+        "disagreement": 0.04306513409961686,
+        "unstable_share": 0.08888888888888889,
+        "changes_mean": 2.466666666666667,
+        "changes_worst5": 5.0,
+        "wrong": 0.25037037037037035,
+        "wrong_majority": 0.25555555555555554,
+        "wrong_excess": -0.005185185185185182
+      },
+      "G7 checking account < 0 DM": {
+        "rows": 90,
+        "disagreement": 0.04597701149425288,
+        "unstable_share": 0.08888888888888889,
+        "changes_mean": 3.0,
+        "changes_worst5": 5.333333333333333,
+        "wrong": 0.2637037037037037,
+        "wrong_majority": 0.26666666666666666,
+        "wrong_excess": -0.002962962962962945
+      },
+      "G8 large and long loan": {
+        "rows": 48,
+        "disagreement": 0.052059386973180084,
+        "unstable_share": 0.125,
+        "changes_mean": 1.5666666666666667,
+        "changes_worst5": 3.1666666666666665,
+        "wrong": 0.33125,
+        "wrong_majority": 0.3541666666666667,
+        "wrong_excess": -0.022916666666666696
+      },
+      "G9 no property": {
+        "rows": 50,
+        "disagreement": 0.048413793103448274,
+        "unstable_share": 0.12,
+        "changes_mean": 1.7,
+        "changes_worst5": 3.1666666666666665,
+        "wrong": 0.266,
+        "wrong_majority": 0.28,
+        "wrong_excess": -0.014000000000000012
+      },
+      "G10 male divorced/separated": {
+        "rows": 14,
+        "disagreement": 0.03579638752052545,
+        "unstable_share": 0.07142857142857142,
+        "changes_mean": 0.3333333333333333,
+        "changes_worst5": 1.1111111111111112,
+        "wrong": 0.09523809523809523,
+        "wrong_majority": 0.07142857142857142,
+        "wrong_excess": 0.023809523809523808
+      }
+    },
+    "disclaimer": "These numbers describe how much a model's decisions vary between training runs, overall and by group. They are a statistical diagnostic, not a finding of bias or wrongdoing, and not legal, credit or compliance advice."
+  }
+}
