@@ -161,7 +161,9 @@ Each polish step moves along the full gradient `g`. The step length is chosen by
 What the risk term does, and does not do (`research/risk_effect/RESULTS.md`): at the same number of passes, the risk-averse step
 reaches the same stability as the plain exact line search (differences of at most about 1 point). The stability gain over simply training one
 more epoch comes from using the exact full-data gradient, not from the risk term. The risk term's measurable effect is on how many rows a step
-makes worse (`entropic_exact` at θ = 5), at the price of smaller steps.
+makes worse, at the price of smaller steps. Against a plain line search shrunk to the same average step, the risk-averse step hurts slightly fewer rows
+(a few thousandths of a loss unit at the 95th percentile, in 99 of 160 settings) and gives up some seed stability for it; it did not change the worst group's
+wrong-decision rate (`research/risk_effect/RESULTS.md`, step-matched controls).
 
 **Large data.** The step search only needs sums over rows once the gradient is known, so it can be computed batch by batch:
 `polish_logistic_streaming(w0, iter_batches(X, y, 10_000), lam, step="entropic")` reads the data twice per step and never holds `X` in memory

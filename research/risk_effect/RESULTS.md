@@ -104,3 +104,26 @@ and does not depend on the batch size (differences below 1e-9). 127 tests pass.
 * Caveat for that last comparison: the SGD baseline here is an interpreted NumPy loop of 16-row steps; a framework implementation of minibatch SGD on a GPU has a different cost profile. The fair statement is that the step search is no longer the bottleneck:
   a step costs two passes plus a 1-D solve on length-n vectors.
 * The quality comparison of section 1 is unchanged (it counted epochs, not seconds).
+
+## Addendum: step-matched controls and theta sweep (PLAN section 9)
+
+Code `stepmatch_experiment.py`, analysis `analyze_stepmatch.py`, every table in [`stepmatch_tables.md`](stepmatch_tables.md), raw `results/stepmatch_<dataset>.json`. 200 stage-1 models per dataset from SGD and from Adam,
+1, 2 and 5 full-batch steps along the same full gradient; arms: L (exact line search), R1 (your first-order entropic step) and R3 (my exact-change variant) at theta in {0.5, 1, 2, 5, 10};
+**M1** = the exact line search with every step multiplied by the constant c that gives the same mean step as R (so it keeps the line search's per-seed adaptivity), **M2** = R's mean step of each iteration replayed as one fixed schedule for all seeds.
+Outcome of record: the 95th percentile of the per-row loss increase on held-out rows (lower = fewer rows hurt). Deviations: 20 steps omitted (all arms have converged); German groups only; paired bootstrap over seeds (1,000 resamples).
+
+**1. Larger theta means smaller steps and less harm (dose-response holds).** Mean held-out harm falls monotonically as theta grows from 0.5 to 10 on 4/4 datasets in 10 of 12 (stage 1, steps, rule) settings
+(SGD, 1 step, R1: +1.14 → +0.44 → +0.19 → +0.07 → +0.03; Adam, 1 step, R3: +0.082 → +0.011). The mean step falls with it: R1 at theta = 5 takes 0.4-1.8 times 1/L, against 2-6 times 1/L for the exact line search.
+
+**2. Against the exact line search, the risk step hurts far fewer rows**, as before: e.g. German, SGD, 2 steps, R3(theta = 5): -0.43 [-0.44, -0.41] in p95 harm. That comparison does not isolate the risk term, because the step is also 3-7 times shorter.
+
+**3. Against the step-matched controls the difference is small.** Over the 160 cells with 2 or 5 steps (2 stage-1 optimizers × 2 step counts × 2 rules × 5 thetas × 4 datasets):
+* R has significantly lower harm than M1 (same mean step, per-seed line-search shape) in 99 cells; the median difference is -0.002, small beside the harm levels of 0.03-1.1. It is not lower at one step (0 of 4 datasets for SGD, 1 of 4 for Adam).
+* R is significantly better than M2 (the same per-iteration step for every seed) in 83 cells and significantly worse in 20; the median difference is -0.002, i.e. most of the harm reduction is **the step length, not the risk weighting of each seed's step**.
+* **The saving is paid for in seed variation.** In 78 of the 99 cells where R beats M1 on harm, R has significantly *more* disagreement than M1 (typically +0.3 to +4 points; German, SGD, 5 steps, R1(theta = 5): harm -0.116 vs M1 but disagreement +3.9 points). Only 9 cells have lower harm and no worse disagreement.
+* **Pre-registered credit rule (harm lower than both L and M1 on at least 3 of 4 datasets for some theta): met** from two steps on, for example SGD 2 steps R1(theta = 2) and R3(theta = 1) on 4/4, SGD and Adam 5 steps for theta between 2 and 5 on 4/4, but **not at one step**. The effect sizes are small, so the rule is a weak test.
+* **Worst-group wrong-decision rate (German): no effect.** R minus M1 is between -0.3 and +0.6 points across all settings (e.g. SGD, 5 steps, R3(theta = 5): +0.4 [+0.1, +0.8]). The group part of the credit rule is **not met**.
+
+**Reading.** The risk-averse step is a way to take shorter steps that are somewhat adaptive to each seed. Most of what it does for per-row harm is what any shorter step does; the seed-adaptive part adds a small further reduction (a few thousandths of a loss unit) that costs seed stability, and it does not change who is wrong. For stability the exact full-data gradient remains what matters, and the risk term is best described as a knob that trades convergence speed for fewer rows made worse.
+
+Experiment C (large data, few passes) remains open. Statements describe statistical behaviour of models on public datasets; not accusations of bias; not credit advice.

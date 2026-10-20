@@ -53,7 +53,9 @@ Use only these numbers in scripts, captions and posts. If a number is not here, 
 | E4 | The risk-averse first-order step matches the plain exact line search within about 1 point of disagreement; the gain over continuation is the exact full-data gradient, not the risk term | Y2, B2 |
 | E5 | From an SGD start, averaged continuation beats the adapter at 1 epoch on COMPAS (3.4% vs 10.7%); the adapter wins from about 2 epochs on German, Pima, Heart and from 5 on COMPAS | Y2, B2 |
 
-(source for E3-E5: `research/risk_effect/RESULTS.md`)
+| E6 | Against a line search shrunk to the same mean step, the risk-averse step hurts slightly fewer rows in 99 of 160 settings (median difference −0.002 in the 95th-percentile per-row loss increase) but has more seed disagreement in 78 of those 99; no effect on the worst group's wrong-decision rate on German | Y2, B2 |
+
+(source for E3-E6: `research/risk_effect/RESULTS.md`)
 
 ## F. Concentration across datasets — source: `research/tail_analysis/RESULTS.md`
 
