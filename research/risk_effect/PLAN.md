@@ -86,3 +86,12 @@ An earlier draft of this plan included a tilted training objective (tilted ERM).
 - Reuse `research/linesearch/linesearch_experiment.py` (steps R1, R3, exact LS, golden-section search) and `risk_averse_tuning.adapter.polish_logistic`.
 - New code: `risk_effect_experiment.py` (arms A0-A5, step matching for A4, outcomes O1-O4), `partial_pass.py` (C). Run detached with `nohup setsid`, OMP_NUM_THREADS=1, one process per dataset; logs gitignored.
 - Order of work: A on German (smoke test), A on all datasets, C. Record deviations in RESULTS.md before reading any result.
+
+## 9. Addendum before running section 3 (step-matched controls and theta sweep)
+
+Fixed in advance, code `stepmatch_experiment.py`:
+- Arms: L (exact line search); R1(theta) and R3(theta) for theta in {0.5, 1, 2, 5, 10}; **M1** = line search with every step multiplied by one constant c = mean step of the R arm / mean step of L (per dataset, budget, theta);
+  **M2** = replay of the R arm's mean step length of each iteration as one fixed schedule for all seeds. Budgets 1, 2, 5 steps (20 omitted: all arms have converged and the risk term cannot matter), 200 stage-1 models from SGD and from Adam, four datasets.
+- The step search uses a vectorized safeguarded Newton solver (agrees with the grid + golden-section search of `research/linesearch` to 5e-7 in the step length).
+- Primary outcomes (paired bootstrap over seeds, 1,000 resamples): the 95th percentile of the per-row loss increase on held-out rows (O5), the worst-group wrong-decision rate (German only, groups with >= 30 held-out rows), disagreement, overall wrong-decision rate.
+- **Credit rule (section 3):** the risk adjustment is credited if R has a lower O5 than **both** L and M1 and a lower or equal worst-group wrong-decision rate, CI excluding 0, on at least 3 of 4 datasets for some theta, with dose-response (O5 falls as theta grows). Otherwise "the risk-weighted step is equivalent to a smaller step".
