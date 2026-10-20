@@ -95,3 +95,13 @@ Fixed in advance, code `stepmatch_experiment.py`:
 - The step search uses a vectorized safeguarded Newton solver (agrees with the grid + golden-section search of `research/linesearch` to 5e-7 in the step length).
 - Primary outcomes (paired bootstrap over seeds, 1,000 resamples): the 95th percentile of the per-row loss increase on held-out rows (O5), the worst-group wrong-decision rate (German only, groups with >= 30 held-out rows), disagreement, overall wrong-decision rate.
 - **Credit rule (section 3):** the risk adjustment is credited if R has a lower O5 than **both** L and M1 and a lower or equal worst-group wrong-decision rate, CI excluding 0, on at least 3 of 4 datasets for some theta, with dose-response (O5 falls as theta grows). Otherwise "the risk-weighted step is equivalent to a smaller step".
+
+## 10. Addendum before running the negative-flip test
+
+Question: does the risk-averse step reduce **negative flips** (held-out rows the stage-1 model decided correctly that the update then decides wrongly), compared with the matched controls and with continued training?
+Definitions (held-out rows, decision at 0.5): negative flip = correct before, wrong after; positive flip = wrong before, correct after; net = positive minus negative (the accuracy change); churn = decision differs before/after.
+Rates are per held-out row, averaged over the 200 stage-1 models. Arms and budgets as in section 9 (L, R1 and R3 at theta in {0.5, 1, 2, 5, 10}, matched controls M1 and M2, steps 1, 2, 5) plus the continuation arms C1 (continue), C2 (decayed) and C3 (averaged) of section 2 at the same epochs.
+German also reports the worst-group negative-flip rate (groups with at least 30 held-out rows).
+Hypotheses: H1 R has fewer negative flips than L and than the best continuation. H2 R has fewer negative flips than M1 and M2. H3 R's net accuracy change is not worse than M1's by more than 0.5 points.
+**Credit rule:** the risk adjustment is credited for negative flips if, for some theta and for both 2 and 5 steps, R has a lower negative-flip rate than both M1 and M2 (paired bootstrap CI below 0) on at least 3 of 4 datasets, with H3 satisfied. Otherwise the negative-flip reduction is attributed to step length.
+Code: `negflip_experiment.py`.
