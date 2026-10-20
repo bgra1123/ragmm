@@ -109,7 +109,7 @@ Other theta (0.5, 1, 2) give the same picture (see `tilted_tables.md`). Group-DR
 * **Against reweighting, the picture depends on what is compared.** Tilted beats the matched reweighting on worst-class error on Pima and Heart (3-6 points, CI excluding 0) and loses on COMPAS (+3 to +4). But the "matched" reweighting is not matched: on German it is 1 point less accurate, and
   reweighting trades the false-negative rate against the false-positive rate (a different operating point), which is what a worst-class error rewards or punishes depending on the dataset. These differences are about the operating point, not about hard rows.
 * **Decision rule (PLAN section 4):** "at matched overall accuracy (within 0.5 points) the tilted model has a lower worst-group wrong-decision rate than the reweighting control, CI excluding 0, on at least 2 datasets" is **not supported**: the accuracy match fails on 3 of 4 datasets, the
-  German worst-group difference has a CI including 0 at every theta, and the CI excludes 0 (in the right direction) only for worst-class error on Pima and Heart, where the accuracy gap is 0.1-0.6 points but the control is not a clean match. At most it is **suggestive on two of four datasets and contradicted on a third**.
+  German worst-group difference has a CI including 0 at every theta, and the CI excludes 0 (in the right direction) only for worst-class error on Pima and Heart, where the accuracy gap is 0.1-1.4 points (depending on theta) and the control is not a clean match. At most it is **suggestive on two of four datasets and contradicted on a third**.
 
 ## What this means
 
