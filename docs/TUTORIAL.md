@@ -163,6 +163,12 @@ reaches the same stability as the plain exact line search (differences of at mos
 more epoch comes from using the exact full-data gradient, not from the risk term. The risk term's measurable effect is on how many rows a step
 makes worse (`entropic_exact` at θ = 5), at the price of smaller steps.
 
+**Large data.** The step search only needs sums over rows once the gradient is known, so it can be computed batch by batch:
+`polish_logistic_streaming(w0, iter_batches(X, y, 10_000), lam, step="entropic")` reads the data twice per step and never holds `X` in memory
+(`StabilityAdapter(..., batch_size=10_000)` does the same). With the default `search="newton"` the 1-D problem is solved on three length-n vectors, no further data pass;
+on Adult (47,000 rows) 20 steps took 0.26 s, against 1.6 s for 20 epochs of minibatch SGD in the same NumPy setting (`research/risk_effect/RESULTS.md`, addendum).
+For a neural network, the per-row quantity `gᵀ∇f_i(w)` is a forward-mode JVP of the row's loss along `g`.
+
 Why it works: L2-regularized logistic regression is strongly convex and smooth, the setting the paper's theory covers [1].
 Every seed's model lies near the same optimum, and full-batch steps remove the noise that minibatches added.
 

@@ -78,3 +78,29 @@ continuation is much cheaper per epoch in this implementation. A fair claim is t
 Statements describe statistical behaviour of models on public datasets; not accusations of bias; not credit advice.
 
 *Note: an earlier version of this folder also tested a tilted training objective (tilted ERM, a different method with a different optimum). It is outside the question here, which is about the risk-averse step length, and was removed; it remains in the git history.*
+
+## Addendum: streaming step search (cost)
+
+The first implementation of the step search (80-point grid + golden-section over all rows, for 200 models at once) made the full-batch arms look expensive in
+seconds (section 4). The step rule needs only sums over rows once the gradient `g` is known, so it can be computed batch by batch. New in the package:
+`polish_logistic_streaming(w0, batches, lam, step=..., search="grid" | "newton")` (also `StabilityAdapter(batch_size=...)`). Per epoch it makes two passes over the data: (1) the full gradient;
+(2) the per-row quantities along `g` (margin `y x.w`, margin change `y x.g`, and the directional derivative `g.grad f_i`, which for a neural network is one forward-mode JVP per batch).
+`search="grid"` accumulates log-sum-exp sums on a 120-point grid of step lengths (memory O(grid)); `search="newton"` keeps three length-n vectors and solves the convex 1-D problem by safeguarded Newton with no further data pass (memory O(n)).
+
+**Correctness (tests in `tests/test_adapter.py`):** the streaming result equals the in-memory result to 1e-8 (Newton) / 1e-3 (grid; the parabola refinement) in the weights, for all three step rules and theta = 1 and 5,
+and does not depend on the batch size (differences below 1e-9). 127 tests pass.
+
+**Cost (`cost_benchmark.py`, `results/cost.json`; one model, 20 extra epochs, single thread, median of 3; seconds):**
+
+| Dataset | n | SGD continue (batch 16) | line search, in memory | line search, streaming Newton | entropic, in memory | entropic, streaming grid | **entropic, streaming Newton** |
+|---|---|---|---|---|---|---|---|
+| German | 700 | 0.019 | 0.055 | 0.010 | 0.018 | 0.012 | **0.004** |
+| COMPAS | 4,320 | 0.094 | 0.234 | 0.013 | 0.046 | 0.081 | **0.013** |
+| Adult | 46,842 | 1.572 | 2.461 | 0.356 | 0.428 | 0.643 | **0.261** |
+| synthetic (timing only) | 200,000 | 5.108 | 6.953 | 1.736 | 2.035 | 2.353 | **1.193** |
+
+* The grid search is not cheaper than the in-memory search (the same number of operations per row); the saving is **memory**, so the data can be streamed.
+* The Newton search on cached scalars is 2-4 times cheaper than the in-memory version and, in this implementation, **4-6 times cheaper than the same number of epochs of continued minibatch SGD**.
+* Caveat for that last comparison: the SGD baseline here is an interpreted NumPy loop of 16-row steps; a framework implementation of minibatch SGD on a GPU has a different cost profile. The fair statement is that the step search is no longer the bottleneck:
+  a step costs two passes plus a 1-D solve on length-n vectors.
+* The quality comparison of section 1 is unchanged (it counted epochs, not seconds).

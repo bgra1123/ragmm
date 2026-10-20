@@ -111,3 +111,41 @@ def test_cli_adapter(tmp_path):
                  "--seeds", "3", "--group-columns", "housing", "--report", str(out)]) == 0
     text = out.read_text()
     assert "sgd + adapter" in text and "housing = for free" in text
+
+
+@pytest.mark.parametrize("step", ["line_search", "entropic", "entropic_exact"])
+@pytest.mark.parametrize("theta", [1.0, 5.0])
+def test_streaming_matches_in_memory(step, theta):
+    from risk_averse_tuning import iter_batches, polish_logistic_streaming
+    X, y01 = data(n=300, d=4, seed=7)
+    F = np.column_stack([X, np.ones(len(X))])
+    y = 2.0 * y01 - 1
+    mask = np.r_[np.ones(4), 0.0]
+    w0 = np.random.default_rng(1).normal(scale=0.3, size=5)
+    w_ref, i_ref = polish_logistic(w0, F, y, 0.01, epochs=4, step=step, theta=theta, mask=mask)
+    for search, tol in (("newton", 1e-6), ("grid", 5e-3)):
+        outs = []
+        for bs in (13, 300):
+            w, info = polish_logistic_streaming(w0, iter_batches(F, y, bs), 0.01, epochs=4, step=step, theta=theta,
+                                                mask=mask, search=search)
+            assert np.abs(w - w_ref).max() < tol
+            assert abs(info["objective_after"] - i_ref["objective_after"]) < 1e-4
+            outs.append(w)
+        assert np.abs(outs[0] - outs[1]).max() < 1e-9           # the batch size does not change the result
+
+
+def test_streaming_rejects_newton_step_and_bad_search():
+    from risk_averse_tuning import iter_batches, polish_logistic_streaming
+    F, y = np.ones((4, 2)), np.array([1.0, -1.0, 1.0, -1.0])
+    with pytest.raises(ValueError):
+        polish_logistic_streaming(np.zeros(2), iter_batches(F, y, 2), 0.1, step="newton")
+    with pytest.raises(ValueError):
+        polish_logistic_streaming(np.zeros(2), iter_batches(F, y, 2), 0.1, search="bogus")
+
+
+def test_adapter_batch_size_matches_unbatched():
+    X, y = data(seed=9)
+    make = lambda: SGDClassifier(loss="log_loss", alpha=0.01, max_iter=3, tol=None, random_state=0)  # noqa: E731
+    a = StabilityAdapter(make(), step="entropic").fit(X, y)
+    b = StabilityAdapter(make(), step="entropic", batch_size=64).fit(X, y)
+    assert np.abs(a.fitted_["coef"] - b.fitted_["coef"]).max() < 1e-5

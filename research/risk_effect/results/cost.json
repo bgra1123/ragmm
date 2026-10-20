@@ -1,0 +1,134 @@
+{
+  "german": {
+    "n": 700,
+    "d": 55,
+    "seconds": {
+      "1": {
+        "SGD continue (batch 16)": 0.0007894350000015038,
+        "line_search: in memory (grid + golden)": 0.0027072610000118402,
+        "line_search: streaming, grid sums": 0.001765082000019902,
+        "line_search: streaming, Newton on cached scalars": 0.001311606000001575,
+        "entropic: in memory (grid + golden)": 0.0012240499999904841,
+        "entropic: streaming, grid sums": 0.0007405979999930423,
+        "entropic: streaming, Newton on cached scalars": 0.0003862060000017209
+      },
+      "5": {
+        "SGD continue (batch 16)": 0.003262589000001981,
+        "line_search: in memory (grid + golden)": 0.015716700000012906,
+        "line_search: streaming, grid sums": 0.009696789000003037,
+        "line_search: streaming, Newton on cached scalars": 0.0037543219999918165,
+        "entropic: in memory (grid + golden)": 0.006681380000003401,
+        "entropic: streaming, grid sums": 0.003690161999998054,
+        "entropic: streaming, Newton on cached scalars": 0.002274886999998671
+      },
+      "20": {
+        "SGD continue (batch 16)": 0.018786280000000488,
+        "line_search: in memory (grid + golden)": 0.055061851000004935,
+        "line_search: streaming, grid sums": 0.043031624999997575,
+        "line_search: streaming, Newton on cached scalars": 0.009828962000000274,
+        "entropic: in memory (grid + golden)": 0.018292838000007805,
+        "entropic: streaming, grid sums": 0.01191148800000974,
+        "entropic: streaming, Newton on cached scalars": 0.004198212999995121
+      }
+    }
+  },
+  "compas": {
+    "n": 4320,
+    "d": 8,
+    "seconds": {
+      "1": {
+        "SGD continue (batch 16)": 0.003710264999995161,
+        "line_search: in memory (grid + golden)": 0.012473416000005955,
+        "line_search: streaming, grid sums": 0.010660938999990321,
+        "line_search: streaming, Newton on cached scalars": 0.004203758999977936,
+        "entropic: in memory (grid + golden)": 0.002051432000001796,
+        "entropic: streaming, grid sums": 0.003483152000001155,
+        "entropic: streaming, Newton on cached scalars": 0.0010808770000210188
+      },
+      "5": {
+        "SGD continue (batch 16)": 0.02805888599999662,
+        "line_search: in memory (grid + golden)": 0.0742191049999974,
+        "line_search: streaming, grid sums": 0.07216167500001802,
+        "line_search: streaming, Newton on cached scalars": 0.007031105999999454,
+        "entropic: in memory (grid + golden)": 0.010386370999981409,
+        "entropic: streaming, grid sums": 0.0181276769999954,
+        "entropic: streaming, Newton on cached scalars": 0.0033128700000020217
+      },
+      "20": {
+        "SGD continue (batch 16)": 0.09361518899999055,
+        "line_search: in memory (grid + golden)": 0.23361596300000542,
+        "line_search: streaming, grid sums": 0.2036583140000232,
+        "line_search: streaming, Newton on cached scalars": 0.013203715000003058,
+        "entropic: in memory (grid + golden)": 0.04558795700000928,
+        "entropic: streaming, grid sums": 0.08071714400000474,
+        "entropic: streaming, Newton on cached scalars": 0.01291851999999949
+      }
+    }
+  },
+  "adult": {
+    "n": 46842,
+    "d": 101,
+    "seconds": {
+      "1": {
+        "SGD continue (batch 16)": 0.056014163000014605,
+        "line_search: in memory (grid + golden)": 0.14788808900001982,
+        "line_search: streaming, grid sums": 0.12334322899999961,
+        "line_search: streaming, Newton on cached scalars": 0.023730497000002515,
+        "entropic: in memory (grid + golden)": 0.04887011799999641,
+        "entropic: streaming, grid sums": 0.054892410000007885,
+        "entropic: streaming, Newton on cached scalars": 0.024056494999996403
+      },
+      "5": {
+        "SGD continue (batch 16)": 0.2703491799999824,
+        "line_search: in memory (grid + golden)": 0.6704897719999963,
+        "line_search: streaming, grid sums": 0.6673452699999984,
+        "line_search: streaming, Newton on cached scalars": 0.12457127600001172,
+        "entropic: in memory (grid + golden)": 0.14911554300002194,
+        "entropic: streaming, grid sums": 0.2200115019999771,
+        "entropic: streaming, Newton on cached scalars": 0.08766226500000585
+      },
+      "20": {
+        "SGD continue (batch 16)": 1.5716747360000056,
+        "line_search: in memory (grid + golden)": 2.461482351000001,
+        "line_search: streaming, grid sums": 2.4748491070000114,
+        "line_search: streaming, Newton on cached scalars": 0.3561037139999996,
+        "entropic: in memory (grid + golden)": 0.42773394100001383,
+        "entropic: streaming, grid sums": 0.6434217080000053,
+        "entropic: streaming, Newton on cached scalars": 0.2607958879999899
+      }
+    }
+  },
+  "synthetic 200k x 51 (timing only)": {
+    "n": 200000,
+    "d": 51,
+    "seconds": {
+      "1": {
+        "SGD continue (batch 16)": 0.29619555700000433,
+        "line_search: in memory (grid + golden)": 0.5719484530000045,
+        "line_search: streaming, grid sums": 0.5971525340000028,
+        "line_search: streaming, Newton on cached scalars": 0.10605285100001538,
+        "entropic: in memory (grid + golden)": 0.14432272100000887,
+        "entropic: streaming, grid sums": 0.182775448000001,
+        "entropic: streaming, Newton on cached scalars": 0.14846476100001382
+      },
+      "5": {
+        "SGD continue (batch 16)": 1.1146476250000035,
+        "line_search: in memory (grid + golden)": 2.7923061500000017,
+        "line_search: streaming, grid sums": 2.7856309409999938,
+        "line_search: streaming, Newton on cached scalars": 0.6974047499999756,
+        "entropic: in memory (grid + golden)": 0.6123623870000188,
+        "entropic: streaming, grid sums": 0.6683816279999917,
+        "entropic: streaming, Newton on cached scalars": 0.39338148199999523
+      },
+      "20": {
+        "SGD continue (batch 16)": 5.107678167000017,
+        "line_search: in memory (grid + golden)": 6.952605750000004,
+        "line_search: streaming, grid sums": 6.094277407999982,
+        "line_search: streaming, Newton on cached scalars": 1.7361092900000017,
+        "entropic: in memory (grid + golden)": 2.0352909200000227,
+        "entropic: streaming, grid sums": 2.352653959999998,
+        "entropic: streaming, Newton on cached scalars": 1.1932492809999928
+      }
+    }
+  }
+}

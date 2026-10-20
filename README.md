@@ -38,7 +38,7 @@ report = stability_check(lambda s: XGBClassifier(subsample=0.8, random_state=s),
 
 For logistic models (`SGDClassifier(loss="log_loss")`, `LogisticRegression`, `RiskAverseClassifier`, a network's last layer)
 the adapter instead polishes the trained weights with deterministic full-batch steps; `step="entropic"` uses a risk-averse
-line search based on the entropic risk measure of the paper. Command line: `ragmm-adapter data.csv --target y --model xgboost`.
+line search based on the entropic risk measure of the paper. Data that does not fit in memory: `polish_logistic_streaming` / `StabilityAdapter(batch_size=...)` compute the step search from batch sums. Command line: `ragmm-adapter data.csv --target y --model xgboost`.
 Benchmark (pre-registered, German Credit): disagreement between retrains SGD logistic 15.5% → 0.1%, XGBoost 6.5% → 2.1%,
 MLP 14.4% → 5.1%, with no loss of accuracy; for tree models 10× more trees is an equally good fix
 ([`research/product/RESULTS.md`](research/product/RESULTS.md)).
