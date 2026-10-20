@@ -1,0 +1,1630 @@
+{
+  "dataset": "pima",
+  "seeds": 200,
+  "n": 538,
+  "d": 9,
+  "L": 0.5482307255986574,
+  "stage1": {
+    "SGD": {
+      "stage1": {
+        "metrics": {
+          "S_mean": 0.05788560318816978,
+          "S_cvar5": 0.16056491184338836,
+          "changed": 22.505,
+          "disagreement": 0.14021564343456414,
+          "share_rows_worse": 0.0,
+          "p95_row_loss_change": 0.0,
+          "p95_row_loss": 1.8566796676618367,
+          "mean_row_loss": 0.519747065999209,
+          "wrong": 0.2603695652173913
+        },
+        "disagreement": 0.14021564343456414,
+        "changed": [
+          22.505,
+          46.5
+        ]
+      },
+      "budgets": {
+        "1": {
+          "K2": 34,
+          "best_continuation": "C3 continue, averaged",
+          "arms": {
+            "C1 continue": {
+              "S_mean": 0.05866116285276585,
+              "S_cvar5": 0.1399569466817684,
+              "changed": 22.32,
+              "disagreement": 0.14158575486126282,
+              "share_rows_worse": 0.5072211895910781,
+              "p95_row_loss_change": 0.7760131630004818,
+              "p95_row_loss": 1.8607948244780008,
+              "mean_row_loss": 0.520522625663805,
+              "wrong": 0.25717391304347825,
+              "changed_mean": 22.32,
+              "changed_worst5": 44.7,
+              "seconds_all_seeds": 0.004384517669677734
+            },
+            "C2 continue, decayed": {
+              "S_mean": 0.012913685445987103,
+              "S_cvar5": 0.028965749009629355,
+              "changed": 10.335,
+              "disagreement": 0.06528752457941883,
+              "share_rows_worse": 0.5141171003717472,
+              "p95_row_loss_change": 0.45026814188713027,
+              "p95_row_loss": 1.571828923063738,
+              "mean_row_loss": 0.4747751482570262,
+              "wrong": 0.2393695652173913,
+              "changed_mean": 10.335,
+              "changed_worst5": 21.5,
+              "seconds_all_seeds": 0.00404047966003418
+            },
+            "C3 continue, averaged": {
+              "S_mean": 0.011213610903421616,
+              "S_cvar5": 0.02354330241600915,
+              "changed": 8.605,
+              "disagreement": 0.05464780423858422,
+              "share_rows_worse": 0.4888568773234201,
+              "p95_row_loss_change": 0.41231898196185207,
+              "p95_row_loss": 1.597265619972768,
+              "mean_row_loss": 0.4730750737144608,
+              "wrong": 0.23767391304347826,
+              "changed_mean": 8.605,
+              "changed_worst5": 18.454545454545453,
+              "seconds_all_seeds": 0.004204988479614258
+            },
+            "R risk first-order (theta=1)": {
+              "S_mean": 0.009466511582272621,
+              "S_cvar5": 0.024929553962615418,
+              "changed": 7.87,
+              "disagreement": 0.05066287961546865,
+              "share_rows_worse": 0.49314126394052044,
+              "p95_row_loss_change": 0.3641781453143208,
+              "p95_row_loss": 1.5840749966898497,
+              "mean_row_loss": 0.4713279743933118,
+              "wrong": 0.23978260869565218,
+              "mean_alpha_times_L": 2.5754536029630737,
+              "changed_mean": 7.87,
+              "changed_worst5": 18.0,
+              "seconds_all_seeds": 0.3137025833129883
+            },
+            "R risk exact-change (theta=5)": {
+              "S_mean": 0.04375568420909698,
+              "S_cvar5": 0.11945231618350467,
+              "changed": 19.4,
+              "disagreement": 0.12153506663753551,
+              "share_rows_worse": 0.4770074349442379,
+              "p95_row_loss_change": 0.04708777600699578,
+              "p95_row_loss": 1.7800252180154645,
+              "mean_row_loss": 0.5056171470201362,
+              "wrong": 0.2542608695652174,
+              "mean_alpha_times_L": 0.4271610945012181,
+              "changed_mean": 19.4,
+              "changed_worst5": 40.6,
+              "seconds_all_seeds": 2.3270959854125977
+            },
+            "L exact line search": {
+              "S_mean": 0.008572956871863813,
+              "S_cvar5": 0.02229085242539642,
+              "changed": 7.41,
+              "disagreement": 0.047875464277911284,
+              "share_rows_worse": 0.4937918215613383,
+              "p95_row_loss_change": 0.3807962323390536,
+              "p95_row_loss": 1.5792451962627996,
+              "mean_row_loss": 0.470434419682903,
+              "wrong": 0.23817391304347826,
+              "mean_alpha_times_L": 2.647348593619861,
+              "changed_mean": 7.41,
+              "changed_worst5": 16.818181818181817,
+              "seconds_all_seeds": 1.169358730316162
+            }
+          },
+          "tests": {
+            "R risk first-order (theta=1) vs C3 continue, averaged": {
+              "disagreement": [
+                -0.003984924623115574,
+                -0.007647307188114495,
+                0.0002832313742626237
+              ],
+              "changed_mean": [
+                -0.7350000000000003,
+                -1.455,
+                0.009999999999999787
+              ],
+              "wrong": [
+                0.0021086956521739197,
+                -0.0001092391304347871,
+                0.004348369565217394
+              ]
+            },
+            "R risk first-order (theta=1) vs C1 continue": {
+              "disagreement": [
+                -0.09092287524579418,
+                -0.09843576578544899,
+                -0.08233361918287087
+              ],
+              "changed_mean": [
+                -14.45,
+                -15.870125000000002,
+                -13.114750000000003
+              ],
+              "wrong": [
+                -0.01739130434782607,
+                -0.02115217391304347,
+                -0.013410869565217358
+              ]
+            },
+            "R risk first-order (theta=1) vs L exact line search": {
+              "disagreement": [
+                0.0027874153375573654,
+                0.001525737382564983,
+                0.004182701551234438
+              ],
+              "changed_mean": [
+                0.45999999999999996,
+                0.2450000000000001,
+                0.6900000000000004
+              ],
+              "wrong": [
+                0.0016086956521739193,
+                0.0005864130434782546,
+                0.0027396739130434744
+              ]
+            },
+            "R risk exact-change (theta=5) vs C3 continue, averaged": {
+              "disagreement": [
+                0.06688726239895129,
+                0.059456150316801404,
+                0.07406692702643652
+              ],
+              "changed_mean": [
+                10.794999999999998,
+                9.554625000000001,
+                12.155125
+              ],
+              "wrong": [
+                0.01658695652173911,
+                0.013303260869565231,
+                0.02013097826086957
+              ]
+            },
+            "R risk exact-change (theta=5) vs C1 continue": {
+              "disagreement": [
+                -0.02005068822372731,
+                -0.028745034957395645,
+                -0.010128850775617197
+              ],
+              "changed_mean": [
+                -2.9200000000000017,
+                -4.460124999999997,
+                -1.269625
+              ],
+              "wrong": [
+                -0.0029130434782608794,
+                -0.007348913043478293,
+                0.0023076086956521757
+              ]
+            },
+            "R risk exact-change (theta=5) vs L exact line search": {
+              "disagreement": [
+                0.07365960235962422,
+                0.06769040310246886,
+                0.07929152283154903
+              ],
+              "changed_mean": [
+                11.989999999999998,
+                10.989875000000001,
+                13.045124999999999
+              ],
+              "wrong": [
+                0.01608695652173911,
+                0.01280434782608697,
+                0.01958858695652175
+              ]
+            }
+          }
+        },
+        "2": {
+          "K2": 67,
+          "best_continuation": "C3 continue, averaged",
+          "arms": {
+            "C1 continue": {
+              "S_mean": 0.05724651135338611,
+              "S_cvar5": 0.1421106960201493,
+              "changed": 23.89,
+              "disagreement": 0.1472270045881582,
+              "share_rows_worse": 0.5075650557620818,
+              "p95_row_loss_change": 0.7631037683373569,
+              "p95_row_loss": 1.8425657067019783,
+              "mean_row_loss": 0.5191079741644253,
+              "wrong": 0.259,
+              "changed_mean": 23.89,
+              "changed_worst5": 48.1,
+              "seconds_all_seeds": 0.009517669677734375
+            },
+            "C2 continue, decayed": {
+              "S_mean": 0.008907098725276053,
+              "S_cvar5": 0.02063122295365904,
+              "changed": 8.13,
+              "disagreement": 0.05201441992571554,
+              "share_rows_worse": 0.5263568773234201,
+              "p95_row_loss_change": 0.42265388117117325,
+              "p95_row_loss": 1.5301889397239175,
+              "mean_row_loss": 0.47076856153631524,
+              "wrong": 0.2378695652173913,
+              "changed_mean": 8.13,
+              "changed_worst5": 16.4375,
+              "seconds_all_seeds": 0.0065135955810546875
+            },
+            "C3 continue, averaged": {
+              "S_mean": 0.007017791196288184,
+              "S_cvar5": 0.016176013556166317,
+              "changed": 6.22,
+              "disagreement": 0.03909635132182653,
+              "share_rows_worse": 0.48726765799256505,
+              "p95_row_loss_change": 0.400638531331529,
+              "p95_row_loss": 1.570340357115412,
+              "mean_row_loss": 0.4688792540073274,
+              "wrong": 0.23495652173913043,
+              "changed_mean": 6.22,
+              "changed_worst5": 13.071428571428571,
+              "seconds_all_seeds": 0.0068356990814208984
+            },
+            "R risk first-order (theta=1)": {
+              "S_mean": 0.0021412273216841493,
+              "S_cvar5": 0.0067490571500529615,
+              "changed": 2.87,
+              "disagreement": 0.019748306751147037,
+              "share_rows_worse": 0.5290148698884758,
+              "p95_row_loss_change": 0.32756369648162476,
+              "p95_row_loss": 1.501460465305181,
+              "mean_row_loss": 0.4640026901327234,
+              "wrong": 0.23726086956521739,
+              "mean_alpha_times_L": 3.0024055389499686,
+              "changed_mean": 2.87,
+              "changed_worst5": 6.9523809523809526,
+              "seconds_all_seeds": 0.23990416526794434
+            },
+            "R risk exact-change (theta=5)": {
+              "S_mean": 0.03318071684106661,
+              "S_cvar5": 0.09028064225088331,
+              "changed": 16.52,
+              "disagreement": 0.10418876993663972,
+              "share_rows_worse": 0.4837639405204461,
+              "p95_row_loss_change": 0.09001586027306946,
+              "p95_row_loss": 1.7117577104677892,
+              "mean_row_loss": 0.4950421796521058,
+              "wrong": 0.24913043478260868,
+              "mean_alpha_times_L": 0.4359255275055009,
+              "changed_mean": 16.52,
+              "changed_worst5": 34.416666666666664,
+              "seconds_all_seeds": 2.3468174934387207
+            },
+            "L exact line search": {
+              "S_mean": 0.0020307181750343264,
+              "S_cvar5": 0.0053780776360566555,
+              "changed": 2.82,
+              "disagreement": 0.019348918505571334,
+              "share_rows_worse": 0.5268029739776952,
+              "p95_row_loss_change": 0.3036971444017161,
+              "p95_row_loss": 1.5093615587784621,
+              "mean_row_loss": 0.4638921809860735,
+              "wrong": 0.237,
+              "mean_alpha_times_L": 2.8918301102788706,
+              "changed_mean": 2.82,
+              "changed_worst5": 7.916666666666667,
+              "seconds_all_seeds": 1.8119301795959473
+            }
+          },
+          "tests": {
+            "R risk first-order (theta=1) vs C3 continue, averaged": {
+              "disagreement": [
+                -0.019348044570679495,
+                -0.022265730828053307,
+                -0.016505434782608696
+              ],
+              "changed_mean": [
+                -3.3499999999999996,
+                -3.9201249999999996,
+                -2.845
+              ],
+              "wrong": [
+                0.002304347826086961,
+                0.0004989130434782615,
+                0.004304891304347805
+              ]
+            },
+            "R risk first-order (theta=1) vs C1 continue": {
+              "disagreement": [
+                -0.12747869783701118,
+                -0.13486581275944942,
+                -0.11960941118636662
+              ],
+              "changed_mean": [
+                -21.02,
+                -22.485,
+                -19.689625
+              ],
+              "wrong": [
+                -0.021739130434782622,
+                -0.025630978260869578,
+                -0.018239130434782647
+              ]
+            },
+            "R risk first-order (theta=1) vs L exact line search": {
+              "disagreement": [
+                0.00039938824557570266,
+                -0.0008802490714441829,
+                0.0018067456849464778
+              ],
+              "changed_mean": [
+                0.050000000000000266,
+                -0.16999999999999993,
+                0.2599999999999998
+              ],
+              "wrong": [
+                0.00026086956521739757,
+                -0.0007173913043478364,
+                0.0011739130434782752
+              ]
+            },
+            "R risk exact-change (theta=5) vs C3 continue, averaged": {
+              "disagreement": [
+                0.06509241861481319,
+                0.05836190736290146,
+                0.07098543805986456
+              ],
+              "changed_mean": [
+                10.3,
+                9.179875,
+                11.43
+              ],
+              "wrong": [
+                0.014173913043478259,
+                0.011477173913043476,
+                0.017130434782608672
+              ]
+            },
+            "R risk exact-change (theta=5) vs C1 continue": {
+              "disagreement": [
+                -0.04303823465151849,
+                -0.05229378413808171,
+                -0.03322086519554293
+              ],
+              "changed_mean": [
+                -7.370000000000001,
+                -9.055000000000001,
+                -5.664874999999999
+              ],
+              "wrong": [
+                -0.009869565217391324,
+                -0.014196739130434793,
+                -0.005543478260869566
+              ]
+            },
+            "R risk exact-change (theta=5) vs L exact line search": {
+              "disagreement": [
+                0.0848398514310684,
+                0.0787482466681232,
+                0.09027420253441118
+              ],
+              "changed_mean": [
+                13.7,
+                12.734874999999999,
+                14.710125
+              ],
+              "wrong": [
+                0.012130434782608696,
+                0.009891304347826091,
+                0.014543478260869547
+              ]
+            }
+          }
+        },
+        "5": {
+          "K2": 168,
+          "best_continuation": "C3 continue, averaged",
+          "arms": {
+            "C1 continue": {
+              "S_mean": 0.058749346005187754,
+              "S_cvar5": 0.16143725663161673,
+              "changed": 23.25,
+              "disagreement": 0.14344155560410748,
+              "share_rows_worse": 0.5075743494423792,
+              "p95_row_loss_change": 0.76031963267998,
+              "p95_row_loss": 1.8511783659314145,
+              "mean_row_loss": 0.5206108088162269,
+              "wrong": 0.25678260869565217,
+              "changed_mean": 23.25,
+              "changed_worst5": 43.30769230769231,
+              "seconds_all_seeds": 0.019840240478515625
+            },
+            "C2 continue, decayed": {
+              "S_mean": 0.005028072582247487,
+              "S_cvar5": 0.0110794867187048,
+              "changed": 6.28,
+              "disagreement": 0.040100502512562815,
+              "share_rows_worse": 0.5288661710037175,
+              "p95_row_loss_change": 0.39587078762530636,
+              "p95_row_loss": 1.495534863392698,
+              "mean_row_loss": 0.4668895353932867,
+              "wrong": 0.23621739130434782,
+              "changed_mean": 6.28,
+              "changed_worst5": 12.866666666666667,
+              "seconds_all_seeds": 0.02033400535583496
+            },
+            "C3 continue, averaged": {
+              "S_mean": 0.003778800634432511,
+              "S_cvar5": 0.007327014103999513,
+              "changed": 3.96,
+              "disagreement": 0.022951715097225257,
+              "share_rows_worse": 0.4853531598513011,
+              "p95_row_loss_change": 0.38963781148876353,
+              "p95_row_loss": 1.5450340636901188,
+              "mean_row_loss": 0.4656402634454717,
+              "wrong": 0.233,
+              "changed_mean": 3.96,
+              "changed_worst5": 8.285714285714286,
+              "seconds_all_seeds": 0.02181220054626465
+            },
+            "R risk first-order (theta=1)": {
+              "S_mean": 4.78253167116649e-05,
+              "S_cvar5": 0.0002549471782960666,
+              "changed": 0.335,
+              "disagreement": 0.002112082149879834,
+              "share_rows_worse": 0.5435594795539034,
+              "p95_row_loss_change": 0.35240600113902787,
+              "p95_row_loss": 1.4467953361007817,
+              "mean_row_loss": 0.46190928812775084,
+              "wrong": 0.2377608695652174,
+              "mean_alpha_times_L": 3.078506758280697,
+              "changed_mean": 0.335,
+              "changed_worst5": 1.0307692307692307,
+              "seconds_all_seeds": 0.6794037818908691
+            },
+            "R risk exact-change (theta=5)": {
+              "S_mean": 0.01467308903523074,
+              "S_cvar5": 0.04191247313116276,
+              "changed": 10.305,
+              "disagreement": 0.06622569368582042,
+              "share_rows_worse": 0.49817843866171,
+              "p95_row_loss_change": 0.19328250605677189,
+              "p95_row_loss": 1.5995540032148927,
+              "mean_row_loss": 0.47653455184626997,
+              "wrong": 0.2410217391304348,
+              "mean_alpha_times_L": 0.4704648655390947,
+              "changed_mean": 10.305,
+              "changed_worst5": 22.5,
+              "seconds_all_seeds": 3.2221932411193848
+            },
+            "L exact line search": {
+              "S_mean": 8.547676638063439e-05,
+              "S_cvar5": 0.00029756307646811584,
+              "changed": 0.325,
+              "disagreement": 0.002099410093948001,
+              "share_rows_worse": 0.5406691449814126,
+              "p95_row_loss_change": 0.3542651712963105,
+              "p95_row_loss": 1.4531205652865884,
+              "mean_row_loss": 0.4619469395774198,
+              "wrong": 0.2377608695652174,
+              "mean_alpha_times_L": 2.793132391031979,
+              "changed_mean": 0.325,
+              "changed_worst5": 1.0483870967741935,
+              "seconds_all_seeds": 1.7664411067962646
+            }
+          },
+          "tests": {
+            "R risk first-order (theta=1) vs C3 continue, averaged": {
+              "disagreement": [
+                -0.02083963294734542,
+                -0.022016861481319646,
+                -0.01951602578107931
+              ],
+              "changed_mean": [
+                -3.625,
+                -3.91,
+                -3.335
+              ],
+              "wrong": [
+                0.004760869565217374,
+                0.003652173913043455,
+                0.005804891304347833
+              ]
+            },
+            "R risk first-order (theta=1) vs C1 continue": {
+              "disagreement": [
+                -0.14132947345422764,
+                -0.1480625027310465,
+                -0.1336883111208215
+              ],
+              "changed_mean": [
+                -22.915,
+                -24.18025,
+                -21.714625
+              ],
+              "wrong": [
+                -0.019021739130434784,
+                -0.02269728260869567,
+                -0.015347826086956534
+              ]
+            },
+            "R risk first-order (theta=1) vs L exact line search": {
+              "disagreement": [
+                1.267205593183298e-05,
+                -0.00023381035612846858,
+                0.00024279549923530682
+              ],
+              "changed_mean": [
+                0.010000000000000009,
+                -0.030000000000000027,
+                0.04999999999999999
+              ],
+              "wrong": [
+                0.0,
+                -0.00019565217391304124,
+                0.0001739130434782743
+              ]
+            },
+            "R risk exact-change (theta=5) vs C3 continue, averaged": {
+              "disagreement": [
+                0.04327397858859516,
+                0.03906197837011144,
+                0.04728259230937294
+              ],
+              "changed_mean": [
+                6.345,
+                5.584875000000001,
+                7.124999999999999
+              ],
+              "wrong": [
+                0.008021739130434774,
+                0.006108695652173923,
+                0.010000543478260878
+              ]
+            },
+            "R risk exact-change (theta=5) vs C1 continue": {
+              "disagreement": [
+                -0.07721586191828707,
+                -0.08516752785667467,
+                -0.0685935765785449
+              ],
+              "changed_mean": [
+                -12.945,
+                -14.395,
+                -11.544750000000002
+              ],
+              "wrong": [
+                -0.015760869565217384,
+                -0.019826086956521716,
+                -0.011369021739130429
+              ]
+            },
+            "R risk exact-change (theta=5) vs L exact line search": {
+              "disagreement": [
+                0.06412628359187242,
+                0.05993518134149006,
+                0.06793735525453354
+              ],
+              "changed_mean": [
+                9.98,
+                9.31975,
+                10.695125
+              ],
+              "wrong": [
+                0.0032608695652174002,
+                0.0013907608695652143,
+                0.005130434782608689
+              ]
+            }
+          }
+        },
+        "20": {
+          "K2": 672,
+          "best_continuation": "C3 continue, averaged",
+          "arms": {
+            "C1 continue": {
+              "S_mean": 0.0586503010455532,
+              "S_cvar5": 0.13711043620845206,
+              "changed": 23.66,
+              "disagreement": 0.14652479790255626,
+              "share_rows_worse": 0.5091171003717472,
+              "p95_row_loss_change": 0.7670994775549737,
+              "p95_row_loss": 1.851573121912341,
+              "mean_row_loss": 0.5205117638565924,
+              "wrong": 0.25956521739130434,
+              "changed_mean": 23.66,
+              "changed_worst5": 44.36363636363637,
+              "seconds_all_seeds": 0.09439754486083984
+            },
+            "C2 continue, decayed": {
+              "S_mean": 0.002594646267782132,
+              "S_cvar5": 0.006208997528396543,
+              "changed": 4.325,
+              "disagreement": 0.02786344767314835,
+              "share_rows_worse": 0.5375371747211896,
+              "p95_row_loss_change": 0.3712721420108524,
+              "p95_row_loss": 1.4692663186383514,
+              "mean_row_loss": 0.4644561090788213,
+              "wrong": 0.23454347826086958,
+              "changed_mean": 4.325,
+              "changed_worst5": 8.733333333333333,
+              "seconds_all_seeds": 0.08294081687927246
+            },
+            "C3 continue, averaged": {
+              "S_mean": 0.0022338883708396306,
+              "S_cvar5": 0.003904094267215358,
+              "changed": 2.435,
+              "disagreement": 0.011034957395674021,
+              "share_rows_worse": 0.4838382899628253,
+              "p95_row_loss_change": 0.3864002482001389,
+              "p95_row_loss": 1.5266537471706567,
+              "mean_row_loss": 0.4640953511818787,
+              "wrong": 0.23254347826086957,
+              "changed_mean": 2.435,
+              "changed_worst5": 5.538461538461538,
+              "seconds_all_seeds": 0.09284138679504395
+            },
+            "R risk first-order (theta=1)": {
+              "S_mean": 2.0164511727038813e-12,
+              "S_cvar5": 3.7210617920280244e-11,
+              "changed": 0.0,
+              "disagreement": 0.0,
+              "share_rows_worse": 0.5455576208178439,
+              "p95_row_loss_change": 0.35278102588606286,
+              "p95_row_loss": 1.4410541766481169,
+              "mean_row_loss": 0.4618614628130556,
+              "wrong": 0.2391304347826087,
+              "mean_alpha_times_L": 3.2925218208696636,
+              "changed_mean": 0.0,
+              "changed_worst5": 0.0,
+              "seconds_all_seeds": 2.9126195907592773
+            },
+            "R risk exact-change (theta=5)": {
+              "S_mean": 0.0001642862151629662,
+              "S_cvar5": 0.0009270543726659419,
+              "changed": 0.61,
+              "disagreement": 0.004096569805549486,
+              "share_rows_worse": 0.5412360594795539,
+              "p95_row_loss_change": 0.3462994162377811,
+              "p95_row_loss": 1.4550063481294593,
+              "mean_row_loss": 0.46202574902620214,
+              "wrong": 0.23752173913043478,
+              "mean_alpha_times_L": 0.7486071632365664,
+              "changed_mean": 0.61,
+              "changed_worst5": 2.6956521739130435,
+              "seconds_all_seeds": 20.323435306549072
+            },
+            "L exact line search": {
+              "S_mean": 1.517772782455573e-10,
+              "S_cvar5": 8.832992060003875e-10,
+              "changed": 0.0,
+              "disagreement": 0.0,
+              "share_rows_worse": 0.5455483271375464,
+              "p95_row_loss_change": 0.352771818628808,
+              "p95_row_loss": 1.4410559544326071,
+              "mean_row_loss": 0.4618614629628165,
+              "wrong": 0.2391304347826087,
+              "mean_alpha_times_L": 2.8087108403690677,
+              "changed_mean": 0.0,
+              "changed_worst5": 0.0,
+              "seconds_all_seeds": 7.6777496337890625
+            }
+          },
+          "tests": {
+            "R risk first-order (theta=1) vs C3 continue, averaged": {
+              "disagreement": [
+                -0.011034957395674021,
+                -0.011816326196198384,
+                -0.010203326414682107
+              ],
+              "changed_mean": [
+                -2.435,
+                -2.645,
+                -2.235
+              ],
+              "wrong": [
+                0.006586956521739129,
+                0.005760326086956533,
+                0.007413586956521752
+              ]
+            },
+            "R risk first-order (theta=1) vs C1 continue": {
+              "disagreement": [
+                -0.14652479790255626,
+                -0.15325584443958923,
+                -0.13849446689971598
+              ],
+              "changed_mean": [
+                -23.66,
+                -25.03525,
+                -22.35975
+              ],
+              "wrong": [
+                -0.020434782608695634,
+                -0.023935326086956508,
+                -0.016825543478260846
+              ]
+            },
+            "R risk first-order (theta=1) vs L exact line search": {
+              "disagreement": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "changed_mean": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "wrong": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "R risk exact-change (theta=5) vs C3 continue, averaged": {
+              "disagreement": [
+                -0.006938387590124535,
+                -0.008045034957395674,
+                -0.005745127812977934
+              ],
+              "changed_mean": [
+                -1.8250000000000002,
+                -2.08,
+                -1.595
+              ],
+              "wrong": [
+                0.00497826086956521,
+                0.004086956521739127,
+                0.0058483695652173946
+              ]
+            },
+            "R risk exact-change (theta=5) vs C1 continue": {
+              "disagreement": [
+                -0.14242822809700678,
+                -0.14900443521957615,
+                -0.13439587065763603
+              ],
+              "changed_mean": [
+                -23.05,
+                -24.375625,
+                -21.739749999999997
+              ],
+              "wrong": [
+                -0.022043478260869553,
+                -0.02569619565217388,
+                -0.01843478260869566
+              ]
+            },
+            "R risk exact-change (theta=5) vs L exact line search": {
+              "disagreement": [
+                0.004096569805549486,
+                0.00332444832859952,
+                0.004955134367489622
+              ],
+              "changed_mean": [
+                0.61,
+                0.49,
+                0.75
+              ],
+              "wrong": [
+                -0.0016086956521739193,
+                -0.002065217391304358,
+                -0.0011521739130434805
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Adam": {
+      "stage1": {
+        "metrics": {
+          "S_mean": 0.002224691024975261,
+          "S_cvar5": 0.004892401460181694,
+          "changed": 3.855,
+          "disagreement": 0.025688660694778237,
+          "share_rows_worse": 0.0,
+          "p95_row_loss_change": 0.0,
+          "p95_row_loss": 1.4650785147671468,
+          "mean_row_loss": 0.46408615383601454,
+          "wrong": 0.23458695652173914
+        },
+        "disagreement": 0.025688660694778237,
+        "changed": [
+          3.855,
+          9.157894736842104
+        ]
+      },
+      "budgets": {
+        "1": {
+          "K2": 34,
+          "best_continuation": "C3 continue, averaged",
+          "arms": {
+            "C1 continue": {
+              "S_mean": 0.002737327482696778,
+              "S_cvar5": 0.007108477471660474,
+              "changed": 4.5,
+              "disagreement": 0.029230937295171514,
+              "share_rows_worse": 0.4823327137546468,
+              "p95_row_loss_change": 0.12054419863411946,
+              "p95_row_loss": 1.4731441739115463,
+              "mean_row_loss": 0.4645987902937359,
+              "wrong": 0.2343913043478261,
+              "changed_mean": 4.5,
+              "changed_worst5": 10.0,
+              "seconds_all_seeds": 0.004818916320800781
+            },
+            "C2 continue, decayed": {
+              "S_mean": 0.0022856374567467043,
+              "S_cvar5": 0.0059201318595669015,
+              "changed": 4.02,
+              "disagreement": 0.02603058772121477,
+              "share_rows_worse": 0.47764869888475836,
+              "p95_row_loss_change": 0.08427433723107326,
+              "p95_row_loss": 1.4662071938241816,
+              "mean_row_loss": 0.46414710026778583,
+              "wrong": 0.23447826086956522,
+              "changed_mean": 4.02,
+              "changed_worst5": 8.88888888888889,
+              "seconds_all_seeds": 0.005118370056152344
+            },
+            "C3 continue, averaged": {
+              "S_mean": 0.0022509812991716107,
+              "S_cvar5": 0.005815859896062647,
+              "changed": 3.955,
+              "disagreement": 0.02556980554948656,
+              "share_rows_worse": 0.4770167286245353,
+              "p95_row_loss_change": 0.08198534281088717,
+              "p95_row_loss": 1.4660970089834036,
+              "mean_row_loss": 0.4641124441102108,
+              "wrong": 0.2345,
+              "changed_mean": 3.955,
+              "changed_worst5": 9.0,
+              "seconds_all_seeds": 0.004978179931640625
+            },
+            "R risk first-order (theta=1)": {
+              "S_mean": 0.00034748448820958345,
+              "S_cvar5": 0.000787571654892355,
+              "changed": 1.075,
+              "disagreement": 0.00679375136552327,
+              "share_rows_worse": 0.5002695167286245,
+              "p95_row_loss_change": 0.08606637029869439,
+              "p95_row_loss": 1.4484328723968825,
+              "mean_row_loss": 0.4622089472992488,
+              "wrong": 0.23615217391304347,
+              "mean_alpha_times_L": 2.30754273465571,
+              "changed_mean": 1.075,
+              "changed_worst5": 3.3333333333333335,
+              "seconds_all_seeds": 0.12273001670837402
+            },
+            "R risk exact-change (theta=5)": {
+              "S_mean": 0.0016659521868156834,
+              "S_cvar5": 0.003647529083396128,
+              "changed": 3.095,
+              "disagreement": 0.020702862136770812,
+              "share_rows_worse": 0.4987360594795539,
+              "p95_row_loss_change": 0.01378932862898644,
+              "p95_row_loss": 1.4601730450042567,
+              "mean_row_loss": 0.46352741499785494,
+              "wrong": 0.23467391304347826,
+              "mean_alpha_times_L": 0.38526263661572696,
+              "changed_mean": 3.095,
+              "changed_worst5": 8.7,
+              "seconds_all_seeds": 0.6231324672698975
+            },
+            "L exact line search": {
+              "S_mean": 0.000321461153435009,
+              "S_cvar5": 0.0007396519822551739,
+              "changed": 1.06,
+              "disagreement": 0.006551452916757702,
+              "share_rows_worse": 0.5003717472118959,
+              "p95_row_loss_change": 0.08998229546885451,
+              "p95_row_loss": 1.4475986312529168,
+              "mean_row_loss": 0.4621829239644742,
+              "wrong": 0.236,
+              "mean_alpha_times_L": 2.365281952656776,
+              "changed_mean": 1.06,
+              "changed_worst5": 3.3333333333333335,
+              "seconds_all_seeds": 0.37662768363952637
+            }
+          },
+          "tests": {
+            "R risk first-order (theta=1) vs C3 continue, averaged": {
+              "disagreement": [
+                -0.01877605418396329,
+                -0.020498082805331008,
+                -0.016733204063797243
+              ],
+              "changed_mean": [
+                -2.88,
+                -3.2051250000000002,
+                -2.5700000000000003
+              ],
+              "wrong": [
+                0.001652173913043481,
+                0.00023913043478260287,
+                0.0031521739130434823
+              ]
+            },
+            "R risk first-order (theta=1) vs C1 continue": {
+              "disagreement": [
+                -0.022437185929648246,
+                -0.0243215042604326,
+                -0.020226660476294518
+              ],
+              "changed_mean": [
+                -3.425,
+                -3.79,
+                -3.04975
+              ],
+              "wrong": [
+                0.0017608695652173711,
+                0.00028206521739129536,
+                0.003239673913043475
+              ]
+            },
+            "R risk first-order (theta=1) vs L exact line search": {
+              "disagreement": [
+                0.00024229844876556828,
+                -0.00010531461656106676,
+                0.0006192538780860825
+              ],
+              "changed_mean": [
+                0.014999999999999902,
+                -0.040000000000000036,
+                0.08000000000000007
+              ],
+              "wrong": [
+                0.0001521739130434796,
+                -8.695652173915103e-05,
+                0.0003918478260869782
+              ]
+            },
+            "R risk exact-change (theta=5) vs C3 continue, averaged": {
+              "disagreement": [
+                -0.004866943412715749,
+                -0.0068825486126283565,
+                -0.002848787415337557
+              ],
+              "changed_mean": [
+                -0.8599999999999999,
+                -1.180125,
+                -0.5398750000000001
+              ],
+              "wrong": [
+                0.0001739130434782743,
+                -0.0010434782608695625,
+                0.001413043478260851
+              ]
+            },
+            "R risk exact-change (theta=5) vs C1 continue": {
+              "disagreement": [
+                -0.008528075158400702,
+                -0.01099366943412716,
+                -0.005962661131745684
+              ],
+              "changed_mean": [
+                -1.4049999999999998,
+                -1.86025,
+                -0.9550000000000005
+              ],
+              "wrong": [
+                0.0002826086956521645,
+                -0.001413043478260851,
+                0.0018054347826086986
+              ]
+            },
+            "R risk exact-change (theta=5) vs L exact line search": {
+              "disagreement": [
+                0.01415140922001311,
+                0.012318117762726677,
+                0.015688873716408126
+              ],
+              "changed_mean": [
+                2.035,
+                1.745,
+                2.305
+              ],
+              "wrong": [
+                -0.001326086956521727,
+                -0.002696195652173913,
+                -4.293478260869226e-05
+              ]
+            }
+          }
+        },
+        "2": {
+          "K2": 67,
+          "best_continuation": "C3 continue, averaged",
+          "arms": {
+            "C1 continue": {
+              "S_mean": 0.0024931110866625015,
+              "S_cvar5": 0.006717373908479612,
+              "changed": 4.185,
+              "disagreement": 0.027097006772995414,
+              "share_rows_worse": 0.48656133828996284,
+              "p95_row_loss_change": 0.1340470990774995,
+              "p95_row_loss": 1.4706218266811009,
+              "mean_row_loss": 0.4643545738977017,
+              "wrong": 0.23467391304347826,
+              "changed_mean": 4.185,
+              "changed_worst5": 9.461538461538462,
+              "seconds_all_seeds": 0.016558408737182617
+            },
+            "C2 continue, decayed": {
+              "S_mean": 0.0020295909727362075,
+              "S_cvar5": 0.005148355216363543,
+              "changed": 3.715,
+              "disagreement": 0.024055713349355475,
+              "share_rows_worse": 0.4830018587360595,
+              "p95_row_loss_change": 0.10121428148718012,
+              "p95_row_loss": 1.4668289741382898,
+              "mean_row_loss": 0.4638910537837754,
+              "wrong": 0.23419565217391305,
+              "changed_mean": 3.715,
+              "changed_worst5": 8.571428571428571,
+              "seconds_all_seeds": 0.011674880981445312
+            },
+            "C3 continue, averaged": {
+              "S_mean": 0.001946936281156744,
+              "S_cvar5": 0.004972848646758105,
+              "changed": 3.625,
+              "disagreement": 0.02344046318549268,
+              "share_rows_worse": 0.4815799256505576,
+              "p95_row_loss_change": 0.0952657052838689,
+              "p95_row_loss": 1.4651559490036663,
+              "mean_row_loss": 0.4638083990921959,
+              "wrong": 0.2341086956521739,
+              "changed_mean": 3.625,
+              "changed_worst5": 8.2,
+              "seconds_all_seeds": 0.011018514633178711
+            },
+            "R risk first-order (theta=1)": {
+              "S_mean": 7.071815780286234e-05,
+              "S_cvar5": 0.00020330233197230486,
+              "changed": 0.5,
+              "disagreement": 0.0026930303692374916,
+              "share_rows_worse": 0.507314126394052,
+              "p95_row_loss_change": 0.08432617208216668,
+              "p95_row_loss": 1.4430480754657375,
+              "mean_row_loss": 0.4619321809688421,
+              "wrong": 0.23695652173913043,
+              "mean_alpha_times_L": 2.7189988186002165,
+              "changed_mean": 0.5,
+              "changed_worst5": 2.0,
+              "seconds_all_seeds": 0.2821512222290039
+            },
+            "R risk exact-change (theta=5)": {
+              "S_mean": 0.0012520608435481048,
+              "S_cvar5": 0.0027381660996992963,
+              "changed": 2.495,
+              "disagreement": 0.01667489622023159,
+              "share_rows_worse": 0.4998513011152416,
+              "p95_row_loss_change": 0.025807996470707497,
+              "p95_row_loss": 1.4568626395525948,
+              "mean_row_loss": 0.4631135236545873,
+              "wrong": 0.23532608695652174,
+              "mean_alpha_times_L": 0.3966665771711205,
+              "changed_mean": 2.495,
+              "changed_worst5": 6.647058823529412,
+              "seconds_all_seeds": 1.3292648792266846
+            },
+            "L exact line search": {
+              "S_mean": 7.663281036215663e-05,
+              "S_cvar5": 0.0002225763064853281,
+              "changed": 0.505,
+              "disagreement": 0.0028579855800742846,
+              "share_rows_worse": 0.5069330855018588,
+              "p95_row_loss_change": 0.07950519882099442,
+              "p95_row_loss": 1.4437456328498814,
+              "mean_row_loss": 0.46193809562140137,
+              "wrong": 0.23702173913043478,
+              "mean_alpha_times_L": 2.6172136363012815,
+              "changed_mean": 0.505,
+              "changed_worst5": 2.0,
+              "seconds_all_seeds": 0.7756543159484863
+            }
+          },
+          "tests": {
+            "R risk first-order (theta=1) vs C3 continue, averaged": {
+              "disagreement": [
+                -0.020747432816255188,
+                -0.022285416211492246,
+                -0.01881189643871532
+              ],
+              "changed_mean": [
+                -3.125,
+                -3.415,
+                -2.819875
+              ],
+              "wrong": [
+                0.002847826086956523,
+                0.001542934782608693,
+                0.004196195652173887
+              ]
+            },
+            "R risk first-order (theta=1) vs C1 continue": {
+              "disagreement": [
+                -0.024403976403757924,
+                -0.026046269390430414,
+                -0.022686781734760762
+              ],
+              "changed_mean": [
+                -3.6849999999999996,
+                -4.005125,
+                -3.395
+              ],
+              "wrong": [
+                0.0022826086956521663,
+                0.0009342391304347754,
+                0.0036956521739130443
+              ]
+            },
+            "R risk first-order (theta=1) vs L exact line search": {
+              "disagreement": [
+                -0.00016495521083679295,
+                -0.0004562213240113611,
+                0.00012499999999999987
+              ],
+              "changed_mean": [
+                -0.0050000000000000044,
+                -0.06499999999999995,
+                0.05500000000000005
+              ],
+              "wrong": [
+                -6.521739130435633e-05,
+                -0.00032608695652172685,
+                0.00019565217391304124
+              ]
+            },
+            "R risk exact-change (theta=5) vs C3 continue, averaged": {
+              "disagreement": [
+                -0.006765566965261087,
+                -0.008541812322481974,
+                -0.004879003714223295
+              ],
+              "changed_mean": [
+                -1.13,
+                -1.4649999999999999,
+                -0.81
+              ],
+              "wrong": [
+                0.0012173913043478368,
+                -6.521739130435633e-05,
+                0.0024565217391304406
+              ]
+            },
+            "R risk exact-change (theta=5) vs C1 continue": {
+              "disagreement": [
+                -0.010422110552763823,
+                -0.012657433908673807,
+                -0.008246231155778895
+              ],
+              "changed_mean": [
+                -1.6899999999999995,
+                -2.0702499999999997,
+                -1.3250000000000002
+              ],
+              "wrong": [
+                0.00065217391304348,
+                -0.0008918478260869521,
+                0.002283152173913063
+              ]
+            },
+            "R risk exact-change (theta=5) vs L exact line search": {
+              "disagreement": [
+                0.013816910640157307,
+                0.01218882455757046,
+                0.015280243609351108
+              ],
+              "changed_mean": [
+                1.9900000000000002,
+                1.7598749999999999,
+                2.2201249999999995
+              ],
+              "wrong": [
+                -0.0016956521739130426,
+                -0.0026092391304347894,
+                -0.000782608695652165
+              ]
+            }
+          }
+        },
+        "5": {
+          "K2": 168,
+          "best_continuation": "C3 continue, averaged",
+          "arms": {
+            "C1 continue": {
+              "S_mean": 0.0021230299215408257,
+              "S_cvar5": 0.005119934251877395,
+              "changed": 3.875,
+              "disagreement": 0.024268953462967008,
+              "share_rows_worse": 0.4920260223048327,
+              "p95_row_loss_change": 0.13970979482398407,
+              "p95_row_loss": 1.4639421574413813,
+              "mean_row_loss": 0.46398449273257997,
+              "wrong": 0.23332608695652174,
+              "changed_mean": 3.875,
+              "changed_worst5": 9.071428571428571,
+              "seconds_all_seeds": 0.02522420883178711
+            },
+            "C2 continue, decayed": {
+              "S_mean": 0.0012344611873768296,
+              "S_cvar5": 0.0030776190261077975,
+              "changed": 2.57,
+              "disagreement": 0.015823465151846187,
+              "share_rows_worse": 0.48192379182156136,
+              "p95_row_loss_change": 0.10857729474526351,
+              "p95_row_loss": 1.4595025464716729,
+              "mean_row_loss": 0.463095923998416,
+              "wrong": 0.23356521739130434,
+              "changed_mean": 2.57,
+              "changed_worst5": 5.3076923076923075,
+              "seconds_all_seeds": 0.024106979370117188
+            },
+            "C3 continue, averaged": {
+              "S_mean": 0.0011383130022295015,
+              "S_cvar5": 0.0025536643447771567,
+              "changed": 2.465,
+              "disagreement": 0.015450950404194886,
+              "share_rows_worse": 0.4791542750929368,
+              "p95_row_loss_change": 0.09828757534286932,
+              "p95_row_loss": 1.458235714125328,
+              "mean_row_loss": 0.4629997758132687,
+              "wrong": 0.23402173913043478,
+              "changed_mean": 2.465,
+              "changed_worst5": 5.2727272727272725,
+              "seconds_all_seeds": 0.024735212326049805
+            },
+            "R risk first-order (theta=1)": {
+              "S_mean": 1.6626569678665493e-06,
+              "S_cvar5": 8.892746884409109e-06,
+              "changed": 0.37,
+              "disagreement": 0.0020371422329036487,
+              "share_rows_worse": 0.5110223048327137,
+              "p95_row_loss_change": 0.09230665857235922,
+              "p95_row_loss": 1.4413372851146067,
+              "mean_row_loss": 0.461863125468007,
+              "wrong": 0.23752173913043478,
+              "mean_alpha_times_L": 2.9620017624587387,
+              "changed_mean": 0.37,
+              "changed_worst5": 1.0,
+              "seconds_all_seeds": 0.9423220157623291
+            },
+            "R risk exact-change (theta=5)": {
+              "S_mean": 0.0005382924615847762,
+              "S_cvar5": 0.0012413033462868373,
+              "changed": 1.45,
+              "disagreement": 0.009486563251037798,
+              "share_rows_worse": 0.5018308550185874,
+              "p95_row_loss_change": 0.05302755546658546,
+              "p95_row_loss": 1.4498162470609923,
+              "mean_row_loss": 0.46239975527262395,
+              "wrong": 0.23595652173913043,
+              "mean_alpha_times_L": 0.43800678843771046,
+              "changed_mean": 1.45,
+              "changed_worst5": 4.4375,
+              "seconds_all_seeds": 2.9141557216644287
+            },
+            "L exact line search": {
+              "S_mean": 3.3396669312713012e-06,
+              "S_cvar5": 1.4053983043393892e-05,
+              "changed": 0.425,
+              "disagreement": 0.0021356783919597986,
+              "share_rows_worse": 0.5100836431226766,
+              "p95_row_loss_change": 0.09251014945301496,
+              "p95_row_loss": 1.4414223529869248,
+              "mean_row_loss": 0.4618648024779705,
+              "wrong": 0.23728260869565218,
+              "mean_alpha_times_L": 2.663807624736537,
+              "changed_mean": 0.425,
+              "changed_worst5": 1.0,
+              "seconds_all_seeds": 1.9095900058746338
+            }
+          },
+          "tests": {
+            "R risk first-order (theta=1) vs C3 continue, averaged": {
+              "disagreement": [
+                -0.013413808171291237,
+                -0.014486268298011794,
+                -0.012308821280314615
+              ],
+              "changed_mean": [
+                -2.0949999999999998,
+                -2.31,
+                -1.9
+              ],
+              "wrong": [
+                0.003500000000000003,
+                0.0025000000000000022,
+                0.0044347826086956485
+              ]
+            },
+            "R risk first-order (theta=1) vs C1 continue": {
+              "disagreement": [
+                -0.022231811230063358,
+                -0.02382433908673804,
+                -0.02041657745247979
+              ],
+              "changed_mean": [
+                -3.505,
+                -3.8301250000000002,
+                -3.18
+              ],
+              "wrong": [
+                0.004195652173913045,
+                0.003065217391304359,
+                0.005500000000000005
+              ]
+            },
+            "R risk first-order (theta=1) vs L exact line search": {
+              "disagreement": [
+                -9.853615905614996e-05,
+                -0.00020974437404413398,
+                -1.6386279222197625e-05
+              ],
+              "changed_mean": [
+                -0.05499999999999999,
+                -0.09999999999999998,
+                -0.014875000000000072
+              ],
+              "wrong": [
+                0.00023913043478260287,
+                6.467391304345944e-05,
+                0.0004347826086956441
+              ]
+            },
+            "R risk exact-change (theta=5) vs C3 continue, averaged": {
+              "disagreement": [
+                -0.0059643871531570875,
+                -0.0071643926152501645,
+                -0.004740714441774085
+              ],
+              "changed_mean": [
+                -1.015,
+                -1.2405,
+                -0.7947500000000002
+              ],
+              "wrong": [
+                0.0019347826086956454,
+                0.0008260869565217543,
+                0.0030217391304347705
+              ]
+            },
+            "R risk exact-change (theta=5) vs C1 continue": {
+              "disagreement": [
+                -0.01478239021192921,
+                -0.01670026764256063,
+                -0.012752878523050036
+              ],
+              "changed_mean": [
+                -2.425,
+                -2.775125,
+                -2.0698750000000006
+              ],
+              "wrong": [
+                0.002630434782608687,
+                0.0013913043478260834,
+                0.004000543478260873
+              ]
+            },
+            "R risk exact-change (theta=5) vs L exact line search": {
+              "disagreement": [
+                0.007350884859078,
+                0.006324421018134148,
+                0.008290643434564126
+              ],
+              "changed_mean": [
+                1.025,
+                0.8500000000000001,
+                1.195125
+              ],
+              "wrong": [
+                -0.0013260869565217548,
+                -0.001978260869565208,
+                -0.00065217391304348
+              ]
+            }
+          }
+        },
+        "20": {
+          "K2": 672,
+          "best_continuation": "C3 continue, averaged",
+          "arms": {
+            "C1 continue": {
+              "S_mean": 0.0023725024153028224,
+              "S_cvar5": 0.005854999384569032,
+              "changed": 4.35,
+              "disagreement": 0.027732575923093732,
+              "share_rows_worse": 0.5012081784386617,
+              "p95_row_loss_change": 0.14640245043360312,
+              "p95_row_loss": 1.4604443855234854,
+              "mean_row_loss": 0.46423396522634197,
+              "wrong": 0.23408695652173914,
+              "changed_mean": 4.35,
+              "changed_worst5": 8.428571428571429,
+              "seconds_all_seeds": 0.09667587280273438
+            },
+            "C2 continue, decayed": {
+              "S_mean": 0.0005948333219140092,
+              "S_cvar5": 0.0014686806162996224,
+              "changed": 1.6,
+              "disagreement": 0.009727332313742626,
+              "share_rows_worse": 0.5013289962825279,
+              "p95_row_loss_change": 0.1057936158684044,
+              "p95_row_loss": 1.4491470397156305,
+              "mean_row_loss": 0.4624562961329532,
+              "wrong": 0.23508695652173914,
+              "changed_mean": 1.6,
+              "changed_worst5": 4.4375,
+              "seconds_all_seeds": 0.0920858383178711
+            },
+            "C3 continue, averaged": {
+              "S_mean": 0.0003598766075956031,
+              "S_cvar5": 0.0008263892759788726,
+              "changed": 1.295,
+              "disagreement": 0.007274415556041077,
+              "share_rows_worse": 0.49391263940520447,
+              "p95_row_loss_change": 0.09734103920122184,
+              "p95_row_loss": 1.446439499411033,
+              "mean_row_loss": 0.46222133941863475,
+              "wrong": 0.23528260869565218,
+              "changed_mean": 1.295,
+              "changed_worst5": 3.2857142857142856,
+              "seconds_all_seeds": 0.09129738807678223
+            },
+            "R risk first-order (theta=1)": {
+              "S_mean": 1.9181267685297598e-13,
+              "S_cvar5": 3.8062331064736554e-12,
+              "changed": 0.0,
+              "disagreement": 0.0,
+              "share_rows_worse": 0.5118122676579926,
+              "p95_row_loss_change": 0.09267046076638379,
+              "p95_row_loss": 1.4410541364872156,
+              "mean_row_loss": 0.461861462811231,
+              "wrong": 0.2391304347826087,
+              "mean_alpha_times_L": 3.223142815198383,
+              "changed_mean": 0.0,
+              "changed_worst5": 0.0,
+              "seconds_all_seeds": 8.562804698944092
+            },
+            "R risk exact-change (theta=5)": {
+              "S_mean": 5.350995410568215e-06,
+              "S_cvar5": 2.289752603661932e-05,
+              "changed": 0.43,
+              "disagreement": 0.0021420144199257155,
+              "share_rows_worse": 0.5103159851301116,
+              "p95_row_loss_change": 0.09087349426107622,
+              "p95_row_loss": 1.4412328614955408,
+              "mean_row_loss": 0.4618668138064498,
+              "wrong": 0.23726086956521739,
+              "mean_alpha_times_L": 0.7207063006985794,
+              "changed_mean": 0.43,
+              "changed_worst5": 1.0,
+              "seconds_all_seeds": 15.63055157661438
+            },
+            "L exact line search": {
+              "S_mean": 6.3434116293059614e-12,
+              "S_cvar5": 4.552759835796394e-11,
+              "changed": 0.0,
+              "disagreement": 0.0,
+              "share_rows_worse": 0.5118122676579926,
+              "p95_row_loss_change": 0.09266883378418289,
+              "p95_row_loss": 1.441054235139724,
+              "mean_row_loss": 0.4618614628173826,
+              "wrong": 0.2391304347826087,
+              "mean_alpha_times_L": 2.7849886525109464,
+              "changed_mean": 0.0,
+              "changed_worst5": 0.0,
+              "seconds_all_seeds": 9.042430400848389
+            }
+          },
+          "tests": {
+            "R risk first-order (theta=1) vs C3 continue, averaged": {
+              "disagreement": [
+                -0.007274415556041077,
+                -0.00794196526108805,
+                -0.0065558007428446596
+              ],
+              "changed_mean": [
+                -1.295,
+                -1.45,
+                -1.145
+              ],
+              "wrong": [
+                0.003847826086956524,
+                0.0032385869565217363,
+                0.004456521739130442
+              ]
+            },
+            "R risk first-order (theta=1) vs C1 continue": {
+              "disagreement": [
+                -0.027732575923093732,
+                -0.02938359187240551,
+                -0.02574770045881582
+              ],
+              "changed_mean": [
+                -4.35,
+                -4.6751249999999995,
+                -4.059875
+              ],
+              "wrong": [
+                0.005043478260869566,
+                0.0037826086956521676,
+                0.006326630434782628
+              ]
+            },
+            "R risk first-order (theta=1) vs L exact line search": {
+              "disagreement": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "changed_mean": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "wrong": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "R risk exact-change (theta=5) vs C3 continue, averaged": {
+              "disagreement": [
+                -0.005132401136115362,
+                -0.005820122350884861,
+                -0.004423618090452263
+              ],
+              "changed_mean": [
+                -0.865,
+                -1.030125,
+                -0.71
+              ],
+              "wrong": [
+                0.001978260869565207,
+                0.0013478260869565217,
+                0.002652173913043482
+              ]
+            },
+            "R risk exact-change (theta=5) vs C1 continue": {
+              "disagreement": [
+                -0.025590561503168015,
+                -0.02725866834170855,
+                -0.02361089687568276
+              ],
+              "changed_mean": [
+                -3.9199999999999995,
+                -4.235125,
+                -3.63
+              ],
+              "wrong": [
+                0.003173913043478249,
+                0.0019125000000000086,
+                0.004434782608695648
+              ]
+            },
+            "R risk exact-change (theta=5) vs L exact line search": {
+              "disagreement": [
+                0.0021420144199257155,
+                0.0020252621804675553,
+                0.0021839632947345425
+              ],
+              "changed_mean": [
+                0.43,
+                0.364875,
+                0.495
+              ],
+              "wrong": [
+                -0.0018695652173913169,
+                -0.0021521739130434814,
+                -0.001586413043478256
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "deviation_notes": []
+}
