@@ -127,3 +127,32 @@ Outcome of record: the 95th percentile of the per-row loss increase on held-out 
 **Reading.** The risk-averse step is a way to take shorter steps that are somewhat adaptive to each seed. Most of what it does for per-row harm is what any shorter step does; the seed-adaptive part adds a small further reduction (a few thousandths of a loss unit) that costs seed stability, and it does not change who is wrong. For stability the exact full-data gradient remains what matters, and the risk term is best described as a knob that trades convergence speed for fewer rows made worse.
 
 Experiment C (large data, few passes) remains open. Statements describe statistical behaviour of models on public datasets; not accusations of bias; not credit advice.
+
+## Addendum: negative-flip test (PLAN section 10)
+
+Code `negflip_experiment.py`, analysis `analyze_negflip.py`, all tables in [`negflip_tables.md`](negflip_tables.md), raw `results/negflip_<dataset>.json`. Same 200 stage-1 models (SGD and Adam), same budgets (1, 2, 5 epochs), same arms as the step-matched test plus the continuation arms C1-C3.
+Negative flip = held-out row decided correctly by the stage-1 model and wrongly after the update; positive flip = the reverse; net = positive minus negative = the accuracy change. Rates are % of held-out rows, mean over the 200 models, averaged over datasets below.
+
+| Update (4-dataset average, % of held-out rows) | negative flips | positive flips | net accuracy change |
+|---|---|---|---|
+| SGD start, 1 epoch: C1 continue | 9.65 | 9.67 | +0.02 |
+| SGD, 1 epoch: C3 continue and average | 5.59 | 7.94 | +2.35 |
+| SGD, 1 step: exact line search L | 5.50 | 7.83 | +2.33 |
+| SGD, 1 step: **R1 (theta = 5)** | **0.77** | 1.42 | +0.65 |
+| SGD, 1 step: line search with R1's mean step (M1) | 0.77 | 1.42 | +0.65 |
+| SGD, 5 steps: L | 5.40 | 8.27 | +2.87 |
+| SGD, 5 steps: **R1 (theta = 5)** | **3.18** | 5.35 | +2.18 |
+| SGD, 5 steps: M1 | 3.79 | 6.19 | +2.41 |
+| Adam start, 1 step: L / R1 (theta = 5) / M1 | 1.64 / **0.33** / 0.33 | 1.80 / 0.39 / 0.39 | +0.16 / +0.07 / +0.06 |
+| Adam, 5 steps: L / R1 (theta = 5) / M1 | 1.61 / **1.18** / 1.32 | 1.98 / 1.39 / 1.58 | +0.37 / +0.21 / +0.26 |
+
+**Results over all 240 cells** (2 stage-1 optimizers × 3 step counts × 2 rules × 5 thetas × 4 datasets; paired bootstrap over seeds):
+* **Against the exact line search and against the best continuation**, the risk-averse step has far fewer negative flips: significantly fewer in 179 and 190 cells (more in 34 and 34); the median difference is -0.58 and -0.64 percentage points of held-out rows.
+* **Against the step-matched controls**, almost nothing: against M1 (same mean step) significantly fewer in 85, more in 46, not significant in 109 cells, median difference -0.004 points; against M2 (same schedule for all seeds) fewer in 104, more in 16, median -0.034 points.
+* **The reduction is mostly because the model moves less.** The positive flips fall with the negative ones, so the net accuracy gain is smaller than with the line search (SGD, 1 step: +0.65 against +2.33 points). Negative flips per point of net gain: L 2.4, R1(theta = 5) 1.2 at one step, but M1 (the plain line search with the same mean step) is also 1.2; at five steps R1 1.5 against M1 1.6 and L 1.9.
+* **Pre-registered credit rule** (lower negative-flip rate than both M1 and M2, and net no worse than M1 by more than 0.5 points, on at least 3 of 4 datasets, for some theta, at both 2 and 5 steps): **not met**. The best settings pass on 2 of 4 datasets (for example SGD, 2 steps, R1 theta = 2: COMPAS and Pima; at 5 steps, R1 theta = 5: COMPAS and Pima), and no setting passes at one step.
+* **Worst group (German, groups with at least 30 held-out rows):** negative-flip rate SGD 1 step: L 10.96%, C3 12.26%, R1(theta = 5) 1.13%, M1 1.17%; 5 steps R1 5.84% against M1 8.12%. The reductions against L and continuation are large and are the step length; against M1 the 5-step difference is 2.3 points for SGD and 0.5 for Adam, with one dataset.
+
+**Reading.** Taking short steps is a good way to avoid regressions, and a risk-averse step is one way to take them: it keeps negative flips at a fraction of what a full line-search step or one more epoch of training causes. It is **not better than a plain line search of the same size** on negative flips, apart from a small advantage at 5 steps on some datasets. The honest statement of value is "short, exact steps avoid regressions", with the risk-averse rule as one way to choose the short step that needs no hand-tuned step size (θ sets the cautiousness; the matched control needed the risk step's mean as input).
+
+Statements describe statistical behaviour of models on public datasets; not accusations of bias; not credit advice.
