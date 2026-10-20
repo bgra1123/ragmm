@@ -10,40 +10,56 @@ The polish adapter has two ingredients:
 
 Claim to test: **I2 changes outcomes beyond I1.** Evidence so far suggests that with enough full-batch steps on a strongly convex problem, both reach the same optimum, so I2 can only matter when (a) the budget is short, or (b) the objective itself is tilted. Two experiments follow, one for each route.
 
-## 2. Control ladder (same start, same direction, same number of passes)
+## 2. Primary comparison (revised): risk-adjusted step vs one more epoch of the same training
 
-All arms start from the same 200 stage-1 SGD models per dataset (2,000 textbook SGD steps, L2 logistic regression, lambda = 0.01, as in `research/linesearch`) and take T full-batch steps along the exact gradient g. They differ only in the step length alpha_t.
+Correction after review: the comparison that matters to a user is not "which step rule inside the adapter" but
+**"for the same extra compute, is the risk-adjusted adapter better than simply training one more epoch?"** An earlier draft of
+this plan compared step rules against each other; that is now a secondary attribution analysis (section 3).
 
-| Arm | Step length | Role |
+All arms start from the same 200 stage-1 models per dataset (stage 1 = 2,000 minibatch steps of SGD, or of Adam; L2 logistic
+regression, lambda = 0.01, batch 16, as in `research/linesearch` and `research/optimizers`) and get the **same extra budget of
+B epochs of row-gradients** (B in {1, 2, 5, 20}; one epoch = n row-gradients):
+
+| Arm | What it does with the extra budget | Role |
 |---|---|---|
-| A0 | none (stage 1) | reference |
-| A1 | fixed 1/L | no line search at all |
-| A2 | exact line search | I1 only |
-| A3(theta) | **entropic_exact** (risk of the exact per-row loss change), theta in {0.5, 1, 2, 5, 10} | I1 + I2 |
-| A4(theta) | **step-matched control**: exact line-search direction, step = c * alpha_A2, with c chosen per (dataset, budget, theta) so that the mean step length equals that of A3(theta) | I1 + "smaller step" without risk |
-| A5 | entropic first-order (R1, theta = 1, 5) | variant, reported as secondary |
+| C0 | nothing | reference |
+| **C1 continue** | the same optimizer, same settings, B more epochs (fresh minibatch order) | the "one more epoch" baseline |
+| **C2 continue, decayed** | same optimizer, step size decayed linearly to 0 over the B epochs | the best classical use of an extra epoch |
+| **C3 continue, averaged** | same optimizer, average the iterates of the extra epochs (Polyak-Ruppert) | strongest standard noise reducer |
+| **R risk-adjusted adapter** | B full-batch steps, each step length from the entropic rule (first-order R1 theta = 1 as the original proposal, and `entropic_exact` theta = 5) | the proposal |
+| **L exact line search** | B full-batch steps with exact line search | I1 only: exact gradient without risk |
 
-Notes fixed in advance:
-- **theta -> 0 limit.** Only the exact-change variant (A3) tends to the ordinary line search as theta -> 0. The first-order variant (R1) is linear in alpha as theta -> 0 and has no minimum, so it is not the control. (This corrects an earlier remark.)
-- **A4 is the decisive control.** The risk rule mostly takes smaller steps. Along one fixed direction the step length alone decides the new weights, so the risk rule can only beat A4 if its step is smaller in the right places: different per seed, per budget, per state.
-- Compute: A3 needs per-row loss changes (n extra row evaluations per grid point). Report seconds per fit; A2 and A4 are matched in passes, not in seconds.
+Compute accounting (fixed in advance): one full-batch step = 1 epoch of row-gradients. The step-length search needs only
+matrix-vector products with the already computed gradient (`X g`), so it is counted as 0 extra epochs, but wall-clock seconds are
+reported for every arm so the reader can judge.
 
-## 3. Experiment A: short budget (does the risk step protect rows and groups?)
+Outcomes (held-out rows unless noted): O1 chance of a wrong decision, overall, per pre-registered group, and worst group;
+O2 seed disagreement (two retrains differ); O3 decisions changed vs the exactly trained model (mean and worst 5% of retrains);
+O4 gap to the optimum f(w) - f*, mean and CVaR5% (train); O5 per-row harm (share of rows worse; 95th percentile of per-row loss increase).
 
-- Budgets T in {1, 2, 5, 20} passes.
-- Datasets: German, COMPAS, Pima, Heart (as in `research/linesearch`) + Adult subsample (n = 20,000) where one pass is costly. 200 stage-1 seeds each. Stratified 70/30 splits; 3 splits for the groups analysis (German, COMPAS: the pre-registered groups of `research/groups`, groups with at least 30 held-out rows).
-- Outcomes (all on **held-out** rows unless said):
-  - O1 per-row harm: share of rows whose loss increases from A0 to the end, 95th percentile of the per-row loss increase, maximum increase (train and held-out).
-  - O2 worst-5% objective gap CVaR5%[f(w) - f*] (train).
-  - O3 chance of a wrong decision: overall, per group, and the worst group.
-  - O4 seed disagreement (two retrains differ on a row).
-- Primary comparisons (paired by stage-1 seed, bootstrap 95% CI over seeds): **A3(theta=5) vs A4(theta=5)** on O1 (p95 held-out per-row loss increase) at T = 1 and 2, and on the worst-group wrong-decision rate. Everything else is secondary.
-- Dose-response: for each outcome the effect of A3 vs A2 should be monotone in theta. Report the curve; non-monotone curves are reported as such.
+**Primary question and decision rule (fixed before running).** R beats the best of C1-C3 on O2 and O3 at budgets B = 1 and 2,
+CI excluding 0 (paired bootstrap over stage-1 seeds), on at least 4 of 5 datasets, and not worse on O1 overall by more than
+1 point. Same for R vs C1 alone as the weaker, plainly stated "one more epoch" comparison.
 
-### Decision rules (stated before running)
-- **Supported:** A3 beats A4 on the primary p95 harm outcome, CI excluding 0, on at least 4 of 5 datasets at T = 1 and 2, and the dose-response is monotone on at least 4 of 5.
-- **Not supported:** otherwise. The conclusion then is: *the risk-averse step is equivalent to a smaller step*, and the adapter should be described as exact steps (I1) with the step rule as a convenience.
-- **Group claim:** only if the worst-group wrong-decision rate improves with CI excluding 0 on at least 2 datasets, and overall accuracy is not worse by more than 1 point.
+**What earlier results already suggest (so the plan is honest about what is at stake).** In `research/linesearch/RESULTS.md`
+the stochastic polisher (more minibatch steps) beat the line searches at 1 epoch on German and COMPAS; the line searches won
+at 5-20 epochs. We therefore expect "continue training" to be competitive at B = 1, and R to win from about B = 5. The test
+reports the budget at which R overtakes continuation, or that it never does.
+
+## 3. Secondary: attributing a win (only run if section 2 shows R > continuation)
+
+If R beats continuation, which ingredient is responsible?
+- L (exact full-batch line search) vs C1-C3: the effect of **exact full-data gradients**.
+- R vs L: the effect of **the risk adjustment**, the question that matters for the claim.
+- R vs a **step-matched** line search (L with its step shrunk so its mean step equals R's): separates "risk-weighted step" from
+  "smaller step". Along one fixed direction the step length alone decides the weights, so R can only beat this control if its
+  step is smaller in the right places.
+- Dose-response: R at theta in {0.5, 1, 2, 5, 10}; protection (O5) should grow with theta.
+- Note: only the exact-change variant tends to the ordinary line search as theta -> 0; the first-order variant is linear in
+  the step length at small theta and has no minimum, so it is not used as the control.
+
+Rule: the risk adjustment is credited only if R beats both L and the step-matched control on O5 and on the worst-group
+wrong-decision rate, CI excluding 0, on at least 3 of 5 datasets. Otherwise the gain is attributed to exact gradients.
 
 ## 4. Experiment B: tilted objective (does risk change the final model?)
 
@@ -72,9 +88,9 @@ Here the objective itself changes, so the optimum moves and "one more round of l
 - Statements describe statistical behaviour of models on public datasets; not accusations of bias; not credit advice.
 
 ## 7. What would change the adapter
-- A supported: keep `step="entropic_exact"` as the recommended short-budget rule and document the budget range where it wins.
-- A not supported and B supported: add a `tilt=theta` objective mode to `StabilityAdapter`/`polish_logistic` (changes the optimum, so it must be opt-in and documented as such).
-- Neither supported: say so in the tutorial and videos: the stability gain is exact full-data steps on a convex problem; the risk-averse step is a safe way to take few steps, not an extra source of gain.
+- Section 2 supported (R beats continuation): keep `step="entropic_exact"` as the recommended short-budget rule and document the budget range where it wins.
+- Section 2 not supported and B supported: add a `tilt=theta` objective mode to `StabilityAdapter`/`polish_logistic` (changes the optimum, so it must be opt-in and documented as such).
+- Neither supported (continuing training is as good): say so in the tutorial and videos: the stability gain is exact full-data steps on a convex problem; the risk-averse step is a safe way to take few steps, not an extra source of gain.
 
 ## 8. Implementation notes
 - Reuse `research/linesearch/linesearch_experiment.py` (steps R1, R3, exact LS, golden-section search) and `risk_averse_tuning.adapter.polish_logistic`.
