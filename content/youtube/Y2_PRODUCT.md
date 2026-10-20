@@ -75,10 +75,11 @@ Five epochs of SGD disagree with themselves 15.5% of the time. After the polish:
 
 **VO:** "Here's where the paper comes in. A normal line search picks the step that lowers the average loss. The entropic step
 looks at every training row: how much does this step help or hurt that row? It then minimizes the entropic risk of those
-changes, the same risk measure we used in the paper [1, 2]. Rows that would get hurt count more. A related idea in the
-literature is tilted ERM [3]. In tests, the cautious version cut the worst per-row damage of a step by 84 to 91 percent, at the
-price of smaller steps. With a few more passes it reaches the same optimum: after 20 passes the worst 5% of runs were within
-5 in 100,000 of the optimum."
+changes, the same risk measure we used in the paper [1, 2]. Rows that would get hurt count more. This step rule is my own
+proposal [3]. In tests, the cautious version cut the worst per-row damage of a step by 84 to 91 percent, at the price of smaller
+steps. And an honest finding: for stability, it did the same as a plain exact line search. The gain over one more epoch of
+training comes from using exact full-data gradients, not from the risk term. With enough passes both reach the same optimum:
+after 20 passes the worst 5% of runs were within 5 in 100,000 of the optimum."
 
 **On screen:** `StabilityAdapter(model, step="entropic", theta=1.0)`.
 
@@ -131,7 +132,7 @@ Previous video (the problem): Y1
 References
 [1] Can & Gürbüzbalaban (2025). Entropic risk-averse generalized momentum methods. Optimization Methods and Software 40(6). doi:10.1080/10556788.2025.2549356 · arXiv:2204.11292
 [2] Ahmadi-Javid (2012). Entropic value-at-risk. J. Optim. Theory Appl. 155(3).
-[3] Li, Beirami, Sanjabi & Smith (2021). Tilted empirical risk minimization. ICLR.
+[3] Can (2025). Entropic risk-averse line search (proposal, this repository: research/linesearch, research/risk_effect).
 [9] Breiman (1996). Bagging predictors.  [10] Lakshminarayanan, Pritzel & Blundell (2017). Deep ensembles. NeurIPS.
 [11] Platt (1999). Probabilistic outputs for SVMs.  [13] Chen & Guestrin (2016). XGBoost. KDD.  [14] Ke et al. (2017). LightGBM. NeurIPS.
 [12] Hofmann (1994). Statlog (German Credit Data). UCI. doi:10.24432/C5NC77

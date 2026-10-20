@@ -6,9 +6,9 @@ Status: PRE-REGISTRATION, written before any run. Results go to `RESULTS.md`. Br
 
 The polish adapter has two ingredients:
 - **I1, exact full-batch steps** (no minibatch noise). Already shown to remove most seed variation (`research/product`, `research/linesearch`).
-- **I2, a risk-averse rule for the step length or the objective** (entropic risk, Can & Gürbüzbalaban 2025; tilted ERM, Li et al. 2021).
+- **I2, a risk-averse rule for the step length** (the entropic line search: the entropic risk measure of Can & Gürbüzbalaban 2025 applied to the per-row loss change of a step).
 
-Claim to test: **I2 changes outcomes beyond I1.** Evidence so far suggests that with enough full-batch steps on a strongly convex problem, both reach the same optimum, so I2 can only matter when (a) the budget is short, or (b) the objective itself is tilted. Two experiments follow, one for each route.
+Claim to test: **I2 changes outcomes beyond I1.** Evidence so far suggests that with enough full-batch steps on a strongly convex problem, both reach the same optimum, so I2 can only matter when the budget is short. The experiments below test that.
 
 ## 2. Primary comparison (revised): risk-adjusted step vs one more epoch of the same training
 
@@ -61,18 +61,9 @@ If R beats continuation, which ingredient is responsible?
 Rule: the risk adjustment is credited only if R beats both L and the step-matched control on O5 and on the worst-group
 wrong-decision rate, CI excluding 0, on at least 3 of 5 datasets. Otherwise the gain is attributed to exact gradients.
 
-## 4. Experiment B: tilted objective (does risk change the final model?)
+## 4. (removed)
 
-Here the objective itself changes, so the optimum moves and "one more round of learning" cannot reproduce it by running longer.
-
-- Tilted loss: F_theta(w) = (1/theta) log mean_i exp(theta * l_i(w)) + (lambda/2)||w||^2, theta in {0, 0.5, 1, 2, 5}; theta = 0 is ordinary ERM. Convex, solved by Newton with the polish; no minibatch noise.
-- Controls with the same budget of fitted models:
-  - ordinary ERM (theta = 0);
-  - **reweighting control:** ERM with class weights tuned to match the tilted model's overall accuracy (so any group effect is not just a shifted operating point);
-  - **per-group worst-case control:** group-DRO-style reweighting over the pre-registered groups (known upper bound for what is possible with group labels).
-- Outcomes: overall accuracy and AUC, worst-group wrong-decision rate and the five largest groups, calibration slope, seed disagreement (should be near 0 for all, since all are exact convex solves).
-- **Supported** if at matched overall accuracy (within 0.5 points) the tilted model has a lower worst-group wrong-decision rate than the reweighting control, CI excluding 0, on at least 2 datasets. Otherwise: tilting is equivalent to reweighting and gets no separate claim.
-- Caveat to report: a tilted objective fits the hardest rows harder and can trade accuracy for them; label the trade-off, do not hide it.
+An earlier draft of this plan included a tilted training objective (tilted ERM). It is a different method from the step-length rule under study and was removed from scope.
 
 ## 5. Experiment C: where the risk step could matter in practice (large n, few passes)
 
@@ -89,10 +80,9 @@ Here the objective itself changes, so the optimum moves and "one more round of l
 
 ## 7. What would change the adapter
 - Section 2 supported (R beats continuation): keep `step="entropic_exact"` as the recommended short-budget rule and document the budget range where it wins.
-- Section 2 not supported and B supported: add a `tilt=theta` objective mode to `StabilityAdapter`/`polish_logistic` (changes the optimum, so it must be opt-in and documented as such).
 - Neither supported (continuing training is as good): say so in the tutorial and videos: the stability gain is exact full-data steps on a convex problem; the risk-averse step is a safe way to take few steps, not an extra source of gain.
 
 ## 8. Implementation notes
 - Reuse `research/linesearch/linesearch_experiment.py` (steps R1, R3, exact LS, golden-section search) and `risk_averse_tuning.adapter.polish_logistic`.
-- New code: `risk_effect_experiment.py` (arms A0-A5, step matching for A4, outcomes O1-O4), `tilted_experiment.py` (B), `partial_pass.py` (C). Run detached with `nohup setsid`, OMP_NUM_THREADS=1, one process per dataset; logs gitignored.
-- Order of work: A on German (smoke test), A on all datasets, B, C. Record deviations in RESULTS.md before reading any result.
+- New code: `risk_effect_experiment.py` (arms A0-A5, step matching for A4, outcomes O1-O4), `partial_pass.py` (C). Run detached with `nohup setsid`, OMP_NUM_THREADS=1, one process per dataset; logs gitignored.
+- Order of work: A on German (smoke test), A on all datasets, C. Record deviations in RESULTS.md before reading any result.

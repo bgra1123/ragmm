@@ -10,8 +10,9 @@ Repository evidence is cited by file path; every number used in content is trace
    (copy in [`papers/can_et_al_2025.pdf`](../papers/can_et_al_2025.pdf)).
 2. Ahmadi-Javid, A. (2012). Entropic value-at-risk: A new coherent risk measure. *Journal of Optimization Theory and
    Applications*, 155(3), 1105–1123.
-3. Li, T., Beirami, A., Sanjabi, M., & Smith, V. (2021). Tilted empirical risk minimization. *ICLR 2021*.
-   (Related idea: an exponential tilt over data points, as in the entropic line search.)
+3. Can, B. (2025). The entropic risk-averse line search: choose the step length by minimizing the entropic risk of the per-row loss
+   change along the full gradient. Proposal built on [1, 2]; implemented and evaluated in this repository
+   ([`research/linesearch/`](../research/linesearch/RESULTS.md), [`research/risk_effect/`](../research/risk_effect/RESULTS.md)). Unpublished.
 
 ## The problem: one dataset, many models
 

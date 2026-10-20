@@ -49,6 +49,12 @@ Use only these numbers in scripts, captions and posts. If a number is not here, 
 | E1 | At 20 full passes the entropic line search (θ = 1) and the exact line search leave the worst 5% of runs at most 5·10⁻⁵ above the optimum, vs 0.0007–0.013 for the stochastic polish | B2, Y2 |
 | E2 | One step at θ = 5: the 95th-percentile per-row loss increase is 84–91% smaller than with the exact line search (German +0.06 vs +0.69), with smaller steps | B2, Y2 |
 
+| E3 | Against "one more epoch" (Adam start): the risk-averse first-order step lowers two-retrain disagreement from 8.4% (stage 1) to 3.7% after 1 epoch and 0.0% after 20 on German; best continuation (averaged iterates): 8.4% and 3.0% | Y2, B2 |
+| E4 | The risk-averse first-order step matches the plain exact line search within about 1 point of disagreement; the gain over continuation is the exact full-data gradient, not the risk term | Y2, B2 |
+| E5 | From an SGD start, averaged continuation beats the adapter at 1 epoch on COMPAS (3.4% vs 10.7%); the adapter wins from about 2 epochs on German, Pima, Heart and from 5 on COMPAS | Y2, B2 |
+
+(source for E3-E5: `research/risk_effect/RESULTS.md`)
+
 ## F. Concentration across datasets — source: `research/tail_analysis/RESULTS.md`
 
 | ID | Fact | Used in |

@@ -152,10 +152,16 @@ Each polish step moves along the full gradient `g`. The step length is chosen by
   `α* = argmin_α (1/θ) log( (1/n) Σ_i exp(−θ α a_i) )`,
 
   the entropic risk [1, 2] of the per-row loss change. Rows the step would hurt get more weight than in a plain average.
-  This is the same tilt over data points as tilted ERM [3]. `θ` sets how cautious the step is (larger means more cautious).
-* `"entropic_exact"`: the same with the exact per-row loss change. It protects the rows a step makes worse: in one-step tests at θ = 5 it cut
+  This rule is the entropic risk-averse line search [3], built on the entropic risk measure of the paper [1]. `θ` sets how
+  cautious the step is (larger means more cautious).
+* `"entropic_exact"`: a variant added in this package that uses the exact per-row loss change instead of the first-order one. It protects the rows a step makes worse: in one-step tests at θ = 5 it cut
   the 95th-percentile per-row loss increase by 84–91% compared with the plain line search, at the price of smaller steps (`research/linesearch/RESULTS.md`).
 * `"newton"`: solve the head exactly.
+
+What the risk term does, and does not do (`research/risk_effect/RESULTS.md`): at the same number of passes, the risk-averse step
+reaches the same stability as the plain exact line search (differences of at most about 1 point). The stability gain over simply training one
+more epoch comes from using the exact full-data gradient, not from the risk term. The risk term's measurable effect is on how many rows a step
+makes worse (`entropic_exact` at θ = 5), at the price of smaller steps.
 
 Why it works: L2-regularized logistic regression is strongly convex and smooth, the setting the paper's theory covers [1].
 Every seed's model lies near the same optimum, and full-batch steps remove the noise that minibatches added.
