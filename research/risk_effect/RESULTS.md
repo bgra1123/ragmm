@@ -47,7 +47,7 @@ Rule: R beats the best continuation on disagreement and on changed decisions at 
 | Adam | first-order (theta = 1) | 4 / 4 datasets better | 4 / 4 | **supported** (wrong-decision rate within +0.3 points) |
 | Adam | exact-change (theta = 5) | 3 / 4 (COMPAS worse by 2.5 points) | 3 / 4 | not supported |
 | SGD | first-order (theta = 1) | **1 / 4** (German and Pima intervals include 0; COMPAS worse by 7.3 points) | 3 / 4 (COMPAS worse by 3.9 points) | **not supported** |
-| SGD | exact-change (theta = 5) | 0 / 4 | 0 / 4 | not supported (worse by 0.7-22.6 points at one epoch) |
+| SGD | exact-change (theta = 5) | 0 / 4 | 0 / 4 | not supported (worse by 0.9-22.6 points at one epoch) |
 
 Where the adapter overtakes averaged continuation when the start is SGD: from 2 epochs on German, Pima and Heart; from 5 epochs on COMPAS (0.2 points worse, not significant);
 at 20 epochs everywhere (0.0-0.1% vs 0.5-3.8%). COMPAS is the large dataset (n about 4,300): there one epoch is 270 minibatch steps, and averaging them already removes most noise.
