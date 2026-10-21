@@ -190,3 +190,42 @@ At 20,000 and 46,842 rows C3 wins everywhere (46,842 rows, 2 passes: 1.0% agains
 as a plain smaller step does. This does not contradict E15: the adapter's advantage appears when several full passes are affordable, and gets there later the larger n is.
 
 Statements describe statistical behaviour of models on a public dataset; not accusations of bias; not credit advice.
+
+## Addendum: step multiplier on the adapter's alpha (PLAN section 12)
+
+Code `stepscale_experiment.py`, analysis `analyze_stepscale.py`, all tables in [`stepscale_tables.md`](stepscale_tables.md), raw `results/stepscale_<name>.json`. The update is w <- w - omega alpha* g with omega in {1, 1.5, 2, 3} applied at every step (the step search is re-run along the new path), for the exact line search (L), R1 at theta = 1 and 5, and R3 at theta = 5, with 1, 2 and 5 full-batch steps, SGD and Adam starts, five datasets (German, COMPAS, Pima, Heart: 200 models; Adult with 46,842 rows: 100 models). Reference: average-and-continue (C3).
+
+**Result.**
+* **H1 supported.** For the theta = 5 rules (which take steps of 0.4-1.5 times 1/L, against 2-6 times for the line search) a multiplier above 1 lowers two-retrain disagreement on **all 5 datasets in every setting** (win rule met: 5 of 5 datasets for omega = 1.5, 2 and 3, both starts, 1, 2 and 5 steps; wrong-decision rate never worse by more than 1 point).
+  Example, 2 steps, SGD start: COMPAS R1(theta = 5) 21.6% at omega = 1, 13.8% at 2, 7.3% at 3; German 20.6%, 15.8%, 11.5% (omega = 3); Adam: German 6.1%, 4.2%, 2.9%.
+* **H2 supported.** The multiplier does not help the rules that already take line-search-sized steps: L and R1(theta = 1) win on 0 of 5 datasets for every omega above 1. Overshooting is costly: German, SGD, 2 steps, L: 8.4% at omega = 1, 21.8% at omega = 2; COMPAS 7.2% to 33.2%.
+* **H3 supported.** A theta = 5 rule with omega chosen so that its mean step is about the line search's recovers the line search and does not beat it by more than a few tenths of a point: 5 steps, SGD, disagreement of L against R1(theta = 5) at omega = 3: German 3.5% / 3.2%, COMPAS 1.4% / 1.2%, Pima 0.2% / 0.3%, Heart 0.6% / 0.5%; Adam: German 1.3% / 1.2%, COMPAS 0.2% / 0.1%.
+  At 1 to 2 steps the unscaled L or R1(theta = 1) is the best arm in most cells; a scaled theta = 5 arm is the best in 10 of 30 dataset-start-step cells (mostly at 5 steps and on Adult).
+* **H4 supported at up to 2 steps and refined at 5.** On Adult (46,842 rows) no arm beats average-and-continue within 2 steps (best arm against C3, SGD start: +9.3 points at 1 step, +5.2 at 2; Adam start: +1.9, +0.8). At 5 steps with an Adam start the scaled R1(theta = 5) at omega = 2 is slightly better (0.5% against 0.6%, difference −0.10 [−0.14, −0.05]); with an SGD start it is still far behind (2.8% against 0.8%).
+  This locates the crossing for large data: between 2 and 5 passes with an Adam start, and beyond 5 passes with an SGD start (not tested further).
+
+**Reading.** Taking larger steps on the adapter's alpha helps exactly when its steps are shorter than the line search's, and the gain is to move toward the exact line-search step. It does not go beyond it: the exact line search is already the best step along the gradient, and larger steps overshoot. For the entropic rule this means a multiplier works as the way to choose how cautious to be (theta and omega trade off), not as an additional source of stability.
+
+## Addendum: Newton's method for the exact solution (PLAN section 13)
+
+Code `newton_experiment.py`; the streaming Newton solve is in the package (`polish_logistic_streaming(step="newton")`, tested against the in-memory solve to 1e-9, and with different starts reaching the same model to 1e-8). Tables: [`newton_tables.md`](newton_tables.md), raw `results/newton_<name>.json`. Damped Newton (Armijo backtracking) on the L2 logistic objective, started from the stage-1 weights of 200 models (100 for Adult).
+
+| Dataset (n, d) | Start | Two retrains disagree: stage 1 → after Newton iteration 1 / 2 / 3 / 4 | Iterations to gradient norm 1e-8 |
+|---|---|---|---|
+| German (700, 55) | SGD | 25.1% → 9.2 / 3.4 / 1.3 / 0.3% (0.02% at 5) | 5 |
+| German | Adam | 8.4% → 1.2 / 0 / 0 / 0% | 4 |
+| COMPAS (4,320, 8) | SGD | 29.2% → 14.5 / 1.8 / 0.2 / 0.02% | 7 |
+| COMPAS | Adam | 7.2% → 0.3 / 0 / 0 / 0% | 4 |
+| Pima (538, 9) | SGD | 14.0% → 4.5 / 0.2 / 0 / 0% | 4 |
+| Pima | Adam | 2.6% → 0.1 / 0 / 0 / 0% | 3 |
+| Heart (212, 27) | SGD | 7.6% → 1.9 / 0.06 / 0 / 0% | 5 |
+| Heart | Adam | 2.5% → 0 / 0 / 0 / 0% | 3 |
+| Adult (46,842, 101) | SGD | 18.8% → 8.2 / 5.5 / 4.3 / 2.2% (0.6% at 5, 0.2% at 6) | 10 |
+| Adult | Adam | 6.7% → 3.1 / 1.7 / 0.9 / 0.2% (0 at 5) | 8 |
+
+* **H1 mostly supported.** Disagreement is below 0.1% within 5 iterations on every dataset and start except Adult with an SGD start (0.6% at 5, below 0.1% only from iteration 7 on); decisions changed against the exact model reach 0 by iteration 3 or 4 on the four smaller datasets (Adult SGD: 29 changed per 2,000 rows after 4 iterations). On Adult the early iterations take damped steps because the SGD start is far from the optimum.
+* **H2 not supported.** One or two Newton iterations do not beat 20 line-search steps on the objective gap (German SGD: 6.8e-3 after two against 1.2e-5 for 20 line-search steps), except after Adam on German; the gap falls by a factor of 4 to 7 per iteration in the damped phase and then quadratically. Newton matches 20 line-search steps after about 3 to 5 iterations (on the four smaller datasets).
+* **H3 partly supported (single model, one thread, streaming, seconds):** Newton to convergence took 0.005 / 0.015 / 0.007 / 0.002 s against 0.011 / 0.023 / 0.021 / 0.007 s for 20 line-search steps on German / COMPAS / Pima / Heart (2 to 7 times faster), but 0.84 s against 0.61 s on Adult (101 features, 10 iterations; the line search has not converged after 20 steps: gap 4.2e-3, disagreement 1.0%). One epoch of average-and-continue costs 0.001-0.016 s on the small data and 0.09-0.12 s on Adult.
+* Newton gives the same model for every seed, so converged disagreement is 0 by construction; the question answered here is how many iterations and what it costs. The cost per iteration is a d x d Hessian (n d^2 flops), so it grows with the number of features: not tested beyond d = 101.
+
+Statements describe statistical behaviour of models on public datasets; not accusations of bias; not credit advice.

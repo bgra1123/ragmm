@@ -21,7 +21,7 @@ Groups give the same numbers for subsets of rows (groups of fewer than 15 rows a
 * `line_search`: the step that lowers the mean loss most;
 * `entropic`: minimizes the entropic risk of how the step changes each row's loss, `(1/θ) log mean_i exp(-θ α gᵀ∇f_i)`, a risk-averse variant that builds on the entropic risk measure of Can & Gürbüzbalaban (2025);
 * `entropic_exact`: the same with the exact per-row loss change;
-* `newton`: damped Newton on the full objective; converges in 3 to 7 iterations from a trained model and gives the same model for every seed.
+* `newton`: damped Newton on the full objective; converges in 3 to 10 iterations from a trained model (more on large, poorly scaled data) and gives the same model for every seed.
 The streaming versions read the data in batches (two passes per step, or two per Newton iteration), so the data never has to fit in memory.
 
 ## The averaging

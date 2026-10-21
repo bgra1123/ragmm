@@ -22,7 +22,7 @@ German Credit is a public dataset from the 1990s; results describe training beha
 | 10 times more trees match averaging 10 seeds at equal compute | 2.0 vs 2.1% (XGBoost) | `research/product` |
 | Head refit does not help trees; function-space polish does not help boosting | | `research/trees`, `research/boost` |
 | Calibration lowers the expected cost at a cost-based cutoff for every tree model and the MLP | e.g. XGBoost 0.562 to 0.530 | `research/sota2` |
-| Newton solves the logistic head exactly in 3 to 7 iterations from a trained model | | `research/risk_effect` |
+| Newton solves the logistic head exactly in 3 to 10 iterations from a trained model (Adult, 46,842 rows, needs 8 to 10) | | `research/risk_effect` |
 
 ## Against simply training longer
 Averaging the iterates of one more epoch of minibatch training is a strong baseline. The exact polish beats it from the first epoch with an Adam start and from about 2 to 5 epochs with an SGD start, but not on large data with
