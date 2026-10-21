@@ -105,3 +105,15 @@ German also reports the worst-group negative-flip rate (groups with at least 30 
 Hypotheses: H1 R has fewer negative flips than L and than the best continuation. H2 R has fewer negative flips than M1 and M2. H3 R's net accuracy change is not worse than M1's by more than 0.5 points.
 **Credit rule:** the risk adjustment is credited for negative flips if, for some theta and for both 2 and 5 steps, R has a lower negative-flip rate than both M1 and M2 (paired bootstrap CI below 0) on at least 3 of 4 datasets, with H3 satisfied. Otherwise the negative-flip reduction is attributed to step length.
 Code: `negflip_experiment.py`.
+
+## 11. Addendum before running Experiment C (large n, few passes)
+
+Question: where a pass over the data is expensive and only a fraction of a pass to two passes is affordable, does the risk-averse step beat continued training, and does it beat the matched plain step (M1, M2)?
+Setting (fixed in advance; code `large_data_experiment.py`):
+- Data: Adult income (train 46,842 rows after the 2,000-row test split; test = 2,000 held-out rows). Training sizes n in {5,000, 20,000, 46,842} (random subsample of the training rows, fixed seed). 100 stage-1 models per size (fewer than before because every step touches n rows), from SGD (step 1/L) and Adam (lr 0.01), 2,000 minibatch steps of 16 (so stage 1 itself sees only 0.7 passes at the full size).
+- Extra budget B in {0.25, 0.5, 1, 2} passes = B n row-gradients. Continuation arms (C1 continue, C2 decayed, C3 averaged) use round(B n / 16) minibatch steps. Full-batch arms: for B >= 1, B full-batch steps; for B < 1, **one step whose gradient and step search use a random subset of B n rows, drawn independently per model** (these arms are stochastic and labelled so; all rules share the same subset for a given model).
+- Arms: L (exact line search); R1 and R3 at theta in {1, 5}; M1 (L with its step scaled to R's mean step) and M2 (R's per-iteration mean step as one schedule) for R1(5) and R3(5).
+- Outcomes (held-out): two retrains disagree, decisions changed against the exactly trained model of that training size (mean over models), wrong-decision rate, 95th-percentile per-row loss increase, negative-flip and positive-flip rates relative to the stage-1 model. Paired bootstrap over models (1,000 resamples).
+- Questions answered: (1) the smallest budget at which the best risk step has lower disagreement than the best continuation, per size and start (or "never"); (2) whether the risk step has lower harm and negative flips than both L and M1 at the budgets below 1 pass.
+- Credit rule (for the risk term): lower harm than both L and M1 with CI below 0 at B in {0.25, 0.5, 1}, for the same theta, on at least 2 of the 3 sizes, for both starts. Otherwise the gain is attributed to the exact gradient and the shorter step.
+- Deviations from section 5: 100 models, not 200; one dataset; wall-clock is taken from `cost_benchmark.py` (the step search is vectorized over models here, so per-arm seconds would not be comparable).
