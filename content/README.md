@@ -1,5 +1,7 @@
 # Content hub
 
+**Format: explainers.** The videos are educational explainers (short-form for TikTok, long-form for YouTube): organic content that teaches one finding and points to the product softly. They are not ads and not product demos; product demos are a separate format for later.
+
 One story, told at three lengths. Every piece links to the others, cites the paper, and takes its numbers from one fact sheet.
 
 | ID | Piece | Channel | Job | File |

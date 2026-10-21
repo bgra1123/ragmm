@@ -1,5 +1,7 @@
 # TikTok / Reels / Shorts scripts (T1–T6)
 
+**Format: short-form explainers** (educational, organic; not ads, not product demos).
+
 *Vertical 9:16, 25–45 seconds each. Goal: awareness that ML decisions can change because of training randomness alone, and
 that people who are rare in the data are hit hardest. Each short points to the long video ([Y1](../youtube/Y1_PROBLEM.md) or
 [Y2](../youtube/Y2_PRODUCT.md)) and the written pieces ([B1](../../research/blog/BLOG.md), [B2](../../docs/TUTORIAL.md)).
