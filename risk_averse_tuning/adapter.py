@@ -171,6 +171,49 @@ def _newton_1d(h1, h2, lo, hi, iters=60, tol=1e-12):
     return x
 
 
+def _newton_streaming(w0, batches, lam, max_iter, mask, tol):
+    """Damped Newton on the L2 logistic objective from batch sums. Per iteration: one pass for the gradient, the Hessian
+    (d x d, memory O(d^2)) and the objective, one pass for the objective at a grid of trial step lengths (Armijo backtracking)."""
+    w = np.asarray(w0, float).copy()
+    m = np.ones_like(w) if mask is None else np.asarray(mask, float)
+    ts = 0.5 ** np.arange(0, 12)
+    passes, used = 0, 0
+    f_first = None
+    for used in range(1, max_iter + 1):
+        gs, Hs, fs, n = np.zeros_like(w), np.zeros((len(w), len(w))), 0.0, 0
+        for Xb, yb in batches():
+            Mb = yb * (Xb @ w)
+            s = sigmoid(-Mb)
+            gs += -(Xb.T @ (yb * s))
+            Hs += (Xb.T * (s * (1 - s))) @ Xb
+            fs += float(np.logaddexp(0.0, -Mb).sum())
+            n += len(yb)
+        passes += 1
+        pen = 0.5 * lam * np.sum((m * w) ** 2)
+        f0 = fs / n + pen
+        if f_first is None:
+            f_first = f0
+        g = gs / n + lam * m * w
+        if np.linalg.norm(g) < tol:
+            used -= 1
+            break
+        H = Hs / n + lam * np.diag(m) + 1e-12 * np.eye(len(w))
+        p = np.linalg.solve(H, g)
+        gp = float(g @ p)
+        S = np.zeros(len(ts))
+        for Xb, yb in batches():
+            Mb = yb * (Xb @ w)
+            Cb = yb * (Xb @ p)
+            S += np.logaddexp(0.0, -(Mb[None, :] - ts[:, None] * Cb[None, :])).sum(1)
+        passes += 1
+        reg = 0.5 * lam * np.array([np.sum((m * (w - t * p)) ** 2) for t in ts])
+        ok = np.flatnonzero(S / n + reg <= f0 - 0.25 * ts * gp)
+        t = float(ts[ok[0]]) if len(ok) else float(ts[-1])
+        w = w - t * p
+    return w, dict(step="newton", search="exact", epochs=used, iterations=used, passes=passes, objective_before=f_first,
+                   objective_after=None)
+
+
 def polish_logistic_streaming(w0, batches, lam, epochs=20, step="line_search", theta=1.0, mask=None, search="newton",
                               grid=120, tol=1e-8):
     """
@@ -184,10 +227,12 @@ def polish_logistic_streaming(w0, batches, lam, epochs=20, step="line_search", t
     and solve the convex 1-D problem by safeguarded Newton with no further pass over the data (memory O(n)).
     step: "line_search", "entropic" (the entropic risk-averse line search) or "entropic_exact". Returns (w, info).
     """
-    if step not in STEPS or step == "newton":
-        raise ValueError("streaming supports step in ('line_search', 'entropic', 'entropic_exact')")
+    if step not in STEPS:
+        raise ValueError(f"step must be one of {STEPS}, got {step!r}")
     if search not in ("grid", "newton"):
         raise ValueError("search must be 'grid' or 'newton'")
+    if step == "newton":
+        return _newton_streaming(w0, batches, lam, epochs, mask, tol)
     w = np.asarray(w0, float).copy()
     m = np.ones_like(w) if mask is None else np.asarray(mask, float)
     alphas_used, passes = [], 0
@@ -374,7 +419,7 @@ class StabilityAdapter:
     calibrate : add out-of-fold Platt scaling (``cv`` folds; costs cv extra fits of the whole adapter).
     random_state : base seed; copy i uses seed ``random_state * 1000 + i``.
     batch_size : if set, the polish reads the data in batches of this many rows (``polish_logistic_streaming``): the same
-        result with the step search done from batch sums; for ``step="newton"`` the in-memory solve is used.
+        result with the step search done from batch sums. For ``step="newton"`` the Hessian (d x d) is accumulated over batches.
     """
 
     def __init__(self, estimator, strategy="auto", n_seeds=10, polish_epochs=20, step="line_search", theta=1.0,
@@ -424,7 +469,7 @@ class StabilityAdapter:
             else:
                 lam = 1e-2
         lam = self.lam if self.lam is not None else lam
-        if self.batch_size and self.step != "newton":
+        if self.batch_size:
             w, info = polish_logistic_streaming(w0, iter_batches(F, yy, self.batch_size), lam, epochs=self.polish_epochs,
                                                 step=self.step, theta=self.theta, mask=mask)
         else:

@@ -149,3 +149,21 @@ def test_adapter_batch_size_matches_unbatched():
     a = StabilityAdapter(make(), step="entropic").fit(X, y)
     b = StabilityAdapter(make(), step="entropic", batch_size=64).fit(X, y)
     assert np.abs(a.fitted_["coef"] - b.fitted_["coef"]).max() < 1e-5
+
+
+def test_streaming_newton_matches_in_memory_and_solves_exactly():
+    from risk_averse_tuning import iter_batches, polish_logistic_streaming
+    X, y01 = data(n=300, d=4, seed=11)
+    F = np.column_stack([X, np.ones(len(X))])
+    y = 2.0 * y01 - 1
+    mask = np.r_[np.ones(4), 0.0]
+    w0 = np.random.default_rng(2).normal(scale=0.5, size=5)
+    w_ref, _ = polish_logistic(w0, F, y, 0.01, step="newton", mask=mask)
+    for bs in (17, 300):
+        w, info = polish_logistic_streaming(w0, iter_batches(F, y, bs), 0.01, epochs=30, step="newton", mask=mask)
+        assert np.abs(w - w_ref).max() < 1e-9
+        assert info["iterations"] <= 10 and info["passes"] == 2 * info["iterations"] + 1
+    # different starting points reach the same model: no seed dependence
+    ws = [polish_logistic_streaming(np.random.default_rng(s).normal(size=5), iter_batches(F, y, 50), 0.01, epochs=30,
+                                    step="newton", mask=mask)[0] for s in range(3)]
+    assert max(np.abs(a - b).max() for a in ws for b in ws) < 1e-8
