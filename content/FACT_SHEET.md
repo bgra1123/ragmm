@@ -57,7 +57,9 @@ Use only these numbers in scripts, captions and posts. If a number is not here, 
 
 | E7 | Updating a model: after 1 epoch from SGD, continued training flips 9.65% of held-out rows from correct to wrong (negative flips, 4-dataset average); averaged continuation 5.59%; exact line search 5.50%; the risk-averse step (theta = 5) 0.77%, the same as a plain line search with the same mean step (0.77%); it also gives up accuracy gain (+0.65 vs +2.33 points) | Y2, B2 |
 
-(source for E3-E7: `research/risk_effect/RESULTS.md`)
+| E8 | Large data, fraction of a pass to two passes (Adult, 5,000-46,842 rows): average-and-continue beats the risk-averse full-batch step on disagreement in every SGD-start cell (46,842 rows: 3.1% to 1.2% against 11.1% to 7.2%); with an Adam start the risk step wins only at 5,000 rows | Y2, B2 |
+
+(source for E3-E8: `research/risk_effect/RESULTS.md`)
 
 ## F. Concentration across datasets — source: `research/tail_analysis/RESULTS.md`
 

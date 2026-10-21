@@ -156,3 +156,37 @@ Negative flip = held-out row decided correctly by the stage-1 model and wrongly 
 **Reading.** Taking short steps is a good way to avoid regressions, and a risk-averse step is one way to take them: it keeps negative flips at a fraction of what a full line-search step or one more epoch of training causes. It is **not better than a plain line search of the same size** on negative flips, apart from a small advantage at 5 steps on some datasets. The honest statement of value is "short, exact steps avoid regressions", with the risk-averse rule as one way to choose the short step that needs no hand-tuned step size (θ sets the cautiousness; the matched control needed the risk step's mean as input).
 
 Statements describe statistical behaviour of models on public datasets; not accusations of bias; not credit advice.
+
+## Addendum: Experiment C, large n and a fraction of a pass to two passes (PLAN section 11)
+
+Code `large_data_experiment.py`, analysis `analyze_large.py`, all tables in [`large_tables.md`](large_tables.md), raw `results/large_<n>.json`. Adult income, training sizes 5,000, 20,000 and 46,842 rows, 2,000 held-out rows, 100 stage-1 models per size from SGD (step 1/L) and Adam (lr 0.01), extra budget 0.25, 0.5, 1 and 2 passes.
+For budgets below one pass the full-batch arms take one step whose gradient and step search use a random subset of that fraction of the rows, drawn independently per model (stochastic arms). Continuation arms (C1 continue, C2 decayed, C3 averaged) use minibatch steps of 16 rows for the same row budget.
+The weighted step search was checked against the earlier one (relative difference below 5e-9). Deviations: 100 models per size (not 200); one dataset; cost is not re-measured here (see the streaming-cost addendum).
+
+**1. Two retrains disagree.** SGD start (stage 1: 17.9-19.0%): average-and-continue (C3) wins at every size and budget, by a margin that grows with n.
+
+| Training rows | Passes 0.25 / 0.5 / 1 / 2: C3 | Best risk step (R1 or R3 at θ = 1) | Line search L |
+|---|---|---|---|
+| 5,000 | 8.1 / 5.9 / 4.2 / 2.9% | 11.5 / 10.3 / 9.7 / 6.5% | 11.9 / 11.2 / 10.6 / 7.4% |
+| 20,000 | 4.7 / 3.2 / 2.3 / 1.8% | 11.1 / 10.8 / 10.7 / 7.2% | 12.4 / 12.0 / 11.9 / 8.1% |
+| 46,842 | 3.1 / 2.3 / 1.7 / 1.2% | 11.1 / 11.0 / 11.0 / 7.2% | 12.6 / 12.3 / 12.3 / 8.2% |
+
+The risk step is worse than the best continuation in all 12 cells (differences +3.4 to +9.2 points, all intervals above 0). Decisions changed against the exact model (46,842 rows, SGD): stage 1 273; C3 58 / 51 / 46 / 44; R1(θ = 1) 164 / 162 / 162 / 124; exact line search 192 / 188 / 187 / 124.
+Wrong-decision rate: stage 1 20.9%, C3 16.3-16.6%, R1(θ = 1) 17.2-18.2%.
+Reason: with n of 5,000 to 47,000, one pass of minibatch SGD is 300 to 2,900 steps, while a full-batch arm takes 1 or 2 steps and cannot converge; at 2 passes they reach about 7-8%.
+
+**2. Adam start** (stage 1: 6.0-6.5%). The risk step beats the best continuation only on the smallest size: n = 5,000 at 0.25 passes (R3(θ = 1) 4.4% against 5.4%, −1.0 [−1.2, −0.8]), 0.5 passes (3.8% against 4.3%) and 2 passes (R1(θ = 1) 1.7% against 2.3%); at 1 pass the interval includes 0 (3.0% against 3.2%).
+At 20,000 and 46,842 rows C3 wins everywhere (46,842 rows, 2 passes: 1.0% against 1.9%).
+
+**3. Overtaking budget.** Within 2 passes the risk step never overtakes average-and-continue with an SGD start, and overtakes it with an Adam start only at 5,000 rows. Earlier experiments (E15) showed overtaking from about 5 to 20 epochs at 700 to 4,300 rows; whether the crossing for 47,000 rows lies at 5, 10 or 20 passes was not tested here.
+
+**4. Does the risk term protect rows (theta = 5)?**
+* Against the exact line search the risk step is far gentler: 95th-percentile per-row loss increase −0.7 to −0.8 (SGD, below 2 passes), negative flips −5.6 to −6.5 points of rows. But R1(θ = 5) takes steps of 1.1-1.3 times 1/L here, and the matched control M1 (same mean step) does nearly the same.
+* Against M1 at less than 2 passes the harm difference is −0.001 to −0.004 (intervals touching 0) and the negative-flip difference −0.01 to −0.04 points: no practical difference. At 2 passes (two full steps) it is larger: harm −0.04 to −0.06, negative flips −0.4 to −0.55 points, but with +1.2 to +2.0 points more seed disagreement.
+* Average-and-continue also hurts few rows: negative flips 4.5-5.0% of rows against 0.7% for the risk step (SGD, below 2 passes), but its positive flips are 8-9%, so its net accuracy gain is about +4 points against +1 (46,842 rows, 1 pass: C3 net +4.5, R1(θ = 5) net +1.0, exact line search net +2.3).
+* **Credit rule (harm lower than both L and M1, same θ, at 0.25, 0.5 and 1 pass, at least 2 of 3 sizes, for both starts): not met.** It holds for the SGD start (R1(θ = 5) 3 of 3 sizes at each budget) but not for the Adam start (1 or 2 of 3 sizes, and 1 of 3 at 0.25 and 1 pass), and the effect against M1 is a few thousandths of a loss unit.
+
+**Reading.** In the regime that looked most favourable to a careful step rule (large data, only a fraction of a pass to two passes), **continuing minibatch training and averaging the iterates is the better update** on stability, decisions changed and accuracy. The full-batch steps are too few to converge, and the risk term only makes them gentler,
+as a plain smaller step does. This does not contradict E15: the adapter's advantage appears when several full passes are affordable, and gets there later the larger n is.
+
+Statements describe statistical behaviour of models on a public dataset; not accusations of bias; not credit advice.
