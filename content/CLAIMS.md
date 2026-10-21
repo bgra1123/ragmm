@@ -64,7 +64,7 @@ Add the group version only for groups with enough rows (the package reports grou
 * **"The model discriminates."** Not supported and not what the data shows. Sex, age and foreign-worker status were never inputs; the exact model's own refusal rate for these groups is a property of its features and data
   (for example 25.7% of repaying under-25 applicants even without randomness). Removing training randomness makes decisions reproducible; it does not fix that.
 * **"X% of all lenders' applicants..."** One dataset from the 1990s; not a statement about any lender today or any real portfolio.
-* **"The adapter makes decisions fairer / more accurate."** It moves decisions toward the exactly trained model (the 5% overall wrong-decision improvement from the benchmark is a consequence), not beyond it (E10). For trees and networks the adapter is averaging, and the same stability comes from more trees at equal cost (E14).
+* **"The adapter makes decisions fairer / more accurate."** It moves decisions toward the exactly trained model (overall wrong decisions in the benchmark fell from 27.3% to 25.4%, a consequence of that), not beyond it (E10). For trees and networks the adapter is averaging, and the same stability comes from more trees at equal cost (E14).
 * **"The risk-averse step is why."** Not supported (E15-E17): the gain comes from exact full-data steps.
 * **Small groups.** Groups of 27 to 55 repaying applicants carry wide uncertainty and the same applicant appears in several splits; label them indicative.
 
