@@ -134,11 +134,11 @@ def test_streaming_matches_in_memory(step, theta):
         assert np.abs(outs[0] - outs[1]).max() < 1e-9           # the batch size does not change the result
 
 
-def test_streaming_rejects_newton_step_and_bad_search():
+def test_streaming_rejects_bad_step_and_bad_search():
     from risk_averse_tuning import iter_batches, polish_logistic_streaming
     F, y = np.ones((4, 2)), np.array([1.0, -1.0, 1.0, -1.0])
     with pytest.raises(ValueError):
-        polish_logistic_streaming(np.zeros(2), iter_batches(F, y, 2), 0.1, step="newton")
+        polish_logistic_streaming(np.zeros(2), iter_batches(F, y, 2), 0.1, step="bogus")
     with pytest.raises(ValueError):
         polish_logistic_streaming(np.zeros(2), iter_batches(F, y, 2), 0.1, search="bogus")
 
