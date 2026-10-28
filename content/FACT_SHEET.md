@@ -67,6 +67,14 @@ Use only these numbers in scripts, captions and posts. If a number is not here, 
 |---|---|---|
 | F1 | Across six datasets, the 5% most affected people carry 20–58% of the bad-run losses | Y1, T6 |
 
+## G. Why rare people flip — source: `research/rare_flip/RESULTS.md`
+
+| ID | Fact | Used in |
+|---|---|---|
+| G1 | The spread of a row's score across retrains tracks how thin the data is around it: Spearman with k-NN rarity 0.52–0.90 and with leverage 0.59–0.90 on five of six datasets | Two Seeds beat 7 |
+| G2 | At the same distance from the decision boundary, the rarest 10% of held-out rows got a different decision 1.4–1.9× as often as the rest (German 1.45, COMPAS 1.39, Adult 1.79, Bank 1.86, Pima 1.63; Heart too small) | Two Seeds beat 7 |
+| G3 | After 20 exact polish steps 0–0.9% of rows flip and the rare-row excess is gone | Two Seeds beat 10 |
+
 ## Standard caveats (say at least one in every piece)
 
 * One public dataset from the 1990s [12]; not a claim about any lender today.
