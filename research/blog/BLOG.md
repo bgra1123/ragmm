@@ -112,6 +112,8 @@ I turned the measurement and the fixes into an open-source package, **edgelift**
 
 ---
 
+*Independent work. This is a personal research project, done in my own time on public data. The experiments, code and opinions are my own and are not connected to, funded by, endorsed by or representative of any employer, university, lender or other organization. Nothing here indicates how any real institution builds or uses its models.*
+
 *Notes. This post describes statistical behaviour of training procedures on public data from the 1990s. It is not legal, credit or compliance advice, and it makes no claim about any real lender. The opening applicant is a real held-out row of the public dataset described by her form, not an identifiable person.*
 
 *Reproduce: `research/report/REPORT.md`, `research/groups/RESULTS.md`, `research/groups/CONCRETE.md`, `research/rare_flip/RESULTS.md`, `research/product/RESULTS.md`, `research/sota2/RESULTS.md`, `research/risk_effect/RESULTS.md` in the research repository; every number in this post is traced in `research/blog/FACT_CHECK.md`.*
