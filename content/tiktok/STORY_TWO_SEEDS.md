@@ -52,7 +52,7 @@ No logo, no command, no product name in the video.
 | 9 | **The table** (+30 s) | The real numbers: all applicants 30.4% wrong vs 24.4% without randomness; housing for free 37.8% vs 27.4%; no property 35.4% vs 25.6%; 55 of 300 decisions change per retrain, 284 of 300 at least once in 1,000 retrains. | "This is not one unlucky applicant. Across all 300 held-out applicants, 55 decisions change on every retrain; 284 changed at least once in a thousand." | the table |
 | 10 | **The fix** (+15 s) | The hundred lines in the hundred worlds slide together into one. The flicker stops. Ada's tile: 90 green. | "You can't remove the model's own judgement. You can remove the luck. A short exact polish after training makes every seed draw the same line: Ada's approvals go from fifty-six to ninety of a hundred." | "56 → 90 of 100" |
 | 11 | **Not oversold** (+20 s) | Trees and networks: averaging seeds; ten times more trees is as good. | "For tree models and networks the fix is averaging seeds, and more trees at a lower learning rate does the same job. The exact model still makes its own mistakes; this removes only the luck." | "removes luck, not judgement" |
-| 12 | **The ask** (+8 s) | One card, steady light. The package name and command. | "Ask your model twice. Measure who changes. Remove the part that is only luck." | "seedproof · pip install" (working name) |
+| 12 | **The ask** (+8 s) | One card, steady light. The package name and command. | "Ask your model twice. Measure who changes. Remove the part that is only luck." | "edgelift · pip install edgelift" |
 | 13 | **Fine print** | Static card. | — | "German Credit, a public 1990s dataset; a composite applicant; statistical behaviour of a model, not an accusation of bias, not credit advice." |
 
 ---

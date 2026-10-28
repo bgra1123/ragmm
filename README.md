@@ -22,7 +22,13 @@ change between training runs, which rows are affected, and which rows are at ris
 `RiskAverseClassifier`, `TabularEncoder`, `tail_report`. The story and evidence behind it:
 [`research/report/REPORT.md`](research/report/REPORT.md).
 
-## Stability adapter (new in 0.4.0)
+## The product: edgelift
+
+The stability adapter below has moved to its own repository, **[bgra1123/edgelift](https://github.com/bgra1123/edgelift)** (`pip install edgelift`): a standalone package
+that measures how much a model's decisions on rare cases depend on training randomness, finds who sits on the moving decision boundary, and removes the part that is only luck.
+This repository stays the research record behind it (every experiment under `research/`, with plans and results) and the reference implementation of the paper's optimizer.
+
+## Stability adapter (new in 0.3.0; now maintained in edgelift)
 
 Retrain a model with a different random seed and some of its decisions change. The adapter measures this and reduces it for
 a model you already have:

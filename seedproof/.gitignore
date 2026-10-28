@@ -1,9 +1,0 @@
-__pycache__/
-*.pyc
-.venv/
-*.egg-info/
-build/
-dist/
-.pytest_cache/
-stability.md
-stability.json
